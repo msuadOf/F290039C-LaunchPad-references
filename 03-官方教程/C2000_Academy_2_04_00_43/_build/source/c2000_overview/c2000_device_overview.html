@@ -1,0 +1,766 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Overview of C28x Devices and Accelerators &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_overview/c2000_device_overview';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_overview/c2000_device_overview.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Reset and Boot Process" href="../c2000_system/c2000_boot.html" />
+    <link rel="prev" title="Get Started with C2000 using SysConfig" href="../c2000_get_started/c2000_getstarted_sysconfig.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="overview-of-c28x-devices-and-accelerators">
+<h1>Overview of C28x Devices and Accelerators<a class="headerlink" href="#overview-of-c28x-devices-and-accelerators" title="Permalink to this heading">#</a></h1>
+<p>This introductory module includes an architectural overview of the basic
+architecture of the C2000™ family of real-time control microcontrollers.</p>
+<p>C2000 real-time control MCUs feature highly integrated analog and control
+peripherals, which provide a complete solution for demanding real-time high
+performance signal processing applications, such as digital power, industrial
+drives, inverters, and motor control.</p>
+<section id="c28x-cpu">
+<h2>C28x CPU<a class="headerlink" href="#c28x-cpu" title="Permalink to this heading">#</a></h2>
+<p>The C28x is a highly integrated, high performance solution for demanding control
+applications. It is a union between a general purpose microcontroller and a
+digital signal processor(DSP), balancing the code density of a RISC processor
+and the execution speed of a DSP with the architecture, firmware, and
+development tools of a microcontroller.</p>
+<p>The MCU features include a modified Harvard architecture and circular
+addressing. The RISC features are single-cycle instruction execution,
+register-to-register operations, and a modified Harvard architecture. The
+microcontroller features include ease of use through an intuitive instruction
+set, byte packing and unpacking, and bit manipulation.</p>
+<p>The <a class="reference external" href="https://www.ti.com/lit/SPRU430F"><i>TMS320C28x CPU and Instruction Set Reference Guide</i></a>
+describes the central processing unit (CPU) and the assembly language instructions. Some of the major features of the CPU include:</p>
+<ul class="simple">
+<li><p><strong>Protected pipeline</strong>: The CPU implements an 8-phase pipeline that prevents a
+write to and a read from the same location from occurring out of order.</p></li>
+<li><p><strong>Independent register space</strong>: The CPU contains registers that are not mapped
+to data space. These registers function as system-control registers, math
+registers, and data pointers. The system-control registers are accessed by
+special instructions. The other registers are accessed by special
+instructions or by a special addressing mode (register addressing mode).</p></li>
+<li><p><strong>Arithmetic logic unit (ALU)</strong>: The 32-bit ALU performs two’s complement
+arithmetic and Boolean logic operations.</p></li>
+<li><p><strong>Address register arithmetic unit (ARAU)</strong>: The ARAU generates data-memory
+addresses and increments or decrements pointers in parallel with ALU
+operations.</p></li>
+<li><p><strong>Barrel shifter</strong>: This shifter performs all left and right shifts of data.
+It can shift data to the left by up to 16 bits and to the right by up to 16
+bits.</p></li>
+<li><p><strong>Multiplier</strong>: The multiplier performs 32-bit × 32-bit two’s complement
+multiplication with a 64-bit result. The multiplication can be performed
+with two signed numbers, two unsigned numbers, or one signed number and one
+unsigned number.</p></li>
+</ul>
+<p>The C28x design supports an efficient C engine with hardware that allows the C
+compiler to generate compact code. Multiple busses and an internal register bus
+allow an efficient and flexible way to operate on the data. The architecture is
+also supported by powerful addressing modes, which allow the compiler as well
+as the assembly programmer to generate compact code that is almost one to one
+corresponded to the C code.</p>
+</section>
+<section id="c28x-internal-bussing">
+<h2>C28x Internal Bussing<a class="headerlink" href="#c28x-internal-bussing" title="Permalink to this heading">#</a></h2>
+<p>Within each C2000 device’s datasheet is a ‘Functional Block Diagram’ of the CPU
+system and associated peripherals. Please refer to this diagram to understand
+the bus architecture for each of the different components within the device.</p>
+<p>As with many high performance microcontrollers, multiple busses are used to move
+data between the memory blocks, peripherals, and the CPU. The C28x memory bus
+architecture consists of six buses (three address and three data):</p>
+<ol class="arabic simple">
+<li><p>A program read bus (22-bit address line and 32-bit data line)</p></li>
+<li><p>A data read bus (32-bit address line and 32-bit data line)</p></li>
+<li><p>A data write bus (32-bit address line and 32-bit data line)</p></li>
+</ol>
+<p><img alt="C28x Internal Bus Architecture" src="../../_images/somepic.png" /></p>
+<p>The 32-bit-wide data busses provide single cycle 32-bit operations. This
+multiple bus architecture (Harvard Bus Architecture) enables the C28x to fetch
+an instruction, read a data value and write a data value in a single cycle. All
+peripherals and memory blocks are attached to the memory bus with prioritized
+memory accesses.</p>
+</section>
+<section id="c28x-math-accelerators">
+<h2>C28x Math Accelerators<a class="headerlink" href="#c28x-math-accelerators" title="Permalink to this heading">#</a></h2>
+<p>The C28x is also enhanced by math accelerators such as the ones below.
+Note that not all accelerators may be present in every device. Refer to the device datasheet for specific implementations.</p>
+<ul class="simple">
+<li><p><strong>Control Law Accelerator (CLA)</strong>: An independent 32-bit floating-point math
+hardware accelerator which executes real-time control algorithms in
+parallel with the main C28x CPU, effectively doubling the computational
+performance. With direct access to the various control and communication
+peripherals, the CLA minimizes latency, enables a fast trigger response,
+and avoids CPU overhead.</p></li>
+<li><p><strong>Floating Point Unit (FPU)</strong>: The addition of the Floating-Point Unit(FPU) to
+the fixed-point CPU core enables support for hardware IEEE-754
+single-precision floating-point format operations. The FPU adds an extended
+set of floating-point registers and instructions to the standard C28x
+architecture, providing seamless integration of floating-point hardware
+into the CPU.</p></li>
+<li><p><strong>Trigonometric Math Unit (TMU)</strong>: TMU extends the capability of the CPU to
+efficiently execute trigonometric and arithmetic operations commonly found
+in control system applications. It also provides hardware support for
+IEEE-754 single-precision floating point operations which accelerate
+trigonometric math functions.</p></li>
+<li><p><strong>Viterbi, Complex Math, and CRC Unit (VCU)</strong>: VCU further extends the
+capabilities of the CPU for supporting various communication-based
+algorithms and is very useful for general-purpose signal processing
+applications, such as filtering and spectral analysis.</p></li>
+</ul>
+</section>
+<section id="c28x-cpu-math-accelerators">
+<h2>C28x CPU + Math Accelerators<a class="headerlink" href="#c28x-cpu-math-accelerators" title="Permalink to this heading">#</a></h2>
+<p>The figure below illustrates how the different components discussed so far in the module function together.</p>
+<p><img alt="C28x CPU and other cores" src="../../_images/core_connections.png" /></p>
+<p><b> Summary of Key Benefits: </b></p>
+<ol class="arabic simple">
+<li><p>MCU/DSP balancing code density &amp; execution time</p>
+<ul class="simple">
+<li><p>16-bit instructions for improved code density</p></li>
+<li><p>32-bit instructions for improved execution time</p></li>
+</ul>
+</li>
+<li><p>32-bit fixed-point CPU + FPU</p></li>
+<li><p>32x32 fixed-point multiply-accumulate (MAC), doubles as dual 16x16 MAC</p></li>
+<li><p>IEEE Single-precision floating point hardware and MAC</p></li>
+<li><p>Floating-point simplifies software development and boosts performance</p></li>
+<li><p>Viterbi, Complex Math, CRC Unit (VCU) adds support for Viterbi decode, complex math and cyclic redundancy check (CRC) operations</p></li>
+<li><p>Parallel processing Control Law Accelerator (CLA) adds IEEE Single-precision 32-bit floating point math operations</p></li>
+<li><p>CLA algorithm execution is independent of the main CPU</p></li>
+<li><p>Trigonometric operations supported by TMU</p></li>
+<li><p>Fast interrupt service time</p></li>
+<li><p>Single cycle read-modify-write instructions</p></li>
+</ol>
+<p>The C28x is as efficient in DSP math tasks as it is in system control tasks. This efficiency
+removes the need for a second processor in many systems. The 32 x 32-bit multiply-accumulate
+(MAC) capabilities can also support 64-bit processing, enabling the C28x to efficiently handle
+higher numerical resolution calculations that would otherwise demand a more expensive solution.
+Along with this is the capability to perform two 16 x 16-bit multiply accumulate instructions
+simultaneously or Dual MACs (DMAC).</p>
+</section>
+<section id="special-instructions">
+<h2>Special Instructions<a class="headerlink" href="#special-instructions" title="Permalink to this heading">#</a></h2>
+<p>Atomic instructions are a group of small common instructions which are non-interruptible. The
+atomic ALU capability supports instructions and code that manages tasks and processes. These
+instructions usually execute several cycles faster than traditional coding.</p>
+<p><img alt=" C28x Atomic Read Modify Write" src="../../_images/atomic_read_write.png" /></p>
+<section id="atomic-instructions-benefits">
+<h3>Atomic Instructions Benefits<a class="headerlink" href="#atomic-instructions-benefits" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Simpler programming</p></li>
+<li><p>Smaller, faster code</p></li>
+<li><p>Uninterruptible (Atomic)</p></li>
+<li><p>More efficient compiler</p></li>
+</ol>
+</section>
+<section id="standard-load-store">
+<h3>Standard Load/Store<a class="headerlink" href="#standard-load-store" title="Permalink to this heading">#</a></h3>
+<div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">AND</span><span class="w"> </span><span class="no">AL</span><span class="p">,</span><span class="mi">#1234</span><span class="no">h</span>
+<span class="nf">MOV</span><span class="w"> </span><span class="p">*</span><span class="no">XAR2</span><span class="p">,</span><span class="no">AL</span>
+<span class="nf">DINT</span>
+<span class="nf">EINT</span>
+</pre></div>
+</div>
+</section>
+<section id="atomic-read-modify-write">
+<h3>Atomic Read/Modify/Write<a class="headerlink" href="#atomic-read-modify-write" title="Permalink to this heading">#</a></h3>
+<div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">AND</span><span class="w"> </span><span class="p">*</span><span class="no">XAR2</span><span class="p">,</span><span class="mi">#1234</span><span class="no">h</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="cpu-pipeline">
+<h2>CPU Pipeline<a class="headerlink" href="#cpu-pipeline" title="Permalink to this heading">#</a></h2>
+<p>The C28x uses a special 8-stage protected pipeline to maximize the throughput. This protected
+pipeline prevents a write to and a read from the same location from occurring out of order.
+This pipelining also enables the C28x CPU to execute at high speeds without resorting to
+expensive high-speed memories. Special branch-look-ahead hardware minimizes the latency for
+conditional discontinuities. Special store conditional operations further improve performance.
+With the 8-stage pipeline most operations can be performed in a single cycle.</p>
+<p><img alt=" C28x CPU Pipeline" src="../../_images/cpu_pipeline.png" /></p>
+<section id="peripheral-write-read-protection">
+<h3>Peripheral Write-Read Protection<a class="headerlink" href="#peripheral-write-read-protection" title="Permalink to this heading">#</a></h3>
+<p>The peripheral write-read protection is a mechanism to protect the write-read
+order for peripherals at different addresses. This works similar to the CPU
+pipeline protection of write-read order for the same address.</p>
+<p>Suppose you need to write to a peripheral register and then read a different
+register for the same peripheral(e.g., write to control, read from status
+register)?</p>
+<ol class="arabic simple">
+<li><p>CPU pipeline protects W-R order for the same address</p></li>
+<li><p>Write-Read protection mechanism protects W-R order for different addresses</p></li>
+</ol>
+</section>
+</section>
+<section id="memory">
+<h2>Memory<a class="headerlink" href="#memory" title="Permalink to this heading">#</a></h2>
+<p>C2000 devices implement a memory map where the unified memory blocks can be accessed in either
+program space, data space, or both spaces. This type of memory map lends itself well for
+supporting high-level programming languages. The memory map structure consists of RAM
+blocks dedicated to the CPU, RAM blocks accessible by the CPU and CLA, RAM blocks
+accessible by the DMA module, message RAM blocks between the CPU and CLA, CAN
+message RAM blocks, flash, and one-time programmable (OTP) memory.</p>
+<p>The Boot ROM is factory programmed with boot software routines and standard
+tables used in math related algorithms.</p>
+<section id="memory-map">
+<h3>Memory Map<a class="headerlink" href="#memory-map" title="Permalink to this heading">#</a></h3>
+<p>The C28x CPU core contains no memory, but can access on-chip and off-chip memory. The
+C28x uses 32-bit data addresses and 22-bit program addresses. This allows for a total address
+reach of 4GB (4G words, where 1 word = 16-bits) in data memory and 4MB (4M words) in program
+memory.</p>
+<p>The memory map for a device can be found within the device’s datasheet under
+the ‘Memory’ section of the ‘Detailed Description’ chapter. Within the Memory
+map will be the content for the dedicated RAM (Mx RAM), local shared RAM
+(LSx RAM), and global shared RAM (GSx RAM).</p>
+<p>Dedicated RAM blocks are tightly coupled with the CPU, and only the CPU has
+access to them. The local shared memory blocks are accessible by the CPU and
+CLA. The four global shared memory blocks are accessible by the CPU and DMA.</p>
+<p>The user OTP is a one-time-programmable memory block which contains device
+specific calibration data for the ADC, internal oscillators, and buffered DACs,
+in addition to settings used by the flash state machine for erase and
+program operations. Additionally, it contains locations for programming security
+settings, such as passwords for selectively securing memory blocks, configuring
+the standalone boot process, as well as selecting the boot-mode pins in case the
+factory-default pins cannot be used. This information is programmed into the
+dual code security module (DCSM). The flash memory is primarily used to store
+program code, but can also be used to store static data. The boot ROM and boot
+ROM vectors are located at the bottom of the memory map.</p>
+</section>
+</section>
+<section id="multi-core-devices">
+<h2>Multi Core Devices<a class="headerlink" href="#multi-core-devices" title="Permalink to this heading">#</a></h2>
+<p>The C2000 portfolio offers single and multi-core devices. Devices which contain
+muli-cores are the F2837xD and F2838xD devices. Each C28x core is identical
+with access to its own local RAM and flash memory, as well as globally shared
+RAM memory. Sharing information between the two CPU cores is accomplished with
+an Inter-Processor Communications (IPC) module. Additionally, each core shares
+access to a common set of highly integrated analog and control peripherals,
+providing a complete solution for demanding real-time high-performance signal
+processing applications, such as digital power, industrial drives, inverters,
+and motor control.</p>
+</section>
+<section id="connectivity-manager-cm">
+<h2>Connectivity Manager (CM)<a class="headerlink" href="#connectivity-manager-cm" title="Permalink to this heading">#</a></h2>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>This section is only applicable to the F2838x device</p>
+</div>
+<p>The F2838x device has a Connectivity Manager (CM) which is an Arm Cortex-M4
+processor.The Arm Cortex-M4 processor provides a high-performance, low-cost
+platform that meets the system requirements of minimal memory implementation,
+reduced pin count, and low power consumption, while delivering outstanding
+computational performance and exceptional system response to interrupts.</p>
+<p>The CM subsystem has the following:</p>
+<ul class="simple">
+<li><p><strong>A variety of communication peripherals</strong>: EtherCAT, Ethernet, USB, MCAN
+(CAN-FD), DCAN, UART, SSI, I2C, and so on.</p></li>
+<li><p><strong>Advance encryption standard (AES) accelerator</strong>: Provides
+hardware-accelerated data encryption and decryption operations based on a
+binary key.</p></li>
+<li><p><strong>Generic Cyclic Redundancy Check (GCRC) module</strong>: Computes the CRC value for
+a configurable block of memory.</p></li>
+<li><p><strong>CM Nonmaskable Interrupt (CMNMI) module</strong>: Allows the CM subsystem to detect
+all serious errors that could occur in the entire system(including all of
+the subsystems), and informing the main CPU core about the errors.</p></li>
+</ul>
+</section>
+<section id="lockstep-comparator-module-lcm">
+<h2>Lockstep Comparator Module (LCM)<a class="headerlink" href="#lockstep-comparator-module-lcm" title="Permalink to this heading">#</a></h2>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>This section is only applicable to the F280015x device</p>
+</div>
+<p>Ensuring integrity of hardware modules during run-time is a critical functional-safety
+requirement. In a lockstep CPU architecture, hardware redundancy is achieved by two CPUs
+executing the same instruction and the output of the CPUs being continuously compared.
+This is a proven method for achieving high diagnostic coverage for both permanent and
+transient faults. The lock-step architecture is implemented by the Lockstep Comparator
+Module (LCM), which compares the output from both CPUs to detect permanent and transient
+faults. It must be emphasized that both cores are executing the <i>same</i> code. In other
+words, it is not possible to run different codes on the two cores. Contrast this with
+devices such as F2837xD or F2838xD, where the two C28x CPUs are independent of each other
+and hence it is possible to run different codes on the two cores.</p>
+<p><img alt=" Lock-step Control Module" src="../../_images/lcm.png" /></p>
+<p>The LCM implements the following features:</p>
+<ul class="simple">
+<li><p>Pipelined architecture</p></li>
+<li><p>Redundant comparison</p></li>
+<li><p>Self-test capability</p></li>
+<li><p>Match and mismatch test</p></li>
+<li><p>Error forcing capability</p></li>
+<li><p>Temporal redundancy: The operation of the two modules is skewed by two cycles
+to address the issue of common cause failures like failure of clock, power,
+etc. This ensures temporal redundancy.</p></li>
+<li><p>Spatial redundancy: Each module is physically separate, which provides spatial redundancy”</p></li>
+<li><p>Non-delayed functional output path to provide non-delayed CPU execution for the system (while still having temporal redundancy).</p></li>
+<li><p>Register protection of critical memory mapped registers of the module, using a parity scheme.</p></li>
+</ul>
+<p>Upon an error generated by the LCM module, a system-level NMI is triggered. In systems that
+do not require the redundant module for functional safety requirements, the LCM redundant
+module can be disabled for additional power savings.</p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<section id="c28x-related-collateral">
+<h3>C28X Related Collateral<a class="headerlink" href="#c28x-related-collateral" title="Permalink to this heading">#</a></h3>
+<p><strong>Foundational</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://software-dl.ti.com/C2000/docs/optimization_guide/index.html">C2000 C28x Optimization Guide</a></p></li>
+<li><p><a class="reference external" href="https://software-dl.ti.com/C2000/docs/software_guide/index.html">C2000 Software Guide</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRY288">Enhancing the Computational Performance of the C2000™ Microcontroller Family Application Report</a></p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/blogs_/b/industrial_strength/archive/2015/07/15/how-fast-is-your-32-bit-mcu">How fast is your 32-bit MCU?</a> - Only applicable to: F2807x, F2837x</p></li>
+</ul>
+<p><strong>Getting Started</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://software-dl.ti.com/C2000/docs/C2000_Multicore_Development_User_Guide/index.html">C2000 Multicore Development User Guide</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/3869897798001">C2000 VCU, Viterbi, Complex Math, and CRC</a> - Only applicable to: F28004x, F2807x, F2837xD, F2837xS</p></li>
+<li><p><a class="reference external" href="https://dev.ti.com/tirex/explore/node?node=AJQZotxCdtXD4hGbOZrXXA__gYkahfz__LATEST">C2000Ware - CLAMath</a></p></li>
+<li><p><a class="reference external" href="https://dev.ti.com/tirex/explore/node?node=AMKkBMCf2i6vcDt9cLSJ0A__gYkahfz__LATEST">C2000Ware - FPU Fast RTS</a></p></li>
+<li><p><a class="reference external" href="https://dev.ti.com/tirex/explore/node?node=AKg0a8h-.vTGXaCZThPhkQ__gYkahfz__LATEST">C2000Ware - FPU Library</a></p></li>
+<li><p><a class="reference external" href="https://dev.ti.com/tirex/explore/node?node=AJvCpzFT6CVD21-BTdLCJg__gYkahfz__LATEST">C2000Ware - Fast Integer Division</a></p></li>
+<li><p><a class="reference external" href="https://dev.ti.com/tirex/explore/node?node=ALuZdvMDhSsqxHVeb595ZQ__gYkahfz__LATEST">C2000Ware - Fixed Point Library</a></p></li>
+<li><p><a class="reference external" href="https://dev.ti.com/tirex/explore/node?node=AOg.3PQHvLDA2Ap18Lmjpg__gYkahfz__LATEST">C2000Ware - IQMath</a></p></li>
+<li><p><a class="reference external" href="https://dev.ti.com/tirex/explore/node?node=AMXKlFPARdBiAwrbthDVyQ__gYkahfz__LATEST">C2000Ware - VCU Library</a></p></li>
+<li><p><a class="reference external" href="https://software-dl.ti.com/C2000/docs/software_guide/c2000ware/libraries.html">C2000Ware Libraries Overview</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACR3">CRC Engines in C2000 Devices Application Report</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/sprad88">Migrating Software From 8-Bit (Byte) Addressable CPU’s to C28x CPU Application Report</a> - Only applicable to: F28002x, F28003x, F28004x, F2807x, F2837xD, F2837xS</p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRUHS1C">TMS320C28x Extended Instruction Sets Application Report</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRAAN9">TMS320C28x FPU Primer Application Report</a></p></li>
+</ul>
+<p><strong>Expert</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACN6">Fast Integer Division - A Differentiated Offering From C2000 Product Family Application Report</a> - Only applicable to: F28002x, F28003x, F2838x</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="../c2000_get_started/c2000_getstarted_sysconfig.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Get Started with C2000 using SysConfig</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="../c2000_system/c2000_boot.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Reset and Boot Process</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#c28x-cpu">
+   C28x CPU
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#c28x-internal-bussing">
+   C28x Internal Bussing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#c28x-math-accelerators">
+   C28x Math Accelerators
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#c28x-cpu-math-accelerators">
+   C28x CPU + Math Accelerators
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#special-instructions">
+   Special Instructions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#atomic-instructions-benefits">
+     Atomic Instructions Benefits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#standard-load-store">
+     Standard Load/Store
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#atomic-read-modify-write">
+     Atomic Read/Modify/Write
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cpu-pipeline">
+   CPU Pipeline
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#peripheral-write-read-protection">
+     Peripheral Write-Read Protection
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#memory">
+   Memory
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#memory-map">
+     Memory Map
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-core-devices">
+   Multi Core Devices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#connectivity-manager-cm">
+   Connectivity Manager (CM)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lockstep-comparator-module-lcm">
+   Lockstep Comparator Module (LCM)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c28x-related-collateral">
+     C28X Related Collateral
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

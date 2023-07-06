@@ -1,0 +1,715 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Embedded Real-time Analysis and Diagnostic (ERAD) &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_debug_systems/c2000_erad';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_debug_systems/c2000_erad.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Debug Tips &amp; Tricks" href="c2000_debug_tips.html" />
+    <link rel="prev" title="Background CRC (BGCRC)" href="../c2000_security_safety/c2000_bgcrc.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="embedded-real-time-analysis-and-diagnostic-erad">
+<h1>Embedded Real-time Analysis and Diagnostic (ERAD)<a class="headerlink" href="#embedded-real-time-analysis-and-diagnostic-erad" title="Permalink to this heading">#</a></h1>
+<p>C2000 real-time microcontrollers architecture includes a new and advanced
+peripheral Embedded Real-time Analysis and Diagnostic (ERAD). The ERAD module
+enhances the debug and system analysis capabilities of the device. This module
+facilitates sophisticated non-intrusive detection and monitoring of the CPU
+operation in real-time. The debug and system analysis enhancements provided by
+the ERAD module are implemented external to the CPU.</p>
+<div class="admonition-erad-module admonition">
+<p class="admonition-title">ERAD Module</p>
+<p>Not all C2000 devices have an ERAD module. Refer to the
+<i><a class="reference external" href="https://www.ti.com/lit/spru566">Peripheral Reference Guide</a></i>
+for a list of supported modules on your device.</p>
+</div>
+<section id="what-is-erad-module">
+<h2>What is ERAD module?<a class="headerlink" href="#what-is-erad-module" title="Permalink to this heading">#</a></h2>
+<p>The C28x CPU alone has two analysis resources; Analysis Unit 1 (AU1) and
+Analysis Unit 2 (AU2). The first analysis unit counts events or monitors
+address buses. The second analysis unit monitors address and data buses. The
+two analysis units can be configured for hardware breakpoints or hardware watch
+points, and additionally the first analysis unit can be configured as a
+benchmark counter or event counter.</p>
+<p>The ERAD module further expands the debugging capability by providing:</p>
+<ul class="simple">
+<li><p>Additional hardware breakpoints</p></li>
+<li><p>Hardware watch points</p></li>
+<li><p>Counters for profiling</p></li>
+<li><p>Other advanced features</p></li>
+</ul>
+<p>The ERAD module can be utilized by the debugger, and also by the application
+software. For many real-time systems, it is not always possible to connect a
+debugger and perform an intrusive debug. Under these situations, the user’s
+code has the ability to set up and control the ERAD module in order to debug
+and profile the system without disturbing the end application.</p>
+</section>
+<section id="block-diagram-of-erad-module">
+<h2>Block Diagram of ERAD module<a class="headerlink" href="#block-diagram-of-erad-module" title="Permalink to this heading">#</a></h2>
+<p>The ERAD module consists of two blocks:</p>
+<ul class="simple">
+<li><p>Enhanced Bus Comparator (EBC)</p></li>
+<li><p>System Event Counter (SEC)</p></li>
+</ul>
+<p>Figure below shows the block diagram of ERAD module.</p>
+<p><img alt="ERAD Overview Diagram" src="../../_images/erad_block_diagram.png" /></p>
+</section>
+<section id="enhanced-bus-comparator-ebc">
+<h2>Enhanced Bus Comparator (EBC)<a class="headerlink" href="#enhanced-bus-comparator-ebc" title="Permalink to this heading">#</a></h2>
+<p>The EBC units connect to the CPU similar to any standard direct memory interface
+connection. The program space buses, data space buses, debug qualifiers for
+memory access, and debug-related strobes necessary for breakpoints, watch
+points and trace points, are connected between the CPU and these units. The EBC
+units are usually controlled by the debug software. However, a CPU application
+code can also configure and use these units for interrupt and event generation.
+The ERAD module can be owned by either the debugger or the application software
+through the memory-mapped registers.</p>
+</section>
+<section id="capabilities-of-ebc-unit">
+<h2>Capabilities of EBC Unit<a class="headerlink" href="#capabilities-of-ebc-unit" title="Permalink to this heading">#</a></h2>
+<p>The EBC unit has the following capabilities:</p>
+<ul class="simple">
+<li><p>Generate hardware breakpoints</p></li>
+<li><p>Generate hardware watch points</p></li>
+<li><p>Generate trace tags for instruction fetch matches and generate real-time
+interrupt</p></li>
+<li><p>Monitor data read address buses, data write address buses, data write data
+bus, and generate real-time interrupt</p></li>
+<li><p>Generate an event output which can be used by other modules. This is done
+through monitoring any of the program address buses, Virtual Program
+Counter (VPC), or the Program Counter of the CPU.</p></li>
+</ul>
+</section>
+<section id="operation-of-ebc-unit">
+<h2>Operation of EBC Unit<a class="headerlink" href="#operation-of-ebc-unit" title="Permalink to this heading">#</a></h2>
+<p>The following operations are supported by the EBC unit:</p>
+<ul class="simple">
+<li><p><strong>Operation of a hardware breakpoint</strong>: The EBC unit will generate the
+appropriate tags for an access made to a particular address. When the
+instruction is going to enter the DECODE 2 (D2) phase of the pipeline, the
+CPU is halted.</p></li>
+<li><p><strong>Operation of a watch point</strong>: The watch points will detect the occurrence
+of a data memory read or write, and will halt the CPU at the next
+interruptible boundary.</p></li>
+<li><p><strong>Operation of program trace</strong>: This operation is very similar to the
+hardware breakpoint operation. The difference between the CPU behavior is
+that it will internally generate an real-time interrupt when the tagged
+instruction reaches the DECODE 2 (D2) phase of the pipeline. If this
+instruction is discarded in the fetch buffer due to discontinuity, then no
+real-time interrupt will be generated.</p></li>
+<li><p><strong>Operation of real-time interrupt</strong>: This is an alternative to a watch point
+where an interrupt can be generated to the CPU on detecting the designated
+read and write access.</p></li>
+</ul>
+<p>It is important to note that a hardware breakpoint will only halt the CPU if a
+debugger is connected.</p>
+</section>
+<section id="ebc-unit-event-masking-and-exporting">
+<h2>EBC Unit - Event Masking and Exporting<a class="headerlink" href="#ebc-unit-event-masking-and-exporting" title="Permalink to this heading">#</a></h2>
+<p>The events generated by different EBC units can be combined using OR and AND
+logics to generate new events as required. There are four <strong>AND</strong> and
+four <strong>OR</strong> combinations that could be exported using masks to suppress
+unnecessary events. These events may also be configured to generate an
+real-time interrupt.</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>Option to generate real-time interrupt is not supported on TMS320F28004x.</p>
+</div>
+</section>
+<section id="system-event-counter-sec">
+<h2>System Event Counter (SEC)<a class="headerlink" href="#system-event-counter-sec" title="Permalink to this heading">#</a></h2>
+<p>The SEC units provide better system profiling, analysis, and debug capability.
+The SEC units contain counters which enhances the debug and profiling process
+in various types of system scenarios such as:</p>
+<ul class="simple">
+<li><p>Profiling code segments</p></li>
+<li><p>Counting duration between specified memory reads and writes</p></li>
+<li><p>Counting system events (such as interrupts)</p></li>
+<li><p>Counting duration between system events</p></li>
+<li><p>System timer</p></li>
+<li><p>Measuring the number of wait states in code segments</p></li>
+<li><p>Measuring the maximum amount of time spent in between a pair of events,
+measured over multiple iterations</p></li>
+<li><p>Chaining counters in order to link events or create larger counters</p></li>
+</ul>
+</section>
+<section id="capabilities-of-sec">
+<h2>Capabilities of SEC<a class="headerlink" href="#capabilities-of-sec" title="Permalink to this heading">#</a></h2>
+<p>The SEC unit has following capabilities:</p>
+<ul class="simple">
+<li><p>Function as a counter capable of counting:</p>
+<ul>
+<li><p>Any of the match events generated by the EBC units</p></li>
+<li><p>Events generated by the EBC units. These events can be used to start and
+stop the counting.</p></li>
+<li><p>System events including the PIE interrupts, timer interrupts, and CLA task
+interrupts. These system events can be used to start and stop the
+counting.</p></li>
+<li><p>More information on the sources of the SEC units can be found at the Event
+Selector Mux Signals Table.</p></li>
+</ul>
+</li>
+<li><p>Generate an interrupt or a watch point if the count reaches a reference
+value.</p></li>
+<li><p>Operate in counting mode in one of the following two modes:</p>
+<ul>
+<li><p>Duration mode: The counter will count the CPU cycles as long as the event
+is active.</p></li>
+<li><p>Event mode: The counter will count only the positive edge of the event
+signal. This is effectively counting the number of times the event
+transitions from inactive to active.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="system-event-counter-modes">
+<h2>System Event Counter Modes<a class="headerlink" href="#system-event-counter-modes" title="Permalink to this heading">#</a></h2>
+<p>The following are the key features of the SEC unit. The counters are initialized to zero and will always count up.</p>
+<ul class="simple">
+<li><p><strong>Continuous Count</strong>: In this mode the counter continues to count as
+specified by the input selector. If the counter reaches the maximum value,
+it resets to zero and will continue to count up. A sticky overflow bit
+will be set to indicate that this counter had overflowed. The counter can
+count the CPU cycles without any events selected. In this mode the module
+can be used as a software controlled SYSCLK counter.</p></li>
+<li><p><strong>Timer Mode Count</strong>: In this mode, the counter counts up to a set reference
+value and after reaching the reference value, it resets to zero. The
+counter will generate an event that can send an interrupt to the CPU or
+generate a watch point. The counter can be set up to either continue
+incrementing or reset when a match event occurs.</p></li>
+<li><p><strong>Start-Stop Count</strong>: In this mode, two events are allowed to act as start
+and stop indicators to the counter. The counter will commence counting
+only when the defined start event occurs. The counter will then continue
+to count up until the stop event occurs. Once the first start event has
+occurred, further start events will be ignored till the stop event
+occurs.</p></li>
+</ul>
+</section>
+<section id="counting-active-levels-versus-edges">
+<h2>Counting Active Levels Versus Edges<a class="headerlink" href="#counting-active-levels-versus-edges" title="Permalink to this heading">#</a></h2>
+<p>The SEC units can be configured to either count active levels or edges of the
+selected inputs. Each SEC unit has eight inputs from the EBC units and many
+inputs from other events in the device. Each SEC unit can be configured to
+count any of the input events or just count up on every cycle.</p>
+<p>For example, if an input event occurs and is active for 25 cycles, the SEC
+unit’s counter increments only by 1 in event mode, whereas in the duration
+mode, it increments by 25.</p>
+<p><strong>Max Mode</strong>:
+Max mode is also supported by the SEC units. This mode allows the
+user to detect the maximum count that has occurred during various count
+iterations in start-stop mode. For example, a user can set up the counter in
+the start-stop count mode to count the duration of a critical code loop.
+Every time the stop event occurs and the counter stops, the counter value is
+checked against the current MAX_COUNT present in the register. If the new
+value is greater, then the MAX_COUNT register is updated. The counter will
+always reset to zero at the stop event and will be ready to start counting on
+the next start event. Therefore the MAX_COUNT will contain the maximum number
+of cycles that occurred between the start and stop condition over many
+iterations.</p>
+<p><strong>Cumulative Mode</strong>:
+The SEC units can be used to yield the cumulative count over several start and
+stop events. In this mode the, unlike Max mode, the counter does not reset due
+to a stop event. Instead it stops counting and resumes counting when a start
+event occurs. in cumulative count mode, the MAX_COUNT is not valid.</p>
+</section>
+<section id="cyclic-redundancy-check-crc-unit">
+<h2>Cyclic Redundancy Check (CRC) Unit<a class="headerlink" href="#cyclic-redundancy-check-crc-unit" title="Permalink to this heading">#</a></h2>
+<p>The main purpose of the CRC units is to ensure that the CPU functionally remains
+intact when it is executing the same software test library over multiple
+iterations. This is done by comparing the computed CRC values after each
+iteration, with a pre-computed golden value.</p>
+<p>The CRC units monitor CPU buses and compute CRC when the self-test code is
+executed. This capability aids in achieving simpler, non-intrusive and
+interruptible self-test mechanisms with Software Test Library (STL). Each CRC
+unit is used to monitor a different CPU interface. For example, CRC unit 1 is
+used to monitor the Program Counter, while CRC unit 2 is used to monitor the
+data read address bus.</p>
+</section>
+<section id="cpu-interface-monitored-by-crc">
+<h2>CPU interface monitored by CRC<a class="headerlink" href="#cpu-interface-monitored-by-crc" title="Permalink to this heading">#</a></h2>
+<p>The CPU interface being monitored by each of the CRC units are listed below in
+following table.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>CRC Unit</p></th>
+<th class="head"><p>CPU Interface</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CRC Unit 1</p></td>
+<td><p>Program Counter Register</p></td>
+</tr>
+<tr class="row-odd"><td><p>CRC Unit 2</p></td>
+<td><p>Data Read Address Bus</p></td>
+</tr>
+<tr class="row-even"><td><p>CRC Unit 3</p></td>
+<td><p>Data Read Data Bus</p></td>
+</tr>
+<tr class="row-odd"><td><p>CRC Unit 4</p></td>
+<td><p>Data Write Address Bus</p></td>
+</tr>
+<tr class="row-even"><td><p>CRC Unit 5</p></td>
+<td><p>Data Write Data Bus</p></td>
+</tr>
+<tr class="row-odd"><td><p>CRC Unit 6</p></td>
+<td><p>Instruction Register Value (Unsecured)</p></td>
+</tr>
+<tr class="row-even"><td><p>CRC Unit 7</p></td>
+<td><p>Instruction Register Value (Secure-Zone 1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>CRC Unit 8</p></td>
+<td><p>Instruction Register Value (Secure-Zone 2)</p></td>
+</tr>
+</tbody>
+</table>
+<p>CRC units 7 and 8 are intended to compute the Instruction Register values for
+secure-zone 1 and secure-zone 2 instruction execution. Computed CRC values for
+the a given secure-zone is available only for accesses originating from that
+zone.</p>
+</section>
+<section id="crc-unit-qualifiers">
+<h2>CRC Unit Qualifiers<a class="headerlink" href="#crc-unit-qualifiers" title="Permalink to this heading">#</a></h2>
+<p>EBC units have the capability to monitor the Program Counter, data writes and
+data reads. CRC units can use the EBC units to decide when the check values
+should be calculated. By default, all the valid events on a given interface
+enables a CRC unit for computation. However there are optional qualifiers which
+can be used to control the CRC computation when valid events occur. These
+qualifiers can be generated by masking the EBC units events. Figure  shows the
+connection between EBC event masking and exporting with the CRC qualifiers.</p>
+<p>For example, if it is required to calculate the check values only when the CPU
+is executing a specific function, the user can set up an EBC unit to monitor
+the PC and generate a CRC qualifier when that function is executed. This allows
+the CRC unit to calculated the check value only when desired.</p>
+<p><img alt="CRC Qualifiers Diagram" src="../../_images/Event_Masking_With_CRC.png" /></p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<section id="erad-related-collateral">
+<h3>ERAD Related Collateral<a class="headerlink" href="#erad-related-collateral" title="Permalink to this heading">#</a></h3>
+<p><strong>Foundational</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/video/5745571666001">Embedded Real-Time Analysis &amp;amp; Diagnostics (ERAD) on C2000™ Devices</a> - Only applicable to: F28002x, F28003x, F28004x, F2838x</p></li>
+</ul>
+<p><strong>Getting Started</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/video/6292444674001">Embedded Real-Time Analysis &amp;amp; Diagnostics (ERAD) on C2000 MCUs</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACM7">Embedded Real-Time Analysis and Response for Control Applications Application Report</a> - Only applicable to: F28002x, F28003x, F28004x, F2838x</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="../c2000_security_safety/c2000_bgcrc.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Background CRC (BGCRC)</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_debug_tips.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Debug Tips &amp; Tricks</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-erad-module">
+   What is ERAD module?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#block-diagram-of-erad-module">
+   Block Diagram of ERAD module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enhanced-bus-comparator-ebc">
+   Enhanced Bus Comparator (EBC)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#capabilities-of-ebc-unit">
+   Capabilities of EBC Unit
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operation-of-ebc-unit">
+   Operation of EBC Unit
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ebc-unit-event-masking-and-exporting">
+   EBC Unit - Event Masking and Exporting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#system-event-counter-sec">
+   System Event Counter (SEC)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#capabilities-of-sec">
+   Capabilities of SEC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#system-event-counter-modes">
+   System Event Counter Modes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#counting-active-levels-versus-edges">
+   Counting Active Levels Versus Edges
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cyclic-redundancy-check-crc-unit">
+   Cyclic Redundancy Check (CRC) Unit
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cpu-interface-monitored-by-crc">
+   CPU interface monitored by CRC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#crc-unit-qualifiers">
+   CRC Unit Qualifiers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#erad-related-collateral">
+     ERAD Related Collateral
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

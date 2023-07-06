@@ -1,0 +1,68 @@
+# Functional Safety (FuSa) 
+
+The C2000 family has many devices which are safety compliant for industrial 
+and automotive use-cases. The International Electrotechnical Commission (IEC) 
+defines functional safety as the part of overall safety that depends on a 
+system or equipment operating correctly in response to its inputs. Development 
+of functional safety-compliant systems capable of ensuring safe operation in 
+the event of dangerous failures has become a priority for companies and 
+engineers alike. These functional safety-compliant systems can detect 
+potentially dangerous conditions and deploy appropriate measures to take 
+a system to a safe state.
+
+Functional Safety-Compliant C2000 products can help streamline and speed up 
+the ISO 26262, IEC 61508, and IEC 60730 certification processes with their 
+built-in diagnostics, documentation, software, and support. Functional 
+Safety-Compliant products are developed using an ISO 26262/IEC 61508-compliant 
+hardware development process that is independently assessed and certified to 
+meet ASIL D/SIL 3 systematic capability.
+
+## Hardware
+
+With over 300 safety mechanisms defined and independently assessed by TÜV SÜD
+for its effectiveness, Functional Safety-Compliant C2000 MCUs provide the
+required diagnostic coverage to meet a random hardware capability of up to ASIL
+B or SIL 2 at a component level. Device-specific functional safety manuals
+provide detailed information on the safety mechanisms, techniques for achieving
+non-interference between elements and avoiding dependent failures, to aid
+customers in the development of compliant systems.
+
+## Software
+
+Three software diagnostic libraries are available for C2000 devices to help 
+provide implementations and demonstrations of several key safety mechanisms 
+described in the device safety manuals. They are the C2000 Software Diagnostic 
+Library (SDL), the CLA Self-Test Library (CLA_STL), and the C28x Self-Test 
+Library (C28x_STL).
+
+The C2000 SDL is a collection of reference implementations of several safety 
+mechanisms. These include software-based diagnostics, software tests of 
+hardware diagnostics, and demonstrations of how to use hardware diagnostics. 
+Examples include clock integrity checks using a CPU Timer, software tests of 
+SRAMs, software tests of SRAM parity/ECC logic, software tests of the watchdog, 
+and drivers for the Hardware Built-In Self-Test (HWBIST) module. The SDL is 
+provided as part of C2000Ware.
+
+The CLA_STL and C28x_STL implement specific safety mechanisms “CLA2 – Software 
+Test of CLA” and “CPU3 – Software Test of CPU” respectively (see your device 
+safety manual for more about these mechanisms). The STLs were developed using 
+the TÜV SÜD certified TI internal software development process and have been 
+independently assessed and certified. They are available upon request.
+
+## Resources
+
+To get further details on functional safety, refer to following documents:
+
+* [C2000™ Safety Mechanisms](https://www.ti.com/lit/SWAB005)
+* [Industrial fuctional safety for C2000™ Real-Time Microcontrollers](https://www.ti.com/lit/SWAB013)
+* [Automotive fuctional safety for C2000™ Real-Time Microcontrollers](https://www.ti.com/lit/SWAB014)
+* [Error Detection in SRAM Application Report](https://www.ti.com/lit/SPRACC0)
+* [C2000™ Hardware Built-In Self-Test Application Report](https://www.ti.com/lit/SPRACA7)
+* [C2000™ CPU Memory Built-In Self-Test Application Report](https://www.ti.com/lit/SPRACB9)
+
+------------------------------------------
+
+```{admonition} Feedback
+Please provide any feedback you may have about the content within C2000 Academy to: <c2000_academy_feedback@list.ti.com>
+
+```

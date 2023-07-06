@@ -1,0 +1,559 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Serial Communication Interface (SCI) &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_communications/c2000_sci';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_communications/c2000_sci.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Inter-Integrated Circuit (I2C)" href="c2000_i2c.html" />
+    <link rel="prev" title="Fast Serial Interface (FSI)" href="c2000_fsi.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="serial-communication-interface-sci">
+<h1>Serial Communication Interface (SCI)<a class="headerlink" href="#serial-communication-interface-sci" title="Permalink to this heading">#</a></h1>
+<p>The SCI is a two-wire
+asynchronous serial port (also known as a UART) that supports communications
+between the processor and other asynchronous peripherals that use the standard
+non-return-to-zero (NRZ) format.</p>
+<p>In addition, the C28x SCI is a full duplex interface which provides for
+simultaneous data transmit and receive. Parity checking and data formatting is
+also designed to be done by the port hardware, further reducing software
+overhead.</p>
+<section id="sci-pin-connections">
+<h2>SCI Pin Connections<a class="headerlink" href="#sci-pin-connections" title="Permalink to this heading">#</a></h2>
+<p>A receiver and transmitter FIFO is used to
+reduce servicing overhead. The SCI transmit and receive registers are both
+double-buffered to prevent data collisions and allow for efficient CPU usage.</p>
+<p><img alt="SCI Full Duplex" src="../../_images/sci_full_duplex.png" /></p>
+</section>
+<section id="sci-data-format">
+<h2>SCI Data Format<a class="headerlink" href="#sci-data-format" title="Permalink to this heading">#</a></h2>
+<p><img alt="SCI Data Format" src="../../_images/sci_data_format.png" /></p>
+<p>The basic unit of data is called a <strong>character</strong> and is 1 to 8 bits in length.
+Each character of data is formatted with a start bit, 1 or 2 stop bits, an
+optional parity bit, and an optional address/data bit.</p>
+<p>A character of data along with its formatting bits is called a <strong>frame</strong>. Frames
+are organized into groups called blocks. If more than two serial ports exist on
+the SCI bus, a block of data will usually begin with an address frame which
+specifies the destination port of the data as determined by the user’s
+protocol.</p>
+<p>The beginning of a frame is marked by the start bit going low.</p>
+<p>The SCI uses a <strong>NRZ (Non-Return-to-Zero)</strong> format which
+means that in an inactive state the SCIRX and SCITX lines will be held high.</p>
+<p>Peripherals are expected to pull the SCIRX and SCITX lines to a high level when
+they are not receiving or transmitting on their respective lines.</p>
+</section>
+<section id="sci-data-timing">
+<h2>SCI Data Timing<a class="headerlink" href="#sci-data-timing" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>8 SCICLK periods per data bit</p></li>
+<li><p>Start bit valid if 4 consecutive SCICLK periods of zero bits after falling edge</p></li>
+<li><p>Majority vote taken on 4th, 5th, and 6th SCICLK cycles</p></li>
+</ul>
+<p><img alt="SCI Data Timing" src="../../_images/sci_data_timing.png" /></p>
+</section>
+<section id="multiprocessor-wake-up-modes">
+<h2>Multiprocessor Wake-Up Modes<a class="headerlink" href="#multiprocessor-wake-up-modes" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Allows numerous processors to be hooked up to the bus, but transmission occurs
+between only two of them</p></li>
+<li><p>Idle-line or Address-bit modes</p></li>
+<li><p>Sequence of Operation</p>
+<ul>
+<li><p>Potential receivers set SLEEP=1, which disables RXINT except when an address
+frame is received</p></li>
+<li><p>All transmissions begin with an address frame</p></li>
+<li><p>Incoming address frame temporarily wakes up all SCIs on bus</p></li>
+<li><p>CPUs compare incoming SCI address to their SCI address</p></li>
+<li><p>Process following data frames only if address matches</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="idle-line-wake-up-mode">
+<h2>Idle-Line Wake-Up Mode<a class="headerlink" href="#idle-line-wake-up-mode" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Idle time separates blocks of frames</p></li>
+<li><p>Receiver wakes up when SCIRXD high for 10 or more bit periods</p></li>
+<li><p>Two transmit address methods</p>
+<ul>
+<li><p>Deliberate software delay of 10 or more bits</p></li>
+<li><p>Set TXWAKE bit to automatically leave exactly 11 idle bits</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="SCI Idle Line Wake-Up Mode" src="../../_images/sci_idle_line.png" /></p>
+</section>
+<section id="address-bit-wake-up-mode">
+<h2>Address-Bit Wake-Up Mode<a class="headerlink" href="#address-bit-wake-up-mode" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>All frames contain an extra address bit</p></li>
+<li><p>Receiver wakes up when address bit detected</p></li>
+<li><p>Automatic setting of Addr/Data bit in frame by setting TXWAKE=1 prior to
+writing address to SCITXBUF</p></li>
+</ul>
+<p><img alt="SCI Address-Bit Wake-Up Mode" src="../../_images/sci_address_bit.png" /></p>
+</section>
+<section id="sci-interrupts">
+<h2>SCI Interrupts<a class="headerlink" href="#sci-interrupts" title="Permalink to this heading">#</a></h2>
+<p>The SCI interrupt logic generates interrupt flags when it receives or transmits
+a complete character as determined by the SCI character length. This provides a
+convenient and efficient way of timing and controlling the operation of the SCI
+transmitter and receiver.</p>
+<p><strong>Interrupt Flags</strong></p>
+<p>The interrupt flag for the transmitter is TXRDY, and for the
+receiver RXRDY.</p>
+<p><strong>How is the TX Interrupt Flag set?</strong></p>
+<p>TXRDY is set when a character is transferred to
+TXSHF and SCITXBUF is ready to receive the next character. In addition, when
+both the SCIBUF and TXSHF registers are empty, the TX EMPTY flag is
+set.</p>
+<p><strong>How is the RX Interrupt Flag set?</strong></p>
+<p>When a new character has been received and shifted into SCIRXBUF, the
+RXRDY flag is set. In addition, the BRKDT flag is set if a break condition
+occurs.</p>
+<p><strong>What is a break detect?</strong></p>
+<p>A break condition is where the SCIRXD line remains continuously low for at least
+ten bits, beginning after a missing stop bit. This error flag is cleared
+through a software reset of the SCI through “SWRESET”.</p>
+<p><strong>SCI Error Flags</strong></p>
+<p>Additional flag and interrupt capability exists for other receiver errors. The
+RX ERROR flag is the logical OR of the break detect (BRKDT), framing error
+(FE), receiver overrun (OE), and parity error (PE) bits. RX ERROR high
+indicates that at least one of these four errors has occurred during
+transmission. This will also send an interrupt request to the CPU if the RX ERR
+INT ENA bit is set.</p>
+</section>
+<section id="sci-summary">
+<h2>SCI Summary<a class="headerlink" href="#sci-summary" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Asynchronous communications format</p></li>
+<li><p>65000+ different programmable baud rates</p></li>
+<li><p>Two wake-up multiprocesssor modes</p>
+<ul>
+<li><p>Idle-line wake-up</p></li>
+<li><p>Address-bit wake-up</p></li>
+</ul>
+</li>
+<li><p>Programmable data word format</p>
+<ul>
+<li><p>1 to 8 bit data word length</p></li>
+<li><p>1 or 2 stop bits</p></li>
+<li><p>even/odd/no parity</p></li>
+</ul>
+</li>
+<li><p>Error Detection Flags</p>
+<ul>
+<li><p>Parity error; Framing Error; Overrun error; Break detection</p></li>
+</ul>
+</li>
+<li><p>Transmit FIFO and receive FIFO</p></li>
+<li><p>Individual interrupts for transmit and receive</p></li>
+</ul>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<section id="sci-related-collateral">
+<h3>SCI Related Collateral<a class="headerlink" href="#sci-related-collateral" title="Permalink to this heading">#</a></h3>
+<p><strong>Foundational</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/video/3870842977001">One Minute RS-485 Introduction</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/3869819873001">RS-232, RS-422, RS-485: What Are the Differences?</a></p></li>
+</ul>
+<p><strong>Getting Started</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/1031947/faq-my-c2000-sci-is-not-transmitting-and-or-receiving-data-correctly-how-do-i-fix-this">[FAQ] My C2000 SCI is not Transmitting and/or Receiving data correctly, how do I fix this?</a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="c2000_fsi.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Fast Serial Interface (FSI)</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_i2c.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Inter-Integrated Circuit (I2C)</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sci-pin-connections">
+   SCI Pin Connections
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sci-data-format">
+   SCI Data Format
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sci-data-timing">
+   SCI Data Timing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiprocessor-wake-up-modes">
+   Multiprocessor Wake-Up Modes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#idle-line-wake-up-mode">
+   Idle-Line Wake-Up Mode
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#address-bit-wake-up-mode">
+   Address-Bit Wake-Up Mode
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sci-interrupts">
+   SCI Interrupts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sci-summary">
+   SCI Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sci-related-collateral">
+     SCI Related Collateral
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

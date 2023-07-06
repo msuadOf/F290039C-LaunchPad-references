@@ -1,0 +1,1043 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Enhanced Quadrature Encoder Pulse (eQEP) Lab &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_academy_labs/control_peripherals/c2000_lab_qep';</script>
+    <script src="../../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_academy_labs/control_peripherals/c2000_lab_qep.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Serial Communication Interface (SCI) Lab" href="../communications_lab/c2000_lab_sci.html" />
+    <link rel="prev" title="Enhanced Pulse Width Modulation (ePWM) Lab" href="c2000_lab_pwm.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="enhanced-quadrature-encoder-pulse-eqep-lab">
+<h1>Enhanced Quadrature Encoder Pulse (eQEP) Lab<a class="headerlink" href="#enhanced-quadrature-encoder-pulse-eqep-lab" title="Permalink to this heading">#</a></h1>
+<p>The objective of this lab is to gain familiarity with the Enhanced Quadrature
+Encoder Pulse (eQEP) module through a guided lab example. This lab will
+illustrate a common use-case of the eQEP module: connecting quadrature signals
+to the C2000 device and using the eQEP to calculate motor characteristics.</p>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h2>
+<p>All solutions are available
+in the directory: <code class="docutils literal notranslate"><span class="pre">&lt;c2000ware_install_path&gt;/training/device/&lt;device_name&gt;</span></code>.</p>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>In this lab, an eQEP module will be used to calculate the position and speed of
+a motor encoder given a set of quadrature signals. The eQEP in this lab will be
+configured for a generic 1000-line incremental quadrature encoder, similar to
+the <a class="reference external" href="https://www.ti.com/tool/LVSERVOMTR">LVSERVOMTR</a> offered by TI. The
+quadrature signals will be generated using the device’s ePWM and GPIO pins at a
+constant frequency. Users with access to a motor encoder may also connect the
+quadrature signals from their motor encoder to the C2000 device to further
+evaluate the performance of the eQEP module.</p>
+<p><img alt="EQEP Lab Block Diagram" src="../../../_images/eqep_lab_block_diagram.png" /></p>
+<p>The channel A, channel B, and index quadrature signals will be fed into the
+C2000 device’s eQEP module, which will be configured in quadrature-count mode.
+The eQEP module will determine the direction of motion using the channel A and
+channel B signals. The position counter within the eQEP will keep track of the
+position of the motor encoder with respect to the zero index position. The eQEP
+module will issue periodic interrupts to the CPU using Unit time-out events.</p>
+<p>Within the application code for this lab, there will be an interrupt handler
+that will be responsible for calculating the frequency of the encoder signals
+using characteristics from the eQEP module. The speed of the motor will be
+calculated using this frequency. The final output of all of these calculations
+and motor characteristics can be viewed in the Watch Variables panel of Code
+Composer Studio.</p>
+</section>
+<section id="lab-setup">
+<h2>Lab Setup<a class="headerlink" href="#lab-setup" title="Permalink to this heading">#</a></h2>
+<div class="admonition-two-options-for-guided-lab-exercise admonition">
+<p class="admonition-title">Two Options for Guided Lab Exercise</p>
+<p>This guided lab exercise supports two different options for working with the
+eQEP module.</p>
+<p>The primary setup is a loopback exercise in which ePWM and GPIO signals are
+generated by the C2000 EVM and then subsequently fed into the dedicated eQEPA,
+eQEPB, and eQEPI headers. The generated ePWM and GPIO signals operate at a
+constant frequency so as to validate the generated eQEP characteristics against
+the known quadrature characteristics.</p>
+<p>If you have access to a motor encoder available for use, it will also be
+possible to connect the quadrature signals from the motor encoder directly to
+the C2000 device. This option will allow you to actively measure speed and
+position from quadrature signals that are dynamically generated by a physical
+encoder. This option is tailored to the <a class="reference external" href="https://www.ti.com/tool/LVSERVOMTR">LVSERVOMTR</a>,
+but you can adjust the eQEP and application code to fit the resolution of the
+motor encoder being used.</p>
+</div>
+<section id="hardware-setup">
+<h3>Hardware Setup<a class="headerlink" href="#hardware-setup" title="Permalink to this heading">#</a></h3>
+<p>You will need the following hardware for this lab:</p>
+<ul class="simple">
+<li><p>A C2000 controlCARD or LaunchPad with the supplied USB cable.</p></li>
+<li><p>Jumper cables.</p></li>
+<li><p>Oscilloscope (optional).</p></li>
+<li><p><a class="reference external" href="https://www.ti.com/tool/LVSERVOMTR">LVSERVOMTR</a> or similar encoder (optional).</p></li>
+</ul>
+<p>Use the supplied USB cable to connect the USB Micro or USB Mini Type-B connector
+to the board. Connect the USB Standard Type-A connector into your computer USB
+port. You should see some LEDs light up on your board. In addition to powering
+the board, a JTAG communication link is also established between the device and
+Code Composer Studio. A 1000-line encoder is recommended and will allow you to
+generate dynamic quadrature signals for the eQEP module.</p>
+</section>
+<section id="software-setup">
+<h3>Software Setup<a class="headerlink" href="#software-setup" title="Permalink to this heading">#</a></h3>
+<p>The following software will need to be installed on your computer:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/tool/CCSTUDIO-C2000">Code Composer Studio</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/tool/C2000WARE">C2000Ware</a></p></li>
+</ul>
+</section>
+</section>
+<section id="import-empty-project">
+<h2>Import Empty Project<a class="headerlink" href="#import-empty-project" title="Permalink to this heading">#</a></h2>
+<p>Our first task is to import an empty project to our Code Composer
+Studio (CCS) workspace.
+The basic instructions are as follows:</p>
+<ol class="arabic">
+<li><p>Open CCS and go to <strong>Project→Import CCS Projects</strong>. A new window should
+appear. Ensure that the <strong>Select search-directory</strong> option is activated.</p></li>
+<li><p>Click the <strong>Browse</strong> button and select the
+<code class="docutils literal notranslate"><span class="pre">[C20000ware_Install_dir]/training/device/[device]/empty_lab</span></code>
+directory.</p>
+<p>Note that the default Windows [C20000ware_Install_dir] is <code class="docutils literal notranslate"><span class="pre">C:/ti/c2000/C2000Ware_4_xx_xx_xx</span></code>.</p>
+</li>
+<li><p>Under <strong>Discovered Projects</strong>, you should now see the
+<code class="docutils literal notranslate"><span class="pre">lab_[board]_[device]</span></code> project. Select the appropriate project for either the control card or the launchpad.</p></li>
+</ol>
+<p><img alt="Discovered_Projects" src="../../../_images/c2000_lab_qep_start_small.png" /></p>
+<ol class="arabic simple" start="4">
+<li><p>Click <strong>Finish</strong> to import and copy the <code class="docutils literal notranslate"><span class="pre">lab_[board]_[device]</span></code> project
+into your workspace.</p></li>
+<li><p>Rename the project and source files appropriately.</p></li>
+</ol>
+</section>
+<section id="task-1-setting-up-the-gpios">
+<h2>Task 1 - Setting up the GPIOs<a class="headerlink" href="#task-1-setting-up-the-gpios" title="Permalink to this heading">#</a></h2>
+<div class="admonition-enable-gpio-pin-names-in-sysconfig admonition">
+<p class="admonition-title">Enable GPIO Pin Names in SysConfig</p>
+<p>Enabling the ‘GPIO Pin Labels’ option within SysConfig can make it easier to
+choose the desired device pins. To enable device pin names, perform the
+following steps:</p>
+<ol class="arabic simple">
+<li><p>In the top right of SysConfig, click the ellipses icon (<strong>…</strong>)</p></li>
+<li><p>Open the<strong>Preferences &amp; Actions</strong>menu</p></li>
+<li><p>Under<strong>Device Pin Label</strong>, select and enable the option next to ‘Device pin
+name’</p></li>
+<li><p>Press the exit icon (<strong>X</strong>) in the top right to close the ‘Preferences &amp;
+Actions’ menu</p></li>
+</ol>
+</div>
+<p>We will begin this lab exercise by configuring the GPIO within the
+<code class="docutils literal notranslate"><span class="pre">c2000.syscfg</span></code> file of the project. Double-click the <code class="docutils literal notranslate"><span class="pre">c2000.syscfg</span></code> file within
+the project to open the SysConfig GUI. This lab requires a single dedicated
+GPIO which will represent the index signal from a quadrature encoder.</p>
+<p>To initialize this GPIO within SysConfig, perform the following steps:</p>
+<ul class="simple">
+<li><p>Add a GPIO by clicking the (+) icon next to ‘GPIO’ on the left pane</p></li>
+<li><p>Set the name of the GPIO as ‘myGPIOIndex’</p></li>
+<li><p>Set the <strong>GPIO Direction</strong> as ‘Pin is a GPIO output’</p></li>
+<li><p>Ensure the <strong>Pin Type</strong> is set as ‘Push-pull output/floating input’</p></li>
+<li><p>Initialize the GPIO pin to low by enabling the checkbox next to <strong>Write
+Initial Value</strong> and set the <strong>Initial Value</strong> to be ‘0: GPIO state is LOW’</p></li>
+<li><p>Under <strong>PinMux</strong>, set the GPIO to be ‘GPIO2’</p></li>
+</ul>
+<p><img alt="SysConfig Index GPIO" src="../../../_images/syscfg_gpio.png" /></p>
+<p>The state of this pin will be continually toggled within the program’s
+application code. The pin will pulse high for the length of a single encoder
+cycle every time the encoder disk makes a full rotation. In this lab, a single
+rotation occurs every 1000 pulses of EPWM1A and EPWM1B.</p>
+</section>
+<section id="task-2-initialize-the-epwm-module">
+<h2>Task 2 - Initialize the EPWM Module<a class="headerlink" href="#task-2-initialize-the-epwm-module" title="Permalink to this heading">#</a></h2>
+<p>The EPWM module will be used to generate the quadrature signals and is
+configured as two 2.5kHz PWM waveforms with 50% duty cycle that are offset 90°
+from each other. EPWM1A corresponds to quadrature channel A and EPWM1B
+corresponds to quadrature channel B. For more information on the ePWM module,
+please review the Control Peripherals module.</p>
+<p>We will start by adding a PWM instance within Sysconfig by clicking on the (+)
+sign next to ‘EPWM’ within the left pane of Sysconfig. Name this EPWM instance
+‘myQuadraturePWM’. Now that we have added an EPWM instance, we will configure
+the EPWM1
+‘Timebase’ submodule as follows:</p>
+<ul class="simple">
+<li><p>Set <strong>High Speed Clock Divider</strong> to ‘Divide clock by 1’</p></li>
+<li><p>Set <strong>Time Base Period</strong> to ‘24000’</p></li>
+<li><p>Set <strong>Counter Mode</strong> to ‘Up - down - count mode’</p></li>
+</ul>
+<p><img alt="SysConfig EPWM Part 1" src="../../../_images/syscfg_epwm_pt11.png" /></p>
+<p>The ‘Counter Compare’ submodule for EPWM1 will be as follows:</p>
+<ul class="simple">
+<li><p>Set <strong>Counter Compare A (CMPA)</strong> to ‘12500’</p></li>
+</ul>
+<p><img alt="SysConfig EPWM Part 2" src="../../../_images/syscfg_epwm_pt21.png" /></p>
+<p>Now, configure the ‘Action Qualifier’ submodule for EPWM1A as follows:</p>
+<ul class="simple">
+<li><p>Enable Shadow Mode</p></li>
+<li><p>Set <strong>Shadow Load Event</strong> to ‘Load when counter equals zero’</p></li>
+<li><p>In <strong>Events to Configure for ePWMxA output</strong>, select ‘Time base counter up
+equals COMPA’ and ‘Time base counter down equals COMPA’</p></li>
+<li><p>Set <strong>Time base counter up equals COMPA</strong> to ‘Set output pins to High’</p></li>
+<li><p>Set <strong>Time base counter down equals COMPA</strong> to ‘Set output pins to Low’</p></li>
+</ul>
+<p><img alt="SysConfig EPWM Part 3" src="../../../_images/syscfg_epwm_pt31.png" /></p>
+<p>Configure the ‘Action Qualifer’ submodule for EPWM1B as follows:</p>
+<ul class="simple">
+<li><p>Enable Shadow Mode</p></li>
+<li><p>Set <strong>Shadow Load Event</strong> to ‘Load when counter equals zero’</p></li>
+<li><p>In <strong>Events to Configure for ePWMxB output</strong>, select ‘Time base counter
+equals period’ and ‘Time base counter equals zero’</p></li>
+<li><p>Set <strong>Time base counter equals period</strong> to ‘Set output pins to High’</p></li>
+<li><p>Set <strong>Time base counter equals zero</strong> to ‘Set output pins to Low’</p></li>
+</ul>
+<p><img alt="SysConfig EPWM Part 4" src="../../../_images/syscfg_epwm_pt41.png" /></p>
+<p>Lastly, we need to configure the PinMux for EPWM1. Follow the steps below:</p>
+<ul class="simple">
+<li><p>Set the EPWM Peripheral to be used as ‘EPWM1’</p></li>
+<li><p>Configure the ‘EPWM_A’ pin to be ‘GPIO0’</p></li>
+<li><p>Configure the ‘EPWM_B’ pin to be ‘GPIO1’</p></li>
+</ul>
+<p><img alt="SysConfig EPWM Part 4" src="../../../_images/syscfg_epwm_pt5.png" /></p>
+</section>
+<section id="task-3-configuring-the-eqep-module">
+<h2>Task 3 - Configuring the EQEP Module<a class="headerlink" href="#task-3-configuring-the-eqep-module" title="Permalink to this heading">#</a></h2>
+<p>Next, we will need to configure the EQEP module being used to process the
+quadrature signals. The exact configuration of the EQEP is dependent on the
+encoder being used. In this lab, the eQEP will be tuned to interact with a
+1000-line encoder.</p>
+<p>Add an instance of the EQEP module by clicking the ‘+’ icon next to EQEP. Name
+the EQEP instance ‘myEQEP1’. Configure the EQEP module as follows:</p>
+<p>Configure the ‘Quadrature Decoder Unit’ as follows:</p>
+<ul class="simple">
+<li><p>Ensure that <strong>Position Counter Source (QSRC)</strong> is set to
+Quadrature-clock mode’</p></li>
+<li><p>Set <strong>Resolution</strong> to ‘1X Resolution: Count rising edge only’</p></li>
+</ul>
+<p><img alt="SysConfig EQEP Part 1" src="../../../_images/syscfg_eqep_pt1.png" /></p>
+<p>Configure the ‘Position Counter and Control Unit’ as follows:</p>
+<ul>
+<li><p>Ensure <strong>Position Counter Mode</strong> is set to ‘Reset position on index pulse’</p></li>
+<li><p>Set <strong>Maximum Position</strong> to ‘3999’</p>
+<ul class="simple">
+<li><p>Recall that the Position Counter operates at 4x the frequency of the
+quadrature signals. Thus, for a 1000-line encoder, the maximum position is</p></li>
+</ul>
+<ol class="arabic simple" start="3999">
+<li></li>
+</ol>
+</li>
+<li><p>Under ‘Latch Mode,’ configure <strong>QEP Capture Latch Mode (QCLM)</strong> to latch ‘On
+unit time-out event’ and ensure that <strong>Index Event Latch (IEL)</strong> is configured
+to latch ‘On rising edge of index’</p></li>
+<li><p>Configure <strong>Position Index Events (IEI)</strong> to trigger ‘On rising edge of index’</p></li>
+<li><p>Toggle on the checkbox next to <strong>Enable Position Counter</strong></p></li>
+</ul>
+<p><img alt="SysConfig EQEP Part 2" src="../../../_images/syscfg_eqep_pt2.png" /></p>
+<p>Configure the ‘Edge Capture Unit’ as follows:</p>
+<ul class="simple">
+<li><p>Toggle on the checkbox next to <strong>Enable Unit Timer</strong></p></li>
+<li><p>Set the <strong>Unit Timer Period</strong> to 1200000</p></li>
+</ul>
+<p><img alt="SysConfig EQEP Part 3" src="../../../_images/syscfg_eqep_pt3.png" /></p>
+<p>Configure the ‘Interrupts’ as follows:</p>
+<ul class="simple">
+<li><p>Ensure that the checkbox next to <strong>User Interrupt</strong> is enabled</p></li>
+<li><p>Toggle on the checkbox next to <strong>Register Interrupt Handler</strong></p></li>
+<li><p>Toggle on the checkbox next to <strong>Enable Interrupt</strong></p></li>
+<li><p>Configure the <strong>Interrupt Sources</strong> as ‘Unit time-out’</p></li>
+</ul>
+<p><img alt="SysConfig EQEP Part 4" src="../../../_images/syscfg_eqep_pt4.png" /></p>
+<p>For <strong>Emulation Mode</strong>, configure it to ‘Counter unaffected by suspend’ option</p>
+<p>Configure the EQEP ‘PinMux’ as follows:</p>
+<ul class="simple">
+<li><p>Since the QEPS signal is not being used, set <strong>Pinmux Use Case</strong> to ‘NO
+STROBE’</p></li>
+<li><p>Set the EQEP Peripheral to be used as ‘EQEP1’</p></li>
+<li><p>Configure the EQEP pins per the table below:</p></li>
+</ul>
+<p><strong>LaunchPad</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>EQEP_A GPIO</p></th>
+<th class="head"><p>EQEP_B GPIO</p></th>
+<th class="head"><p>EQEP Index</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>20</p></td>
+<td><p>40</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>35</p></td>
+<td><p>37</p></td>
+<td><p>59</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28002x</p></td>
+<td><p>44</p></td>
+<td><p>37</p></td>
+<td><p>43</p></td>
+</tr>
+<tr class="row-even"><td><p>F28003x</p></td>
+<td><p>40</p></td>
+<td><p>41</p></td>
+<td><p>59</p></td>
+</tr>
+<tr class="row-odd"><td><p>F280013x</p></td>
+<td><p>40</p></td>
+<td><p>41</p></td>
+<td><p>39</p></td>
+</tr>
+<tr class="row-even"><td><p>F280015x</p></td>
+<td><p>20</p></td>
+<td><p>21</p></td>
+<td><p>43</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ControlCARD</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>EQEP_A GPIO</p></th>
+<th class="head"><p>EQEP_B GPIO</p></th>
+<th class="head"><p>EQEP Index</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>20</p></td>
+<td><p>21</p></td>
+<td><p>23</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>20</p></td>
+<td><p>21</p></td>
+<td><p>23</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>40</p></td>
+<td><p>57</p></td>
+<td><p>31</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28002x</p></td>
+<td><p>40</p></td>
+<td><p>41</p></td>
+<td><p>23</p></td>
+</tr>
+<tr class="row-even"><td><p>F28003x</p></td>
+<td><p>20</p></td>
+<td><p>21</p></td>
+<td><p>23</p></td>
+</tr>
+<tr class="row-odd"><td><p>F280013x</p></td>
+<td><p>20</p></td>
+<td><p>21</p></td>
+<td><p>23</p></td>
+</tr>
+<tr class="row-even"><td><p>F280015x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p><img alt="SysConfig EQEP Part 5" src="../../../_images/syscfg_eqep_pt5.png" /></p>
+</section>
+<section id="task-4-setup-the-c-file">
+<h2>Task 4 - Setup the .c file<a class="headerlink" href="#task-4-setup-the-c-file" title="Permalink to this heading">#</a></h2>
+<p>Next, we will move to the application code section of the lab. We will have to
+define any variables we are using throughout the project and setup the content
+within the main() function, which includes device initialization and the
+toggling of the GPIO index pin.</p>
+<p>We begin by including the basic necessary libraries <code class="docutils literal notranslate"><span class="pre">driverlib.h</span></code> and <code class="docutils literal notranslate"><span class="pre">device.</span> <span class="pre">h</span></code>. Next, include the SysConfig-generated header file <code class="docutils literal notranslate"><span class="pre">board.h</span></code>. This should
+already be included within the .c file by default.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//</span>
+<span class="c1">// Included Files</span>
+<span class="c1">//</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;driverlib.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;device.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;board.h&quot;</span>
+</pre></div>
+</div>
+<p>Next, we will define any constants which will be used throughout the
+application code. <code class="docutils literal notranslate"><span class="pre">ENCODER_SLOTS</span></code> is a constant which denotes the number of
+lines within the encoder wheel. <code class="docutils literal notranslate"><span class="pre">UNIT_PERIOD</span></code> defines the duration of the unit
+period, which will be taken into consideration when calculating the frequency
+of the quadrature signals.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//</span>
+<span class="c1">// Defines</span>
+<span class="c1">//</span>
+<span class="cp">#define ENCODER_SLOTS   1000U           </span><span class="c1">// LVSERVOMTR is a 1000-line encoder</span>
+<span class="cp">#define UNIT_PERIOD     10000U          </span><span class="c1">// Unit period in microseconds</span>
+</pre></div>
+</div>
+<p>Now, it is necessary to define the global constants which will be used in the
+application code. This lab requires two variables which will be used to store
+the position counter value received from the eQEP module.
+<code class="docutils literal notranslate"><span class="pre">currentEncoderPosition</span></code>, <code class="docutils literal notranslate"><span class="pre">frequency</span></code>, <code class="docutils literal notranslate"><span class="pre">speed</span></code>, and <code class="docutils literal notranslate"><span class="pre">direction</span></code> all store their
+respective values and can be added to the <strong>Watch Expressions</strong> tab within the
+CCS debug view.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//</span>
+<span class="c1">// Globals</span>
+<span class="c1">//</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">oldCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                  </span><span class="c1">// stores the previous position counter value</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">newCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                  </span><span class="c1">// stores the new position counter value for frequency calculation</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">currentEncoderPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">    </span><span class="c1">// stores the current encoder position</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                  </span><span class="c1">// measured quadrature signal frequency of motor using eQEP</span>
+<span class="n">float32_t</span><span class="w"> </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">                 </span><span class="c1">// measured speed of motor in rpm</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                  </span><span class="c1">// direction of rotation of motor</span>
+</pre></div>
+</div>
+<p>Lastly, we define the contents within main() which includes device
+initialization and peripheral setup. There will be an infinite while loop which
+controls the logic for the <code class="docutils literal notranslate"><span class="pre">myGPIOIndex</span></code> signal.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//</span>
+<span class="c1">// Main</span>
+<span class="c1">//</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// Initialize device clock and peripherals</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="n">Device_init</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// Disable pin locks and enable internal pull ups.</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="n">Device_initGPIO</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// Initialize PIE and clear PIE registers. Disables CPU interrupts.</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="n">Interrupt_initModule</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// Initialize the PIE vector table with pointers to the shell Interrupt</span>
+<span class="w">    </span><span class="c1">// Service Routines (ISR).</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="n">Interrupt_initVectorTable</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Board Initialization</span>
+<span class="w">	</span><span class="n">Board_init</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// Enable Global Interrupt (INTM) and realtime interrupt (DBGM)</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="n">EINT</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ERTM</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// Loop indefinitely</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//</span>
+<span class="w">        </span><span class="c1">// myGPIOIndex pulses high for 200 microseconds every 1000 encoder cycles (400,000 us)</span>
+<span class="w">        </span><span class="c1">//</span>
+<span class="w">        </span><span class="n">DEVICE_DELAY_US</span><span class="p">(</span><span class="mf">400000L</span><span class="p">);</span>
+<span class="w">        </span><span class="n">GPIO_writePin</span><span class="p">(</span><span class="n">myGPIOIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">DEVICE_DELAY_US</span><span class="p">(</span><span class="mf">200L</span><span class="p">);</span>
+<span class="w">        </span><span class="n">GPIO_writePin</span><span class="p">(</span><span class="n">myGPIOIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="task-5-setup-the-eqep-isr">
+<h2>Task 5 - Setup the eQEP ISR<a class="headerlink" href="#task-5-setup-the-eqep-isr" title="Permalink to this heading">#</a></h2>
+<p>The last step for setting up this lab will be configuring the interrupt
+handler. The interrupt handler will be triggered by the unit time-out signal,
+which periodically interrupts the CPU to perform position and speed
+calculations.</p>
+<p>Under the EQEP module in SysConfig, collapse the <strong>EQEP Interrupt</strong> drop-down:</p>
+<ul class="simple">
+<li><p>Rename the <strong>Interrupt Handler</strong> to a name of your choosing e.g.,
+‘INT_myEQEP1_ISR’.</p>
+<ul>
+<li><p>This name must match the name of the ISR function within your application
+code.</p></li>
+</ul>
+</li>
+<li><p>Ensure the <strong>Enable Interrupt in PIE</strong> checkbox is checked.</p></li>
+</ul>
+<p><img alt="SysConfig EQEP Part 5" src="../../../_images/syscfg_eqep_INT.png" /></p>
+<p>Within your application code, declare the interrupt handler with the same name
+as defined in SysConfig.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//</span>
+<span class="c1">// eqep1 ISR- interrupts once per ePWM period</span>
+<span class="c1">//</span>
+<span class="n">__interrupt</span><span class="w"> </span><span class="kt">void</span>
+<span class="n">INT_myEQEP1_ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Populate the interrupt handler within the code and algorithms necessary for
+calculating the frequency, speed, and position of the motor.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">INT_myEQEP1_ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// Save current encoder position value for monitoring</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="n">currentEncoderPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EQEP_getPosition</span><span class="p">(</span><span class="n">myEQEP1_BASE</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// Get position counter value latched on unit time-out event</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="n">newCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EQEP_getPositionLatch</span><span class="p">(</span><span class="n">myEQEP1_BASE</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// Gets rotation direction of motor</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EQEP_getDirection</span><span class="p">(</span><span class="n">myEQEP1_BASE</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// Calculates the number of position in unit time based on direction</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">direction</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">){</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newCount</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="n">oldCount</span><span class="p">)</span>
+<span class="w">            </span><span class="n">newCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newCount</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">oldCount</span><span class="p">;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">newCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ENCODER_SLOTS</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">oldCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">newCount</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newCount</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="n">oldCount</span><span class="p">)</span>
+<span class="w">            </span><span class="n">newCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oldCount</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">newCount</span><span class="p">;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">newCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ENCODER_SLOTS</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">newCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oldCount</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// Stores the current position count value to oldCount variable</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="n">oldCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentEncoderPosition</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// Calculate frequency and speed values</span>
+<span class="w">    </span><span class="c1">// frequency found by counting external input pulses for UNIT PERIOD</span>
+<span class="w">    </span><span class="c1">// speed derived from encoder frequency and encoder resolution</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">newCount</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="mi">1000000U</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">((</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">UNIT_PERIOD</span><span class="p">);</span>
+<span class="w">    </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">frequency</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">((</span><span class="kt">float</span><span class="p">)(</span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ENCODER_SLOTS</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// Clear interrupt flag and issue ACK</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="n">EQEP_clearInterruptStatus</span><span class="p">(</span><span class="n">myEQEP1_BASE</span><span class="p">,</span><span class="n">EQEP_INT_UNIT_TIME_OUT</span><span class="o">|</span><span class="n">EQEP_INT_GLOBAL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Interrupt_clearACKGroup</span><span class="p">(</span><span class="n">INT_myEQEP1_INTERRUPT_ACK_GROUP</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This concludes the coding portion of this lab.</p>
+</section>
+<section id="running-the-lab">
+<h2>Running the Lab<a class="headerlink" href="#running-the-lab" title="Permalink to this heading">#</a></h2>
+<section id="build-and-run-interactive-debug-session">
+<h3>Build and Run Interactive Debug Session<a class="headerlink" href="#build-and-run-interactive-debug-session" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Ensure that the USB cable from your LaunchPad or controlCARD is connected to
+your computer. If you have a LaunchPad, right click on your project in the
+project explorer pane and click <strong>Properties→Build→C2000
+Compiler→Predefined Symbols</strong>, add <code class="docutils literal notranslate"><span class="pre">_LAUNCHXL_F28XXXXX</span></code> as a predefined
+symbol according to your <code class="docutils literal notranslate"><span class="pre">device.h</span></code> header file. The <code class="docutils literal notranslate"><span class="pre">device.h</span></code> file can be
+found in the <code class="docutils literal notranslate"><span class="pre">&lt;projectroot&gt;/device/</span></code> directory.</p></li>
+<li><p>Under the <strong>Build</strong> button, activate the <strong>CPU1_RAM</strong> build configuration.
+Use the <strong>CPU1_LAUNCHXL_RAM</strong> build configuration if it is available and if
+you are using a LaunchPad. Build the program and fix any compilation errors.</p></li>
+<li><p>Create a new debug configuration. Set the target configuration to be
+<code class="docutils literal notranslate"><span class="pre">${workspace_loc:/&lt;projectroot&gt;/targetConfigs/TMS320F28XXXXX_LaunchPad.ccxml}</span></code>
+if using a LaunchPad, else, use
+<code class="docutils literal notranslate"><span class="pre">${workspace_loc:/&lt;projectroot&gt;/targetConfigs/TMS320F28XXXXX.ccxml}</span></code>.
+Select the current project to be loaded to <strong>CPU1</strong>. Press <strong>Apply</strong> and
+close the window.</p></li>
+<li><p>Now we will start the debug session. Under the debug button, start the debug
+session using the new configuration. You should now see the debugging
+session open up and the debugger should have reached <code class="docutils literal notranslate"><span class="pre">main()</span></code>.</p></li>
+<li><p>Click the <strong>Resume</strong> button.</p></li>
+</ul>
+</section>
+<section id="primary-method-loopback-quadrature-signals">
+<h3>Primary Method (Loopback Quadrature Signals)<a class="headerlink" href="#primary-method-loopback-quadrature-signals" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use jumper cables to create connections between GPIO0 and EQEP1_A, GPIO1 and
+EQEP1_B, and GPIO2 and EQEP1_I.</p>
+<ul>
+<li><p>All LaunchPads feature dedicated EQEP header(s) located at the bottom of
+the device. When using these headers, ensure that the QEP Select Switch is in
+the correct configuration that routes the GPIO signals from the device to the
+dedicated EQEP header(s).</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="EVM Loopback Diagram" src="../../../_images/evm_loopback_diagram_margin.png" /></p>
+<ul class="simple">
+<li><p>Add the following variables to the<strong>Watch Expressions</strong>tab.</p></li>
+<li><p>currentEncoderPosition</p></li>
+<li><p>frequency</p></li>
+<li><p>speed</p></li>
+<li><p>direction</p></li>
+<li><p>Enable <strong>Continuous Refresh</strong> for the Expressions. Verify that the frequency,
+speed, and direction match the expected values.</p></li>
+<li><p>The frequency value should be 4x the frequency of the configured ePWM
+signals. Since we configured the ePWM module to generate 2.5 kHz signals, we
+should expect to see the measured frequency be 10,000 Hz.</p></li>
+<li><p>The speed value (in rotations per minute) is derived from the measured
+frequency.</p></li>
+<li><p>The direction should be 1. A direction value of 1 indicates that the motor
+is moving in the forward direction, and a direction value of -1 indicates that
+the motor is moving in the reverse direction.</p></li>
+</ul>
+<p><img alt="Primary Method Results" src="../../../_images/method1_results.png" /></p>
+<ul class="simple">
+<li><p>Observe that the value within currentEncoderPosition increments until it
+reaches the maximum position value, at which point the position resets to 0.</p></li>
+</ul>
+<p>If a motor encoder is available, proceed to Secondary Method. Otherwise,
+terminate the debug session and close the project.</p>
+</section>
+<section id="secondary-method-physical-motor-encoder">
+<h3>Secondary Method (Physical Motor Encoder)<a class="headerlink" href="#secondary-method-physical-motor-encoder" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Pause the debug session and disconnect the jumper cables connecting the ePWM/
+GPIO headers to the eQEP headers.</p></li>
+<li><p>Connect the quadrature signals from the motor encoder to the eQEP signals.
+The required signals are EQEPA, EQPEB, EQEPI, 5V, and GND.</p></li>
+<li><p>If performing this lab with a LaunchPad, it is recommended to utilize the
+dedicated eQEP headers located at the bottom of the device. The pinout of
+these headers corresponds to a standard 5-pin connector.</p></li>
+</ul>
+<p><img alt="EVM Motor Encoder Diagram" src="../../../_images/evm_encoder_diagram.png" /></p>
+<ul class="simple">
+<li><p>Resume the lab. Rotate the shaft of the motor and observe the values within
+the <strong>Watch Expressions</strong> tab changing according to the movements made to the
+motor.</p></li>
+</ul>
+<p><img alt="Secondary Method Results" src="../../../_images/method2_results.png" /></p>
+<p>Terminate the debug session and close the project. This concludes the lab
+assignment.</p>
+</section>
+</section>
+<section id="full-solution">
+<h2>Full Solution<a class="headerlink" href="#full-solution" title="Permalink to this heading">#</a></h2>
+<p>The full solution to this lab exercise is included as part of the C2000Ware
+SDK. Import the project from
+<code class="docutils literal notranslate"><span class="pre">&lt;c2000ware_install_path&gt;/training/device/&lt;device_name&gt;/control_peripherals/lab_qep</span></code>.</p>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="c2000_lab_pwm.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Enhanced Pulse Width Modulation (ePWM) Lab</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="../communications_lab/c2000_lab_sci.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Serial Communication Interface (SCI) Lab</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solution">
+   Solution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lab-setup">
+   Lab Setup
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hardware-setup">
+     Hardware Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#software-setup">
+     Software Setup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-empty-project">
+   Import Empty Project
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-1-setting-up-the-gpios">
+   Task 1 - Setting up the GPIOs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-2-initialize-the-epwm-module">
+   Task 2 - Initialize the EPWM Module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-3-configuring-the-eqep-module">
+   Task 3 - Configuring the EQEP Module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-4-setup-the-c-file">
+   Task 4 - Setup the .c file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-5-setup-the-eqep-isr">
+   Task 5 - Setup the eQEP ISR
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-the-lab">
+   Running the Lab
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#build-and-run-interactive-debug-session">
+     Build and Run Interactive Debug Session
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#primary-method-loopback-quadrature-signals">
+     Primary Method (Loopback Quadrature Signals)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#secondary-method-physical-motor-encoder">
+     Secondary Method (Physical Motor Encoder)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-solution">
+   Full Solution
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

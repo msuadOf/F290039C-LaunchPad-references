@@ -1,0 +1,28 @@
+ECAT Related Collateral
+====================================
+
+**Foundational**
+
+- `EtherCAT Device Protocol Poster <https://www.ethercat.org/download/documents/EtherCAT\_Device\_Protocol\_Poster.pdf>`_ - Only applicable to: F2838x
+
+- `EtherCAT Protocol Series <https://training.ti.com/ethercat-protocol-c2000-real-time-controller?context=1137766-1147233>`_ - Only applicable to: F2838x
+
+**Getting Started**
+
+- `EtherCAT User's Guide <https://dev.ti.com/tirex/explore/node?node=AJlv0LZ8NvH0gPlyyf27-Q\_\_gYkahfz\_\_LATEST>`_ - Only applicable to: F2838x
+
+- `Real-time control meets real-time industrial communications development - part 4 <https://e2e.ti.com/blogs\_/b/industrial\_strength/archive/2019/07/15/real-time-control-meets-real-time-industrial-communications-development-part-4>`_ - Only applicable to: F2838x
+
+**Expert**
+
+- `Design Guide: TIDM-02006 Distributed Multi-axis Servo Drive Over Fast Serial Interface (FSI) Reference Design <https://www.ti.com/lit/TIDUEV1>`_
+
+- `EtherCAT Based Connected Servo Drive using Fast Current Loop on PMSM Application Report <https://ti.com/lit/SPRACM9>`_ - Only applicable to: F2838x
+
+- `EtherCAT Technology Group - Download Section Landing Page <https://www.ethercat.org/en/downloads.html>`_ - Only applicable to: F2838x
+
+- `Hardware Data Sheet Section I - Technology <https://download.beckhoff.com/download/Document/io/ethercat-development-products/ethercat\_esc\_datasheet\_sec1\_technology\_2i3.pdf>`_ - Only applicable to: F2838x
+
+- `Hardware Data Sheet Section II - Register Description <https://download.beckhoff.com/download/Document/io/ethercat-development-products/ethercat\_esc\_datasheet\_sec2\_registers\_2i9.pdf>`_ - Only applicable to: F2838x
+
+- `PHY Selection Guide <https://download.beckhoff.com/download/Document/io/ethercat-development-products/an\_phy\_selection\_guidev2.7.pdf>`_ - Only applicable to: F2838x

@@ -1,0 +1,12 @@
+ERAD Related Collateral
+====================================
+
+**Foundational**
+
+- `Embedded Real-Time Analysis &amp; Diagnostics (ERAD) on C2000™ Devices <https://www.ti.com/video/5745571666001>`_ - Only applicable to: F28002x, F28003x, F28004x, F2838x
+
+**Getting Started**
+
+- `Embedded Real-Time Analysis &amp; Diagnostics (ERAD) on C2000 MCUs <https://www.ti.com/video/6292444674001>`_
+
+- `Embedded Real-Time Analysis and Response for Control Applications Application Report <https://ti.com/lit/SPRACM7>`_ - Only applicable to: F28002x, F28003x, F28004x, F2838x

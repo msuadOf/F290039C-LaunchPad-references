@@ -1,0 +1,1209 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<meta content="Academy overview page. " lang="en" name="description" xml:lang="en" />
+
+    <title>Overview &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script src="_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Started with C2000 Devices" href="source/c2000_get_started/c2000_getstarted.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  <div class="bd-header-announcement container-fluid" id="header-announcement">
+    <div class="bd-header-announcement__content"><h1>C2000 Academy</h1><p class='banner-text'> The C2000 Academy is a great resource for developers to learn about C2000 real-time microcontrollers platform. The Academy delivers easy-to-use training modules that span a wide range of topics for all C2000 devices. Additionally, C2000 Academy provides hands-on lab exercises and a full solution for each lab exercise.
+C2000 Academy is applicable to all generation-3 devices- F2807x, F2837xS, F2837xD, F2838xS, F2838xD, F28004x, F28002x, F28003x, F280013x and F280015x </p></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search C2000 Academy"
+         aria-label="Search C2000 Academy"
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+</form>
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="overview">
+<h1 class="sd-d-none">Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h1>
+<p class="section-subtitle overview-heading">1. Getting Started</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Getting started with C2000 Device</div>
+<p class="sd-card-text">The objective of this module is to get started with TI Code Composer Studio (CCS)
+development environment and run a basic example to toggle LEDs. Specifically,
+this module demonstrates how to import a project from a C2000ware, modify/compile the code,
+and run the generated-out file on the target EVM (LaunchPad or controlCARD).</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_get_started/c2000_getstarted.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Getting started using SysConfig</div>
+<p class="sd-card-text">TI’s Code Composer Studio includes a GUI-based tool for
+system configuration (SysConfig). It can be used for PinMux
+configuration, peripheral setup, and the generation of C-code using
+C2000Ware DriverLib API.
+This module goes over how to create a simple SysConfig project to
+toggle an LED.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_get_started/c2000_getstarted_sysconfig.html"></a></div>
+</div>
+</div>
+</div>
+<p class="section-subtitle overview-heading">2. Device Overview</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Overview of C28x Devices and Accelerators</div>
+<p class="sd-card-text">This introductory module includes an
+overview of the basic architecture of the C2000 family of real-time
+control microcontrollers.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_overview/c2000_device_overview.html"></a></div>
+</div>
+</div>
+</div>
+<p class="section-subtitle overview-heading">3. System Control</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Boot-Mode &amp; Resets</div>
+<p class="sd-card-text">This module describes the boot process and the various types
+of resets available on C2000 devices.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_system/c2000_boot.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Interrupts</div>
+<p class="sd-card-text">An interrupt is a response by the processor/CPU to an event that needs attention.
+This module goes over how to setup interrupts and the kinds of interrupts there are
+on C2000 devices.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_system/c2000_interrupt.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Timers</div>
+<p class="sd-card-text">This module describes C28x CPU Timers and the watchdog timer which is a
+safety feature that will reset the device if something goes astray in the system.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_system/c2000_timers.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+GPIOs &amp; Crossbars</div>
+<p class="sd-card-text">This module describes General Purpose
+Input Output (GPIO) pins, as well as crossbars. Crossbars provide the
+ability to route different signals throughout the device.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_system/c2000_gpio_xbar.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Memory Controller</div>
+<p class="sd-card-text">This module describes the C28x memory controller including the types of Random Access Memory (RAM)
+(Ex. local shared RAM, global shared RAM, message RAM).</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_system/c2000_memory.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+External Memory Interface (EMIF)</div>
+<p class="sd-card-text">When an application requires more memory than what is available on-chip, the EMIF controller
+can be used to connect to external memory devices. This module goes into details about EMIF
+such as the features, configuration, and performance.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_system/c2000_emif.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Flash Memory</div>
+<p class="sd-card-text">This module describes C28x flash memory and programming flash memory.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_system/c2000_flash.html"></a></div>
+</div>
+</div>
+</div>
+<p class="section-subtitle overview-heading">4. Analog Subsystem</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Analog to Digital Converter (ADC)</div>
+<p class="sd-card-text">C2000 devices supports multiple analog-to-digital converters (ADCs). This module
+describes the different components in the ADC and how to setup the ADC.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_analog_subsystem/c2000_analog_to_digital_converter.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Comparator Subsystem (CMPSS)</div>
+<p class="sd-card-text">Each Comparator Subsystem (CMPSS) has two comparators within it. This module
+describes how the comparators can be used and setup.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_analog_subsystem/c2000_comparator_subsystem.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Digital to Analog Converter (DAC)</div>
+<p class="sd-card-text">The buffered DAC can be used to provide a programmable reference
+output voltage. This modules walks though the DAC features and the
+DAC block diagram.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_analog_subsystem/c2000_digital_to_analog_converter.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Programmable Gain Amplifier (PGA)</div>
+<p class="sd-card-text">Programmable Gain Amplifier (PGA) amplifies small input signals to increase the
+dynamic range of the downstream ADC and CMPSS modules. This modules showcases
+the benefits of using PGAs and the different parts of the block diagram.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_analog_subsystem/c2000_programmable_gain_amplifier.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Analog Interconnect</div>
+<p class="sd-card-text">The Analog Subsystem Interconnect permits a single pin to route a signal to
+multiple analog modules. Thus, enabling a very flexible pin usage, allowing for
+smaller device packages.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_analog_subsystem/c2000_analog_interconnect.html"></a></div>
+</div>
+</div>
+</div>
+<p class="section-subtitle overview-heading">5. Control Peripherals</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Enhanced Pulse Width Modulation (ePWM)</div>
+<p class="sd-card-text">The C2000 high-performance control peripherals are an integral component for all
+digital control systems. This module will cover pulse width modulation (PWM).</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_control_peripherals/c2000_enhanced_pulse_width_modulation.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Enhanced Capture Module (eCAP)</div>
+<p class="sd-card-text">The C2000 enhanced capture module allows time-based logging of external
+signal transitions. It is used to accurately time external events by
+time stamping transitions on the capture input pin.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_control_peripherals/c2000_enhanced_capture_module.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Enhanced Quadrature Encoder Pulse (eQEP)</div>
+<p class="sd-card-text">The Enhanced Quadrature Encoder Pulse (eQEP) module is essential when
+integrating C2000 devices in any application that requires motor control. The
+eQEP module enables the C2000 device to interact with linear or rotary
+incremental encoders to determine necessary motor information from rotating
+machines.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_control_peripherals/c2000_enhanced_quadrature_encoder_pulse.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Sigma-Delta Filter Module (SDFM)</div>
+<p class="sd-card-text">The C2000 Sigma Delta Filter Module (SDFM) is a four-channel digital filter
+designed specifically for current measurement in motor control applications.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_control_peripherals/c2000_sigma_delta_filter.html"></a></div>
+</div>
+</div>
+</div>
+<p class="section-subtitle overview-heading">6. Communication Peripherals</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Communications Overview</div>
+<p class="sd-card-text">C2000 devices contain features that allow several methods of communication and data
+exchange between the MCU and other devices. Many of the most commonly used
+communications techniques are presented in this module.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_communications/c2000_communications_overview.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Fast Serial Interface (FSI)</div>
+<p class="sd-card-text">The FSI module is a highly reliable high-speed serial communication peripheral
+capable of operating at dual data rate, providing 100 Mbps transfer using a 50
+MHz clock.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_communications/c2000_fsi.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Serial Communication Interface (SCI)</div>
+<p class="sd-card-text">The SCI is a two-wire asynchronous serial port (also known as a
+UART) that supports communications between the processor and other asynchronous
+peripherals that use the standard non-return-to-zero (NRZ) format.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_communications/c2000_sci.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Inter-Integrated Circuit (I2C)</div>
+<p class="sd-card-text">The I2C provides an interface between devices that connect using an I2C-bus and
+are compliant with I2C-bus specification version 2.1.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_communications/c2000_i2c.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Serial Peripheral Interface (SPI)</div>
+<p class="sd-card-text">The SPI is a high-speed
+synchronous serial port that shifts a programmable length serial bit stream
+into and out of the device at a programmable bit-transfer rate.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_communications/c2000_spi.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Multichannel Buffered Serial Port (MCBSP)</div>
+<p class="sd-card-text">The McBSP
+provides a high-speed direct interface to CODECs, analog interface chips
+(AICs), and other serially connected A/D and D/A devices.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_communications/c2000_mcbsp.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Controller Area Network (CAN)</div>
+<p class="sd-card-text">CAN is a serial communications protocol which efficiently supports distributed
+real-time control with a high level of reliability.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_communications/c2000_can.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+CAN Flexible Data Rate (CAN FD/MCAN)</div>
+<p class="sd-card-text">CAN FD refers to the protocol while MCAN refers to the physical module
+on the device that implements the CAN FD protocol.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_communications/c2000_mcan.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Local Interconnect Network (LIN)</div>
+<p class="sd-card-text">The LIN standard is based
+on the SCI (UART) serial data link format. The communication concept is
+single-commander/multiple-responder with a message identification for
+multi-cast transmission between any network nodes.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_communications/c2000_lin.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Power Management Bus (PMBus)</div>
+<p class="sd-card-text">The PMBus module provides an interface for communicating between the
+microcontroller and other devices that are compliant with the System Management
+Interface (SMI) specification.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_communications/c2000_pmbus.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Ethernet for Control Automation Technology (EtherCAT)</div>
+<p class="sd-card-text">Ethernet for Control Automation Technology
+(EtherCAT®) is an Ethernet-based field bus system.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_communications/c2000_ethercat.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Universal Serial Bus (USB)</div>
+<p class="sd-card-text">The USB controller complies
+with USB 2.0 Implementers Forum certification standards, and utilizes
+full-speed (12 Mbps) operation in device mode and full-/low-speed (12 Mbps/1.5
+Mbps) operation in Host mode.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_communications/c2000_usb.html"></a></div>
+</div>
+</div>
+</div>
+<p class="section-subtitle overview-heading">7. Security &amp; Safety Peripherals</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Dual Code Security Module (DCSM)</div>
+<p class="sd-card-text">The purpose of code security is to prevent unauthorized access to on-chip
+secure memories such as Flash, RAM, OTP and ROM. In DCSM there are secure
+zones to which securable resources can be assigned.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_security_safety/c2000_dcsm.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Functional Safety (FuSa)</div>
+<p class="sd-card-text">Functional Safety-Compliant C2000
+products can help streamline and speed up the ISO 26262, IEC 61508, and IEC
+60730 certification processes with their built-in diagnostics, documentation,
+software, and support.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_security_safety/c2000_fusa.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Background CRC (BGCRC)</div>
+<p class="sd-card-text">A cyclic redundancy check (CRC) is an error-detecting code that is commonly used
+in digital systems. Some C2000 devices feature the background CRC
+(BGCRC) module, which computes the CRC value in hardware.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_security_safety/c2000_bgcrc.html"></a></div>
+</div>
+</div>
+</div>
+<p class="section-subtitle overview-heading">8. Debug &amp; Diagnostics</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Embedded Real-time Analysis and Diagnostic (ERAD)</div>
+<p class="sd-card-text">The ERAD module enhances the debug and system analysis capabilities of
+the device. This module facilitates sophisticated non-intrusive
+detection and monitoring of the CPU operation in real-time.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_debug_systems/c2000_erad.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+C2000 Debugging Tips &amp; Tricks</div>
+<p class="sd-card-text">This module describes various topics related to debugging issues on the C2000
+family of devices.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_debug_systems/c2000_debug_tips.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Embedded Pulse Generator (EPG)</div>
+<p class="sd-card-text">The Embedded Pattern Generator (EPG) module is a customizable pattern and clock
+generator that could serve many test and application scenarios that require a
+simple pattern generator or a periodic clock generator. The EPG module can also
+be used to capture an incoming serial stream of data.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_debug_systems/c2000_epg.html"></a></div>
+</div>
+</div>
+</div>
+<p class="section-subtitle overview-heading">9. Advanced Topics</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Control Law Accelerator (CLA)</div>
+<p class="sd-card-text">The CLA is an independent 32-bit floating-point math hardware accelerator which
+executes realtime control algorithms in parallel with the main C28x CPU,
+effectively doubling the computational performance.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_advanced_topics/c2000_control_law_accelerator.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Direct Memory Access (DMA)</div>
+<p class="sd-card-text">The DMA module provides a hardware method of transferring data between
+peripherals and/or memory without intervention from the CPU, effectively
+freeing up the CPU for other functions.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_advanced_topics/c2000_direct_memory_access.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Configurable Logic Block (CLB)</div>
+<p class="sd-card-text">The Configurable Logic Block (CLB) is a peripheral exclusive to C2000 devices
+that allows users to incorporate custom logic without the need for an external
+logic device such as an FPGA or CLPD.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_advanced_topics/c2000_configurable_logic_block.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Interprocessor Communications (IPC)</div>
+<p class="sd-card-text">IPC allows communication between two CPU subsystems (ex. CPU1 and CPU2).
+This module explains the use and operation of IPC.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_advanced_topics/c2000_interprocessor_communications.html"></a></div>
+</div>
+</div>
+</div>
+<p class="section-subtitle overview-heading">Labs</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+ADC Lab</div>
+<p class="sd-card-text">Part one consists of sampling a single ADC input channel at a prescribed sampling rate
+and storing the conversion result in a circular memory buffer. Part two is to integrate
+the digital-to-analog converter (DAC) into part 1.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_academy_labs/analog_subsystem/c2000_lab_adc.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+EPWM/ECAP Lab</div>
+<p class="sd-card-text">Generate a PWM waveform using one of the ePWM modules. The period and
+duty cycle of the PWM waveform will be measured by one of the eCAP
+modules.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_academy_labs/control_peripherals/c2000_lab_pwm.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+EQEP Lab</div>
+<p class="sd-card-text">This lab illustrates a common use-case of the eQEP module- connecting quadrature
+signals to the C2000 device and using the eQEP to calculate motor
+characteristics.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_academy_labs/control_peripherals/c2000_lab_qep.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+SCI Lab</div>
+<p class="sd-card-text">Utilize the SCI (Serial Communication Interface) by sending and receiving data
+between a C2000 device and a computer. The computer will be used to change the
+frequency of the blinking LED and then the board will echo this value back to
+the computer.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_academy_labs/communications_lab/c2000_lab_sci.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+CLA Lab</div>
+<p class="sd-card-text">Use the Control Law Accelerator (CLA) to implement a FIR lowpass filter. We will
+apply a PWM waveform to the input of our lowpass filter, which will result in a
+sinusoidal waveform at the output. The PWM waveform will be generated using one
+of the ePWM modules and it will be sampled via the ADC at a given sample rate.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_academy_labs/advanced_topics/c2000_lab_cla.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+DMA Lab</div>
+<p class="sd-card-text">Use the Direct Memory Access (DMA) controller to regularly service the ADC in a
+real-time data processing application. The ePWM module will be used to generate
+a PWM waveform to simulate a real-time data signal, and the ADC will be setup
+to sample the PWM waveform at a chosen sampling rate. Accordingly, the DMA will
+be used to store the ADC samples in a ping pong buffer, so groups of samples
+can be processed by the CPU in an interrupt service routine (ISR).</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_academy_labs/advanced_topics/c2000_lab_dma.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+CLB Lab</div>
+<p class="sd-card-text">Gain familiarity with the Configurable Logic Block (CLB) peripheral and its
+submodules through a guided lab example. This lab demonstrations the CLB’s
+ability to connect to other peripherals, perform logical operations, override
+peripheral outputs, and then generate interrupts to the CPU.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_academy_labs/advanced_topics/c2000_lab_clb.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+eCAP Implementation Using CLB Lab</div>
+<p class="sd-card-text">This lab demonstrates the CLB’s ability to connect to a signal, accurately time
+events, and send data to the CPU. The CLB will measure a high signal, a low
+signal, and another high signal before sending the data to the CPU. An external
+wave generator or the ePWM module can be set up to supply a signal, if a wave
+generator is not available.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_academy_labs/advanced_topics/c2000_lab_clb_ecap.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+IPC Lab</div>
+<p class="sd-card-text">Use basic IPC features to send data in both directions between CPU1 and CPU2.
+PWM2 will be configured to provide a 50 kHz SOC signal to ADC-A. An
+End-of-Conversion ISR on CPU1 will read each result and write it into a data
+register in the IPC. An IPC interrupt will then be triggered on CPU2 which
+fetches this data and stores it in a circular buffer. The same ISR grabs a data
+point from a sine table and loads it into a different IPC register for
+transmission to CPU1. This triggers an interrupt on CPU1 to fetch the sine data
+and write it into DAC-B.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_academy_labs/advanced_topics/c2000_lab_ipc.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+System Integration Lab</div>
+<p class="sd-card-text">This lab builds on all of the different topics covered thus far. As a system
+example, the epwm module is setup to output a 50kHz output with a duty cycle
+that will vary based on an ADC conversion result. A comparator will also be
+used to monitor the ADC conversion results and cause a one-shot trip to drive
+the EPWM output low in case the ADC conversion is above a certain threshold.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_academy_labs/system_control/c2000_lab_system_design.html"></a></div>
+</div>
+</div>
+</div>
+<p class="section-subtitle overview-heading">Gen2/Gen1 Devices</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+F2803x Workshop</div>
+<p class="sd-card-text">updated or maintained, and are provided “as is”.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_legacy_devices/F2803x/F2803x_workshop.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+F2802x Workshop</div>
+<p class="sd-card-text">updated or maintained, and are provided “as is”.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_legacy_devices/F2802x/F2802x_workshop.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+F2806x Workshop</div>
+<p class="sd-card-text">updated or maintained, and are provided “as is”.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_legacy_devices/F2806x/F2806x_workshop.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+F2833x Workshop</div>
+<p class="sd-card-text">updated or maintained, and are provided “as is”.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_legacy_devices/F2833x/F2833x_workshop.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+F281x Workshop</div>
+<p class="sd-card-text">updated or maintained, and are provided “as is”.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_legacy_devices/F281x/F281x_workshop.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+F280x Workshop</div>
+<p class="sd-card-text">updated or maintained, and are provided “as is”.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_legacy_devices/F280x/F280x_workshop.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+F28M35x Workshop</div>
+<p class="sd-card-text">updated or maintained, and are provided “as is”.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_legacy_devices/F28M35x/F28M35x_workshop.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Texas Instruments</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+LF240x Workshop</div>
+<p class="sd-card-text">updated or maintained, and are provided “as is”.</p>
+</div>
+<a class="sd-stretched-link reference external" href="source/c2000_legacy_devices/LF240x/LF240x_workshop.html"></a></div>
+</div>
+</div>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='right-next' id="next-link" href="source/c2000_get_started/c2000_getstarted.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Getting Started with C2000 Devices</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

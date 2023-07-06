@@ -1,0 +1,718 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Flash Configuration and Memory Performance &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_system/c2000_flash';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_system/c2000_flash.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Analog-to-Digital Converter (ADC)" href="../c2000_analog_subsystem/c2000_analog_to_digital_converter.html" />
+    <link rel="prev" title="External Memory Interface (EMIF)" href="c2000_emif.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="flash-configuration-and-memory-performance">
+<h1>Flash Configuration and Memory Performance<a class="headerlink" href="#flash-configuration-and-memory-performance" title="Permalink to this heading">#</a></h1>
+<section id="flash-wait-state-configuration">
+<h2>Flash Wait State Configuration<a class="headerlink" href="#flash-wait-state-configuration" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>RWAIT bit-field in the <code class="docutils literal notranslate"><span class="pre">FRDCNTL</span></code> register specifies the number of random access wait states</p></li>
+<li><p>OTP reads are hardwired for 10 wait states (RWAIT has no effect)</p></li>
+<li><p>Must specify the number of SYSCLK cycle wait-states; Reset defaults are maximum value (15)</p></li>
+<li><p>Flash/OTP reads returned after (RWAIT + 1 SYSCLK cycles)</p></li>
+<li><p>Flash configuration code should not be run from the flash memory</p></li>
+</ul>
+<p>Example of setting the number of wait states for a flash read access:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Bit-Field Version</span>
+<span class="n">FlashCtrlRegs</span><span class="p">.</span><span class="n">FRDCNTL</span><span class="p">.</span><span class="n">bit</span><span class="p">.</span><span class="n">RWaIT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x03</span><span class="p">;</span><span class="w"> </span>
+<span class="c1">// Driverlib Version</span>
+<span class="c1">// ctrlBase: base address of the flash control registers: FLASH0CTRL_BASE</span>
+<span class="n">Flash_setWaitstates</span><span class="p">(</span><span class="n">ctrlBase</span><span class="p">,</span><span class="w"> </span><span class="n">waitstates</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>Refer to the device specific datasheet for detailed numbers such as RWAIT</p>
+</div>
+</section>
+<section id="speeding-up-execution-in-flash-otp">
+<h2>Speeding Up Execution in Flash/OTP<a class="headerlink" href="#speeding-up-execution-in-flash-otp" title="Permalink to this heading">#</a></h2>
+<p><img alt="Flash Execution" src="../../_images/Flash_execution.png" /></p>
+<p>Enable prefetch mechanism:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Bit-Field Version</span>
+<span class="n">FlashCtrlRegs</span><span class="p">.</span><span class="n">FRD_INTF_CTRL</span><span class="p">.</span><span class="n">bit</span><span class="p">.</span><span class="n">PREFETCH_EN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="c1">// Driverlib Version</span>
+<span class="c1">// ctrlBase: base address of the flash control registers: FLASH0CTRL_BASE</span>
+<span class="n">Flash_enablePrefetch</span><span class="p">(</span><span class="n">ctrlBase</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Enable data cache:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Bit-Field Version</span>
+<span class="n">FlashCtrlRegs</span><span class="p">.</span><span class="n">FRD_INTF_CTRL</span><span class="p">.</span><span class="n">bit</span><span class="p">.</span><span class="n">DATA_CACHE_EN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="c1">// Driverlib Version</span>
+<span class="c1">// ctrlBase: base address of the flash control registers: FLASH0CTRL_BASE</span>
+<span class="n">Flash_enableCache</span><span class="p">(</span><span class="n">ctrlBase</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="code-execution-performance">
+<h2>Code Execution Performance<a class="headerlink" href="#code-execution-performance" title="Permalink to this heading">#</a></h2>
+<p>Ex. Assume 200MHz SYSCLKOUT and single-cycle execution for each instruction:</p>
+<section id="internal-ram-200-mips">
+<h3>Internal RAM: 200 MIPS<a class="headerlink" href="#internal-ram-200-mips" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Fetch up to 32 bits every cycle -&gt; 1 instruction/cycle</p></li>
+</ul>
+</section>
+<section id="flash-200-mips">
+<h3>Flash: 200 MIPS<a class="headerlink" href="#flash-200-mips" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Assume RWAIT=3, prefetch buffer enabled</p></li>
+<li><p>Fetch 128 bits every 4 cycles: (128 bits)/(32-bits per instruction
+worst-case) -&gt; 4 instructions/4 cycles</p></li>
+<li><p>PC discontinuity will degrade this, while 16-bit instructions can help</p></li>
+<li><p>Benchmarking in control applications has shown actual performance of about
+90% efficiency, yielding approximately 180 MIPS</p></li>
+</ul>
+</section>
+</section>
+<section id="data-access-performance">
+<h2>Data Access Performance<a class="headerlink" href="#data-access-performance" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Internal RAM has best data performance - put time critical data here</p></li>
+<li><p>Flash performance often sufficient for constants and tables</p></li>
+<li><p>Note that the flash instruction fetch pipeline will also stall during a flash data access</p></li>
+<li><p>For best flash performance, arrange data so that all 128 bits in a cache line are utilized (ex. sequential access)</p></li>
+</ul>
+<p><strong>Assume 200MHZ SYSCLKOUT</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Memory</p></th>
+<th class="head"><p>16-bit access</p></th>
+<th class="head"><p>32-bit access</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Internal RAM</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Flash (sequential access)</p></td>
+<td><p>.73 (8 words/11 cycles)</p></td>
+<td><p>.57 (4 words/7 cycles)</p></td>
+<td><p>Assumes RWAIT = 3, flash data cache enabled, all 128 bits in cache are used</p></td>
+</tr>
+<tr class="row-even"><td><p>Flash (random access)</p></td>
+<td><p>.25 (1 word/4 cycles)</p></td>
+<td><p>.25 (1 word/4 cycles)</p></td>
+<td><p>Assumes RWAIT = 3</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Assume 100MHZ SYSCLKOUT</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Memory</p></th>
+<th class="head"><p>16-bit access</p></th>
+<th class="head"><p>32-bit access</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Internal RAM</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Flash (sequential access)</p></td>
+<td><p>.73 (8 words/11 cycles)</p></td>
+<td><p>.57 (4 words/7 cycles)</p></td>
+<td><p>Assumes RWAIT = 4, flash data cache enabled, all 128 bits in cache are used</p></td>
+</tr>
+<tr class="row-even"><td><p>Flash (random access)</p></td>
+<td><p>.25 (1 word/4 cycles)</p></td>
+<td><p>.25 (1 word/4 cycles)</p></td>
+<td><p>Assumes RWAIT = 4</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="flash-otp-power-modes">
+<h2>Flash / OTP Power Modes<a class="headerlink" href="#flash-otp-power-modes" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Power configuration settings save power by putting Flash/OTP to ‘Sleep’ or ‘Standby’ mode;
+Flash will automatically enter ‘Active’ mode if a Flash/OTP access is made</p></li>
+</ul>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>F280013x/F280015x devices do not support low power modes. Please refer to the
+Technical Reference Manual (TRM) to for details</p>
+</div>
+<ul class="simple">
+<li><p>At reset Flash/OTP is in sleep mode</p></li>
+<li><p>Operates in three power modes:</p>
+<ul>
+<li><p>Sleep (lowest power)</p></li>
+<li><p>Standby (shorter transition time to active)</p></li>
+<li><p>Active (highest power) <br/><br/></p></li>
+</ul>
+</li>
+<li><p>After an access is made, Flash/OTP can automatically power down
+to ‘Standby’ or ‘Sleep’ (active grace period set in user programmable counters)</p></li>
+</ul>
+<p>Setting Flash charge pump fallback power mode to active:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Bit-field</span>
+<span class="n">FlashCtrlRegs</span><span class="p">.</span><span class="n">FPAC1</span><span class="p">.</span><span class="n">bit</span><span class="p">.</span><span class="n">PMPPWR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1</span><span class="p">;</span><span class="w"> </span><span class="c1">// 0: sleep, 1: active</span>
+<span class="c1">// Driverlib</span>
+<span class="n">Flash_setBankPowerMode</span><span class="p">(</span><span class="n">ctrlBase</span><span class="p">,</span><span class="w"> </span><span class="n">bank</span><span class="p">,</span><span class="w"> </span><span class="n">powerMode</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Setting fallback power mode to active:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Bit-field</span>
+<span class="c1">// 0: sleep, 1: standby,</span>
+<span class="c1">// 2: reserved, 3: active</span>
+<span class="n">FlashCtrlRegs</span><span class="p">.</span><span class="n">FBFALLBACK</span><span class="p">.</span><span class="n">bit</span><span class="p">.</span><span class="n">BNKPWR0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x3</span><span class="p">;</span><span class="w"> </span>
+<span class="c1">// Driverlib</span>
+<span class="n">Flash_setPumpPowerMode</span><span class="p">(</span><span class="n">ctrlBase</span><span class="p">,</span><span class="w"> </span><span class="n">powerMode</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="error-correction-code-ecc-protection">
+<h2>Error Correction Code (ECC) Protection<a class="headerlink" href="#error-correction-code-ecc-protection" title="Permalink to this heading">#</a></h2>
+<p>Provides capability to screen out Flash/OTP memory faults (enabled at reset)</p>
+<ul class="simple">
+<li><p>Single error correction and double error detection (SECDED)</p></li>
+<li><p>For every 64-bits of Flash/OTP, 8 ECC check bits are calculated and programmed into ECC memory</p></li>
+<li><p>ECC check bits are programmed along with Flash/OTP data</p></li>
+<li><p>During an instruction fetch or data read operation the 64-bit data/8-bit ECC are processed by
+the SECDED to determine one of three conditions:</p></li>
+<li><p>No error occurred</p></li>
+<li><p>A correctable error (single bit data error) occurred</p></li>
+<li><p>A non-correctable error (double bit data error or address error) occurred</p></li>
+</ul>
+<p><img alt="Error Correction Code (ECC) Protection" src="../../_images/ecc.png" /></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Bit-Field</span>
+<span class="n">FlashEccRegs</span><span class="p">.</span><span class="n">ECC_ENABLE</span><span class="p">.</span><span class="n">bit</span><span class="p">.</span><span class="n">ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xA</span><span class="p">;</span><span class="w"> </span><span class="c1">// 0xA enable; other values disable</span>
+<span class="c1">// Driverlib</span>
+<span class="n">Flash_enableECC</span><span class="p">(</span><span class="n">eccBase</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="flash-programming">
+<h2>Flash Programming<a class="headerlink" href="#flash-programming" title="Permalink to this heading">#</a></h2>
+<section id="flash-programming-basics">
+<h3>Flash Programming Basics<a class="headerlink" href="#flash-programming-basics" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The device CPU performs the flash programming</p></li>
+<li><p>The CPU executes flash utility code from RAM that reads the flash data and writes it into the flash memory</p></li>
+<li><p>We need to get the flash utility code and the flash data into RAM</p></li>
+</ul>
+<p><img alt="Flash Programming Basics" src="../../_images/flash_basics.png" /></p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>The figure above displays common boot
+modes such as SPI, SCI, etc. that may not all apply for your specific device. To find the boot mode
+options available for your device refer to the table ‘All Available Boot Modes’ within your
+device’s Technical Reference Manual.</p>
+</div>
+</section>
+<section id="minimum-steps-to-program-flash">
+<h3>Minimum Steps to Program Flash<a class="headerlink" href="#minimum-steps-to-program-flash" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Algorithm</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Erase</p></td>
+<td><p>Set all bits to one</p></td>
+</tr>
+<tr class="row-odd"><td><p>Program</p></td>
+<td><p>Program selected bits with zero</p></td>
+</tr>
+<tr class="row-even"><td><p>Verify</p></td>
+<td><p>Verify flash contents</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Minimum <strong>Erase</strong> size is a sector</p></li>
+<li><p>Minimum <strong>Program</strong> size is a bit (be careful of ECC matching)</p></li>
+<li><p>Important not to loose power during erase step</p>
+<ul>
+<li><p>Chance of this happening is quite small (erase step is performed sector by sector)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="flash-programming-utilities">
+<h3>Flash Programming Utilities<a class="headerlink" href="#flash-programming-utilities" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>JTAG Emulator Based</p>
+<ul>
+<li><p>CCS on-chip Flash programmer (<strong>Tools → On-Chip Flash</strong>)</p></li>
+<li><p>CCS UniFlash (TI universal Flash utility)</p></li>
+<li><p>BlackHawk Flash utilities (requires Blackhawk emulator)</p></li>
+<li><p>Elprotronic FlashPro2000</p></li>
+</ul>
+</li>
+<li><p>SCI Serial Port Bootloader Based</p>
+<ul>
+<li><p>CodeSkin C2Prog</p></li>
+<li><p>Elprotronic FlashPro2000</p></li>
+</ul>
+</li>
+<li><p>Production Test/Programming Equipment Based</p>
+<ul>
+<li><p>BP Microsystems programmer</p></li>
+<li><p>Data I/O programmer</p></li>
+</ul>
+</li>
+<li><p>Build your own custom utility</p></li>
+<li><p>Can use any of the ROM bootloader methods</p></li>
+<li><p>Can embed flash programming into your application</p></li>
+<li><p>Flash API algorithms provided by TI</p></li>
+</ul>
+<p>For a complete list of third party flash programming tools refer to
+<a class="reference external" href="https://www.ti.com/tool/C2000-3P-SEARCH">C2000-3P-SEARCH</a></p>
+</section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<section id="flash-related-collateral">
+<h3>FLASH Related Collateral<a class="headerlink" href="#flash-related-collateral" title="Permalink to this heading">#</a></h3>
+<p><strong>Foundational</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/video/6308729698112">Embedded Flash Memory</a></p></li>
+</ul>
+<p><strong>Getting Started</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ti.com/lit/SPRABV4">Serial Flash Programming of C2000 Microcontrollers Application Report</a> - Only applicable to: F280013x, F28002x, F28004x, F2807x, F2837xD, F2837xS, F2838x</p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000/f/171/t/951658">[FAQ] FAQ for Flash ECC usage in C2000 devices - Includes ECC test mode, Linker ECC options:</a></p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/951668/faq-faq-on-flash-api-usage-for-c2000-devices">[FAQ] FAQ on Flash API usage for C2000 devices</a> - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2807x, F2837xD, F2837xS, F2838x</p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000/f/171/t/878674">[FAQ] Flash - How to modify an application from RAM configuration to Flash configuration?</a></p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000/f/171/t/904312">[FAQ] How can we improve the Flash tool performance?</a></p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000/f/171/t/914024">[FAQ] TI C2000 Device Programming Tools and Services</a></p></li>
+</ul>
+<p><strong>Expert</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/lit/spraci5">Updating Firmware on Security Enabled TMS320F2837xx or TMS320F2807x Devices Application Report</a> - Only applicable to: F2807x, F2837xD, F2837xS</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="c2000_emif.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">External Memory Interface (EMIF)</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="../c2000_analog_subsystem/c2000_analog_to_digital_converter.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Analog-to-Digital Converter (ADC)</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flash-wait-state-configuration">
+   Flash Wait State Configuration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#speeding-up-execution-in-flash-otp">
+   Speeding Up Execution in Flash/OTP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#code-execution-performance">
+   Code Execution Performance
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#internal-ram-200-mips">
+     Internal RAM: 200 MIPS
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flash-200-mips">
+     Flash: 200 MIPS
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-access-performance">
+   Data Access Performance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flash-otp-power-modes">
+   Flash / OTP Power Modes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#error-correction-code-ecc-protection">
+   Error Correction Code (ECC) Protection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flash-programming">
+   Flash Programming
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flash-programming-basics">
+     Flash Programming Basics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minimum-steps-to-program-flash">
+     Minimum Steps to Program Flash
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flash-programming-utilities">
+     Flash Programming Utilities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flash-related-collateral">
+     FLASH Related Collateral
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

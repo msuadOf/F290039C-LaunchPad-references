@@ -1,0 +1,545 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Memory Controller &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_system/c2000_memory';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_system/c2000_memory.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="External Memory Interface (EMIF)" href="c2000_emif.html" />
+    <link rel="prev" title="General Purpose Digital I/O" href="c2000_gpio_xbar.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="memory-controller">
+<h1>Memory Controller<a class="headerlink" href="#memory-controller" title="Permalink to this heading">#</a></h1>
+<p>On C2000 real-time microcontrollers, the RAMs have different characteristics. These are:</p>
+<ul class="simple">
+<li><p>Dedicated to the CPU: M0, M1 RAMs</p></li>
+<li><p>Shared between the CPU and CLA: LSx RAMs</p></li>
+<li><p>Shared between the CPU, DMA and HIC: GSx RAMs</p></li>
+<li><p>Used to send and receive messages between processors: MSG RAMs</p></li>
+</ul>
+<p>All these RAMs are highly configurable to achieve control for write access and fetch access
+from different controllers. All the RAMs are enabled with the ECC feature (both data and address).
+Some of the memories are secure memory as well. Each RAM has its own controller which takes
+care of the access protection/security related checks and ECC features for that RAM. Figure
+below shows the configuration of these RAMs.</p>
+<p><img alt="Memory Controller" src="../../_images/memory_controller.png" /></p>
+<div class="admonition-cla-dma-modules admonition">
+<p class="admonition-title">CLA/DMA Modules</p>
+<p>Not all C2000 devices have a CLA or a DMA. Refer to the
+<i><a class="reference external" href="https://www.ti.com/lit/spru566">Peripheral Reference Guide</a></i>
+for a list of supported modules on your device.</p>
+</div>
+<section id="ecc-and-parity-in-ram">
+<h2>ECC and Parity in RAM<a class="headerlink" href="#ecc-and-parity-in-ram" title="Permalink to this heading">#</a></h2>
+<p>Error Correction Code (ECC) is a feature in memory that detects and corrects errors, and can
+notify the system when it is unable to correct data. The ECC scheme used is Single Error
+Correction Double Error Detection (SECDED). This scheme checks the bits of a data word as
+they are read. If one bit is altered, the single-bit error is corrected. If two bits are altered, the
+double-bit error is detected but not corrected. In the case were more than two bits are altered, the
+results are unclear.</p>
+<p>For parity checking in memory, the even parity scheme is used. This means that when the
+total number of 1 bits are an even number, the parity bit will be set to 0. If the total
+number of 1 bits are an odd number, the parity bit will be set to 1. The purpose is to
+maintain an even number of 1’s in the data being accessed. If this total is not even, then
+an error has occurred.</p>
+<p>ECC and parity cover data bits in memory and in the address. The calculation is done inside the
+memory controller itself, and the ECC and parity are written into memory with data. For example, for
+each 32-bit data there will be 3 7-bit ECC codes or 3 parity bits, two of which are for data
+and the third of which is for the address.</p>
+<p>Error detection is done while reading data and executing program code from memory. For parity
+memory, only a single-bit error gets detected. For ECC memory a single and double-bit error get
+detected. The single-bit error for ECC is known as a correctable error, and the double-bit error
+is known as an uncorrectable error. Parity errors, double-bit ECC errors, and address ECC errors
+are considered uncorrectable. Single-bit ECC errors are correctable errors.</p>
+<p>Correctable errors get corrected by the memory controller module, with the correct data given
+back as the read data. This is written back to memory to prevent a double-bit error because
+of another single-bit error at the same memory address. The correctable error count register
+increments for each correctable error. This can be used as a threshold to trigger an interrupt.
+The address for which the error occurs gets latched into the status register and a flag gets set.</p>
+<p>For uncorrectable errors, a Non-Maskable Interrupt gets generated. The address where the error
+occurred gets latched into the status register and a flag gets set.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Access Type</p></th>
+<th class="head"><p>Error Found In</p></th>
+<th class="head"><p>Error Type</p></th>
+<th class="head"><p>Status Indication</p></th>
+<th class="head"><p>Error Notification</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Reads</p></td>
+<td><p>Data read from memory</p></td>
+<td><p>Uncorrectable Error (Single-bit error for Parity RAMs OR Double bit Error for ECC RAMs)</p></td>
+<td><p>Yes -CPUx/CPUx.DMA/CPUx.CLA1; CPU/DMA/CLA Read Error Address Register Data returned to CPUx/CPUx.DMA/CPUx.CLA1 is incorrect</p></td>
+<td><p>NMI for CPUx access; NMI for CPUx.DMA access; NMI to CPU for CPUx.CLA1 access</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reads</p></td>
+<td><p>Data read from memory</p></td>
+<td><p>Single-bit error for ECC RAMs</p></td>
+<td><p>Yes - CPUx/CPUx.DMA CPU/DMA Read Error Address Register Increment single error counter</p></td>
+<td><p>Interrupt when error counter reaches the user programmable threshold for single errors</p></td>
+</tr>
+<tr class="row-even"><td><p>Reads</p></td>
+<td><p>Address</p></td>
+<td><p>Address error</p></td>
+<td><p>Yes - CPUx/CPUx.DMA/CPUx.CLA1; CPU/DMA/CLA Read Address Error Register Data returned to CPUx/CPUx.DMA/CPUx.CLA1 is incorrect</p></td>
+<td><p>NMI to CPU for CPUx access; NMI to CPU for CPUx.DMA access; NMI to CPU for CPUx.CLA1 access</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="initializing-ram">
+<h2>Initializing RAM<a class="headerlink" href="#initializing-ram" title="Permalink to this heading">#</a></h2>
+<p>When the device first powers up, the RAM is in a state where all of its values are considered
+random. ECC is in RAM and is also considered to be in a random state. This will cause any
+read from RAM to raise a flag in the MEMORY_ERROR_REGS register unless RAM is initialized
+(all memory values will be set to 0). The MemCfg_initSection function clears out specified
+RAM sections that are provided as the parameter. Alternatively, the memset string library
+function is available, although this is not provided by TI and as such is on the user to
+verify that it clears the memory properly.</p>
+</section>
+<section id="dedicated-ram-mx-ram">
+<h2>Dedicated RAM (Mx RAM)<a class="headerlink" href="#dedicated-ram-mx-ram" title="Permalink to this heading">#</a></h2>
+<p>The C2000 devices has two dedicated RAM blocks: M0 and M1. M0 and M1 memories are small
+blocks of memory which are tightly coupled with the CPU. Only the CPU has access to
+these memories. No other peripherals (CLA, DMA or HIC) have access to these memories.</p>
+<p>All dedicated RAMs have ECC and access protection (CPU write protection/CPU fetch
+protection) feature. Each type of access protection for each RAM block can be
+enabled/disabled by configuring the specific bit in the access protection register,
+allocated to each subsystem (DxACCPROT).</p>
+</section>
+<section id="local-shared-ram-lsx-ram">
+<h2>Local Shared RAM (LSx RAM)<a class="headerlink" href="#local-shared-ram-lsx-ram" title="Permalink to this heading">#</a></h2>
+<p>Local shared RAMs (LSx RAMs) are secure memories and have ECC. These memories are
+shared between the CPU and CLA but are by default dedicated to the CPU only.
+CLA access can be enabled by configuring MSEL_LSx bit field in the LSxMSEL register.</p>
+<p>Further, when these memories are shared between the CPU and CLA, the user
+could choose to use these memories as CLA program memory by configuring the
+CLAPGM_LSx bit field in the LSxCLAPGM registers. CPU access to all memory blocks,
+which are programmed as CLA program memory, are blocked.</p>
+</section>
+<section id="global-shared-ram-gsx-ram">
+<h2>Global Shared RAM (GSx RAM)<a class="headerlink" href="#global-shared-ram-gsx-ram" title="Permalink to this heading">#</a></h2>
+<p>RAM blocks which are accessible from the CPU, DMA and HIC are called global shared
+RAMs (GSx RAMs). Table below shows the features of the GSx RAM.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>CPU (Fetch)</p></th>
+<th class="head text-center"><p>CPU (Read)</p></th>
+<th class="head text-center"><p>CPU (Write)</p></th>
+<th class="head text-center"><p>CPU.DMA (Read)</p></th>
+<th class="head text-center"><p>CPU.DMA (Write)</p></th>
+<th class="head text-center"><p>HIC (Read)</p></th>
+<th class="head text-center"><p>HIC (Write)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>Yes</p></td>
+<td class="text-center"><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+<p>The shared RAM has different levels of access protection that can be enabled or
+disabled by configuring specific bits in the GSxACCPROT registers.</p>
+<p>Access protection configuration for the GSx RAM block can be locked by the user
+to prevent further updates to this bit field. The user can also choose to
+permanently lock the configuration to individual bit fields by setting the
+specific bit fields in the GSxCOMMIT register (refer to the register description
+for more details). Once a configuration is committed for a particular GSx RAM
+block, it can not be changed further until CPU.SYSRS is issued.</p>
+</section>
+<section id="cla-cpu-message-ram">
+<h2>CLA-CPU Message RAM<a class="headerlink" href="#cla-cpu-message-ram" title="Permalink to this heading">#</a></h2>
+<p>These RAM blocks can be used to share data between the CPU and CLA.
+The CLA has read and write access to the “CLA to CPU MSGRAM”. The CPU
+has read and write access to the “CPU to CLA MSGRAM.” The CPU and CLA
+both have read access to both MSGRAMs.</p>
+</section>
+<section id="cla-dma-message-ram">
+<h2>CLA-DMA Message RAM<a class="headerlink" href="#cla-dma-message-ram" title="Permalink to this heading">#</a></h2>
+<p>These RAMs blocks can be used to share data between CLA and DMA.
+The CLA has read and write access to the “CLA to DMA MSGRAM”.
+The DMA has read and write access to the “DMA to CLA MSGRAM”. The CLA
+and DMA both have read access to both MSGRAMs.</p>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="c2000_gpio_xbar.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">General Purpose Digital I/O</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_emif.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">External Memory Interface (EMIF)</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ecc-and-parity-in-ram">
+   ECC and Parity in RAM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initializing-ram">
+   Initializing RAM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dedicated-ram-mx-ram">
+   Dedicated RAM (Mx RAM)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#local-shared-ram-lsx-ram">
+   Local Shared RAM (LSx RAM)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#global-shared-ram-gsx-ram">
+   Global Shared RAM (GSx RAM)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cla-cpu-message-ram">
+   CLA-CPU Message RAM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cla-dma-message-ram">
+   CLA-DMA Message RAM
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

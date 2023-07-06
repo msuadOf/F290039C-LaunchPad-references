@@ -1,0 +1,80 @@
+# F2806x Workshop
+
+:::{warning} Disclaimer The workshop materials on this page are no longer being
+   updated or maintained, and are provided "as is". However, the workshop
+   materials can still be very useful for learning about the device. The CCS
+   projects which are used with the lab exercise source files may need to be
+   recreated for use with later versions of the software. Also, the hardware
+   target (ie. development board) may be discontinued.
+:::
+
+The C2000 TMS320F2806x Microcontroller Workshop is a hands-on technical course
+based on the TMS320F28069 device. This device shares many common features and
+peripherals that are also found on the other C2000 family members. Therfore,
+this workshop is ideal for anyone interested in learning more about the C2000
+microcontrollers. Learning is accomplished through detailed presentation
+materials and hands-on lab exercises. This workshop has been developed to
+decrease the learning curve from months to days, reduce development time, and
+accelerate product time to market. Also, this workshop is perfect for both the
+beginner and advanced users. 
+
+The workshop starts with the basic concepts and progresses to more advanced
+topics in a logical fashion. Each topic and lab exercise builds on the previous
+one that was presented, running a common theme throughout the workshop. All of
+the lab exercises are written using the Peripheral Register Header Files and
+are performed on the F28069 Experimenter Kit. The materials guide the user
+through system initialization, peripheral setup, and programming an application
+into flash memory using the Code Composer Studio on-chip flash programmer.
+
+## Workshop Outline
+
+1. Architecture Overview
+2. Programming Development Environment -- <i> Lab: Linker command file </i>
+3. Peripheral Register Header Files
+4. Reset and Interrupts
+5. System Initialization -- <i> Lab: Watchdog and interrupts </i>
+6. Analog-to-Digital Converter -- <i> Lab: Build a data acquisition system </i>
+7. Control Peripherals -- <i> Lab: Generate and graph a PWM waveform </i>
+8. Numerical Concepts -- <i> Lab: Low-pass filter the PWM waveform </i>
+9. Direct Memory Access (DMA) -- Lab: Use DMA to buffer ADC results
+10. Control Law Accelerator (CLA) -- <i> Lab: Use CLA to filter PWM waveform </i>
+11. Viterbi, Complex Math, CRC Unit (VCU)
+12. System Design -- <i> Lab: Run the code from flash memory </i>
+13. Communications
+14. Support Resources
+
+## Running the Labs
+
+In order to run the labs, you will need:
+
+- PC running Windows XP or greater
+
+- Adobe Acrobat Reader
+
+- F28069 Experimenter Kit (product number: TMDSDOCK28069)
+
+- Code Composer Studio v6.0.0
+
+- Jumper Wire
+
+```{admonition} Note : Your CCS installation must include the following options in each category:
+	- Processor Support: Select "C2000 real-time MCUs"
+	- Select Emulators: Choose "TI XDS Debug Probe Support"
+
+```
+
+## Workshop Materials - Revision 5.0 May 2014
+
+- [ F2806x Microcontroller Workshop Installer ](resources/C2000_Microcontroller_Workshop_Setup.exe): This installs the lab files, solution files, and the workshop
+manual into the C:\C28x folder on your PC 
+
+```{admonition} NOTE: the downloaded file should be "C2000 Microcontroller Workshop-5.0-Setup.exe"
+If the ".exe" is missing then rename the file to include the extension
+
+```
+
+- [ F2806x Microcontroller Workshop Manual ](resources/C28x_Microcontroller_MDW.pdf) (pdf file)
+
+- [ Lab Files ](resources/Labs.zip) (zip file)
+
+- [ Solution Files ](resources/Solutions.zip) (zip file)

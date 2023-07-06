@@ -1,0 +1,74 @@
+ADC Related Collateral
+====================================
+
+**Foundational**
+
+- `ADC Input Circuit Evaluation for C2000 MCUs (TINA-TI) Application Report <https://ti.com/lit/SPRACT6>`_
+
+- `PSpice for TI design and simulation tool <https://www.ti.com/tool/PSPICE-FOR-TI>`_
+
+- `Real-Time Control Reference Guide <https://www.ti.com/lit/eb/slyy211/slyy211.pdf>`_
+
+- `TI Precision Labs - ADCs <https://www.ti.com/tool/TINA-TI>`_
+
+- `TI Precision Labs: Driving the reference input on a SAR ADC <https://www.ti.com/video/5783793652001>`_
+
+- `TI Precision Labs: Introduction to analog-to-digital converters (ADCs) <https://www.ti.com/video/6163538486001>`_
+
+- `TI Precision Labs: SAR ADC input driver design <https://www.ti.com/video/5476574757001>`_
+
+- `TI e2e: Connecting VDDA to VREFHI  <https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/967811/tms320f28388d-connecting-both-vdda-and-vrefhi-to-3-3v/3575387?tisearch=e2e-sitesearch&amp;keymatch=ADC%252520VREFHI%252520driver#3575387>`_
+
+- `TI e2e: Topologies for ADC Input Protection <https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/1065493/tms320f280049-q1-opamp-powered-by-5v-to-buffer-gpio>`_
+
+- `TI e2e: Why does the ADC Input Voltage drop with sampling? <https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/1024667/tms320f280049c-why-does-the-adc-input-voltage-drop-with-sampling/3787995?tisearch=e2e-sitesearch&amp;keymatch=ADC%25252525252520voltage%25252525252520divider#3787995>`_
+
+- `Understanding Data Converters Application Report <https://www.ti.com/lit/SLAA013>`_
+
+**Getting Started**
+
+- `ADC-PWM Synchronization Using ADC Interrupt <https://www.mathworks.com/help/supportpkg/texasinstrumentsc2000/ug/adc-pwm-synchronization-via-adc-interrupt.html>`_
+
+- `Analog-to-Digital Converter (ADC) Training for C2000 MCUs <https://www.ti.com/video/series/C2000-analog-to-digital-converter.html>`_ - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2837x, F2838x
+
+- `Hardware Design Guide for F2800x C2000 Real-Time MCU Series <https://www.ti.com/lit/spracz9>`_
+
+**Expert**
+
+- `Analog Engineer's Calculator <https://www.ti.com/tool/ANALOG-ENGINEER-CALC>`_
+
+- `Analog Engineer's Pocket Reference <https://www.ti.com/seclit/eb/slyw038c/slyw038c.pdf>`_
+
+- `Charge-Sharing Driving Circuits for C2000 ADCs (using PSPICE-FOR-TI) Application Report <https://ti.com/lit/SPRACZ0>`_ - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2807x, F2837xD, F2837xS, F2838x
+
+- `Charge-Sharing Driving Circuits for C2000 ADCs (using TINA-TI) Application Report <https://ti.com/lit/SPRACV0>`_ - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2807x, F2837xD, F2837xS, F2838x
+
+- `Debugging an integrated ADC in a microcontroller using an oscilloscope <https://e2e.ti.com/blogs\_/b/analogwire/archive/2017/08/17/debugging-an-integrated-adc-in-a-microcontroller-using-an-oscilloscope>`_
+
+- `Methods for Mitigating ADC Memory Cross-Talk Application Report <https://ti.com/lit/SPRACW9>`_ - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2807x, F2837xD, F2837xS, F2838x
+
+- `TI Precision Labs: ADC AC specifications <https://www.ti.com/video/5466126729001>`_
+
+- `TI Precision Labs: ADC Error sources <https://www.ti.com/video/5438477774001>`_
+
+- `TI Precision Labs: ADC Noise <https://www.ti.com/video/6114701198001>`_
+
+- `TI Precision Labs: Analog-to-digital converter (ADC) drive topologies <https://www.ti.com/video/6279972316001>`_
+
+- `TI Precision Labs: Electrical overstress on data converters <https://www.ti.com/video/6025680789001>`_
+
+- `TI Precision Labs: High-speed ADC fundamentals <https://www.ti.com/video/5527915856001>`_
+
+- `TI Precision Labs: SAR &amp; Delta-Sigma: Understanding the Difference <https://www.ti.com/video/6228191712001>`_
+
+- `TI e2e: ADC Bandwidth Clarification <https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/902366/tms320f28377d-ep-adc-bandwidth-clarification/3335570?tisearch=e2e-sitesearch&amp;keymatch=aperture%20jitter#3335570>`_
+
+- `TI e2e: ADC Calibration and Total Unadjusted Error <https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/587441/faq-tms320f28035-adc-calibration-and-total-unadjusted-error>`_
+
+- `TI e2e: ADC Reference Driver Options <https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/477506/faq-adc-reference-in-tms320f28377dzwt>`_
+
+- `TI e2e: ADC Resolution with Oversampling <https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/815285/tms320f280049-about-the-actual-adc-resolution/3017272#3017272>`_
+
+- `TI e2e: ADC configuration for interleaved mode <https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/757435/tms320f28379d-adc-configuration-for-interleaved-mode/2799102?tisearch=e2e-sitesearch&amp;keymatch=aperture%2525252520jitter#2799102>`_
+
+- `TI e2e: Simultaneous Sampling with Single ADC <https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/930245/tms320f280049-simultaneous-sampling-with-single-adc/3437033?tisearch=e2e-sitesearch&amp;keymatch=burst%2520mode#3437033>`_

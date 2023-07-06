@@ -1,0 +1,16 @@
+EQEP Related Collateral
+====================================
+
+**Foundational**
+
+- `Interfacing with Quadrature Encoders <https://www.ti.com/video/6308652805112>`_
+
+- `Real-Time Control Reference Guide <https://www.ti.com/lit/eb/slyy211/slyy211.pdf>`_
+
+**Getting Started**
+
+- `C2000™ Position Manager PTO API Reference Guide Application Report <www.ti.com/lit/SPRAC77>`_
+
+**Expert**
+
+- `CW/CCW Support on the C2000 eQEP Module Application Report <https://ti.com/lit/SPRABX2>`_

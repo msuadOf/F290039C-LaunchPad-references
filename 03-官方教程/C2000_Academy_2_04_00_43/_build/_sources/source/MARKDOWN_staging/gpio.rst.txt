@@ -1,0 +1,8 @@
+GPIO Related Collateral
+====================================
+
+**Getting Started**
+
+- `How to Maximize GPIO Usage in C2000 Devices Application Report <https://ti.com/lit/SPRACP6>`_
+
+- `[FAQ] C2000 GPIO FAQ <https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/942389/faq-c2000-gpio-faq>`_

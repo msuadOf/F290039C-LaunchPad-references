@@ -1,0 +1,12 @@
+USB Related Collateral
+====================================
+
+**Foundational**
+
+- `USB Precision Labs <https://www.ti.com/video/series/ti-precision-labs-usb.html>`_
+
+**Expert**
+
+- `High-Speed Interface Layout Guidelines Application Report <https://www.ti.com/lit/spraar7>`_
+
+- `USB Flash Programming of C2000 Microcontrollers Application Report <https://www.ti.com/lit/spraco7>`_

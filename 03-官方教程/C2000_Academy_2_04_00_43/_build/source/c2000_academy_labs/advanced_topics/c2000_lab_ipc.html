@@ -1,0 +1,1193 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Interprocessor Communication (IPC) Lab &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_academy_labs/advanced_topics/c2000_lab_ipc';</script>
+    <script src="../../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_academy_labs/advanced_topics/c2000_lab_ipc.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="System Design Lab" href="../system_control/c2000_lab_system_design.html" />
+    <link rel="prev" title="eCAP Implementation Using CLB" href="c2000_lab_clb_ecap.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="interprocessor-communication-ipc-lab">
+<h1>Interprocessor Communication (IPC) Lab<a class="headerlink" href="#interprocessor-communication-ipc-lab" title="Permalink to this heading">#</a></h1>
+<p>The objective of this lab exercise is to become familiar with the operation of
+the IPC module. We will be using the basic IPC features to send data in both
+directions between CPU1 and CPU2. We will also be using an ePWM module to
+continuously trigger conversions on an ADC module, which triggers an IPC
+interrupt at the end of the conversion. At the same time, a DAC will feed data
+into the ADC, with the help of one of the IPC interrupts. In addition to
+exploring a basic IPC example, this lab should leave readers more knowledgeable
+about the capabilities of C2000’s ePWM, DAC, and ADC modules.</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>Inter Processor Communication (IPC) module is available only on dual-core systems
+<a class="reference external" href="https://www.ti.com/lit/pdf/spruii0">TMS320F2838xD</a> and <a class="reference external" href="https://www.ti.com/lit/pdf/spruhm8">TMS320F2837xD</a></p>
+</div>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h2>
+<p>All solutions are available
+in the directory: <code class="docutils literal notranslate"><span class="pre">[C2000Ware_Install_Path]/training/device/[device_name]/</span></code>.</p>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>Like some other lab exercises, ePWM2 will be configured to provide a 50 kHz SOC
+signal to ADCA to trigger a conversion. An End-of-Conversion ISR on CPU1 will
+write each result into a data register in the C1toC2 IPC registers. An IPC
+interrupt will then be triggered on CPU2 which fetches this data and stores it
+in a circular buffer. The same ISR on CPU2 grabs a data point from a sine table
+and loads it into a data register in the C2toC1 IPC registers for transmission
+to CPU1. This triggers an interrupt on CPU1, which fetches the sine data and
+writes it into DACB. The DACB output is connected to ADCA by a jumper wire. If
+the program runs as expected, the sine table and ADC results buffer on CPU2
+should contain very similar data.</p>
+<p><img alt="IPC Data Flow" src="../../../_images/lab_data_flow_2.png" /></p>
+<p>In summary:</p>
+<ol class="arabic simple">
+<li><p>CPU1 will send ADC samples to CPU2 via the IPC registers at a rate of 50kHz
+which triggers an IPC0 ISR on CPU2.</p></li>
+<li><p>CPU2 IPC0 ISR will retrieve samples from the IPC registers and
+store them in circular buffer.</p></li>
+<li><p>CPU2 IPC0 will then send the next sinusoidal lookup table entry back to
+CPU1 via the IPC registers which triggers an IPC1 ISR on CPU1.</p></li>
+<li><p>CPU1 IPC1 ISR will then retrieve the DAC sample from the IPC register and
+load it onto the DAC.</p></li>
+<li><p>This process repeats and you should be able to view the sinusoidal
+waveform via the internal buffer AdcBuf using the plot functionality. Note
+that <code class="docutils literal notranslate"><span class="pre">AdcBuf</span></code> has a size of 256 and is of type uint16_t. The sampling rate
+is 50kHz.</p></li>
+</ol>
+<p>Note: LED1 and LED2 are being toggled by CPU1 and CPU2 in their
+respective IPC ISRs. They should be toggling at a rate of 1Hz and should have
+alternating states, i.e., if LED1 is high, then LED2 should be low, etc.</p>
+</section>
+<section id="lab-setup">
+<h2>Lab Setup<a class="headerlink" href="#lab-setup" title="Permalink to this heading">#</a></h2>
+<section id="hardware-setup">
+<h3>Hardware Setup<a class="headerlink" href="#hardware-setup" title="Permalink to this heading">#</a></h3>
+<p>You will need the following hardware for this lab:</p>
+<ul class="simple">
+<li><p>A C2000 controlCARD or LaunchPad with the supplied USB cable.</p></li>
+<li><p>Jumper cables.</p></li>
+<li><p>Oscilloscope (optional).</p></li>
+</ul>
+<p>Use the supplied USB cable to connect your C2000 board’s USB port to the
+standard USB Type-A connector in your computer. You should see some LEDs light
+up on your board. In addition to powering the board, a JTAG communication link
+is also established between the device and Code Composer Studio. Refer to
+<a class="reference internal" href="../../c2000_get_started/c2000_getstarted.html"><span class="doc std std-doc">Getting Started</span></a> module for more
+details if needed.</p>
+<p>Connect the jumper cable from the ADCINA0 pin to the DACB pin so the ADC can sample the output
+of the DAC.</p>
+<p><strong>LaunchPad</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>DACB Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>30</p></td>
+<td><p>70</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ControlCARD</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>DACB Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>9</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>9</p></td>
+<td><p>11</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="software-setup">
+<h3>Software Setup<a class="headerlink" href="#software-setup" title="Permalink to this heading">#</a></h3>
+<p>The following software will need to be installed on your computer:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/tool/CCSTUDIO-C2000">Code Composer Studio</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/tool/C2000WARE">C2000Ware</a></p></li>
+</ul>
+</section>
+</section>
+<section id="import-empty-project">
+<h2>Import Empty Project<a class="headerlink" href="#import-empty-project" title="Permalink to this heading">#</a></h2>
+<p>Our first task is to import an empty project to our Code Composer
+Studio (CCS) workspace.
+The basic instructions are as follows:</p>
+<ol class="arabic simple">
+<li><p>Open CCS and go to <strong>Project→Import CCS Projects</strong>. A new window should
+appear. Ensure that the <strong>Select search-directory</strong> option is activated.</p></li>
+<li><p>Click the <strong>Browse</strong> button and select the
+<code class="docutils literal notranslate"><span class="pre">[C20000ware_Install_dir]/training/device/[device]/empty_ipc_lab</span></code>
+directory. <br/> Note that the default Windows [C20000ware_Install_dir] is
+<code class="docutils literal notranslate"><span class="pre">C:/ti/c2000/C2000Ware_4_xx_xx_xx</span></code>.</p></li>
+<li><p>Under <strong>Discovered Projects</strong>, you should now see the
+<code class="docutils literal notranslate"><span class="pre">multicore_[board]_[device]_multi</span></code> project. Select the appropriate project for either
+the control card or the launchpad.</p></li>
+</ol>
+<p><img alt="Discovered_Projects" src="../../../_images/ipc_start.png" /></p>
+<ol class="arabic simple" start="4">
+<li><p>Click <strong>Finish</strong> to import and copy the <code class="docutils literal notranslate"><span class="pre">multicore_[board]_[device]_multi</span></code> project
+into your workspace.</p></li>
+<li><p>After the project has been imported, the project explorer window should have three new projects and
+look like below:</p></li>
+</ol>
+<p><img alt="Projects_explorer" src="../../../_images/projectExplorer_Imported.png" /></p>
+<ul class="simple">
+<li><p><b>core1.c</b>: C28x core C-source file with empty main() function, which will be compiled for CPU1</p></li>
+<li><p><b>core2.c</b>: C28x core C-source file with empty main() function, which will be compiled for CPU2</p></li>
+<li><p><b>core1.syscfg</b>: SysConfig file with settings for CPU1, opening this file will open Multicore SysConfig</p></li>
+<li><p><b>core2.syscfg</b>: SysConfig file with settings for CPU2, opening this file will open Multicore SysConfig
+<br/><br/></p></li>
+</ul>
+<ol class="arabic simple" start="6">
+<li><p>Now you may want to rename your projects, though it is not essential. Rename the project by right-clicking
+on each of the projects and selecting ‘Rename’. In the image below, we have renamed the projects
+to <code class="docutils literal notranslate"><span class="pre">ipc_lab_[core]</span></code>.</p></li>
+<li><p>To finish renaming the projects, we have to make a small change to the system.xml file. Double-click the <code class="docutils literal notranslate"><span class="pre">ipc_lab_multi</span></code>
+project, then right-click on the system.xml file, and select ‘Open With &gt; Generic Text Editor’.
+Change the text circled below to match the new names of your <code class="docutils literal notranslate"><span class="pre">core1</span></code> and <code class="docutils literal notranslate"><span class="pre">core2</span></code> projects.</p></li>
+</ol>
+<p><img alt="Rename_Projects" src="../../../_images/renameProject4.png" /></p>
+</section>
+<section id="part-1-cpu1-c28x">
+<h2>Part 1 : CPU1 (C28x)<a class="headerlink" href="#part-1-cpu1-c28x" title="Permalink to this heading">#</a></h2>
+<section id="configure-the-gpio">
+<h3>Configure the GPIO<a class="headerlink" href="#configure-the-gpio" title="Permalink to this heading">#</a></h3>
+<p>We will configure the necessary GPIO pins as shown below. Specifically, we will
+configure two of the board LEDs as an indicators.</p>
+</section>
+<section id="steps-to-add-gpio-configuration">
+<h3>Steps to add GPIO configuration:<a class="headerlink" href="#steps-to-add-gpio-configuration" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>In your project, open the <code class="docutils literal notranslate"><span class="pre">core1.syscfg</span></code> or the <code class="docutils literal notranslate"><span class="pre">core2.syscfg</span></code> file by double-clicking it.</p></li>
+<li><p>Both <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> files should open the Multicore SysConfig view</p></li>
+<li><p>Select the option at the top of the SysConfig window to switch to the CPU1 view, which is circled in the image below</p></li>
+<li><p>Click ‘+’ next to GPIO to add a GPIO SysConfig module, like shown below</p></li>
+</ul>
+<p><img alt="SYSCFG_VIEW" src="../../../_images/multicoreSysView.png" /></p>
+<ul class="simple">
+<li><p>Select GPIO numbers for your device and board from the table below.</p></li>
+</ul>
+<p><strong>LaunchPad</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>LED4 Pin</p></th>
+<th class="head"><p>LED5 Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>31</p></td>
+<td><p>34</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ControlCARD</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>LED4 Pin</p></th>
+<th class="head"><p>LED5 Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>31</p></td>
+<td><p>34</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>31</p></td>
+<td><p>34</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>The parameters should be filled like below.</p></li>
+</ul>
+<p><img alt="SYSCFG1" src="../../../_images/led4Screenshot.png" /></p>
+<ul class="simple">
+<li><p>Next click ‘+ Add’ to add another GPIO instance, and fill the parameters like below.</p></li>
+</ul>
+<p><img alt="SYSCFG1" src="../../../_images/led5Screenshot.png" /></p>
+</section>
+<section id="configure-epwm2">
+<h3>Configure ePWM2<a class="headerlink" href="#configure-epwm2" title="Permalink to this heading">#</a></h3>
+<p>In this lab, the ADC will be used to sample the output from the DAC at a rate of 50kHz. The below SysConfig settings enable ePWM2 to trigger a SOC on
+the ADC at a rate of 50kHz. Notice that ePWM2 is setup to operate in up count mode, hence, we have</p>
+<p><span class="math notranslate nohighlight">\(\text{Time Base Period}=\frac{f_{tbclk}}{f_{pwm}}-1=\frac{100* 10^6}{50000}-1=1999.\)</span></p>
+<ul class="simple">
+<li><p>To implement these specifications with SysConfig, first click the ‘+’ by EPWM in the CPU1 SysConfig screen to open an instance of the EPWM module.</p></li>
+</ul>
+<p><img alt="epwm_init" src="../../../_images/epwmScreenshot.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘EPWM Time Base’ dropdown menu, and apply the changes circled below.</p></li>
+</ul>
+<p><img alt="epwm_init2" src="../../../_images/epwmScreenshot2.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘EPWM Event-Trigger’ dropdown menu, and apply the changes circled below.</p></li>
+</ul>
+<p><img alt="epwm_init3" src="../../../_images/epwmScreenshot3.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘PinMux Peripheral and Pin Configuration’ dropdown menu, and apply the changes circled below.</p></li>
+</ul>
+<p><img alt="epwm_init4" src="../../../_images/epwmScreenshot4.png" /></p>
+<p>This concludes the configuration of the ePWM module.</p>
+<div class="admonition-a-more-detailed-explanation-of-the-epwm-configuration admonition">
+<p class="admonition-title">A more detailed explanation of the ePWM configuration</p>
+<p>The configuration of ePWM2 above is identical to that of the
+lab in <a class="reference internal" href="../control_peripherals/c2000_lab_pwm.html"><span class="doc std std-doc">ePWM Lab</span></a>,
+so you should see that lab for a more detailed explanation.</p>
+</div>
+</section>
+<section id="configure-the-adc">
+<h3>Configure the ADC<a class="headerlink" href="#configure-the-adc" title="Permalink to this heading">#</a></h3>
+<p>In the previous section, we explained that ePWM2 would be triggering a SOC
+event on the ADC. In this section, we will provide the code to configure the
+ADC. More details about the configuration of the ADC can be found in
+<a class="reference internal" href="../../c2000_analog_subsystem/c2000_analog_to_digital_converter.html"><span class="doc std std-doc">Analog-to-Digital Converter (ADC)</span></a>.
+However, notice that we have setup a SOC to be triggered by ePWM2 and that we
+have setup the ADC to interrupt at the end of a conversion. This interrupt will
+be utilized by CPU1 so it knows when to load new samples from the ADC into the IPC data registers for CPU2.
+The ADC is also setup in continuous mode so that the ADC register always contains the most recent sample.</p>
+<ul class="simple">
+<li><p>Add ADC by clicking the ‘+’ by ADC in the CPU1 SysConfig screen. Make sure to
+make the changes circled below. Notice that the F2837xd and F2838x devices
+have 200MHz SYSCLK frequencies.</p></li>
+</ul>
+<p><img alt="ADC1" src="../../../_images/adcStartScreenshot.png" /></p>
+<br/>
+* Expand the 'ADC INT Configurations' dropdown menu, make the changes circled below. 
+<p><img alt="ADC2" src="../../../_images/adcScreenshot2.png" /></p>
+</section>
+<section id="configure-the-dac">
+<h3>Configure the DAC<a class="headerlink" href="#configure-the-dac" title="Permalink to this heading">#</a></h3>
+<p>Now we will configure DACB so that it can output sine data for ADCA to sample.
+New data to convert will be loaded for DACB by the IPC interrupt ipc1_ISR.</p>
+<ul class="simple">
+<li><p>Add DAC module by clicking the ‘+’ by DAC in the CPU1 SysConfig screen. Make
+sure to make the changes circled below.</p></li>
+<li><p>These settings should cause a warning message, which we will resolve later
+with our CPU2 IPC SysConfig settings</p></li>
+</ul>
+<p><img alt="DAC1" src="../../../_images/dacScreenshot.png" /></p>
+</section>
+<section id="configure-the-cmd-tool-module">
+<h3>Configure the CMD Tool module<a class="headerlink" href="#configure-the-cmd-tool-module" title="Permalink to this heading">#</a></h3>
+<p>Now we will configure the CMD Tool module on CPU1 so that the device memory locations are provided to CCS.
+If you are using a project from the empty_ipc_lab directory, your project will not have any linker <code class="docutils literal notranslate"><span class="pre">.cmd</span></code> files.
+Otherwise, you will need to delete the existing linker <code class="docutils literal notranslate"><span class="pre">.cmd</span></code> files like shown below.</p>
+<p><img alt="CMD_delete" src="../../../_images/deleteCMD.png" /></p>
+<p>Now we will use the SysConfig CMD Tool to generate the linker <code class="docutils literal notranslate"><span class="pre">.cmd</span></code> files.</p>
+<ul class="simple">
+<li><p>Add CMD Tool module by clicking the ‘+’ by CMD in the CPU1 SysConfig screen
+(you will likely need to scroll down to see CMD). Make the change circled
+below for your project to use the generated linker <code class="docutils literal notranslate"><span class="pre">.cmd</span></code> files.</p></li>
+</ul>
+<p><img alt="CMD_activate" src="../../../_images/activateCMD.png" /></p>
+<ul class="simple">
+<li><p>Select the type of memory you want to use for loading your program onto the
+device. The options are circled below. You should briefly see a message
+saying “Running external process” after clicking an option.</p></li>
+</ul>
+<p><img alt="CMD_selectConfig" src="../../../_images/selectConfigCMD.png" /></p>
+</section>
+<section id="configure-the-ipc-module">
+<h3>Configure the IPC module<a class="headerlink" href="#configure-the-ipc-module" title="Permalink to this heading">#</a></h3>
+<p>Now we will configure the IPC module on CPU1 so that CPU2 can trigger the IPC interrupt ipc1_ISR on CPU1.
+We will also define a new name for IPC_FLAG31 to clarify the function of the flag.<br />
+For now, SysConfig will show an error, since the IPC module is needed on both CPUs. We will fix this error in a later section.</p>
+<ul class="simple">
+<li><p>Add IPC module by clicking the ‘+’ by IPC in the CPU1 SysConfig screen. Make sure to make the changes circled below.</p></li>
+</ul>
+<p><img alt="IPC1" src="../../../_images/ipcScreenshot_cpu1.png" /></p>
+</section>
+<section id="define-global-macros-and-variables">
+<h3>Define global macros and variables<a class="headerlink" href="#define-global-macros-and-variables" title="Permalink to this heading">#</a></h3>
+<p>First, we will define some necessary macros and global variables. Click on the
+<code class="docutils literal notranslate"><span class="pre">.c</span></code> file in your project. In order to use driverlib and SysConfig, make sure
+that you have included <code class="docutils literal notranslate"><span class="pre">driverlib.h</span></code>, <code class="docutils literal notranslate"><span class="pre">device.h</span></code>, <code class="docutils literal notranslate"><span class="pre">board.h</span></code> and <code class="docutils literal notranslate"><span class="pre">ipc.h</span></code>. The
+files <code class="docutils literal notranslate"><span class="pre">driverlib.h</span></code> and <code class="docutils literal notranslate"><span class="pre">device.h</span></code> should be included by default.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ipc.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;board.h&quot;</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">LedCtr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">           </span><span class="c1">// Counter to slow down LED toggling in ipc1_ISR.</span>
+<span class="c1">// declaration of ISR functions</span>
+<span class="n">interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">adcA1ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="n">interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ipc1_ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="define-main">
+<h3>Define main()<a class="headerlink" href="#define-main" title="Permalink to this heading">#</a></h3>
+<p>Next, we will populate <code class="docutils literal notranslate"><span class="pre">main()</span></code> as shown below.
+That being said, we will still need to know the system clock frequency in order
+to configure our PWM waveform frequency. The system clock frequency value is
+defined via the macro <code class="docutils literal notranslate"><span class="pre">DEVICE_SYSCLK_FREQ</span></code> in <code class="docutils literal notranslate"><span class="pre">[projectroot]/device/device.h</span></code>. Observe that
+the main function only handles initialization routines. Most of the activity in
+this lab lies in the peripherals themselves and their interrupt service
+routines.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Configure system clock and PLL, enable peripherals, and configure</span>
+<span class="w">    </span><span class="c1">// flash if used.</span>
+<span class="w">    </span><span class="n">Device_init</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Initialize the PIE module and vector table.</span>
+<span class="w">    </span><span class="n">Interrupt_initModule</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Interrupt_initVectorTable</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Initialize settings from SysConfig</span>
+<span class="w">    </span><span class="n">Board_init</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Short delay to let the DAC and other peripherals start up.</span>
+<span class="w">    </span><span class="n">DEVICE_DELAY_US</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Clear any IPC flags if set already</span>
+<span class="w">    </span><span class="n">IPC_clearFlagLtoR</span><span class="p">(</span><span class="n">IPC_CPU1_L_CPU2_R</span><span class="p">,</span><span class="w"> </span><span class="n">IPC_FLAG_ALL</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Synchronize both the cores.</span>
+<span class="w">    </span><span class="n">IPC_sync</span><span class="p">(</span><span class="n">IPC_CPU1_L_CPU2_R</span><span class="p">,</span><span class="w"> </span><span class="n">IPC_FLAG17</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Enable global interrupts.</span>
+<span class="w">    </span><span class="n">EINT</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ERTM</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Do nothing.</span>
+<span class="w">        </span><span class="n">NOP</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="define-the-adc-interrupt-service-routine">
+<h3>Define the ADC interrupt service routine<a class="headerlink" href="#define-the-adc-interrupt-service-routine" title="Permalink to this heading">#</a></h3>
+<p>In this section, we will define the ADC interrupt service routine.
+This interrupt service routine will read the result and write it into the data register
+of the IPC module. It uses IPC DriverLib API to write the result to the data register.
+Then an IPC interrupt will be triggered on CPU2.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">adcA1ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">adcResult</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Clear interrupt flags.</span>
+<span class="w">    </span><span class="n">Interrupt_clearACKGroup</span><span class="p">(</span><span class="n">INTERRUPT_ACK_GROUP1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ADC_clearInterruptStatus</span><span class="p">(</span><span class="n">ADCA_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">ADC_INT_NUMBER1</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Read the sample from the ADC.</span>
+<span class="w">    </span><span class="n">adcResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">ADC_readResult</span><span class="p">(</span><span class="n">ADCARESULT_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">ADC_SOC_NUMBER0</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Send it over to CPU2.</span>
+<span class="w">    </span><span class="n">IPC_sendCommand</span><span class="p">(</span><span class="n">IPC_CPU1_L_CPU2_R</span><span class="p">,</span><span class="w"> </span><span class="n">IPC_FLAG0</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">adcResult</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="define-the-ipc-interrupt-service-routine">
+<h3>Define the IPC interrupt service routine<a class="headerlink" href="#define-the-ipc-interrupt-service-routine" title="Permalink to this heading">#</a></h3>
+<p>The interrupt service routine of the IPC reads the data from the IPC data register using
+the IPC driverlib API. The read data is then loaded into the shadow register of the DAC-B.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ipc1_ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cmd</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Clear the interrupt flags.</span>
+<span class="w">    </span><span class="n">Interrupt_clearACKGroup</span><span class="p">(</span><span class="n">INTERRUPT_ACK_GROUP1</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Get the next DAC sample from CPU2.</span>
+<span class="w">    </span><span class="n">IPC_readCommand</span><span class="p">(</span><span class="n">IPC_CPU1_L_CPU2_R</span><span class="p">,</span><span class="w"> </span><span class="n">IPC_FLAG1</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">cmd</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Acknowledge IPC1 flag from remote.</span>
+<span class="w">    </span><span class="n">IPC_ackFlagRtoL</span><span class="p">(</span><span class="n">IPC_CPU1_L_CPU2_R</span><span class="p">,</span><span class="w"> </span><span class="n">IPC_FLAG1</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Load the new sample on the DAC.</span>
+<span class="w">    </span><span class="n">DAC_setShadowValue</span><span class="p">(</span><span class="n">DACB_BASE</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">uint16_t</span><span class="p">)</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Toggle LED1 at a rate of 1Hz.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">LedCtr1</span><span class="o">++</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="mi">50000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GPIO_togglePin</span><span class="p">(</span><span class="n">DEVICE_GPIO_PIN_LED1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">LedCtr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w"> </span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="part-2-cpu2-c28x">
+<h2>Part 2 : CPU2 (C28x)<a class="headerlink" href="#part-2-cpu2-c28x" title="Permalink to this heading">#</a></h2>
+<section id="steps-to-configure-the-cmd-tool-module">
+<h3>Steps to Configure the CMD Tool module<a class="headerlink" href="#steps-to-configure-the-cmd-tool-module" title="Permalink to this heading">#</a></h3>
+<p>Now we will configure the CMD Tool module on CPU1 so that the device memory locations are provided to CCS.
+If you are using a project from the empty_ipc_lab directory, your project will not have any linker <code class="docutils literal notranslate"><span class="pre">.cmd</span></code> files.
+Otherwise, you will need to delete the existing linker <code class="docutils literal notranslate"><span class="pre">.cmd</span></code> files like shown below.</p>
+<p><img alt="CMD_delete2" src="../../../_images/deleteCMD.png" /></p>
+<p>Now we will use the SysConfig CMD Tool to generate the linker <code class="docutils literal notranslate"><span class="pre">.cmd</span></code> files for CPU2.</p>
+<ul class="simple">
+<li><p>Add CMD Tool module by clicking the ‘+’ by CMD in the CPU1 SysConfig screen
+(you will likely need to scroll down to see CMD). Make the change circled
+below for your project to use the generated linker <code class="docutils literal notranslate"><span class="pre">.cmd</span></code> files.</p></li>
+</ul>
+<p><img alt="CMD_activate2" src="../../../_images/activateCMD.png" /></p>
+<ul class="simple">
+<li><p>Select the type of memory you want to use for loading your program onto the
+device. The options are circled below. You should briefly see a message
+saying “Running external process” after clicking an option.</p></li>
+</ul>
+<p><img alt="CMD_selectConfig2" src="../../../_images/selectConfigCMD.png" /></p>
+</section>
+<section id="steps-to-configure-ipc-module">
+<h3>Steps to configure IPC module:<a class="headerlink" href="#steps-to-configure-ipc-module" title="Permalink to this heading">#</a></h3>
+<p>Now we will configure the IPC module on CPU2 so that CPU1 can trigger the IPC
+interrupt ipc0_ISR on CPU2. We will also define a new name for IPC_FLAG31 to
+clarify the function of the flag.</p>
+<ul class="simple">
+<li><p>In your project, open the <code class="docutils literal notranslate"><span class="pre">core1.syscfg</span></code> or the <code class="docutils literal notranslate"><span class="pre">core2.syscfg</span></code> file by double-clicking it.</p></li>
+<li><p>Both <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> files should open the Multicore SysConfig view</p></li>
+<li><p>Select the CPU2 option at the top of the SysConfig window to switch to CPU2 view</p></li>
+<li><p>Click ‘+’ next to IPC to add a IPC SysConfig module</p></li>
+<li><p>Make sure to make the changes circled below.</p></li>
+</ul>
+<p><img alt="ipc_CPU2_0" src="../../../_images/ipcCPU2Screenshot.png" /></p>
+</section>
+<section id="define-macros-and-variables">
+<h3>Define macros and variables<a class="headerlink" href="#define-macros-and-variables" title="Permalink to this heading">#</a></h3>
+<p>First, we will define some necessary macros and global variables. In order to
+use driverlib, make sure that you have included <code class="docutils literal notranslate"><span class="pre">driverlib.h</span></code>, <code class="docutils literal notranslate"><span class="pre">device.h</span></code>, <code class="docutils literal notranslate"><span class="pre">board.h</span></code> and <code class="docutils literal notranslate"><span class="pre">ipc.h</span></code>.</p>
+<p>There are two main global variables:</p>
+<ul class="simple">
+<li><p>SinTable -  The SinTable consists of fix-point 16-bit samples.</p></li>
+<li><p>AdcBuf - It is circular buffer which is filled by IPC data received from CPU1.
+AdcBuf is used to plot the graph.</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ipc.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;board.h&quot;</span>
+<span class="cp">#define DAC_OUTPUT_BITS 11                  </span><span class="c1">// Bits of output for the DAC.</span>
+<span class="cp">#define BUF_BITS 8                          </span><span class="c1">// Buffer bits.</span>
+<span class="cp">#define BUF_LEN (1 &amp;lt;&amp;lt; BUF_BITS)             </span><span class="c1">// Buffer length.</span>
+<span class="cp">#define BUF_MASK ((uint16_t)(BUF_LEN - 1))  </span><span class="c1">// Buffer index mask.</span>
+<span class="cp">#define LUT_BITS 6                          </span><span class="c1">// Sin table bits.</span>
+<span class="cp">#define LUT_LEN (1 &amp;lt;&amp;lt; LUT_BITS)             </span><span class="c1">// Sin table length.</span>
+<span class="cp">#define LUT_MASK ((uint16_t)(LUT_LEN - 1))  </span><span class="c1">// Sin table index mask.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">AdcBuf</span><span class="p">[</span><span class="n">BUF_LEN</span><span class="p">];</span><span class="w">                   </span><span class="c1">// ADC buffer to store samples.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">AdcBufIdx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                     </span><span class="c1">// ADC buffer index.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">SinPhase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                      </span><span class="c1">// Sin table index, i.e., phase.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">LedCtr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                       </span><span class="c1">// Counter to slow down the toggling of the LED.</span>
+<span class="c1">// Fixed Point Sin Table</span>
+<span class="c1">// 16-bits of amplitude resolution</span>
+<span class="c1">// 6-bits of phase resolution</span>
+<span class="c1">// phi = (0:2^LUT_BITS-1)*2pi</span>
+<span class="c1">// SinTable = (sin(phi) + 1)*(2^16 - 1)/2</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">SinTable</span><span class="p">[</span><span class="n">LUT_LEN</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="mh">0x8000</span><span class="p">,</span><span class="mh">0x8c8b</span><span class="p">,</span><span class="mh">0x98f8</span><span class="p">,</span><span class="mh">0xa527</span><span class="p">,</span><span class="mh">0xb0fb</span><span class="p">,</span><span class="mh">0xbc56</span><span class="p">,</span><span class="mh">0xc71c</span><span class="p">,</span><span class="mh">0xd133</span><span class="p">,</span>
+<span class="w">    </span><span class="mh">0xda82</span><span class="p">,</span><span class="mh">0xe2f1</span><span class="p">,</span><span class="mh">0xea6d</span><span class="p">,</span><span class="mh">0xf0e2</span><span class="p">,</span><span class="mh">0xf641</span><span class="p">,</span><span class="mh">0xfa7c</span><span class="p">,</span><span class="mh">0xfd89</span><span class="p">,</span><span class="mh">0xff61</span><span class="p">,</span>
+<span class="w">    </span><span class="mh">0xffff</span><span class="p">,</span><span class="mh">0xff61</span><span class="p">,</span><span class="mh">0xfd89</span><span class="p">,</span><span class="mh">0xfa7c</span><span class="p">,</span><span class="mh">0xf641</span><span class="p">,</span><span class="mh">0xf0e2</span><span class="p">,</span><span class="mh">0xea6d</span><span class="p">,</span><span class="mh">0xe2f1</span><span class="p">,</span>
+<span class="w">    </span><span class="mh">0xda82</span><span class="p">,</span><span class="mh">0xd133</span><span class="p">,</span><span class="mh">0xc71c</span><span class="p">,</span><span class="mh">0xbc56</span><span class="p">,</span><span class="mh">0xb0fb</span><span class="p">,</span><span class="mh">0xa527</span><span class="p">,</span><span class="mh">0x98f8</span><span class="p">,</span><span class="mh">0x8c8b</span><span class="p">,</span>
+<span class="w">    </span><span class="mh">0x8000</span><span class="p">,</span><span class="mh">0x7374</span><span class="p">,</span><span class="mh">0x6707</span><span class="p">,</span><span class="mh">0x5ad8</span><span class="p">,</span><span class="mh">0x4f04</span><span class="p">,</span><span class="mh">0x43a9</span><span class="p">,</span><span class="mh">0x38e3</span><span class="p">,</span><span class="mh">0x2ecc</span><span class="p">,</span>
+<span class="w">    </span><span class="mh">0x257d</span><span class="p">,</span><span class="mh">0x1d0e</span><span class="p">,</span><span class="mh">0x1592</span><span class="p">,</span><span class="mh">0x0f1d</span><span class="p">,</span><span class="mh">0x09be</span><span class="p">,</span><span class="mh">0x0583</span><span class="p">,</span><span class="mh">0x0276</span><span class="p">,</span><span class="mh">0x009e</span><span class="p">,</span>
+<span class="w">    </span><span class="mh">0x0000</span><span class="p">,</span><span class="mh">0x009e</span><span class="p">,</span><span class="mh">0x0276</span><span class="p">,</span><span class="mh">0x0583</span><span class="p">,</span><span class="mh">0x09be</span><span class="p">,</span><span class="mh">0x0f1d</span><span class="p">,</span><span class="mh">0x1592</span><span class="p">,</span><span class="mh">0x1d0e</span><span class="p">,</span>
+<span class="w">    </span><span class="mh">0x257d</span><span class="p">,</span><span class="mh">0x2ecc</span><span class="p">,</span><span class="mh">0x38e3</span><span class="p">,</span><span class="mh">0x43a9</span><span class="p">,</span><span class="mh">0x4f04</span><span class="p">,</span><span class="mh">0x5ad8</span><span class="p">,</span><span class="mh">0x6707</span><span class="p">,</span><span class="mh">0x7374</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>Define the IPC interrupt service routine<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>The interrupt service routine of the IPC reads the data from the IPC data register using
+the IPC driverlib API. The read data is then stored in the AdcBuf circular buffer . Then
+it reads the next data from the SinTable and writes it to the IPC data register for CPU1.
+Again, we will use the driverlib API to write to the IPC register.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ipc0_ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cmd</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Clear interrupt flags.</span>
+<span class="w">    </span><span class="n">Interrupt_clearACKGroup</span><span class="p">(</span><span class="n">INTERRUPT_ACK_GROUP1</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Read the data from the IPC registers.</span>
+<span class="w">    </span><span class="n">IPC_readCommand</span><span class="p">(</span><span class="n">IPC_CPU2_L_CPU1_R</span><span class="p">,</span><span class="w"> </span><span class="n">IPC_FLAG0</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">cmd</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Acknowledge IPC1 flag from remote.</span>
+<span class="w">    </span><span class="n">IPC_ackFlagRtoL</span><span class="p">(</span><span class="n">IPC_CPU2_L_CPU1_R</span><span class="p">,</span><span class="w"> </span><span class="n">IPC_FLAG0</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Get the ADC sample from CPU1 and store it in a circular buffer.</span>
+<span class="w">    </span><span class="n">AdcBuf</span><span class="p">[</span><span class="n">AdcBufIdx</span><span class="o">++</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="w"> </span><span class="n">BUF_MASK</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint16_t</span><span class="p">)</span><span class="n">data</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Send next DAC sample from the sinusoidal table to CPU1.</span>
+<span class="w">    </span><span class="n">IPC_sendCommand</span><span class="p">(</span><span class="n">IPC_CPU2_L_CPU1_R</span><span class="p">,</span><span class="w"> </span><span class="n">IPC_FLAG1</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)(</span><span class="n">SinTable</span><span class="p">[</span><span class="n">SinPhase</span><span class="o">++</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="w"> </span><span class="n">LUT_MASK</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="p">(</span><span class="mi">16</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">DAC_OUTPUT_BITS</span><span class="p">)));</span>
+<span class="w">    </span><span class="c1">// Toggle LED2 at a rate of 1Hz.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">LedCtr2</span><span class="o">++</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="mi">50000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GPIO_togglePin</span><span class="p">(</span><span class="n">DEVICE_GPIO_PIN_LED2</span><span class="p">);</span>
+<span class="w">        </span><span class="n">LedCtr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="define-main-function">
+<h3>Define main() function<a class="headerlink" href="#define-main-function" title="Permalink to this heading">#</a></h3>
+<p>Next, we will populate <code class="docutils literal notranslate"><span class="pre">main()</span></code> as shown below.</p>
+<p>Besides system initialization, we will register IPC interrupt service routine for
+IPC flag0.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Configure system clock and PLL, enable peripherals, and configure</span>
+<span class="w">    </span><span class="c1">// flash if used.</span>
+<span class="w">    </span><span class="n">Device_init</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Initialize the PIE module and vector table.</span>
+<span class="w">    </span><span class="n">Interrupt_initModule</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Interrupt_initVectorTable</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Initialize settings from SysConfig</span>
+<span class="w">    </span><span class="n">Board_init</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Clear any IPC flags if set already</span>
+<span class="w">    </span><span class="n">IPC_clearFlagLtoR</span><span class="p">(</span><span class="n">IPC_CPU2_L_CPU1_R</span><span class="p">,</span><span class="w"> </span><span class="n">IPC_FLAG_ALL</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Enable IPC0 interrupt.</span>
+<span class="w">    </span><span class="n">IPC_registerInterrupt</span><span class="p">(</span><span class="n">IPC_CPU2_L_CPU1_R</span><span class="p">,</span><span class="w"> </span><span class="n">IPC_INT0</span><span class="p">,</span><span class="w"> </span><span class="n">ipc0_ISR</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Make sure that LED2 is set high to complement LED1.</span>
+<span class="w">    </span><span class="n">GPIO_writePin</span><span class="p">(</span><span class="n">DEVICE_GPIO_PIN_LED2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Enable global interrupts.</span>
+<span class="w">    </span><span class="n">EINT</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Enable real-time debug.</span>
+<span class="w">    </span><span class="n">ERTM</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Synchronize both the cores.</span>
+<span class="w">    </span><span class="n">IPC_sync</span><span class="p">(</span><span class="n">IPC_CPU2_L_CPU1_R</span><span class="p">,</span><span class="w"> </span><span class="n">IPC_FLAG17</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Do nothing.</span>
+<span class="w">        </span><span class="n">NOP</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now save the files and you are ready to build the project.</p>
+</section>
+<section id="jumper-pin-connection">
+<h3>Jumper Pin Connection<a class="headerlink" href="#jumper-pin-connection" title="Permalink to this heading">#</a></h3>
+<p>Connect the jumper cable from the ADCINA0 pin to the DACB pin so the ADC can sample the output
+of the DAC.</p>
+<p><strong>LaunchPad</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>DACB Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>30</p></td>
+<td><p>70</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ControlCARD</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>DACB Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>9</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>9</p></td>
+<td><p>11</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="build-and-load-the-project">
+<h2>Build and Load the Project<a class="headerlink" href="#build-and-load-the-project" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In the Project Explorer window click on the <code class="docutils literal notranslate"><span class="pre">[your_project_name]_multi</span></code> project to set it active. Then click
+the “Build” button and watch the tools run in the “Console” window. This will build all of the associated projects.
+Check for any errors in the “Problems” window.</p></li>
+<li><p>Again, in the Project Explorer window click on the <code class="docutils literal notranslate"><span class="pre">[your_project_name]_core1</span></code> project to set it active. Click
+on the “Debug” button (green bug). A Launching Debug Session window will open. Select
+only CPU1 to load the program on, and then click OK. The “CCS Debug” perspective view
+should open, then CPU1 will connect to the target and the program will load automatically.</p></li>
+<li><p>Next, we need to connect to and load the program on CPU2. Right-click at the line <code class="docutils literal notranslate"><span class="pre">Texas</span> <span class="pre">Instruments</span> <span class="pre">XDS100v2</span> <span class="pre">USB</span> <span class="pre">Debug</span> <span class="pre">Probe_0/C28xx_CPU2</span></code> and select <code class="docutils literal notranslate"><span class="pre">Connect</span> <span class="pre">Target</span></code>.</p></li>
+<li><p>With the line <code class="docutils literal notranslate"><span class="pre">Texas</span> <span class="pre">Instruments</span> <span class="pre">XDS100v2</span> <span class="pre">USB</span> <span class="pre">Debug</span> <span class="pre">Probe_0/C28xx_CPU2</span></code> still
+highlighted, load the program: ‘Run &gt; Load &gt; Load Program…’
+Browse to the file: <code class="docutils literal notranslate"><span class="pre">[project]/CPU2_RAM/[your_project_name]_core2.out</span></code> and select OK to load the program.</p></li>
+<li><p>Again, with the line <code class="docutils literal notranslate"><span class="pre">Texas</span> <span class="pre">Instruments</span> <span class="pre">XDS100v2</span> <span class="pre">USB</span> <span class="pre">Debug</span> <span class="pre">Probe_0/C28xx_CPU2</span></code> still
+highlighted, set the bootloader mode using the menu bar by clicking:
+‘Scripts &gt; EMU Boot Mode Select &gt; EMU_BOOT_SARAM’.
+CPU1 bootloader mode was already set in the previous lab exercise. If the device has been
+power cycled since the last lab exercise, be sure to configure the boot mode to
+EMU_BOOT_SARAM using the Scripts menu for both CPU1 and CPU2.</p></li>
+</ul>
+</section>
+<section id="run-the-code">
+<h2>Run the Code<a class="headerlink" href="#run-the-code" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In the Debug window, click on the line <code class="docutils literal notranslate"><span class="pre">Texas</span> <span class="pre">Instruments</span> <span class="pre">XDS100v2</span> <span class="pre">USB</span> <span class="pre">Debug</span> <span class="pre">Probe_0/C28xx_CPU1</span></code>. Run the code on CPU1 by clicking the green “Resume”
+button. At this point CPU1 is waiting for CPU2 to be ready. In the Debug
+window, click on the line <code class="docutils literal notranslate"><span class="pre">Texas</span> <span class="pre">Instruments</span> <span class="pre">XDS100v2</span> <span class="pre">USB</span> <span class="pre">Debug</span> <span class="pre">Probe_0/C28xx_CPU2</span></code>. As before, run the code on CPU2 by clicking
+the “Resume” button. Using the IPC, CPU2 communicates to CPU1 that it is
+now ready. LED D10 connected to CPU1 on the LaunchPad should be blinking at
+a period of approximately 1 second. Note that LED D9 connected to CPU2 will
+not be used in this lab exercise.</p></li>
+<li><p>In the Debug window select CPU1. Halt the CPU1 code after a few seconds by
+clicking on the “Suspend” button.</p></li>
+<li><p>Then in the Debug window select CPU2. Halt the CPU2 code by using the same
+procedure.</p></li>
+</ul>
+<section id="view-the-circular-buffer-adcbuf">
+<h3>View the Circular Buffer (AdcBuf)<a class="headerlink" href="#view-the-circular-buffer-adcbuf" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Open and set up a graph to plot a 256-point window of the ADC results buffer. Click:
+<strong>Tools→Graph→Single Time</strong> and set the following values:</p></li>
+</ul>
+<div class="admonition-important admonition">
+<p class="admonition-title">Important</p>
+<p>Note: If you do not see CCS menu <strong>Tools → Graph</strong>, please refer to
+<a class="reference internal" href="../../c2000_get_started/c2000_getstarted.html"><span class="doc std std-doc">Getting Started (Setting CCS for graph)</span></a>
+to see the instruction on how to enable CCS graphing tool in your perspective.</p>
+</div>
+<p><img alt="IPC Graph Option" src="../../../_images/lab_ipc_graph.png" /></p>
+<ul class="simple">
+<li><p>Select OK to save the graph options.</p></li>
+<li><p>If the IPC communications are working, the ADC buffer on CPU2 should contain the
+sine data transmitted from the look-up table. The graph view should look like:</p></li>
+</ul>
+<p><img alt="IPC Graph Plot" src="../../../_images/lab_ipc_graph_plot.png" /></p>
+<ul class="simple">
+<li><p>We will now run the code in real-time emulation mode. On the graph window toolbar, left-click on <code class="docutils literal notranslate"><span class="pre">Enable</span> <span class="pre">Continuous</span>&#160;&#160; <span class="pre">Refresh</span></code> (the yellow icon with the arrows rotating in a circle over a pause sign).
+This will allow the graph to continuously refresh in real-time while the program is
+running.</p></li>
+</ul>
+</section>
+</section>
+<section id="ipc-communication-between-c28x-and-cm-core">
+<h2>IPC communication between C28x and CM Core<a class="headerlink" href="#ipc-communication-between-c28x-and-cm-core" title="Permalink to this heading">#</a></h2>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p><a class="reference external" href="https://www.ti.com/lit/pdf/spruii0">TMS320F2838xD</a> also has Connectivity Manager (CM)
+subsystem. The CM subsystem is based on the industry-standard 32-bit Arm® Cortex®-M4 CPU
+and features a wide variety of communication peripherals, including EtherCAT, Ethernet,
+USB, MCAN (CAN-FD), DCAN, UART, SSI, I2C, and so on. The IPC communication between C28x and CM core
+functions in a similar way as IPC communication between CPU1 and CPU2 as illustrated above.
+All IPC features are independent of each other, and have dedicated IPC MSGRAM and IPC flags.
+Please refer to the C2000Ware DriverLib example if you need working example for IPC communication
+between C28x and CM core. The example can be found at the following location:
+<code class="docutils literal notranslate"><span class="pre">C:/ti/c2000/C2000Ware_X_XX_XX_XX/driverlib/f2838x/examples/c28x_cm/ipc</span></code></p>
+</div>
+</section>
+<section id="full-solution">
+<h2>Full Solution<a class="headerlink" href="#full-solution" title="Permalink to this heading">#</a></h2>
+<p>The full solution to this lab exercise is included as part of the C2000Ware
+SDK. Import the project from
+<code class="docutils literal notranslate"><span class="pre">[C2000Ware_Install_Path]/training/device/[device_name]/advance_topics/lab_ipc</span></code>.</p>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="c2000_lab_clb_ecap.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">eCAP Implementation Using CLB</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="../system_control/c2000_lab_system_design.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">System Design Lab</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solution">
+   Solution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lab-setup">
+   Lab Setup
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hardware-setup">
+     Hardware Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#software-setup">
+     Software Setup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-empty-project">
+   Import Empty Project
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-1-cpu1-c28x">
+   Part 1 : CPU1 (C28x)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configure-the-gpio">
+     Configure the GPIO
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#steps-to-add-gpio-configuration">
+     Steps to add GPIO configuration:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configure-epwm2">
+     Configure ePWM2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configure-the-adc">
+     Configure the ADC
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configure-the-dac">
+     Configure the DAC
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configure-the-cmd-tool-module">
+     Configure the CMD Tool module
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configure-the-ipc-module">
+     Configure the IPC module
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-global-macros-and-variables">
+     Define global macros and variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-main">
+     Define main()
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-adc-interrupt-service-routine">
+     Define the ADC interrupt service routine
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-the-ipc-interrupt-service-routine">
+     Define the IPC interrupt service routine
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-2-cpu2-c28x">
+   Part 2 : CPU2 (C28x)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#steps-to-configure-the-cmd-tool-module">
+     Steps to Configure the CMD Tool module
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#steps-to-configure-ipc-module">
+     Steps to configure IPC module:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-macros-and-variables">
+     Define macros and variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Define the IPC interrupt service routine
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-main-function">
+     Define main() function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jumper-pin-connection">
+     Jumper Pin Connection
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-and-load-the-project">
+   Build and Load the Project
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-the-code">
+   Run the Code
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#view-the-circular-buffer-adcbuf">
+     View the Circular Buffer (AdcBuf)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ipc-communication-between-c28x-and-cm-core">
+   IPC communication between C28x and CM Core
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-solution">
+   Full Solution
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

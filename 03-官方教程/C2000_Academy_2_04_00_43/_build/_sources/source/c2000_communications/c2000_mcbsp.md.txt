@@ -1,0 +1,98 @@
+# Multichannel Buffered Serial Port (McBSP)
+
+The McBSP provides a high-speed direct interface to CODECs, analog interface
+chips (AICs), and other serially connected A/D and D/A devices. It has
+double-buffered transmission and triple buffered reception for supporting
+continuous data streams. There are 128 channels for transmission and reception,
+data size selections of 8, 12, 16, 20, 24, and 32 bits.
+
+The McBSP module can also be operated in SPI mode and used as another
+SPI interface.
+
+```{admonition} McBSP Module
+Not all C2000 devices have a McBSP module. Refer to the 
+<i>[Peripheral Reference Guide](https://www.ti.com/lit/spru566)</i>
+for a list of supported modules on your device.
+```
+
+## McBSP Block Diagram
+
+The McBSP module consists of several signal lines that are used to
+control the data transfer between the C2000 device and the external
+device. 
+
+1. **MCLKX (Transmit Clock)-** The clock signal generated
+by the C2000 device that is used to synchronize the data
+transmission from the C2000 device to the external device
+
+2. **MSFX (Transmit Frame Sync)-** Indicates the start
+and the end of a data frame during transmission from the C2000
+device to the external device.
+
+3. **MDX (Transmit Data)-** Data signal tranmitted from 
+the C2000 device to the external device.
+
+4. **MCKR (Receive Clock)-** Clock signal geneated by the
+external device that is used to synchronize the data transmission
+from the external device to the C2000 device.
+
+5. **MFSR (Receive Frame Sync)-** Indicates the start and end of a 
+data fram during tranmission from the extneral device to the 
+C2000 device.
+
+6. **MDR (Receive Data)-** Data signal received from the external
+device by the C2000 device.
+
+![McBSP Block Diagram](images/mcbsp_block_diagram.png)
+
+## Definition: Bit, Word, and Frame
+
+Phrase        | Description   
+--------------|----------------------------
+Bit           | One data bit per serial clock period
+Word/channel  | Contains number of bits (8,12,16,20,24,32)
+Frame         | Contains one or multiple words (1-128 words per frame)
+
+![McBSP Definitions 1](images/mcbsp_word_bit.png)
+
+![McBSP Definitions 2](images/mcbsp_word_frame.png)
+
+## Multi-Channel Selection
+
+![McBSP Multi-Channel](images/mcbsp_multi_channel.png)
+
+
+* Allows multiple channels (words) to be **independently** selected for
+   transmit and receive (e.g. only enable Ch0, 5, 27 for receive, then process
+   via CPU)
+
+* The McBSP keeps time sync with all channels, but only "listens" or "talks" if
+  the specific channel is enabled (reduces processing/bus overhead)
+
+* Multi-channel mode controlled primarily via two registers: Multi-channel Control Reg and Rec/Xmt Channel Enable Regs
+
+* Up to 128 channels can be enabled/disabled
+
+
+## McBSP Summary
+
+   * Independent clocking and framing for transmit and receive
+
+   * Internal or external clock and frame sync
+
+   * Data size of 8, 12, 16, 20, 24, or 32 bits
+
+   * TDM mode - up to 128 channels (used for T1/E1 interfacing)
+
+   * SPI mode
+
+   * Direct interface to many codecs
+
+   * Can be serviced by the DMA
+
+------------------------------------------
+
+```{admonition} Feedback
+Please provide any feedback you may have about the content within C2000 Academy to: <c2000_academy_feedback@list.ti.com>
+
+```

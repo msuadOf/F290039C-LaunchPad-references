@@ -1,0 +1,12 @@
+SCI Related Collateral
+====================================
+
+**Foundational**
+
+- `One Minute RS-485 Introduction <https://www.ti.com/video/3870842977001>`_
+
+- `RS-232, RS-422, RS-485: What Are the Differences? <https://www.ti.com/video/3869819873001>`_
+
+**Getting Started**
+
+- `[FAQ] My C2000 SCI is not Transmitting and/or Receiving data correctly, how do I fix this? <https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/1031947/faq-my-c2000-sci-is-not-transmitting-and-or-receiving-data-correctly-how-do-i-fix-this>`_

@@ -1,0 +1,1048 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Direct Memory Access (DMA) Lab &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_academy_labs/advanced_topics/c2000_lab_dma';</script>
+    <script src="../../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_academy_labs/advanced_topics/c2000_lab_dma.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Configurable Logic Block (CLB) Lab" href="c2000_lab_clb.html" />
+    <link rel="prev" title="Control Law Accelerator (CLA) Lab" href="c2000_lab_cla.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="direct-memory-access-dma-lab">
+<h1>Direct Memory Access (DMA) Lab<a class="headerlink" href="#direct-memory-access-dma-lab" title="Permalink to this heading">#</a></h1>
+<p>In this lab, we will use the Direct Memory Access (DMA) controller to regularly
+service the ADC in a real-time data processing application. By using the DMA to
+move data, the CPU is saving instruction cycles that could be used on other
+critical tasks. Specifically, we will be using the ePWM and ADC modules to
+generate and sample a PWM waveform at a chosen sampling rate. The DMA will then
+be used to store the ADC samples in a ping pong buffer, so groups of samples
+can simultaneously be processed by the CPU in an interrupt service routine
+(ISR). In addition to reviewing basics for the ePWM and ADC modules, this lab
+should inform readers of how and why the DMA can be used to reduce load on the
+CPU.</p>
+<div class="admonition-f280013x-device-family admonition">
+<p class="admonition-title">F280013x Device Family</p>
+<p>This lab is not applicable to the F280013x device family since the F280013x
+device family does not have a DMA module.</p>
+</div>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h2>
+<p>All solutions are available
+in the directory: <code class="docutils literal notranslate"><span class="pre">[C2000Ware_Install_Path]/training/device/[device_name]</span></code>.</p>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>In this lab, we will use the Sysconfig GUI to generate a waveform with one of
+the ePWM modules, like the PWM lab. Also like the PWM lab, the ADC will be
+setup to sample the PWM waveform at a chosen sampling rate. At the end of each
+conversion, however, the ADC will trigger the DMA rather than triggering an
+interrupt on the CPU.</p>
+<p>The first time that the DMA is triggered will be the start of the
+first ‘Transfer’. Since we will have configured our DMA to generate an
+interrupt at the start of ‘Transfers’, the DMA will immediately trigger an
+interrupt before the first ‘Burst’ is sent. This very first interrupt should
+set the DMA destination address to the Ping Buffer, while the CPU copies the
+contents of the still empty Pong Buffer into a buffer called AdcBuf. During the
+next interrupt, the destination address of the DMA will change to the Pong
+Buffer, while the CPU copies from the Ping Buffer. Because we set
+the ‘Transfer’ size of the DMA to be 50 ‘Bursts’, the DMA interrupt will be
+triggered on every 50th ADC conversion before the first ‘Burst’ of
+the ‘Transfer’. You can see the details of the interrupt in the dma_Ch1ISR code
+block included later in the lab.</p>
+<p>You will be able to view the contents of any of these buffers in Code Composer
+Studio (CCS). In this application, the DMA allows the CPU to reclaim
+instruction cycles that would have been necessary to continuously copy data
+from the ADC registers into memory, which allows for more instruction cycles to
+be allocated for other tasks.</p>
+<p><img alt="Intro_Image" src="../../../_images/DMA_LAB_FLOW.png" /></p>
+</section>
+<section id="lab-setup">
+<h2>Lab Setup<a class="headerlink" href="#lab-setup" title="Permalink to this heading">#</a></h2>
+<section id="hardware-setup">
+<h3>Hardware Setup<a class="headerlink" href="#hardware-setup" title="Permalink to this heading">#</a></h3>
+<p>You will need the following hardware for this lab:</p>
+<ul class="simple">
+<li><p>A C2000 controlCARD or LaunchPad with the supplied USB cable.</p></li>
+<li><p>Jumper cables.</p></li>
+<li><p>Oscilloscope (optional).</p></li>
+</ul>
+<p>Use the supplied USB cable to connect the USB Micro or USB Mini Type-B
+connector to the board. Connect the USB Standard Type-A connector into your
+computer USB port. You should see some LEDs light up on your board. In addition
+to powering the board, a JTAG communication link is also established between
+the device and Code Composer Studio. Later in the lab we will be routing the
+output pin of the PWM waveform to the input pin of the ADC, so make sure that
+you have enough jumper cables to facilitate this.</p>
+</section>
+<section id="software-setup">
+<h3>Software Setup<a class="headerlink" href="#software-setup" title="Permalink to this heading">#</a></h3>
+<p>The following software will need to be installed on your computer:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/tool/CCSTUDIO-C2000">Code Composer Studio</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/tool/C2000WARE">C2000Ware</a></p></li>
+</ul>
+</section>
+</section>
+<section id="import-empty-project">
+<h2>Import Empty project<a class="headerlink" href="#import-empty-project" title="Permalink to this heading">#</a></h2>
+<p>Our first task is to import an empty project to our Code Composer
+Studio (CCS) workspace.
+The basic instructions are as follows:</p>
+<ol class="arabic simple">
+<li><p>Open CCS and go to <strong>Project→Import CCS Projects</strong>. A new window should
+appear. Ensure that the <strong>Select search-directory</strong> option is activated.</p></li>
+<li><p>Click the <strong>Browse</strong> button and select the
+<code class="docutils literal notranslate"><span class="pre">[C20000ware_Install_dir]/training/device/[device]/empty_lab</span></code>
+directory.
+Note that the default Windows [C20000ware_Install_dir] is <code class="docutils literal notranslate"><span class="pre">C:/ti/c2000/C2000Ware_4_xx_xx_xx</span></code>.</p></li>
+<li><p>Under <strong>Discovered Projects</strong>, you should now see the
+<code class="docutils literal notranslate"><span class="pre">lab_[board]_[device]</span></code> project. Select the appropriate project for either the control card or the launchpad.</p></li>
+</ol>
+<p><img alt="Discovered_Projects" src="../../../_images/c2000_lab_epwm_ecap_start_small.png" /></p>
+<ol class="arabic simple" start="4">
+<li><p>Click <strong>Finish</strong> to import and copy the <code class="docutils literal notranslate"><span class="pre">lab_[board]_[device]</span></code> project
+into your workspace.</p></li>
+<li><p>Rename the project to your liking</p>
+<ul class="simple">
+<li><p>“Right-click on the project in Project Explorer pane”. Select ‘Rename’ from
+the drop down menu and rename the project to ‘c2000_dma_lab’ or a name of
+your choosing.</p></li>
+<li><p>Now click the ‘Down Arrow’ located to the left of the imported project to
+expand it and select lab_main.c. Right-click on the file, and
+select ‘Rename’ to rename the file to c2000_dma_lab_main.c or a name of
+your choosing.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="configure-the-gpio">
+<h2>Configure the GPIO<a class="headerlink" href="#configure-the-gpio" title="Permalink to this heading">#</a></h2>
+<p>We will configure the necessary GPIO pins as shown below. Our PWM
+waveform will be output from ePWM1A. We will also
+configure one of the board LEDs as an indicator.</p>
+<section id="steps-to-add-gpio-configuration">
+<h3>Steps to add GPIO configuration:<a class="headerlink" href="#steps-to-add-gpio-configuration" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>In the project, open the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file by double-clicking it.</p></li>
+<li><p>Click ‘+’ in GPIO to add GPIO line configuration for LED4.</p></li>
+<li><p>Select GPIO number for your device and board from the table below.</p></li>
+</ul>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>LaunchPad</p></th>
+<th class="head"><p>controlCARD</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>Pin-66 (GPIO-31)</p></td>
+<td><p>Pin-66 (GPIO-31)</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>n/a</p></td>
+<td><p>Pin-66 (GPIO-31)</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>Pin-81 (GPIO-23)</p></td>
+<td><p>Pin-99(GPIO-31)</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28002x</p></td>
+<td><p>Pin-2 (GPIO-31)</p></td>
+<td><p>Pin-2 (GPIO-31)</p></td>
+</tr>
+<tr class="row-even"><td><p>F28003x</p></td>
+<td><p>Pin-83(GPIO-22)</p></td>
+<td><p>Pin-99(GPIO-31)</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>The parameters should be filled like below.</p></li>
+</ul>
+<p><img alt="SYSCFG1" src="../../../_images/lab_gpio.png" /></p>
+</section>
+</section>
+<section id="configure-epwm1-and-epwm2">
+<h2>Configure ePWM1 and ePWM2<a class="headerlink" href="#configure-epwm1-and-epwm2" title="Permalink to this heading">#</a></h2>
+<div class="admonition-for-devices-f2837xd-f2837xs-f2838x-and-f28003x admonition">
+<p class="admonition-title">For Devices F2837xD, F2837xS, F2838x, and F28003x:</p>
+<p>The SYSCLK generated from the internal oscillator is higher than 100MHz on these
+devices. This means that the EPWM clock for F28003x is 120MHz. The maximum EPWM
+clock is still 100MHz on  F2837xD, F2837xS, and F2838x, but the ADC clock is
+equal to the device SYSCLK. When clock dividers are selected in the following
+modules, you may need to modify your dividers to achieve exactly the same
+results.</p>
+<p>You may also notice that your device has different parameters than the ones seen
+in the images below. Do not worry, as all of the essential parameters for this
+lab are available on all devices.</p>
+</div>
+<p>You may notice that the next sections are very similar to the ePWM lab, but be
+careful, as the ADC configuration is slightly different. The code below
+configures ePWM1A to output a 2kHz PWM waveform with a 25% duty cycle. This PWM
+waveform will be used as a data input source. Notice that ePWM1A is setup to
+output a symmetrical PWM waveform, that is, the time base counter is setup in
+up/down mode. Given that we are in up/down mode and we want our PWM waveform to
+have a frequency of 2kHz, we have</p>
+<p><span class="math notranslate nohighlight">\(\text{Time Base Period}=\frac{f_{tbclk}}{2f_{pwm}}=\frac{100* 10^6}{2* 2000}=25000.\)</span></p>
+<p>Next, we note the configuration of the duty cycle. Since we are in up/down mode
+and we want our PWM waveform to have a 25% duty cycle, we have</p>
+<p><span class="math notranslate nohighlight">\(\text{Counter Compare Value}=(1-\frac{duty}{100})*tbprd=(1-\frac{25}{100})*25000=18750.\)</span></p>
+<p>The action qualifier submodule is then set to force the output to be high on a count up
+event and low on a count down event. This results in the desired PWM waveform.</p>
+<p>In this lab, the ADC will be used to sample the generated PWM waveform from
+ePWM1A at a rate of 50kHz. The below code configures ePWM2 to trigger a SOC on
+the ADC at a rate of 50kHz. Unlike ePWM1A, notice that ePWM2 is setup to
+operate in up count mode, hence, we have</p>
+<p><span class="math notranslate nohighlight">\(\text{Time Base Period}=\frac{f_{tbclk}}{f_{pwm}}-1=\frac{100* 10^6}{50000}-1=1999.\)</span></p>
+<ul class="simple">
+<li><p>To implement these specifications with SysConfig, first click the ‘+’ by EPWM in the SysConfig screen to open an instance of the EPWM module.</p></li>
+</ul>
+<p><img alt="epwm_init" src="../../../_images/epwm_start_1.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘EPWM Time Base’ dropdown menu, and apply the changes circled below.</p></li>
+<li><p>Expand the ‘EPWM Counter Compare’ dropdown menu, and again apply the circled changes.</p></li>
+</ul>
+<p><img alt="EPWM1_1" src="../../../_images/lab_epwm1_11.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘EPWM Action Qualifier’ dropdown menu, then apply the changes circled below.</p></li>
+</ul>
+<p><img alt="EPWM1_2" src="../../../_images/lab_epwm1_21.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘ePWMxA Event Output Configuration’ dropdown menu, then apply the changes circled below.</p></li>
+</ul>
+<p><img alt="EPWM1_2" src="../../../_images/lab_epwm1_actions.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘PinMux Peripheral and Pin Configuration’ dropdown menu. For ‘EPWM
+Peripheral’, make sure to select instance EPWM1. Also, make sure to
+select ‘GPIO0’ for ‘EPWMA’ and select ‘GPIO1’ for ‘EPWMB’, as shown below.
+The pin number will vary based on hardware.</p></li>
+</ul>
+<p><img alt="EPWM1_3" src="../../../_images/lab_epwm1_31.png" /></p>
+<ul class="simple">
+<li><p>Now click the ‘+’ by EPWM to open another instance of the EPWM module.</p></li>
+</ul>
+<p><img alt="epwm_init2" src="../../../_images/epwm_start_2.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘EPWM Time Base’ dropdown menu, and apply the changes circled below.</p></li>
+</ul>
+<p><img alt="EPWM2_1" src="../../../_images/lab_epwm2_11.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘EPWM Event-Trigger’ dropdown menu, and apply the changes circled below.</p></li>
+</ul>
+<p><img alt="EPWM2_2" src="../../../_images/lab_epwm2_21.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘PinMux Peripheral and Pin Configuration’ dropdown menu, and apply
+the changes circled below. Also, make sure to select ‘GPIO2’ for ‘EPWMA’ and
+select ‘GPIO3’ for ‘EPWMB’, as shown below. The pin number will vary based on
+hardware.</p></li>
+</ul>
+<p><img alt="EPWM2_3" src="../../../_images/lab_epwm2_31.png" /></p>
+<p>This concludes the configuration of the ePWM modules.</p>
+<div class="admonition-a-more-detailed-explanation-of-the-epwm-configuration admonition">
+<p class="admonition-title">A more detailed explanation of the ePWM configuration</p>
+<p>The configuration of both ePWM1A and ePWM2 above is identical to that of the
+lab in <a class="reference internal" href="../control_peripherals/c2000_lab_pwm.html"><span class="doc std std-doc">ePWM Lab</span></a>,
+so you should see that lab for a more detailed explanation.</p>
+</div>
+</section>
+<section id="configure-the-adc">
+<h2>Configure the ADC<a class="headerlink" href="#configure-the-adc" title="Permalink to this heading">#</a></h2>
+<p>In the previous section, we explained that ePWM2 would be triggering a SOC
+event on the ADC. In this section, we will provide the code to configure the
+ADC. More details about the configuration of the ADC can be found in
+<a class="reference internal" href="../../c2000_analog_subsystem/c2000_analog_to_digital_converter.html"><span class="doc std std-doc">Analog-to-Digital Converter (ADC)</span></a>.
+However, notice that we have setup a SOC to be triggered by ePWM2 and that we
+have setup the ADC to interrupt at the end of a conversion. This interrupt will
+be utilized by the DMA so it knows when to load new samples from the ADC onto
+the ping pong buffer. The ADC is also setup in continuous mode so that the ADC
+register always contains the most recent sample.</p>
+<ul class="simple">
+<li><p>Add ADC by clicking the ‘+’ by ADC in the SysConfig screen. Make sure to make
+the changes circled below. If your device SYSCLK is not 100MHz, you will need
+to change the ADC Clock Prescaler to acheive the same results.</p></li>
+<li><p>For the ‘SOC0 Sample Window[SYSCLK counts]’ parameter, the same value may
+result in a different ‘SOC0 Sample Time[ns]’ on different devices, due to
+varying SYSCLK frequencies across devices. Make sure that the generated ‘SOC0
+Sample Time[ns]’ is about 80ns.</p></li>
+</ul>
+<p><img alt="ADC1" src="../../../_images/epwm_adc_1.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘ADC INT Configurations’ dropdown menu, make the changes circled below.</p></li>
+</ul>
+<p><img alt="ADC2" src="../../../_images/lab_adc_2.png" /></p>
+<div class="admonition-for-devices-f280025c-f280039c-f280049c-and-f2800137 admonition">
+<p class="admonition-title">For Devices F280025C, F280039C, F280049C, and F2800137:</p>
+<p>Set analog reference voltage using asysctl parameter.</p>
+<p>If the ADC module has already been added, select ASYSCTL in the ANALOG group
+and change the analog reference voltage to be an internal voltage of 2.5V. Otherwise,
+add ASYSCTL by clicking ‘+’ in ANALOG group and then add internal
+reference of 2.5V.</p>
+<p><img alt="ASYSCTL" src="../../../_images/lab_adc_internal_ref1.png" /></p>
+</div>
+</section>
+<section id="configure-the-dma">
+<h2>Configure the DMA<a class="headerlink" href="#configure-the-dma" title="Permalink to this heading">#</a></h2>
+<p>In this section, we will configure the DMA using SysConfig GUI tool. There are
+two addresses which will be used during the configuration. These are source and
+destination addresses. We will configure the trigger and mode of DMA channel 1.
+The trigger for DMA channel 1 is set to be from ADCA1, which signals to the DMA
+that a new sample is ready to be moved to the ping pong buffer. Notice that
+one-shot mode has been disabled and continuous mode has been enabled.
+Continuous mode ensures that the DMA is re-initialized after it completes a
+full transfer, which is needed to continuously retrieve samples from the ADC,
+otherwise, the DMA would halt. Additionally, notice that the word size is set
+to be 16 bits.</p>
+<p>Click <code class="docutils literal notranslate"><span class="pre">+</span></code> next to DMA (in COMMUNICATION Group) to add DMA instance</p>
+<p><img alt="DMA1" src="../../../_images/lab_dma1.png" /></p>
+<p><img alt="DMA2" src="../../../_images/lab_dma2.png" /></p>
+<p>This concludes the configuration of the DMA.</p>
+</section>
+<section id="configure-cputimer0">
+<h2>Configure CPUTIMER0<a class="headerlink" href="#configure-cputimer0" title="Permalink to this heading">#</a></h2>
+<p>In this section, we provide the code to setup CPUTIMER0. This timer will be
+used to capture the runtime of the DMA ISR. It is important that the runtime of
+the DMA ISR does not exceed the product of the ADC sampling period with
+<code class="docutils literal notranslate"><span class="pre">ADC_BUF_LEN</span></code> because this implies that the DMA will start to overwrite the
+contents of next buffer. Notice how the timer period is set to be the maximum
+value of the 32-bit counter. The system clock will be driving this counter at a
+frequency of <code class="docutils literal notranslate"><span class="pre">DEVICE_SYSCLK_FREQ</span></code>.</p>
+<p>Click <code class="docutils literal notranslate"><span class="pre">+</span></code> next to CPUTIMER (in SYSTEM Group) to add CPUTIMER instance</p>
+<p><img alt="CPUTIMER" src="../../../_images/lab_cputimer.png" /></p>
+</section>
+<section id="define-global-macros-and-variables">
+<h2>Define global macros and variables<a class="headerlink" href="#define-global-macros-and-variables" title="Permalink to this heading">#</a></h2>
+<p>First, we will define some necessary macros and global variables, and we will
+configure the destination and source address of the DMA transfer. The global
+variable <code class="docutils literal notranslate"><span class="pre">AdcBufRaw</span></code> points to a ping pong buffer of size <code class="docutils literal notranslate"><span class="pre">2*50</span></code> and type
+<code class="docutils literal notranslate"><span class="pre">uint16_t</span></code>. Accordingly, the ping buffer is from offset <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">50/2-1</span></code> and the
+pong buffer is from offset <code class="docutils literal notranslate"><span class="pre">ADC_BUF_LEN</span></code> to <code class="docutils literal notranslate"><span class="pre">2*50-1</span></code>. However, remembering that
+the DMA only has access to GSx RAM, we use the <code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">DATA_SECTION</span> <span class="pre">(AdcBufRaw,</span> <span class="pre">&quot;ramgs0&quot;)</span></code> line to tell the linker to place <code class="docutils literal notranslate"><span class="pre">AdcRawBuf</span></code> in GS0 RAM.
+The section <code class="docutils literal notranslate"><span class="pre">ramgs0</span></code> should be included in the linker scripts provided by the
+<code class="docutils literal notranslate"><span class="pre">empty_driver_lib</span></code> project template that we have used. Notice that we have set
+the DMA channel 1 destination address to be <code class="docutils literal notranslate"><span class="pre">AdcBufRaw</span></code>, i.e., the ping buffer,
+and that we have set the DMA channel 1 source address to be the register that
+contains the samples from ADCINA0. In order to use driverlib, make sure that
+you have included <code class="docutils literal notranslate"><span class="pre">driverlib.h</span></code> and <code class="docutils literal notranslate"><span class="pre">device.h</span></code> above these definitions. A
+description of these macros and global variables will be addressed in the
+following sections.</p>
+<p>In your project, click on the <code class="docutils literal notranslate"><span class="pre">.c</span></code> file to open it, and add the following:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define ADC_BUF_LEN 50              </span><span class="c1">// Buffer length.</span>
+<span class="cp">#pragma DATA_SECTION(AdcBufRaw, &quot;ramgs0&quot;);</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">AdcBufRaw</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">ADC_BUF_LEN</span><span class="p">];</span><span class="w">  </span><span class="c1">// The Ping Pong buffer.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">AdcBuf</span><span class="p">[</span><span class="n">ADC_BUF_LEN</span><span class="p">];</span><span class="w">       </span><span class="c1">// Buffer for CCS plotting.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">PingPongState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">         </span><span class="c1">// Ping Pong buffer state.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">LedCtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                </span><span class="c1">// Counter to slow LED toggling.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">TaskDelayUs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">           </span><span class="c1">// Delay to simulate data processing task.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">OverCnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">               </span><span class="c1">// Counter to store DMA overwrites.</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">TimDiff</span><span class="p">;</span><span class="w">                   </span><span class="c1">// To measure the DMA ISR time.</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">AdcAddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)(</span><span class="n">ADCARESULT_BASE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ADC_O_RESULT0</span><span class="p">);</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">AdcRawBufAddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">AdcBufRaw</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="define-the-dma-interrupt-service-routine">
+<h2>Define the DMA interrupt service routine<a class="headerlink" href="#define-the-dma-interrupt-service-routine" title="Permalink to this heading">#</a></h2>
+<p>Lastly, we will write the ISR for DMA channel 1. The first task of this ISR is
+to clear the necessary interrupt flags and initialize some local variables.
+Notice that we also reset and start CPUTIMER0 to measure the runtime of this
+ISR.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">dma_Ch1ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Interrupt_clearACKGroup</span><span class="p">(</span><span class="n">INTERRUPT_ACK_GROUP7</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CPUTimer_startTimer</span><span class="p">(</span><span class="n">myCPUTIMER0_BASE</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="o">*</span><span class="n">AdcBufPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdcBuf</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="o">*</span><span class="n">AdcBufRawPtr</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Next, we will set up our indicator LED to toggle at a rate of 1Hz. It is
+reasonable to assume that the DMA will be able to transfer words at the ADC
+sampling rate, which is 50kHz. Thus, we know that this ISR is being called at a
+rate of</p>
+<p><span class="math notranslate nohighlight">\(\frac{\text{sampling rate}}{\text{bursts per transfer}}=\frac{50000}{50}=1000\text{Hz}.\)</span></p>
+<p>Consequently, the global variable <code class="docutils literal notranslate"><span class="pre">LedCtr</span></code> is used as a counter to divide the
+ISR call rate by 1000 in order to toggle the LED at a rate of 1Hz.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">LedCtr</span><span class="o">++</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GPIO_togglePin</span><span class="p">(</span><span class="n">myGPIO0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">LedCtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The ping pong buffer implemented in this lab is a type of double buffer that
+allows the CPU to process one buffer of samples from the ADC while the DMA
+fills the other buffer with new samples. As discussed in the last section, this
+ISR will be triggered at the start of transfer on DMA channel 1. Thus, this ISR
+must continuously alternate between the following states:</p>
+<ol class="arabic simple">
+<li><p>Process the <strong>pong</strong> buffer and set the DMA channel 1 destination address to
+point to the <strong>ping</strong> buffer.</p></li>
+<li><p>Process the <strong>ping</strong> buffer and set the DMA channel 1 destination address to
+point to the <strong>pong</strong> buffer.</p></li>
+</ol>
+<p>The global variable <code class="docutils literal notranslate"><span class="pre">PingPongState</span></code> is used as a state register. Note that
+<code class="docutils literal notranslate"><span class="pre">PingPongState</span></code> is toggled in the ISR. In addition, note that our processing
+step involves copying the contents of the ping or pong buffer into <code class="docutils literal notranslate"><span class="pre">AdcBuf</span></code>,
+which is another buffer of size <code class="docutils literal notranslate"><span class="pre">ADC_BUF_LEN</span></code>. In the debug session, we will
+use <code class="docutils literal notranslate"><span class="pre">AdcBuf</span></code> to view the ADC samples in real-time via the plotting capabilities
+of CCS.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">PingPongState</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Set DMA address to start at ping buffer.</span>
+<span class="w">        </span><span class="n">DMA_configAddresses</span><span class="p">(</span><span class="n">DMA_CH1_BASE</span><span class="p">,</span>
+<span class="w">                            </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">AdcBufRaw</span><span class="p">,</span>
+<span class="w">                            </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)(</span><span class="n">ADCARESULT_BASE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ADC_O_RESULT0</span><span class="p">));</span>
+<span class="w">        </span><span class="c1">// Fill AdcBuf with contents of the pong buffer.</span>
+<span class="w">        </span><span class="n">AdcBufRawPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdcBufRaw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ADC_BUF_LEN</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="w"> </span><span class="n">ADC_BUF_LEN</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">            </span><span class="o">*</span><span class="p">(</span><span class="n">AdcBufPtr</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">AdcBufRawPtr</span><span class="o">++</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Set DMA address to start at pong buffer.</span>
+<span class="w">        </span><span class="n">DMA_configAddresses</span><span class="p">(</span><span class="n">DMA_CH1_BASE</span><span class="p">,</span>
+<span class="w">                            </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)(</span><span class="n">AdcBufRaw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ADC_BUF_LEN</span><span class="p">),</span>
+<span class="w">                            </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)(</span><span class="n">ADCARESULT_BASE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ADC_O_RESULT0</span><span class="p">));</span>
+<span class="w">        </span><span class="c1">// Fill AdcBuf with contents of the ping buffer.</span>
+<span class="w">        </span><span class="n">AdcBufRawPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdcBufRaw</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="w"> </span><span class="n">ADC_BUF_LEN</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="o">*</span><span class="p">(</span><span class="n">AdcBufPtr</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">AdcBufRawPtr</span><span class="o">++</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">PingPongState</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In order to simulate more data processing, we add a delay that can be changed
+via the global variable <code class="docutils literal notranslate"><span class="pre">TaskDelayUs</span></code>. We will change the value of
+<code class="docutils literal notranslate"><span class="pre">TaskDelayUs</span></code> in real-time using the debug features of CCS.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="w"> </span><span class="n">TaskDelayUs</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">DEVICE_DELAY_US</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, we stop the counter and calculate the elapsed time it took for the ISR
+to complete. We can safely ignore the counter overflow in this case. To see
+why, consider a system clock speed of 200 MHz—given that CPUTIMER0 is
+32-bit, this would mean that CPUTIMER0 would overflow approximately every
+21.5 seconds which is large enough for us to ignore. The number of counter
+ticks that it takes for the ISR to complete is stored in <code class="docutils literal notranslate"><span class="pre">TimDiff</span></code>.</p>
+<p>Since the DMA is triggering this ISR at a rate of 1000Hz as shown earlier, this
+implies that the ISR duration cannot exceed 1ms, otherwise, the DMA will start
+to overwrite the contents of the other buffer before the CPU has a chance to
+read it. The number <code class="docutils literal notranslate"><span class="pre">0.001*DEVICE_SYSCLK_FREQ</span></code> is the approximate number of
+counter ticks needed for a duration of 1ms. Accordingly, if we find that
+<code class="docutils literal notranslate"><span class="pre">TimDiff</span></code> is greater than or equal to <code class="docutils literal notranslate"><span class="pre">0.001*DEVICE_SYSCLK_FREQ</span></code>, this implies
+that the DMA has started overwriting the contents of the next buffer.
+If this is the case, we increment the global variable <code class="docutils literal notranslate"><span class="pre">OverCnt</span></code>, which stores
+the number of times the ISR runtime exceeds 1ms. We can view <code class="docutils literal notranslate"><span class="pre">OverCnt</span></code> in
+real-time via the debug features of CCS.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">CPUTimer_stopTimer</span><span class="p">(</span><span class="n">myCPUTIMER0_BASE</span><span class="p">);</span>
+<span class="w">    </span><span class="n">TimDiff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFFFFFFFF</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">CPUTimer_getTimerCount</span><span class="p">(</span><span class="n">myCPUTIMER0_BASE</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TimDiff</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="kt">uint32_t</span><span class="p">)(</span><span class="mf">0.001</span><span class="o">*</span><span class="n">DEVICE_SYSCLK_FREQ</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">OverCnt</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-dma-buffer-overwriting-fix admonition">
+<p class="admonition-title">DMA Buffer Overwriting Fix</p>
+<p>If you find that the ISR is taking too long to complete and the DMA is overwriting
+the next buffer, try increasing the buffer size and/or decreasing the ADC sample
+rate. Both of these changes will slow down the DMA and give the CPU more time to
+process data.</p>
+</div>
+</section>
+<section id="define-main">
+<h2>Define main()<a class="headerlink" href="#define-main" title="Permalink to this heading">#</a></h2>
+<p>Next, we will populate <code class="docutils literal notranslate"><span class="pre">main</span></code> as shown below.
+That being said, we still need to know the system clock frequency in order to
+configure the ePWM modules necessary for this lab. The system clock frequency
+value that is configured via <code class="docutils literal notranslate"><span class="pre">Device_init()</span></code> is defined as <code class="docutils literal notranslate"><span class="pre">DEVICE_SYSCLK_FREQ</span></code>
+in <code class="docutils literal notranslate"><span class="pre">[projectroot]/device/device.h</span></code>. Observe that the main function only handles
+initialization routines. Most of the activity in this lab will lie in the DMA
+interrupt service routine.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Device_init</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Interrupt_initModule</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Interrupt_initVectorTable</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Board_init</span><span class="p">();</span>
+<span class="w">    </span><span class="n">EINT</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ERTM</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">NOP</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This concludes the coding portion of this lab.</p>
+</section>
+<section id="build-and-run-interactive-debug-session">
+<h2>Build and run interactive debug session<a class="headerlink" href="#build-and-run-interactive-debug-session" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Ensure that the USB cable from your LaunchPad or controlCARD is connected to
+your computer. If you have a LaunchPad, right click on your project in the
+project explorer pane and click <strong>Properties→Build→C2000
+Compiler→Predefined Symbols</strong>, add <code class="docutils literal notranslate"><span class="pre">_LAUNCHXL_F28XXXXX</span></code> as a predefined
+symbol according to your <code class="docutils literal notranslate"><span class="pre">device.h</span></code> header file. The <code class="docutils literal notranslate"><span class="pre">device.h</span></code> file can be
+found in the <code class="docutils literal notranslate"><span class="pre">[projectroot]/device/</span></code> directory.</p></li>
+<li><p>Under the <strong>Build</strong> button, activate the <strong>CPU1_RAM</strong> build configuration.
+Use the <strong>CPU1_LAUNCHXL_RAM</strong> build configuration if it is available and if
+you are using a LaunchPad. Build the program and fix any compilation errors.</p></li>
+<li><p>Create a new debug configuration. Set the target configuration to be
+<code class="docutils literal notranslate"><span class="pre">${[workspace_loc]:/[projectroot]/targetConfigs/TMS320F28XXXXX_LaunchPad.ccxml}</span></code>
+if using a LaunchPad, else, use
+<code class="docutils literal notranslate"><span class="pre">${[workspace_loc]:/[projectroot]/targetConfigs/TMS320F28XXXXX.ccxml}</span></code>.
+Select the current project to be loaded to <strong>CPU1</strong>. Press <strong>Apply</strong> and close
+the window.</p></li>
+<li><p>Connect the ePWM1A GPIO pin to the ADCINA0 GPIO pin using a jumper cable. If
+you have an oscilloscope, connect a probe to the ePWM1A GPIO pin on your
+board.</p></li>
+</ol>
+<p><strong>LaunchPad</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>EPWM1A Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>30</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>70</p></td>
+<td><p>80</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28003x</p></td>
+<td><p>70</p></td>
+<td><p>40</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ControlCARD</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>EPWM1A Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28003x</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple" start="5">
+<li><p>Now we will start the debug session. Under the debug button, start the debug
+session using the new configuration. You should now see the debugging
+session open up and the debugger should have reached <code class="docutils literal notranslate"><span class="pre">main()</span></code>.</p></li>
+<li><p>Click the <strong>Resume</strong> button. You should see the LED on your board toggling
+at about 1Hz which indicates that the DMA ISR is being called at 1000Hz as
+expected.</p></li>
+<li><p>Next, we will check the ping pong buffer. In the memory browser, search for
+the address <code class="docutils literal notranslate"><span class="pre">&amp;amp;AdcBufRaw</span></code>. Enable <strong>Continuous Refresh</strong> and ensure that you
+are viewing the memory in 16-bit hexadecimal. Watch the memory browser
+update in real-time. If all is well, you should notice that <code class="docutils literal notranslate"><span class="pre">AdcBufRaw</span></code>
+occupies 100 16-bit memory locations and roughly 25% percent of the
+locations have a value of <code class="docutils literal notranslate"><span class="pre">0x0FFF</span></code> while the others contain something close
+to <code class="docutils literal notranslate"><span class="pre">0x0000</span></code>. This suggests that the DMA is transferring the ADC samples
+correctly into the ping pong buffer and the DMA ISR is correctly alternating
+the DMA channel 1 destination address pointer between the ping and pong
+buffers at the start of a transfer.</p></li>
+</ol>
+<p><img alt="Memory Browser" src="../../../_images/memory_browser.png" /></p>
+<ol class="arabic simple" start="8">
+<li><p>Now we will view the sampled PWM waveform in real-time using <code class="docutils literal notranslate"><span class="pre">AdcBuf</span></code>. Click
+on <strong>Tools→Graph→Single Time</strong>, set <strong>Acquisition Buffer Size</strong> to
+be <strong>50</strong>, set <strong>Dsp Data Type</strong> to be <strong>16 bit unsigned integer</strong>, set
+<strong>Sampling Rate Hz</strong> to be <strong>50000</strong>, set <strong>Start Address</strong> to be
+<strong>AdcBuf</strong>, set <strong>Time Display Unit</strong> to be <strong>us</strong>, and leave the other
+settings as their default value. Click <strong>OK</strong> and you should see the plot
+window open up. Activate the <strong>Continuous Refresh</strong> option in the plot
+window. You should now see several periods of the PWM waveform in the plot
+updating in real-time. If desired, you can use the measurement tool to
+verify that the duty cycle is 25% and the period is 500us. Leave the plot
+window open.</p></li>
+</ol>
+<div class="admonition-important admonition">
+<p class="admonition-title">Important</p>
+<p>Note: If you do not see CCS menu <strong>Tools → Graph</strong>, please refer to
+<a class="reference internal" href="../../c2000_get_started/c2000_getstarted.html"><span class="doc std std-doc">Getting Started (Setting CCS for graph)</span></a>
+to see the instruction on how to enable CCS graphing tool in your perspective.</p>
+</div>
+<p><img alt="Plot Configuration" src="../../../_images/plot_setup.png" /></p>
+<p><img alt="PWM Waveform" src="../../../_images/plot_pwm.png" /></p>
+<ol class="arabic simple" start="9">
+<li><p>Finally, we will experiment with different values of delay in the DMA ISR.
+Add <code class="docutils literal notranslate"><span class="pre">OverCnt</span></code>, <code class="docutils literal notranslate"><span class="pre">TimDiff</span></code>, and <code class="docutils literal notranslate"><span class="pre">TaskDelayUs</span></code> to the watch expression list and
+enable <strong>Continuous Refresh</strong>. Play with different values of <code class="docutils literal notranslate"><span class="pre">TaskDelayUs</span></code>
+from 0–1000. Observe the changes in <code class="docutils literal notranslate"><span class="pre">OverCnt</span></code> and <code class="docutils literal notranslate"><span class="pre">TimDiff</span></code>. At some point,
+you will find a value closer to 1000 that will cause <code class="docutils literal notranslate"><span class="pre">OverCnt</span></code> to start to increment,
+which implies that the
+DMA is overwriting the contents of the next buffer. Even though the DMA is
+overwriting the next buffer, notice that the plot window appears to be
+unaffected. This is because the waveform we are viewing is periodic, thus,
+subsequent buffers will all contain the same information. However, if we
+were viewing an aperiodic waveform, we would be able to observe
+discontinuities and other artifacts in the signal due to the DMA overwriting
+the next buffer.</p></li>
+<li><p>Terminate the debug session and close the project. This concludes the lab
+assignment.</p></li>
+</ol>
+</section>
+<section id="full-solution">
+<h2>Full Solution<a class="headerlink" href="#full-solution" title="Permalink to this heading">#</a></h2>
+<p>The full solution to this lab exercise is included as part of the C2000Ware
+SDK. Import the project from
+<code class="docutils literal notranslate"><span class="pre">[C2000Ware_Install_Path]/training/device/[device_name]/advance_topics/lab_dma</span></code>.</p>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="c2000_lab_cla.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Control Law Accelerator (CLA) Lab</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_lab_clb.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Configurable Logic Block (CLB) Lab</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solution">
+   Solution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lab-setup">
+   Lab Setup
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hardware-setup">
+     Hardware Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#software-setup">
+     Software Setup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-empty-project">
+   Import Empty project
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-the-gpio">
+   Configure the GPIO
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#steps-to-add-gpio-configuration">
+     Steps to add GPIO configuration:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-epwm1-and-epwm2">
+   Configure ePWM1 and ePWM2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-the-adc">
+   Configure the ADC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-the-dma">
+   Configure the DMA
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-cputimer0">
+   Configure CPUTIMER0
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-global-macros-and-variables">
+   Define global macros and variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-the-dma-interrupt-service-routine">
+   Define the DMA interrupt service routine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-main">
+   Define main()
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-and-run-interactive-debug-session">
+   Build and run interactive debug session
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-solution">
+   Full Solution
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

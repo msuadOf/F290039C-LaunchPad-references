@@ -1,0 +1,14 @@
+---
+myst:
+  html_meta:
+    "description lang=en": |
+      Academy overview page.
+html_theme.sidebar_secondary.remove: true
+sd_hide_title: true
+---
+
+# Overview
+
+```{overview-grid} ./content.yaml
+```
+

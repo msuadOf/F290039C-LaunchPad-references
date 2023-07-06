@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Dual Code Security Module (DCSM) &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_security_safety/c2000_dcsm';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_security_safety/c2000_dcsm.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Functional Safety (FuSa)" href="c2000_fusa.html" />
+    <link rel="prev" title="Universal Serial Bus (USB)" href="../c2000_communications/c2000_usb.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="dual-code-security-module-dcsm">
+<h1>Dual Code Security Module (DCSM)<a class="headerlink" href="#dual-code-security-module-dcsm" title="Permalink to this heading">#</a></h1>
+<p>The purpose of code security is to prevent unauthorized access to on-chip
+secure memories such as Flash, RAM, OTP and ROM.</p>
+<p>Earlier generation C2000
+MCUs feature the “Code Security Module (CSM)”. In CSM, there is no
+configurability. Security was either enabled or disabled for all secure
+resources. The passwords were stored in the main flash array itself. In
+DCSM, there are two independent secure zones (hence the word “dual”) to
+which securable resources can be assigned. The assignment is done by
+programming select OTP locations in the Zone Select Block (ZSB). Also,
+the passwords are stored in the OTP as part of the ZSB.</p>
+<p>DCSM offers protection for two zones - Zone 1 and Zone 2 (Note: For F2837xD
+each CPU has a DCSM. For the F2838xD both security zones are shared by
+each CPU subsystem).</p>
+<p><img alt="Zone allocation in 2837xD and 2838xD devices" src="../../_images/dcsm.png" /></p>
+<ul class="simple">
+<li><p>Security configurations for each zone is stored in its own dedicated
+secure OTP. These configurations are stored in “<b>Zone Select Blocks (ZSB)</b>”.
+Each block is 16 x 16-bits. There are 30 such identical blocks in the OTP.
+Anytime the security configuration is changed (allocation of flash
+sectors / RAM blocks to a zone or password change), you need to move to
+the next ZSB.</p></li>
+<li><p>Following are the on-chip resources that can be secured using the DCSM:</p>
+<ul>
+<li><p>Flash memory (Individual sectors can be assigned either zone. It is
+possible to not assign a sector to either zone. i.e. a sector can
+remain unsecure).</p></li>
+<li><p>RAM (Not every RAM block is securable. Refer to memory map in the
+data sheet for details. It is possible to not assign a securable
+RAM block to either zone. i.e. a securable RAM block can remain
+unsecure).</p></li>
+<li><p>One-time Programmable Memory (OTP). The OTP contains the security
+configuration for the individual zone.</p></li>
+<li><p>Secure ROM. <br/></p></li>
+</ul>
+</li>
+<li><p>Data reads from (and writes to) secured memory are only allowed
+for code which itself is running from secured memory.</p></li>
+<li><p>All other data reads and writes are blocked. For example: CCS
+reads through the JTAG debug probe, ROM bootloader, code running
+in external memory or unsecured internal memory.</p></li>
+</ul>
+<section id="zone-selection">
+<h2>Zone Selection<a class="headerlink" href="#zone-selection" title="Permalink to this heading">#</a></h2>
+<p>Each securable on-chip memory resource can be allocated to either
+Zone 1 (Z1), Zone 2 (Z2), or allowed to remain as unsecure.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>DCSM Register</p></th>
+<th class="head"><p>Zone Allocation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DcsmZ1Regs.Z1_GRABSECTRX register</p></td>
+<td><p>Allocates individual Flash sectors to Zone 1 or left unsecured</p></td>
+</tr>
+<tr class="row-odd"><td><p>DcsmZ2Regs.Z2_GRABSECTRX register</p></td>
+<td><p>Allocates individual Flash sectors to zone 2 or left unsecured</p></td>
+</tr>
+<tr class="row-even"><td><p>DcsmZ1Regs.Z1_GRABRAMRX register</p></td>
+<td><p>Allocates RAM blocks to Zone 1 or left unsecured</p></td>
+</tr>
+<tr class="row-odd"><td><p>DcsmZ2Regs.Z2_GRABRAMRX register</p></td>
+<td><p>Allocates RAM blocks to Zone 2 or left unsecured</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="csm-passwords">
+<h2>CSM Passwords<a class="headerlink" href="#csm-passwords" title="Permalink to this heading">#</a></h2>
+<p>Devices featuring the Code Security Module (CSM) store the password in fixed
+locations in flash. Devices featuring the Dual Code Security Module (DCSM)
+store the password in OTP. Since OTP locations can only be programmed once, the
+password locations need to be changed every time the password needs to be
+changed. The current password location is tracked by a zone-specific link
+pointer.</p>
+<ul class="simple">
+<li><p>Each zone is secured by its own 128-bit (four 32-bit words) user defined
+password. The four passwords are referred to by Zx_CSMPSWD0, Zx_CSMPSWD1,
+Zx_CSMPSWD2, and Zx_CSMPSWD3.</p></li>
+<li><p>Passwords for each zone are stored in their dedicated OTP location. The
+current location is pointed to by the zone-specific link pointer.</p></li>
+<li><p>128-bit CSMKEY registers are used to unsecure and secure device.</p></li>
+<li><p>Password locations for each zone can be locked and secured by programming
+PSWDLOCK fields in the OTP with any value other than “1111b (0xF)”.</p></li>
+</ul>
+</section>
+<section id="zone-select">
+<h2>Zone Select<a class="headerlink" href="#zone-select" title="Permalink to this heading">#</a></h2>
+<p><img alt="Zone Select Bits in OTP" src="../../_images/zone_selection.png" /></p>
+<p><img alt="Zone Select Block Linker Pointer" src="../../_images/zone_select_link_pointer.png" /></p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>The images above are specific to the F2837xD device. Refer to your device’s
+Technical Reference Manual (TRM) for other devices.</p>
+</div>
+</section>
+<section id="procedure-to-unsecure-and-secure-the-device">
+<h2>Procedure to unsecure and secure the device<a class="headerlink" href="#procedure-to-unsecure-and-secure-the-device" title="Permalink to this heading">#</a></h2>
+<p>The device is always secure after reset. In order to unsecure the device:</p>
+<ul class="simple">
+<li><p>Perform a dummy read of each password in the OTP.  This would be
+CSMPSWD(0,1,2,3).</p></li>
+<li><p>Write the correct password to each CSMKEY(0,1,2,3) register.</p></li>
+</ul>
+<p>The Boot-ROM code will automatically unlock the device as part of the
+initialization sequence if passwords have not been programmed. Refer to the
+device-specific Technical Reference Manual (TRM) for more information on this
+topic.</p>
+<p><img alt="CSM Password Match Flow" src="../../_images/csm_password2.png" /></p>
+<p>Note that there are many registers that are read-only and reflect the value
+of the corresponding OTP locations. These registers get updated automatically
+when the boot-ROM (or the user) performs a dummy read.</p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<section id="dcsm-related-collateral">
+<h3>DCSM Related Collateral<a class="headerlink" href="#dcsm-related-collateral" title="Permalink to this heading">#</a></h3>
+<p><strong>Getting Started</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACP8">C2000 DCSM Security Tool Application Report</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACD0">C2000 Unique Device Number Application Report</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACS4">Enhancing Device Security by Using JTAGLOCK Feature Application Report</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACT3">Secure BOOT On C2000 Device Application Report</a> - Only applicable to: F280013x, F2838x</p></li>
+</ul>
+<p><strong>Expert</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/lit/spraci5">Updating Firmware on Security Enabled TMS320F2837xx or TMS320F2807x Devices Application Report</a> - Only applicable to: F2807x, F2837xD, F2837xS</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="../c2000_communications/c2000_usb.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Universal Serial Bus (USB)</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_fusa.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Functional Safety (FuSa)</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zone-selection">
+   Zone Selection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#csm-passwords">
+   CSM Passwords
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zone-select">
+   Zone Select
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#procedure-to-unsecure-and-secure-the-device">
+   Procedure to unsecure and secure the device
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dcsm-related-collateral">
+     DCSM Related Collateral
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

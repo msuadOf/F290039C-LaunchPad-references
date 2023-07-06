@@ -1,0 +1,22 @@
+DCAN Related Collateral
+====================================
+
+**Foundational**
+
+- `Automotive CAN Overview and Training <https://www.ti.com/video/5236633580001>`_
+
+- `CAN Physical layer <https://www.ti.com/video/6078637405001>`_
+
+- `CAN and CAN FD Overview <https://www.ti.com/video/6078637459001>`_
+
+- `CAN and CAN FD Protocol <https://www.ti.com/video/6078640832001>`_ - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2807x, F2837xD, F2837xS, F2838x
+
+**Getting Started**
+
+- `Programming Examples for the DCAN Module Application Report <https://ti.com/lit/SPRACE5>`_ - Only applicable to: F28002x, F28004x, F2807x, F2837xD, F2837xS, F2838x
+
+**Expert**
+
+- `Calculator for CAN Bit Timing Parameters Application Report <https://ti.com/lit/SPRAC35>`_
+
+- `Configurable Error Generator for Controller Area Network Application Report <https://ti.com/lit/SPRACQ3>`_ - Only applicable to: F28002x, F28004x, F2807x, F2837xD, F2837xS, F2838x

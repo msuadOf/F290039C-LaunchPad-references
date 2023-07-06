@@ -1,0 +1,46 @@
+C28X Related Collateral
+====================================
+
+**Foundational**
+
+- `C2000 C28x Optimization Guide <https://software-dl.ti.com/C2000/docs/optimization\_guide/index.html>`_
+
+- `C2000 Software Guide <https://software-dl.ti.com/C2000/docs/software\_guide/index.html>`_
+
+- `Enhancing the Computational Performance of the C2000™ Microcontroller Family Application Report <https://ti.com/lit/SPRY288>`_
+
+- `How fast is your 32-bit MCU? <https://e2e.ti.com/blogs\_/b/industrial\_strength/archive/2015/07/15/how-fast-is-your-32-bit-mcu>`_ - Only applicable to: F2807x, F2837x
+
+**Getting Started**
+
+- `C2000 Multicore Development User Guide <https://software-dl.ti.com/C2000/docs/C2000\_Multicore\_Development\_User\_Guide/index.html>`_
+
+- `C2000 VCU, Viterbi, Complex Math, and CRC <https://www.ti.com/video/3869897798001>`_ - Only applicable to: F28004x, F2807x, F2837xD, F2837xS
+
+- `C2000Ware - CLAMath <https://dev.ti.com/tirex/explore/node?node=AJQZotxCdtXD4hGbOZrXXA\_\_gYkahfz\_\_LATEST>`_
+
+- `C2000Ware - FPU Fast RTS <https://dev.ti.com/tirex/explore/node?node=AMKkBMCf2i6vcDt9cLSJ0A\_\_gYkahfz\_\_LATEST>`_
+
+- `C2000Ware - FPU Library <https://dev.ti.com/tirex/explore/node?node=AKg0a8h-.vTGXaCZThPhkQ\_\_gYkahfz\_\_LATEST>`_
+
+- `C2000Ware - Fast Integer Division <https://dev.ti.com/tirex/explore/node?node=AJvCpzFT6CVD21-BTdLCJg\_\_gYkahfz\_\_LATEST>`_
+
+- `C2000Ware - Fixed Point Library <https://dev.ti.com/tirex/explore/node?node=ALuZdvMDhSsqxHVeb595ZQ\_\_gYkahfz\_\_LATEST>`_
+
+- `C2000Ware - IQMath <https://dev.ti.com/tirex/explore/node?node=AOg.3PQHvLDA2Ap18Lmjpg\_\_gYkahfz\_\_LATEST>`_
+
+- `C2000Ware - VCU Library <https://dev.ti.com/tirex/explore/node?node=AMXKlFPARdBiAwrbthDVyQ\_\_gYkahfz\_\_LATEST>`_
+
+- `C2000Ware Libraries Overview <https://software-dl.ti.com/C2000/docs/software\_guide/c2000ware/libraries.html>`_
+
+- `CRC Engines in C2000 Devices Application Report <https://ti.com/lit/SPRACR3>`_
+
+- `Migrating Software From 8-Bit (Byte) Addressable CPU's to C28x CPU Application Report <https://www.ti.com/lit/sprad88>`_ - Only applicable to: F28002x, F28003x, F28004x, F2807x, F2837xD, F2837xS
+
+- `TMS320C28x Extended Instruction Sets Application Report <https://ti.com/lit/SPRUHS1C>`_
+
+- `TMS320C28x FPU Primer Application Report <https://ti.com/lit/SPRAAN9>`_
+
+**Expert**
+
+- `Fast Integer Division - A Differentiated Offering From C2000 Product Family Application Report <https://ti.com/lit/SPRACN6>`_ - Only applicable to: F28002x, F28003x, F2838x

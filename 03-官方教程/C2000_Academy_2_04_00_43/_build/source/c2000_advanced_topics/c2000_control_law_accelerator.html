@@ -1,0 +1,955 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Control Law Accelerator (CLA) &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_advanced_topics/c2000_control_law_accelerator';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_advanced_topics/c2000_control_law_accelerator.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Direct Memory Access (DMA)" href="c2000_direct_memory_access.html" />
+    <link rel="prev" title="Embedded Pulse Generator (EPG)" href="../c2000_debug_systems/c2000_epg.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="control-law-accelerator-cla">
+<h1>Control Law Accelerator (CLA)<a class="headerlink" href="#control-law-accelerator-cla" title="Permalink to this heading">#</a></h1>
+<p>The CLA is an independent 32-bit floating-point math hardware accelerator which
+executes realtime control algorithms in parallel with the main C28x CPU,
+effectively doubling the computational performance.</p>
+<div class="admonition-cla admonition">
+<p class="admonition-title">CLA</p>
+<p>Not all C2000 devices have a CLA. Refer to the
+<i><a class="reference external" href="https://www.ti.com/lit/spru566">Peripheral Reference Guide</a></i>
+for a list of supported modules on your device.</p>
+</div>
+<p>With direct access to the various control and communication peripherals, the CLA
+minimizes latency, enables a fast trigger response, and avoids CPU overhead.
+Also, with direct access to the ADC results registers, the CLA is able to read
+the result on the same cycle that the ADC sample conversion is completed,
+providing “just-in-time” reading, which significantly reduces the ADC sample to
+output delay enabling faster system response and higher frequency operation.</p>
+<p><img alt="CLA" src="../../_images/CLA.png" /></p>
+<p>The CLA responds to peripheral interrupts independently of the CPU. Utilizing
+the CLA for time-critical tasks frees up the CPU to perform other system,
+diagnostic, and communication functions concurrently. Additionally, the CLA has
+the capability of running a background task.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Dual Core Devices &amp; CLA <div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">On the F2837xD and F2838xD device families, each CPU subsystem has its
+own CLA that responds directly to peripheral triggers, which can free up the
+C28x CPU for other tasks, such as communications and diagnostics.</p>
+</div>
+</details><section id="cla-block-diagram">
+<h2>CLA Block Diagram<a class="headerlink" href="#cla-block-diagram" title="Permalink to this heading">#</a></h2>
+<p><img alt="CLA Block Diagram" src="../../_images/CLA_Block_Diagram.png" /></p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>For a full list of what peripherals/modules the CLA has access to
+(Peripheral register access) refer to
+your device’s datasheet.</p>
+</div>
+</section>
+<section id="cla-memory-and-register-access">
+<h2>CLA Memory and Register Access<a class="headerlink" href="#cla-memory-and-register-access" title="Permalink to this heading">#</a></h2>
+<p>The CLA has access to the LSx RAM blocks and each memory block can be configured
+to be either dedicated to the CPU or shared between the CPU and CLA. After reset
+the memory block is mapped to the CPU, where it can be initialized by the CPU
+before being shared with the CLA. Once it is shared between the CPU and CLA it
+then can be configured to be either program memory or data memory. When
+configured as program memory it contains the CLA program code, and when
+configured as data memory it contains the variable and coefficients that are
+used by the CLA program code. Additionally, dedicated message RAMs are used to
+pass data from CPU to CLA and CLA to CPU.</p>
+<p><strong>CLA Program Memory [Program RAM: LS RAM]</strong></p>
+<ul class="simple">
+<li><p>Contains CLA program code</p></li>
+<li><p>Mapped to the CPU at reset</p></li>
+<li><p>Initialized by the CPU</p></li>
+</ul>
+<p><strong>CLA Data Memory [Data RAM: LS RAM]</strong></p>
+<ul class="simple">
+<li><p>Contains variables and coefficients used by the CLA program code</p></li>
+<li><p>Mapped to the CPU at reset</p></li>
+<li><p>Initialized by CPU</p></li>
+</ul>
+<p><strong>Message RAMs [MSG RAMs: CPU to CLA/ CLA to CPU]</strong></p>
+<ul class="simple">
+<li><p>Used to pass data between the CPU and CLA</p></li>
+<li><p>Always mapped to both the CPU and CLA</p></li>
+</ul>
+<p><strong>Peripheral Register Access [PF]</strong></p>
+<ul class="simple">
+<li><p>Provides direct access to peripherals</p></li>
+</ul>
+<section id="cla-memory-configuration">
+<h3>CLA Memory Configuration<a class="headerlink" href="#cla-memory-configuration" title="Permalink to this heading">#</a></h3>
+<p><img alt="CLA Memory Config" src="../../_images/CLA_memory_config.png" /></p>
+<p>Set the LSx memory RAM configuration (CPU only or CPU and CLA)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Function inputs:</span>
+<span class="c1">// ramSection parameter value is: MEMCFG_SECT_LSx </span>
+<span class="c1">// controllerSel value is RAM section dedicated to the CPU </span>
+<span class="c1">// or shared between the CPU and the CLA:</span>
+<span class="c1">//  	MEMCFG_LSRAMONTROLLER_CPU_ONLY</span>
+<span class="c1">//  	MEMCFG_LSRAMCONTROLLER_CPU_CLA1</span>
+<span class="n">MemCfg_setLSRAMControllerSel</span><span class="p">(</span><span class="n">ramSection</span><span class="p">,</span><span class="w"> </span><span class="n">controllerSel</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Set the CLA memory RAM configuration type (LSx = Data or Program)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Function inputs:</span>
+<span class="c1">// ramSections parameter value is: MEMCFG_SECT_LSx </span>
+<span class="c1">// claMemType value is RAM section is configured as CLA </span>
+<span class="c1">// data memory or CLA program memory:</span>
+<span class="c1">// MEMCFG_CLA_MEM_DATA or MEMCFG_CLA_MEM_PROGRAM</span>
+<span class="n">MemCfg_setCLAMemType</span><span class="p">(</span><span class="n">ramSections</span><span class="p">,</span><span class="w"> </span><span class="n">claMemType</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="cla-control-and-execution-registers">
+<h3>CLA Control and Execution Registers<a class="headerlink" href="#cla-control-and-execution-registers" title="Permalink to this heading">#</a></h3>
+<p><img alt="CLA Control and Execution Registers" src="../../_images/CLA_control_execution.png" /></p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>The blocks in pink, <code class="docutils literal notranslate"><span class="pre">MVECTBGRNDACTIVE</span></code>: Saves return address and <code class="docutils literal notranslate"><span class="pre">MVECTBGRND</span></code>:
+Background Task Vector, are only applicable to devices with a Type 2 CLA.</p>
+</div>
+<ul class="simple">
+<li><p>CLA1TASKSRCSELx – Task Interrupt Source Select (Task 1-8)</p></li>
+<li><p>MVECT1-8 – Task Interrupt Vector (MVECT1/2/3/4/5/6/7/8)</p></li>
+<li><p>LSxCLAPGM – Memory Map Configuration (LS0 – LSX RAM)</p></li>
+<li><p>MPC – 16-bit Program Counter (initialized by appropriate MVECTx register)</p></li>
+<li><p>MR0-3 – CLA Floating-Point Result Registers (32 bit)</p></li>
+<li><p>MAR0-1 – CLA Auxiliary Registers (16 bit)</p></li>
+</ul>
+</section>
+</section>
+<section id="cla-tasks">
+<h2>CLA Tasks<a class="headerlink" href="#cla-tasks" title="Permalink to this heading">#</a></h2>
+<p>Programming the CLA consists of initialization code, which is performed by the
+CPU, and tasks. A task is similar to an interrupt service routine, and once
+started it runs to completion. Each task is capable of being triggered by a
+variety of peripherals without CPU intervention, which makes the CLA very
+efficient since it does not use interrupts for hardware synchronization, nor
+must the CLA do any context switching. Unlike the traditional interrupt-based
+scheme, the CLA approach becomes deterministic. The CLA supports eight
+independent tasks and each is mapped back to an event trigger. Also, the CLA is
+capable of running a continuous background task. Since the CLA is a software
+programmable accelerator, it is very flexible and can be modified for different
+applications.</p>
+<p><img alt="CLA Tasks" src="../../_images/CLA_tasks.png" /></p>
+<ul class="simple">
+<li><p>A task is similar to an interrupt service routine</p></li>
+<li><p>CLA supports 8 tasks (Task1-8)</p></li>
+<li><p>A task is started by a peripheral interrupt trigger (triggers are enabled in
+the <code class="docutils literal notranslate"><span class="pre">CLA1TASKSRCSELx</span></code> register)</p></li>
+<li><p>When a trigger occurs the CLA begins execution at the associated task vector
+entry (MVECT1-8)</p></li>
+<li><p>Once a task begins it runs to completion (no nesting)</p></li>
+<li><p>Capable of running a continuous background task</p></li>
+</ul>
+<section id="cla-task-c-programming">
+<h3>CLA Task C Programming<a class="headerlink" href="#cla-task-c-programming" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Supports C only (no C++ or GCC extension support)</p></li>
+<li><p>Different data type sizes than C28x CPU and FPU</p></li>
+<li><p>CLA Architecture is designed for 32-bit data types</p>
+<ul>
+<li><p>16-bit computations incur overhead for sign-extension</p></li>
+<li><p>16-bit values mostly used to read/write 16-bit peripheral registers</p></li>
+<li><p>There is no SW or HW support for 64-bit integer or floating point</p></li>
+</ul>
+</li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Data Type Sizes<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Type         | CPU and FPU | CLA    
+-------------|-----------------------
+char         |  16 bit     | 16 bit
+short        |  16 bit     | 16 bit
+int          |  16 bit     | 32 bit
+long         |  32 bit     | 32 bit
+long long    |  64 bit     | 32 bit
+float        |  32 bit     | 32 bit
+double       |  32 bit     | 32 bit
+long double  |  64 bit     | 32 bit
+pointers     |  32 bit     | 16 bit
+</pre></div>
+</div>
+</div>
+</details></section>
+<section id="cla-task-c-code-example">
+<h3>CLA Task C Code Example<a class="headerlink" href="#cla-task-c-code-example" title="Permalink to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// From ClaTasks_C.cla: A .cla extension to the file causes the </span>
+<span class="c1">// C2000 compiler to invoke the CLA compiler</span>
+<span class="n">interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Cla1Task1</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="n">_mdebugstop1</span><span class="p">();</span>
+<span class="w">	</span><span class="n">xDelay</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">float32_t</span><span class="p">)</span><span class="n">AdcaResultRegs</span><span class="p">.</span><span class="n">ADCRESULT0</span><span class="p">;</span>
+<span class="w">	</span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coeffs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">xDelay</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+<span class="w">	</span><span class="n">xDelay</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xDelay</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="w">	</span><span class="n">xDelay</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xDelay</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="w">	</span><span class="n">xDelay</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xDelay</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">	</span><span class="n">xDelay</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xDelay</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="w">	</span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">coeffs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">xDelay</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="w">	</span><span class="n">ClaFilteredOutput</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint16_t</span><span class="p">)</span><span class="n">Y</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="cla-task-c-language-restrictions">
+<h3>CLA Task C Language Restrictions<a class="headerlink" href="#cla-task-c-language-restrictions" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>No initialization support for global and static local variables</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int16_t</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">   </span><span class="c1">// valid</span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="c1">// not valid</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Initialized global variables should be declared in a .c file instead of
+the .cla file</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">c</span><span class="w"> </span><span class="n">file</span><span class="o">:</span><span class="w"> </span><span class="p">.</span><span class="n">cla</span><span class="w"> </span><span class="n">file</span><span class="o">:</span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="k">extern</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>For initialized static variables, easiest solution is to use an initialized
+global variable instead</p></li>
+<li><p>No recursive function calls</p></li>
+<li><p>No function pointers</p></li>
+<li><p>No support for certain fundamental math operations</p>
+<ul>
+<li><p>integer division: z = x/y;</p></li>
+<li><p>modulus (remainder): z = x%y;</p></li>
+<li><p>unsigned 32-bit integer compares</p></li>
+</ul>
+</li>
+<li><p>No standard C math library functions, but TI provides some function examples.</p></li>
+</ul>
+</section>
+<section id="cla-background-task">
+<h3>CLA Background Task<a class="headerlink" href="#cla-background-task" title="Permalink to this heading">#</a></h3>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>Background Tasks can only be implemented with devices that have a Type 2 CLA.</p>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MVECTBGRND</span></code> register contains the background task vector</p></li>
+<li><p>Branch return address is saved to <code class="docutils literal notranslate"><span class="pre">MVECTBGRNDACTIVE</span></code> register (address gets
+popped to the MPC when execution returns)</p></li>
+</ul>
+<p><img alt="CLA Background Task" src="../../_images/CLA_background_task.png" /></p>
+<ul class="simple">
+<li><p>Option to run 8 tasks or 7 tasks and 1 background task</p>
+<ul>
+<li><p>Task 8 can be set to be the background task (while Tasks 1-7 service
+peripheral triggers in the foreground)</p></li>
+<li><p>Runs continuously until disabled or device/soft reset</p></li>
+<li><p>Can be triggered by a peripheral or software</p></li>
+<li><p>Tasks 1 - 7 can interrupt background task in priority order (Task 1 is
+highest, Task 7 is lowest)</p></li>
+<li><p>Can make portions of background task uninterruptible, if needed</p></li>
+</ul>
+</li>
+<li><p>Background task useful for continuous functions such as communications and
+clean-up routines</p></li>
+</ul>
+</section>
+<section id="background-task-interrupts">
+<h3>Background Task Interrupts:<a class="headerlink" href="#background-task-interrupts" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>By default background tasks are interruptible</p>
+<ul>
+<li><p>Highest priority pending task executes first</p></li>
+<li><p>When task completes, and there is no other pending interrupt, execution
+returns to the background task</p></li>
+</ul>
+</li>
+<li><p>Sections of background task can be made uninterruptible</p>
+<ul>
+<li><p>Using compiler intrinsics:</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">__disable_interrupts</span><span class="p">();</span><span class="w"> </span><span class="c1">// MSETC BGINTM</span>
+<span class="w"> </span><span class="n">__enable_interrupts</span><span class="p">();</span><span class="w"> </span><span class="c1">// MCLRC BGINTM</span>
+</pre></div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Task 8 - Background Task - Example for a background task</span>
+<span class="w"> </span><span class="n">__attribute__</span><span class="p">((</span><span class="n">interrupt</span><span class="p">(</span><span class="s">&quot;background&quot;</span><span class="p">)))</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Cla1Task8</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span><span class="w"> </span>
+<span class="w">	</span><span class="c1">//</span>
+<span class="w">	</span><span class="c1">// Code below is interruptible</span>
+<span class="w">	</span><span class="c1">//</span>
+<span class="w">	</span><span class="n">CODE</span><span class="w"> </span><span class="n">GOES</span><span class="w"> </span><span class="n">HERE</span><span class="p">...</span>
+<span class="w">	</span><span class="c1">//</span>
+<span class="w">	</span><span class="c1">// Make this portion un-interruptible //</span>
+<span class="w">	</span><span class="n">__disable_interrupts</span><span class="p">();</span>
+<span class="w">	</span><span class="n">CODE</span><span class="w"> </span><span class="n">GOES</span><span class="w"> </span><span class="n">HERE</span><span class="p">...</span>
+<span class="w">	</span><span class="n">__enable_interrupts</span><span class="p">();</span>
+<span class="w">	</span><span class="c1">//</span>
+<span class="w">	</span><span class="c1">// Code below is interruptible</span>
+<span class="w">	</span><span class="c1">//</span>
+<span class="w">	</span><span class="n">CODE</span><span class="w"> </span><span class="n">GOES</span><span class="w"> </span><span class="n">HERE</span><span class="p">...</span><span class="w"> </span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="cla-initialization">
+<h2>CLA Initialization<a class="headerlink" href="#cla-initialization" title="Permalink to this heading">#</a></h2>
+<p>CLA initialization is performed by the CPU during software initialization.</p>
+<ul class="simple">
+<li><p>Copy CLA task code from flash to CLA program RAM</p></li>
+<li><p>Initialize CLA data RAMs, as needed</p>
+<ul>
+<li><p>Populate with data coefficients, constants, etc.</p></li>
+</ul>
+</li>
+<li><p>Configure the CLA registers</p>
+<ul>
+<li><p>Enable the CLA clock (SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CLA1);)</p></li>
+<li><p>Populate the CLA task interrupt (MVECT1-8 registers)</p></li>
+<li><p>Select the desired task interrupt sources (CLA1TASKSRCSELx registers)</p></li>
+<li><p>If desired, enable IACK instruction to start tasks using software</p></li>
+<li><p>Map CLA program RAM and data RAMs to CLA space</p></li>
+</ul>
+</li>
+<li><p>Configure desired CLA task completion interrupts in the PIE</p></li>
+<li><p>Enable CLA task triggers in the MIER register</p></li>
+<li><p>Initialize the desired peripherals to trigger the CLA tasks</p></li>
+</ul>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>Data can be passed between the CLA and CPU via message RAMs or allocated CLA
+Data RAM</p>
+</div>
+<section id="cla-initialization-code-example">
+<h3>CLA Initialization Code Example<a class="headerlink" href="#cla-initialization-code-example" title="Permalink to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// The cla.h file defines data types and </span>
+<span class="c1">// special registers specific to the CLA</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;driverlib.h&quot;</span><span class="c1">  //cla.h</span>
+<span class="c1">// Defines register bit field structures</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;device.h&quot;</span><span class="c1"> </span>
+<span class="c1">// CLA task functions are predefined</span>
+<span class="k">extern</span><span class="w"> </span><span class="n">interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Cla1Task1</span><span class="p">();</span>
+<span class="k">extern</span><span class="w"> </span><span class="n">interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Cla1Task2</span><span class="p">();</span>
+<span class="k">extern</span><span class="w"> </span><span class="n">interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Cla1Task8</span><span class="p">();</span>
+<span class="c1">// Initialize CLA task interrupt vectors</span>
+<span class="n">CLA_mapTaskVector</span><span class="p">(</span><span class="n">CLA1_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">CLA_MVECT_1</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">uint16_t</span><span class="p">)</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">Cla1Task1</span><span class="p">);</span>
+<span class="n">CLA_mapTaskVector</span><span class="p">(</span><span class="n">CLA1_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">CLA_MVECT_2</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">uint16_t</span><span class="p">)</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">Cla1Task2</span><span class="p">);</span>
+<span class="o">:</span>
+<span class="n">CLA_mapTaskVector</span><span class="p">(</span><span class="n">CLA1_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">CLA_MVECT_7</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">uint16_t</span><span class="p">)</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">Cla1Task7</span><span class="p">);</span>
+<span class="n">CLA_mapTaskVector</span><span class="p">(</span><span class="n">CLA1_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">CLA_MVECT_8</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">uint16_t</span><span class="p">)</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">Cla1Task8</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="enabling-cla-support-in-ccs">
+<h2>Enabling CLA support in CCS<a class="headerlink" href="#enabling-cla-support-in-ccs" title="Permalink to this heading">#</a></h2>
+<p>Within the properties menu of a project go to <strong>Build</strong>→<strong>C2000
+Compiler</strong> →<strong>Processor Options</strong>. Inside the processor options, confirm
+that <code class="docutils literal notranslate"><span class="pre">cla2</span></code> is chosen.</p>
+<p>When creating a new CCS project, choosing a device variant that has the CLA will
+automatically select this option, so normally no user action is required.</p>
+<section id="c2000ware-cla-software-support">
+<h3>C2000Ware - CLA Software Support<a class="headerlink" href="#c2000ware-cla-software-support" title="Permalink to this heading">#</a></h3>
+<p>TI provides some examples of floating-point math CLA functions Go to <strong>TI
+Resource Explorer</strong>→<strong>C2000Ware-version</strong>→<strong>Language</strong>→<strong>Libraries</strong>
+→<strong>CLAmath</strong> →<strong>Examples</strong></p>
+</section>
+<section id="cla-compiler-scratchpad-memory-area">
+<h3>CLA Compiler Scratchpad Memory Area<a class="headerlink" href="#cla-compiler-scratchpad-memory-area" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>For local and compiler generated temporary variables</p></li>
+<li><p>Static allocation, used instead of a stack</p></li>
+<li><p>Defined in the linker command file</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">MEMORY</span>
+<span class="p">{</span><span class="w"> </span>
+<span class="w">	</span><span class="p">...</span>
+<span class="p">}</span>
+<span class="n">SECTIONS</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="p">...</span>
+<span class="w">	</span><span class="cm">/***CLA Compiler Required Sections***/</span>
+<span class="w">	</span><span class="p">.</span><span class="n">scratchpad</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="n">RAMLS0</span><span class="p">,</span><span class="w"> </span><span class="n">PAGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">	</span><span class="p">...</span>
+<span class="p">}</span>
+<span class="n">lab</span><span class="p">.</span><span class="n">cmd</span>
+<span class="cp"># CLA Assembly Language Implementation</span>
+</pre></div>
+</div>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>For a complete list of CLA assembly instructions refer to the device technical
+reference manual (TRM)</p>
+</div>
+<p>The CLA has the same instruction format as the CPU and FPU and the same
+mnemonics as FPU, with a leading “M”</p>
+<ul class="simple">
+<li><p>Destination operand on the left</p></li>
+<li><p>Source operand(s) on the right</p></li>
+</ul>
+<p><u> Example below: </u></p>
+<p><strong>CPU</strong>: MPY      ACC, T, loc16</p>
+<p><strong>FPU</strong>: MPYF32   ROH, R1H, R2H</p>
+<p><strong>CLA</strong>: MMPYF32  MR0, MR1, MR2</p>
+</section>
+<section id="cla-assembly-parallel-instructions">
+<h3>CLA Assembly Parallel Instructions<a class="headerlink" href="#cla-assembly-parallel-instructions" title="Permalink to this heading">#</a></h3>
+<p>Parallel instructions are ‘built-in’ and not free form, meaning you
+cannot just combine two regular instructions. They operate as a single
+instruction with a single opcode, and perform two operations in one cycle.
+A parallel instruction is recognized by its parallel bars.</p>
+<ul class="simple">
+<li><p>Example: Add + Parallel Store</p></li>
+</ul>
+<p><img alt="CLA Parallel Instructions" src="../../_images/CLA_parallel_instructions.png" /></p>
+</section>
+</section>
+<section id="cla-assembly-addressing-modes">
+<h2>CLA Assembly Addressing Modes<a class="headerlink" href="#cla-assembly-addressing-modes" title="Permalink to this heading">#</a></h2>
+<p>The CLA has two addressing modes: Direct and Indirect</p>
+<p><strong>Direct:</strong>
+Populates opcode field with 16-bit address of the variable</p>
+<p><strong>Indirect:</strong>
+Uses the address in MAR0 or MAR1 to access memory; after the read
+or write MAR0/MAR1 is incremented by a 16-bit signed value</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">example</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="w"> </span><span class="n">NMOV32</span><span class="w"> </span><span class="n">MR0</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">MAR0</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">++</span><span class="w"> </span>
+<span class="n">example</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="w"> </span><span class="n">NMOV32</span><span class="w"> </span><span class="n">MR1</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">MAR1</span><span class="p">[</span><span class="mi">-2</span><span class="p">]</span><span class="o">++</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>Both modes can access the lower 64Kx16 of memory only:</p>
+<ul class="simple">
+<li><p>All of the CLA data space</p></li>
+<li><p>Both message RAMs</p></li>
+<li><p>Shared peripheral registers</p></li>
+</ul>
+</section>
+<section id="cla-code-debugging">
+<h2>CLA Code Debugging<a class="headerlink" href="#cla-code-debugging" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The CLA and CPU are debugged from the same JTAG port</p></li>
+<li><p>You can halt, single-step, and run the CLA independent of the CPU</p></li>
+<li><p>Insert a breakpoint in the CLA code</p>
+<ul>
+<li><p>Insert a <code class="docutils literal notranslate"><span class="pre">MDEBUGSTOP1</span></code> instruction(s) in the code where desired then
+rebuild/reload</p></li>
+<li><p>In C code, can use (“MDEBUGSTOP1”)</p></li>
+<li><p>When the debugger is not connected, the <code class="docutils literal notranslate"><span class="pre">MDEBUGSTOP1</span></code> acts like an MNOP</p></li>
+</ul>
+</li>
+<li><p>Connect to the CLA target in CCS</p>
+<ul>
+<li><p>This enables CLA breakpoints</p></li>
+</ul>
+</li>
+<li><p>Run the CPU target</p>
+<ul>
+<li><p>CLA task will trigger (via peripheral interrupt or software)</p></li>
+<li><p>CLA executes instructions until <code class="docutils literal notranslate"><span class="pre">MDEBUGSTOP1</span></code> is hit</p></li>
+</ul>
+</li>
+<li><p>Load the code symbols into the CLA context in CCS</p>
+<ul>
+<li><p>This allows source-level debug</p></li>
+<li><p>Needs to be done only once per debug session unless the .out file changes</p></li>
+</ul>
+</li>
+<li><p>Debug the CLA code</p>
+<ul>
+<li><p>Can single-step the code, or run to the next <code class="docutils literal notranslate"><span class="pre">MDEBUGSTOP1</span></code> or to the end of
+the task</p></li>
+<li><p>If another task is pending, it will start at the end of the previous task</p></li>
+</ul>
+</li>
+<li><p>Disconnect the CLA target to disable CLA breakpoints, if desired</p></li>
+</ul>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>When using the legacy <code class="docutils literal notranslate"><span class="pre">MDEBUGSTOP</span></code> instruction, a CLA single step executes one
+pipeline cycle, whereas a CPU single step executes one instruction (and flushes
+the pipeline); see TRM for details</p>
+</div>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<section id="cla-related-collateral">
+<h3>CLA Related Collateral<a class="headerlink" href="#cla-related-collateral" title="Permalink to this heading">#</a></h3>
+<p><strong>Foundational</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/video/3871287205001">C2000 CLA C Compiler Series</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/5432122168001">CLA Hands On Workshop</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/6050578280001">CLA usage in Valley Switching Boost Power Factor Correction (PFC) Reference Design</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRY288">Enhancing the Computational Performance of the C2000™ Microcontroller Family Application Report</a></p></li>
+</ul>
+<p><strong>Getting Started</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://software-dl.ti.com/C2000/docs/cla_software_dev_guide/index.html">CLA Software Development Guide</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACS0">Software Examples to Showcase Unique Capabilities of TI’s C2000™ CLA Application Report</a></p></li>
+</ul>
+<p><strong>Expert</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ti.com/lit/SPRABS5">Digital Control of Two Phase Interleaved PFC and Motor Drive Using MCU With CLA Application Report</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRABQ5">Sensorless Field Oriented Control:3-Phase Perm.Magnet Synch. Motors With CLA Application Report</a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="../c2000_debug_systems/c2000_epg.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Embedded Pulse Generator (EPG)</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_direct_memory_access.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Direct Memory Access (DMA)</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cla-block-diagram">
+   CLA Block Diagram
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cla-memory-and-register-access">
+   CLA Memory and Register Access
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cla-memory-configuration">
+     CLA Memory Configuration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cla-control-and-execution-registers">
+     CLA Control and Execution Registers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cla-tasks">
+   CLA Tasks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cla-task-c-programming">
+     CLA Task C Programming
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cla-task-c-code-example">
+     CLA Task C Code Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cla-task-c-language-restrictions">
+     CLA Task C Language Restrictions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cla-background-task">
+     CLA Background Task
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#background-task-interrupts">
+     Background Task Interrupts:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cla-initialization">
+   CLA Initialization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cla-initialization-code-example">
+     CLA Initialization Code Example
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enabling-cla-support-in-ccs">
+   Enabling CLA support in CCS
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c2000ware-cla-software-support">
+     C2000Ware - CLA Software Support
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cla-compiler-scratchpad-memory-area">
+     CLA Compiler Scratchpad Memory Area
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cla-assembly-parallel-instructions">
+     CLA Assembly Parallel Instructions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cla-assembly-addressing-modes">
+   CLA Assembly Addressing Modes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cla-code-debugging">
+   CLA Code Debugging
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cla-related-collateral">
+     CLA Related Collateral
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

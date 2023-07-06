@@ -1,0 +1,27 @@
+# Analog System Interconnect
+
+The Analog Subsystem Interconnect permits a single pin to route a signal
+to multiple analog modules. Thus, enabling a very flexible pin usage, allowing
+for smaller device packages. 
+
+```{admonition} Note:
+The F28x7x and F2838x devices do not have an analog subsystem interconnect.
+```
+
+## Example - F28004x Analog Subsystem Interconnect
+
+The DAC outputs, comparator subsystem inputs, PGA functions, and digital inputs
+are multiplexed with the ADC inputs. 
+
+![Analog Subsystem Interconnect](images/adc/analog_subsystem_interconnect.png)
+
+The connections for each of the portions within the analog subsystem
+interconnect can be found within the 'Analog Subsystem' section of the device's
+Technical Reference Manual (TRM). 
+
+------------------------------------------
+
+```{admonition} Feedback
+Please provide any feedback you may have about the content within C2000 Academy to: <c2000_academy_feedback@list.ti.com>
+
+```

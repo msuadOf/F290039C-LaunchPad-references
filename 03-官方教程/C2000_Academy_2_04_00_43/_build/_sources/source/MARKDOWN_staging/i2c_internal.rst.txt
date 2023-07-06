@@ -1,0 +1,30 @@
+I2C Related Collateral
+====================================
+
+**Foundational**
+
+- `I2C Hardware Overview <https://www.ti.com/video/6048454601001>`_
+
+- `I2C Protocol Overview <https://www.ti.com/video/6047548123001>`_
+
+- `Understanding the I2C Bus Application Report <https://www.ti.com/lit/pdf/slva704>`_
+
+**Getting Started**
+
+- `Configuring the TMS320F280x DSP as an I2C Processor Application Report <https://ti.com/lit/SPRAAN8>`_
+
+- `I2C Buffers Overview <https://www.ti.com/video/6049695096001>`_
+
+- `I2C Dynamic Addressing Application Report <https://www.ti.com/lit/pdf/scaa137>`_
+
+- `I2C translators overview <https://www.ti.com/video/6048453246001>`_
+
+- `Interfacing EEPROM Using C2000 I2C Module Application Report <https://www.ti.com/lit/spracs8>`_
+
+- `Why, When, and How to use I2C Buffers Application Report <https://www.ti.com/lit/pdf/scpa054>`_
+
+**Expert**
+
+- `I2C Bus Pull-Up Resistor Calculation Application Report <https://www.ti.com/lit/pdf/slva689>`_
+
+- `Maximum Clock Frequency of I2C Bus Using Repeaters Application Report <https://www.ti.com/lit/pdf/slva695>`_

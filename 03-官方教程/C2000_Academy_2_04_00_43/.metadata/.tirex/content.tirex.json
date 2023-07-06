@@ -1,0 +1,1045 @@
+[
+    {
+        "name": "1. Getting Started",
+        "mainCategories": [],
+        "resourceType": "categoryInfo",
+        "resourceClass": [
+            "other"
+        ],
+        "sort": "manual"
+    },
+    {
+        "name": "Getting started with C2000 Device",
+        "description": "The objective of this module is to get started with TI Code Composer Studio (CCS)\ndevelopment environment and run a basic example to toggle LEDs. Specifically,\nthis module demonstrates how to import a project from a C2000ware, modify/compile the code, \nand run the generated-out file on the target EVM (LaunchPad or controlCARD).\n",
+        "localId": "source_c2000_get_started_c2000_getstarted",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "1. Getting Started"
+        ],
+        "location": "../../_build/source/c2000_get_started/c2000_getstarted.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Getting started using SysConfig",
+        "description": "TI's Code Composer Studio includes a GUI-based tool for\nsystem configuration (SysConfig). It can be used for PinMux\nconfiguration, peripheral setup, and the generation of C-code using\nC2000Ware DriverLib API. \nThis module goes over how to create a simple SysConfig project to\ntoggle an LED. \n",
+        "localId": "source_c2000_get_started_c2000_getstarted_sysconfig",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "1. Getting Started"
+        ],
+        "location": "../../_build/source/c2000_get_started/c2000_getstarted_sysconfig.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "2. Device Overview",
+        "mainCategories": [],
+        "resourceType": "categoryInfo",
+        "resourceClass": [
+            "other"
+        ],
+        "sort": "manual"
+    },
+    {
+        "name": "Overview of C28x Devices and Accelerators",
+        "description": "This introductory module includes an\noverview of the basic architecture of the C2000 family of real-time\ncontrol microcontrollers. \n",
+        "localId": "source_c2000_overview_c2000_device_overview",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "2. Device Overview"
+        ],
+        "location": "../../_build/source/c2000_overview/c2000_device_overview.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "3. System Control",
+        "mainCategories": [],
+        "resourceType": "categoryInfo",
+        "resourceClass": [
+            "other"
+        ],
+        "sort": "manual"
+    },
+    {
+        "name": "Boot-Mode & Resets",
+        "description": "This module describes the boot process and the various types\nof resets available on C2000 devices.\n",
+        "localId": "source_c2000_system_c2000_boot",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "3. System Control"
+        ],
+        "location": "../../_build/source/c2000_system/c2000_boot.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Interrupts",
+        "description": "An interrupt is a response by the processor/CPU to an event that needs attention. \nThis module goes over how to setup interrupts and the kinds of interrupts there are\non C2000 devices.\n",
+        "localId": "source_c2000_system_c2000_interrupt",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "3. System Control"
+        ],
+        "location": "../../_build/source/c2000_system/c2000_interrupt.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Timers",
+        "description": "This module describes C28x CPU Timers and the watchdog timer which is a \nsafety feature that will reset the device if something goes astray in the system. \n",
+        "localId": "source_c2000_system_c2000_timers",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "3. System Control"
+        ],
+        "location": "../../_build/source/c2000_system/c2000_timers.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "GPIOs & Crossbars",
+        "description": "This module describes General Purpose\nInput Output (GPIO) pins, as well as crossbars. Crossbars provide the\nability to route different signals throughout the device. \n",
+        "localId": "source_c2000_system_c2000_gpio_xbar",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "3. System Control"
+        ],
+        "location": "../../_build/source/c2000_system/c2000_gpio_xbar.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Memory Controller",
+        "description": "This module describes the C28x memory controller including the types of Random Access Memory (RAM) \n(Ex. local shared RAM, global shared RAM, message RAM).\n",
+        "localId": "source_c2000_system_c2000_memory",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "3. System Control"
+        ],
+        "location": "../../_build/source/c2000_system/c2000_memory.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "External Memory Interface (EMIF)",
+        "description": "When an application requires more memory than what is available on-chip, the EMIF controller \ncan be used to connect to external memory devices. This module goes into details about EMIF\nsuch as the features, configuration, and performance.\n",
+        "localId": "source_c2000_system_c2000_emif",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "3. System Control"
+        ],
+        "location": "../../_build/source/c2000_system/c2000_emif.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Flash Memory",
+        "description": "This module describes C28x flash memory and programming flash memory.\n",
+        "localId": "source_c2000_system_c2000_flash",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "3. System Control"
+        ],
+        "location": "../../_build/source/c2000_system/c2000_flash.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "4. Analog Subsystem",
+        "mainCategories": [],
+        "resourceType": "categoryInfo",
+        "resourceClass": [
+            "other"
+        ],
+        "sort": "manual"
+    },
+    {
+        "name": "Analog to Digital Converter (ADC)",
+        "description": "C2000 devices supports multiple analog-to-digital converters (ADCs). This module\ndescribes the different components in the ADC and how to setup the ADC.\n",
+        "localId": "source_c2000_analog_subsystem_c2000_analog_to_digital_converter",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "4. Analog Subsystem"
+        ],
+        "location": "../../_build/source/c2000_analog_subsystem/c2000_analog_to_digital_converter.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Comparator Subsystem (CMPSS)",
+        "description": "Each Comparator Subsystem (CMPSS) has two comparators within it. This module\ndescribes how the comparators can be used and setup.\n",
+        "localId": "source_c2000_analog_subsystem_c2000_comparator_subsystem",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "4. Analog Subsystem"
+        ],
+        "location": "../../_build/source/c2000_analog_subsystem/c2000_comparator_subsystem.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Digital to Analog Converter (DAC)",
+        "description": "The buffered DAC can be used to provide a programmable reference\noutput voltage. This modules walks though the DAC features and the\nDAC block diagram.\n",
+        "localId": "source_c2000_analog_subsystem_c2000_digital_to_analog_converter",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "4. Analog Subsystem"
+        ],
+        "location": "../../_build/source/c2000_analog_subsystem/c2000_digital_to_analog_converter.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Programmable Gain Amplifier (PGA)",
+        "description": "Programmable Gain Amplifier (PGA) amplifies small input signals to increase the\ndynamic range of the downstream ADC and CMPSS modules. This modules showcases \nthe benefits of using PGAs and the different parts of the block diagram. \n",
+        "localId": "source_c2000_analog_subsystem_c2000_programmable_gain_amplifier",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "4. Analog Subsystem"
+        ],
+        "location": "../../_build/source/c2000_analog_subsystem/c2000_programmable_gain_amplifier.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Analog Interconnect",
+        "description": "The Analog Subsystem Interconnect permits a single pin to route a signal to\nmultiple analog modules. Thus, enabling a very flexible pin usage, allowing for\nsmaller device packages.\n",
+        "localId": "source_c2000_analog_subsystem_c2000_analog_interconnect",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "4. Analog Subsystem"
+        ],
+        "location": "../../_build/source/c2000_analog_subsystem/c2000_analog_interconnect.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "5. Control Peripherals",
+        "mainCategories": [],
+        "resourceType": "categoryInfo",
+        "resourceClass": [
+            "other"
+        ],
+        "sort": "manual"
+    },
+    {
+        "name": "Enhanced Pulse Width Modulation (ePWM)",
+        "description": "The C2000 high-performance control peripherals are an integral component for all\ndigital control systems. This module will cover pulse width modulation (PWM).\n",
+        "localId": "source_c2000_control_peripherals_c2000_enhanced_pulse_width_modulation",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "5. Control Peripherals"
+        ],
+        "location": "../../_build/source/c2000_control_peripherals/c2000_enhanced_pulse_width_modulation.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Enhanced Capture Module (eCAP)",
+        "description": "The C2000 enhanced capture module allows time-based logging of external\nsignal transitions. It is used to accurately time external events by\ntime stamping transitions on the capture input pin.\n",
+        "localId": "source_c2000_control_peripherals_c2000_enhanced_capture_module",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "5. Control Peripherals"
+        ],
+        "location": "../../_build/source/c2000_control_peripherals/c2000_enhanced_capture_module.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Enhanced Quadrature Encoder Pulse (eQEP)",
+        "description": "The Enhanced Quadrature Encoder Pulse (eQEP) module is essential when\nintegrating C2000 devices in any application that requires motor control. The\neQEP module enables the C2000 device to interact with linear or rotary\nincremental encoders to determine necessary motor information from rotating\nmachines.\n",
+        "localId": "source_c2000_control_peripherals_c2000_enhanced_quadrature_encoder_pulse",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "5. Control Peripherals"
+        ],
+        "location": "../../_build/source/c2000_control_peripherals/c2000_enhanced_quadrature_encoder_pulse.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Sigma-Delta Filter Module (SDFM)",
+        "description": "The C2000 Sigma Delta Filter Module (SDFM) is a four-channel digital filter\ndesigned specifically for current measurement in motor control applications.\n",
+        "localId": "source_c2000_control_peripherals_c2000_sigma_delta_filter",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "5. Control Peripherals"
+        ],
+        "location": "../../_build/source/c2000_control_peripherals/c2000_sigma_delta_filter.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "6. Communication Peripherals",
+        "mainCategories": [],
+        "resourceType": "categoryInfo",
+        "resourceClass": [
+            "other"
+        ],
+        "sort": "manual"
+    },
+    {
+        "name": "Communications Overview",
+        "description": "C2000 devices contain features that allow several methods of communication and data\nexchange between the MCU and other devices. Many of the most commonly used\ncommunications techniques are presented in this module.\n",
+        "localId": "source_c2000_communications_c2000_communications_overview",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "6. Communication Peripherals"
+        ],
+        "location": "../../_build/source/c2000_communications/c2000_communications_overview.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Fast Serial Interface (FSI)",
+        "description": "The FSI module is a highly reliable high-speed serial communication peripheral\ncapable of operating at dual data rate, providing 100 Mbps transfer using a 50\nMHz clock. \n",
+        "localId": "source_c2000_communications_c2000_fsi",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "6. Communication Peripherals"
+        ],
+        "location": "../../_build/source/c2000_communications/c2000_fsi.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Serial Communication Interface (SCI)",
+        "description": "The SCI is a two-wire asynchronous serial port (also known as a\nUART) that supports communications between the processor and other asynchronous\nperipherals that use the standard non-return-to-zero (NRZ) format. \n",
+        "localId": "source_c2000_communications_c2000_sci",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "6. Communication Peripherals"
+        ],
+        "location": "../../_build/source/c2000_communications/c2000_sci.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Inter-Integrated Circuit (I2C)",
+        "description": "The I2C provides an interface between devices that connect using an I2C-bus and\nare compliant with I2C-bus specification version 2.1.\n",
+        "localId": "source_c2000_communications_c2000_i2c",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "6. Communication Peripherals"
+        ],
+        "location": "../../_build/source/c2000_communications/c2000_i2c.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Serial Peripheral Interface (SPI)",
+        "description": "The SPI is a high-speed\nsynchronous serial port that shifts a programmable length serial bit stream\ninto and out of the device at a programmable bit-transfer rate. \n",
+        "localId": "source_c2000_communications_c2000_spi",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "6. Communication Peripherals"
+        ],
+        "location": "../../_build/source/c2000_communications/c2000_spi.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Multichannel Buffered Serial Port (MCBSP)",
+        "description": "The McBSP\nprovides a high-speed direct interface to CODECs, analog interface chips\n(AICs), and other serially connected A/D and D/A devices.\n",
+        "localId": "source_c2000_communications_c2000_mcbsp",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "6. Communication Peripherals"
+        ],
+        "location": "../../_build/source/c2000_communications/c2000_mcbsp.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Controller Area Network (CAN)",
+        "description": "CAN is a serial communications protocol which efficiently supports distributed\nreal-time control with a high level of reliability. \n",
+        "localId": "source_c2000_communications_c2000_can",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "6. Communication Peripherals"
+        ],
+        "location": "../../_build/source/c2000_communications/c2000_can.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "CAN Flexible Data Rate (CAN FD/MCAN)",
+        "description": "CAN FD refers to the protocol while MCAN refers to the physical module\non the device that implements the CAN FD protocol.\n",
+        "localId": "source_c2000_communications_c2000_mcan",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "6. Communication Peripherals"
+        ],
+        "location": "../../_build/source/c2000_communications/c2000_mcan.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Local Interconnect Network (LIN)",
+        "description": "The LIN standard is based\non the SCI (UART) serial data link format. The communication concept is\nsingle-commander/multiple-responder with a message identification for\nmulti-cast transmission between any network nodes.\n",
+        "localId": "source_c2000_communications_c2000_lin",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "6. Communication Peripherals"
+        ],
+        "location": "../../_build/source/c2000_communications/c2000_lin.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Power Management Bus (PMBus)",
+        "description": "The PMBus module provides an interface for communicating between the\nmicrocontroller and other devices that are compliant with the System Management\nInterface (SMI) specification.\n",
+        "localId": "source_c2000_communications_c2000_pmbus",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "6. Communication Peripherals"
+        ],
+        "location": "../../_build/source/c2000_communications/c2000_pmbus.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Ethernet for Control Automation Technology (EtherCAT)",
+        "description": "Ethernet for Control Automation Technology\n(EtherCAT\u00c2\u00ae) is an Ethernet-based field bus system. \n",
+        "localId": "source_c2000_communications_c2000_ethercat",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "6. Communication Peripherals"
+        ],
+        "location": "../../_build/source/c2000_communications/c2000_ethercat.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Universal Serial Bus (USB)",
+        "description": "The USB controller complies\nwith USB 2.0 Implementers Forum certification standards, and utilizes\nfull-speed (12 Mbps) operation in device mode and full-/low-speed (12 Mbps/1.5\nMbps) operation in Host mode.\n",
+        "localId": "source_c2000_communications_c2000_usb",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "6. Communication Peripherals"
+        ],
+        "location": "../../_build/source/c2000_communications/c2000_usb.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "7. Security & Safety Peripherals",
+        "mainCategories": [],
+        "resourceType": "categoryInfo",
+        "resourceClass": [
+            "other"
+        ],
+        "sort": "manual"
+    },
+    {
+        "name": "Dual Code Security Module (DCSM)",
+        "description": "The purpose of code security is to prevent unauthorized access to on-chip \nsecure memories such as Flash, RAM, OTP and ROM. In DCSM there are secure \nzones to which securable resources can be assigned.\n",
+        "localId": "source_c2000_security_safety_c2000_dcsm",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "7. Security & Safety Peripherals"
+        ],
+        "location": "../../_build/source/c2000_security_safety/c2000_dcsm.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Functional Safety (FuSa)",
+        "description": "Functional Safety-Compliant C2000\nproducts can help streamline and speed up the ISO 26262, IEC 61508, and IEC\n60730 certification processes with their built-in diagnostics, documentation,\nsoftware, and support.\n",
+        "localId": "source_c2000_security_safety_c2000_fusa",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "7. Security & Safety Peripherals"
+        ],
+        "location": "../../_build/source/c2000_security_safety/c2000_fusa.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Background CRC (BGCRC)",
+        "description": "A cyclic redundancy check (CRC) is an error-detecting code that is commonly used\nin digital systems. Some C2000 devices feature the background CRC\n(BGCRC) module, which computes the CRC value in hardware. \n",
+        "localId": "source_c2000_security_safety_c2000_bgcrc",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "7. Security & Safety Peripherals"
+        ],
+        "location": "../../_build/source/c2000_security_safety/c2000_bgcrc.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "8. Debug & Diagnostics",
+        "mainCategories": [],
+        "resourceType": "categoryInfo",
+        "resourceClass": [
+            "other"
+        ],
+        "sort": "manual"
+    },
+    {
+        "name": "Embedded Real-time Analysis and Diagnostic (ERAD)",
+        "description": "The ERAD module enhances the debug and system analysis capabilities of\nthe device. This module facilitates sophisticated non-intrusive\ndetection and monitoring of the CPU operation in real-time.\n",
+        "localId": "source_c2000_debug_systems_c2000_erad",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "8. Debug & Diagnostics"
+        ],
+        "location": "../../_build/source/c2000_debug_systems/c2000_erad.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "C2000 Debugging Tips & Tricks",
+        "description": "This module describes various topics related to debugging issues on the C2000\nfamily of devices.\n",
+        "localId": "source_c2000_debug_systems_c2000_debug_tips",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "8. Debug & Diagnostics"
+        ],
+        "location": "../../_build/source/c2000_debug_systems/c2000_debug_tips.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Embedded Pulse Generator (EPG)",
+        "description": "The Embedded Pattern Generator (EPG) module is a customizable pattern and clock\ngenerator that could serve many test and application scenarios that require a\nsimple pattern generator or a periodic clock generator. The EPG module can also\nbe used to capture an incoming serial stream of data.\n",
+        "localId": "source_c2000_debug_systems_c2000_epg",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "8. Debug & Diagnostics"
+        ],
+        "location": "../../_build/source/c2000_debug_systems/c2000_epg.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "9. Advanced Topics",
+        "mainCategories": [],
+        "resourceType": "categoryInfo",
+        "resourceClass": [
+            "other"
+        ],
+        "sort": "manual"
+    },
+    {
+        "name": "Control Law Accelerator (CLA)",
+        "description": "The CLA is an independent 32-bit floating-point math hardware accelerator which\nexecutes realtime control algorithms in parallel with the main C28x CPU,\neffectively doubling the computational performance.\n",
+        "localId": "source_c2000_advanced_topics_c2000_control_law_accelerator",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "9. Advanced Topics"
+        ],
+        "location": "../../_build/source/c2000_advanced_topics/c2000_control_law_accelerator.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Direct Memory Access (DMA)",
+        "description": "The DMA module provides a hardware method of transferring data between\nperipherals and/or memory without intervention from the CPU, effectively\nfreeing up the CPU for other functions.\n",
+        "localId": "source_c2000_advanced_topics_c2000_direct_memory_access",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "9. Advanced Topics"
+        ],
+        "location": "../../_build/source/c2000_advanced_topics/c2000_direct_memory_access.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Configurable Logic Block (CLB)",
+        "description": "The Configurable Logic Block (CLB) is a peripheral exclusive to C2000 devices\nthat allows users to incorporate custom logic without the need for an external\nlogic device such as an FPGA or CLPD. \n",
+        "localId": "source_c2000_advanced_topics_c2000_configurable_logic_block",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "9. Advanced Topics"
+        ],
+        "location": "../../_build/source/c2000_advanced_topics/c2000_configurable_logic_block.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Interprocessor Communications (IPC)",
+        "description": "IPC allows communication between two CPU subsystems (ex. CPU1 and CPU2).\nThis module explains the use and operation of IPC. \n",
+        "localId": "source_c2000_advanced_topics_c2000_interprocessor_communications",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "9. Advanced Topics"
+        ],
+        "location": "../../_build/source/c2000_advanced_topics/c2000_interprocessor_communications.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Labs",
+        "mainCategories": [],
+        "resourceType": "categoryInfo",
+        "resourceClass": [
+            "other"
+        ],
+        "sort": "manual"
+    },
+    {
+        "name": "ADC Lab",
+        "description": "Part one consists of sampling a single ADC input channel at a prescribed sampling rate\nand storing the conversion result in a circular memory buffer. Part two is to integrate \nthe digital-to-analog converter (DAC) into part 1.\n",
+        "localId": "source_c2000_academy_labs_analog_subsystem_c2000_lab_adc",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Labs"
+        ],
+        "location": "../../_build/source/c2000_academy_labs/analog_subsystem/c2000_lab_adc.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "EPWM/ECAP Lab",
+        "description": "Generate a PWM waveform using one of the ePWM modules. The period and\nduty cycle of the PWM waveform will be measured by one of the eCAP\nmodules.\n",
+        "localId": "source_c2000_academy_labs_control_peripherals_c2000_lab_pwm",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Labs"
+        ],
+        "location": "../../_build/source/c2000_academy_labs/control_peripherals/c2000_lab_pwm.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "EQEP Lab",
+        "description": "This lab illustrates a common use-case of the eQEP module- connecting quadrature\nsignals to the C2000 device and using the eQEP to calculate motor\ncharacteristics.\n",
+        "localId": "source_c2000_academy_labs_control_peripherals_c2000_lab_qep",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Labs"
+        ],
+        "location": "../../_build/source/c2000_academy_labs/control_peripherals/c2000_lab_qep.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "SCI Lab",
+        "description": "Utilize the SCI (Serial Communication Interface) by sending and receiving data\nbetween a C2000 device and a computer. The computer will be used to change the\nfrequency of the blinking LED and then the board will echo this value back to\nthe computer.\n",
+        "localId": "source_c2000_academy_labs_communications_lab_c2000_lab_sci",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Labs"
+        ],
+        "location": "../../_build/source/c2000_academy_labs/communications_lab/c2000_lab_sci.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "CLA Lab",
+        "description": "Use the Control Law Accelerator (CLA) to implement a FIR lowpass filter. We will\napply a PWM waveform to the input of our lowpass filter, which will result in a\nsinusoidal waveform at the output. The PWM waveform will be generated using one\nof the ePWM modules and it will be sampled via the ADC at a given sample rate.\n",
+        "localId": "source_c2000_academy_labs_advanced_topics_c2000_lab_cla",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Labs"
+        ],
+        "location": "../../_build/source/c2000_academy_labs/advanced_topics/c2000_lab_cla.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "DMA Lab",
+        "description": "Use the Direct Memory Access (DMA) controller to regularly service the ADC in a\nreal-time data processing application. The ePWM module will be used to generate\na PWM waveform to simulate a real-time data signal, and the ADC will be setup\nto sample the PWM waveform at a chosen sampling rate. Accordingly, the DMA will\nbe used to store the ADC samples in a ping pong buffer, so groups of samples\ncan be processed by the CPU in an interrupt service routine (ISR).\n",
+        "localId": "source_c2000_academy_labs_advanced_topics_c2000_lab_dma",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Labs"
+        ],
+        "location": "../../_build/source/c2000_academy_labs/advanced_topics/c2000_lab_dma.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "CLB Lab",
+        "description": "Gain familiarity with the Configurable Logic Block (CLB) peripheral and its\nsubmodules through a guided lab example. This lab demonstrations the CLB's\nability to connect to other peripherals, perform logical operations, override\nperipheral outputs, and then generate interrupts to the CPU.\n",
+        "localId": "source_c2000_academy_labs_advanced_topics_c2000_lab_clb",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Labs"
+        ],
+        "location": "../../_build/source/c2000_academy_labs/advanced_topics/c2000_lab_clb.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "eCAP Implementation Using CLB Lab",
+        "description": "This lab demonstrates the CLB's ability to connect to a signal, accurately time\nevents, and send data to the CPU. The CLB will measure a high signal, a low\nsignal, and another high signal before sending the data to the CPU. An external\nwave generator or the ePWM module can be set up to supply a signal, if a wave\ngenerator is not available.\n",
+        "localId": "source_c2000_academy_labs_advanced_topics_c2000_lab_clb_ecap",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Labs"
+        ],
+        "location": "../../_build/source/c2000_academy_labs/advanced_topics/c2000_lab_clb_ecap.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "IPC Lab",
+        "description": "Use basic IPC features to send data in both directions between CPU1 and CPU2.\nPWM2 will be configured to provide a 50 kHz SOC signal to ADC-A. An\nEnd-of-Conversion ISR on CPU1 will read each result and write it into a data\nregister in the IPC. An IPC interrupt will then be triggered on CPU2 which\nfetches this data and stores it in a circular buffer. The same ISR grabs a data\npoint from a sine table and loads it into a different IPC register for\ntransmission to CPU1. This triggers an interrupt on CPU1 to fetch the sine data\nand write it into DAC-B.\n",
+        "localId": "source_c2000_academy_labs_advanced_topics_c2000_lab_ipc",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Labs"
+        ],
+        "location": "../../_build/source/c2000_academy_labs/advanced_topics/c2000_lab_ipc.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "System Integration Lab",
+        "description": "This lab builds on all of the different topics covered thus far. As a system\nexample, the epwm module is setup to output a 50kHz output with a duty cycle\nthat will vary based on an ADC conversion result. A comparator will also be\nused to monitor the ADC conversion results and cause a one-shot trip to drive\nthe EPWM output low in case the ADC conversion is above a certain threshold.\n",
+        "localId": "source_c2000_academy_labs_system_control_c2000_lab_system_design",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Labs"
+        ],
+        "location": "../../_build/source/c2000_academy_labs/system_control/c2000_lab_system_design.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "Gen2/Gen1 Devices",
+        "mainCategories": [],
+        "resourceType": "categoryInfo",
+        "resourceClass": [
+            "other"
+        ],
+        "sort": "manual"
+    },
+    {
+        "name": "F2803x Workshop",
+        "description": "   updated or maintained, and are provided \"as is\".",
+        "localId": "source_c2000_legacy_devices_f2803x_f2803x_workshop",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Gen2/Gen1 Devices"
+        ],
+        "location": "../../_build/source/c2000_legacy_devices/F2803x/F2803x_workshop.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "F2802x Workshop",
+        "description": "   updated or maintained, and are provided \"as is\".",
+        "localId": "source_c2000_legacy_devices_f2802x_f2802x_workshop",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Gen2/Gen1 Devices"
+        ],
+        "location": "../../_build/source/c2000_legacy_devices/F2802x/F2802x_workshop.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "F2806x Workshop",
+        "description": "   updated or maintained, and are provided \"as is\".",
+        "localId": "source_c2000_legacy_devices_f2806x_f2806x_workshop",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Gen2/Gen1 Devices"
+        ],
+        "location": "../../_build/source/c2000_legacy_devices/F2806x/F2806x_workshop.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "F2833x Workshop",
+        "description": "   updated or maintained, and are provided \"as is\".",
+        "localId": "source_c2000_legacy_devices_f2833x_f2833x_workshop",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Gen2/Gen1 Devices"
+        ],
+        "location": "../../_build/source/c2000_legacy_devices/F2833x/F2833x_workshop.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "F281x Workshop",
+        "description": "   updated or maintained, and are provided \"as is\".",
+        "localId": "source_c2000_legacy_devices_f281x_f281x_workshop",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Gen2/Gen1 Devices"
+        ],
+        "location": "../../_build/source/c2000_legacy_devices/F281x/F281x_workshop.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "F280x Workshop",
+        "description": "   updated or maintained, and are provided \"as is\".",
+        "localId": "source_c2000_legacy_devices_f280x_f280x_workshop",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Gen2/Gen1 Devices"
+        ],
+        "location": "../../_build/source/c2000_legacy_devices/F280x/F280x_workshop.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "F28M35x Workshop",
+        "description": "   updated or maintained, and are provided \"as is\".",
+        "localId": "source_c2000_legacy_devices_f28m35x_f28m35x_workshop",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Gen2/Gen1 Devices"
+        ],
+        "location": "../../_build/source/c2000_legacy_devices/F28M35x/F28M35x_workshop.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    },
+    {
+        "name": "LF240x Workshop",
+        "description": "   updated or maintained, and are provided \"as is\".",
+        "localId": "source_c2000_legacy_devices_lf240x_lf240x_workshop",
+        "resourceType": "file",
+        "resourceClass": [
+            "other"
+        ],
+        "fileType": ".html",
+        "mainCategories": [],
+        "subCategories": [
+            "Gen2/Gen1 Devices"
+        ],
+        "location": "../../_build/source/c2000_legacy_devices/LF240x/LF240x_workshop.html",
+        "icon": "../../_build/_static/images/favicon.png"
+    }
+]

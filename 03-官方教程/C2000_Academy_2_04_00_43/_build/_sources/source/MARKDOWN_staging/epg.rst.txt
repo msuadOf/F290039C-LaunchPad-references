@@ -1,0 +1,10 @@
+EPG Related Collateral
+====================================
+
+**Foundational**
+
+- `C2000 Embedded Pattern Generator <https://www.ti.com/video/6280114167001>`_
+
+**Getting Started**
+
+- `Designing With the C2000™ Embedded Pattern Generator (EPG) Application Report <https://www.ti.com/lit/spracy7>`_

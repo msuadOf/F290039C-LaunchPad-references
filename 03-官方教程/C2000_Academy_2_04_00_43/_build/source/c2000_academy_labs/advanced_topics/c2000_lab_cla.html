@@ -1,0 +1,936 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Control Law Accelerator (CLA) Lab &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_academy_labs/advanced_topics/c2000_lab_cla';</script>
+    <script src="../../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_academy_labs/advanced_topics/c2000_lab_cla.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Direct Memory Access (DMA) Lab" href="c2000_lab_dma.html" />
+    <link rel="prev" title="Serial Communication Interface (SCI) Lab" href="../communications_lab/c2000_lab_sci.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="control-law-accelerator-cla-lab">
+<h1>Control Law Accelerator (CLA) Lab<a class="headerlink" href="#control-law-accelerator-cla-lab" title="Permalink to this heading">#</a></h1>
+<p>The Control Law Accelerator (CLA) is an independent 32-bit floating-point math
+hardware accelerator which executes realtime control algorithms in parallel
+with the main C28x CPU. In this lab, the user will learn how to configure CLA
+to read the ADC sample data and then apply FIR filter to ADC sample. At the end
+it will send raw ADC sample data and filter outout to C28x code for further
+processing using Cla1ToCpuMsgRAM message RAM.</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>This lab cannot be performed on the following device/s since there is no CLA:</p>
+<ul class="simple">
+<li><p>F28002x</p></li>
+<li><p>F280013x</p></li>
+<li><p>F280015x</p></li>
+</ul>
+</div>
+<section id="solutions">
+<h2>Solutions<a class="headerlink" href="#solutions" title="Permalink to this heading">#</a></h2>
+<p>All solutions are available in the directory: <code class="docutils literal notranslate"><span class="pre">&lt;c2000ware_install_path&gt;/training/device/&lt;device_name&gt;</span></code>.</p>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>In this lab, we will use the Control Law Accelerator (CLA) to implement a FIR
+lowpass filter. We will apply a PWM waveform to the input of our lowpass
+filter, which will result in a sinusoidal waveform at the output. The PWM
+waveform will be generated using one of the ePWM modules and it will be sampled
+via the ADC at a given sample rate. Both the filtered and unfiltered waveforms
+will be viewed in a real-time Code Composer Studio (CCS) debug session via
+internal buffers.</p>
+</section>
+<section id="lab-setup">
+<h2>Lab Setup<a class="headerlink" href="#lab-setup" title="Permalink to this heading">#</a></h2>
+<section id="hardware-setup">
+<h3>Hardware Setup<a class="headerlink" href="#hardware-setup" title="Permalink to this heading">#</a></h3>
+<p>You will need the following hardware for this lab:</p>
+<ul class="simple">
+<li><p>A C2000 controlCARD or LaunchPad with the supplied USB cable.</p></li>
+<li><p>Jumper cables.</p></li>
+<li><p>Oscilloscope (optional).</p></li>
+</ul>
+<p>Use the supplied USB cable to connect your C2000 board’s USB port to the standard
+USB Type-A connector in your computer. You should see some LEDs light up on your
+board. In addition to powering the board, a JTAG communication link is also
+established between the device and Code Composer Studio.</p>
+<p>Later in the lab we will be routing the
+output pin of the PWM waveform to the input pin of the ADC, so make sure that
+you have enough jumper cables to facilitate this.</p>
+</section>
+<section id="software-setup">
+<h3>Software Setup<a class="headerlink" href="#software-setup" title="Permalink to this heading">#</a></h3>
+<p>The following software will need to be installed on your computer:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/tool/CCSTUDIO-C2000">Code Composer Studio</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/tool/C2000WARE">C2000Ware</a></p></li>
+</ul>
+</section>
+</section>
+<section id="import-empty-project">
+<h2>Import Empty Project<a class="headerlink" href="#import-empty-project" title="Permalink to this heading">#</a></h2>
+<p>Our first task is to import an empty project to our Code Composer
+Studio (CCS) workspace.
+The basic instructions are as follows:</p>
+<ol class="arabic simple">
+<li><p>Open CCS and go to <strong>Project→Import CCS Projects</strong>. A new window should
+appear. Ensure that the <strong>Select search-directory</strong> option is activated.</p></li>
+<li><p>Click the <strong>Browse</strong> button and select the
+<code class="docutils literal notranslate"><span class="pre">[C20000ware_Install_dir]/training/device/[device]/empty_cla_lab</span></code>
+directory.
+Note that the default Windows [C20000ware_Install_dir] is
+<code class="docutils literal notranslate"><span class="pre">C:/ti/c2000/C2000Ware_4_xx_xx_xx</span></code>.</p></li>
+<li><p>Under <strong>Discovered Projects</strong>, you should now see the
+<code class="docutils literal notranslate"><span class="pre">lab_[board]_[device]</span></code> project. Select the appropriate project for either
+the control card or the launchpad.</p></li>
+</ol>
+<p><img alt="Discovered_Projects" src="../../../_images/cla_start.png" /></p>
+<ol class="arabic simple" start="4">
+<li><p>Click <strong>Finish</strong> to import and copy the <code class="docutils literal notranslate"><span class="pre">lab_cla_[board]_[device]</span></code> project
+into your workspace.</p></li>
+<li><p>After the project has been imported, the project explorer window should
+look like below:</p></li>
+</ol>
+<p><img alt="Projects_explorer" src="../../../_images/cla_project_view.png" /></p>
+<ul class="simple">
+<li><p><b>lab_main.c</b>: C28x core C-source file with empty main() function</p></li>
+<li><p><b>lab_cla_tasks.cla</b>: CLA core source file</p></li>
+<li><p><b>lab_shared.h</b>: Common symbols defined here and they are used by
+both cores.</p></li>
+</ul>
+</section>
+<section id="configure-the-gpio">
+<h2>Configure the GPIO<a class="headerlink" href="#configure-the-gpio" title="Permalink to this heading">#</a></h2>
+<p>We will configure the necessary GPIO pins as shown below. Our PWM
+waveform will be output from ePWM1A. We will also
+configure one of the board LEDs as an indicator.</p>
+<section id="steps-to-add-gpio-configuration">
+<h3>Steps to add GPIO configuration:<a class="headerlink" href="#steps-to-add-gpio-configuration" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>In the project, open the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file by double-clicking it.</p></li>
+<li><p>In the SysConfig GUI, select the “Hardware” tab, as shown below.</p></li>
+</ul>
+<p><img alt="lab_cla_led" src="../../../_images/lab_cla_led.png" /></p>
+<ul class="simple">
+<li><p>If you have a Launchpad, click ‘+’ to add LED5. If you have a controlCard, click ‘+’ to add D2.</p></li>
+<li><p>Select the LED option like below.</p></li>
+</ul>
+<p><img alt="lab_cla_led2" src="../../../_images/lab_cla_led2.png" /></p>
+</section>
+</section>
+<section id="configure-epwm1-and-epwm2">
+<h2>Configure ePWM1 and ePWM2<a class="headerlink" href="#configure-epwm1-and-epwm2" title="Permalink to this heading">#</a></h2>
+<p>The code below configures ePWM1A to output a 1kHz PWM waveform with a 50% duty
+cycle. This PWM waveform will be used as the input to our FIR lowpass filter.
+Notice that ePWM1A is setup to output a symmetrical PWM waveform, that is, the
+time base counter is setup in up/down mode. Given that we are in up/down mode
+and we want our PWM waveform to have a frequency of 1kHz, we have</p>
+<p><span class="math notranslate nohighlight">\(\text{Time Base Period}=\frac{f_{tbclk}}{2f_{pwm}}=\frac{100* 10^6}{2* 1000}=50000.\)</span></p>
+<p>Notice that the macro <code class="docutils literal notranslate"><span class="pre">PWM_HALF_PERIOD</span></code> is set accordingly to be 50000.</p>
+<div class="admonition-on-the-frequency-of-the-epwm-clock admonition">
+<p class="admonition-title">On the frequency of the ePWM clock</p>
+<p>If you have a F2837xD or F2838x based device, the ePWM clock frequency is half
+of <code class="docutils literal notranslate"><span class="pre">DEVICE_SYSCLK_FREQ</span></code> by default, otherwise, <code class="docutils literal notranslate"><span class="pre">DEVICE_SYSCLK_FREQ</span></code> and the
+ePWM clock frequency are equal. The code provided in this lab results in the
+ePWM clock being 100MHz.</p>
+</div>
+<p>Next, we note the configuration of the duty cycle. Since we are in up/down mode
+and we want our PWM waveform to have a 50% duty cycle, we have</p>
+<p><span class="math notranslate nohighlight">\(\text{Counter Compare Value}=(1-\frac{duty}{100}) *tbprd=(1-\frac{50}{100})*50000=25000.\)</span></p>
+<p>Notice that the macro <code class="docutils literal notranslate"><span class="pre">PWM_DUTY</span></code> is set accordingly to be 25000. The action
+qualifier sub-module is then set to force the output to be high on a count up
+event and low on a count down event. This results in the desired PWM waveform.</p>
+<p>Add EPWM by clicking ‘+’ in SysConfig screen to add EPWM1.</p>
+<p><img alt="EPWM1_1" src="../../../_images/lab_epwm1_1.png" /></p>
+<p><img alt="EPWM1_3" src="../../../_images/lab_epwm1_2.png" /></p>
+<p><img alt="EPWM1_4" src="../../../_images/lab_epwm1_3.png" /></p>
+<p><img alt="EPWM1_2" src="../../../_images/lab_epwm1_4.png" /></p>
+<p>In this lab, the ADC will be used to sample the generated PWM waveform from
+ePWM1A at a rate of 8kHz. The below code configures ePWM2 to trigger a SOC on
+the ADC at a rate of 8kHz. Unlike ePWM1A, notice that ePWM2 is setup to operate
+in up count mode, hence, we have</p>
+<p><span class="math notranslate nohighlight">\(\text{Time Base Period}=\frac{f_{tbclk}}{f_{pwm}}-1=\frac{100* 10^6}{8000}-1=12499.\)</span></p>
+<p>Accordingly, the macro <code class="docutils literal notranslate"><span class="pre">ADC_SAMPLE_PERIOD</span></code> is set to be 12499.</p>
+<p>Now press ‘Add’ button to add EPWM2.</p>
+<p><img alt="EPWM2_1" src="../../../_images/lab_epwm2_1.png" /></p>
+<p><img alt="EPWM2_3" src="../../../_images/lab_epwm2_2.png" /></p>
+<p><img alt="EPWM2_2" src="../../../_images/lab_epwm2_3.png" /></p>
+<p>This concludes the configuration of the ePWM modules.</p>
+<div class="admonition-a-more-detailed-explanation-of-the-epwm-configuration admonition">
+<p class="admonition-title">A more detailed explanation of the ePWM configuration</p>
+<p>The configuration of both ePWM1A and ePWM2 above is identical to that of the
+lab in
+<a class="reference internal" href="../control_peripherals/c2000_lab_pwm.html"><span class="doc std std-doc">ePWM Lab</span></a>,
+so you should see that lab for a more detailed explanation.</p>
+</div>
+</section>
+<section id="configure-the-adc">
+<h2>Configure the ADC<a class="headerlink" href="#configure-the-adc" title="Permalink to this heading">#</a></h2>
+<p>In the previous section, we explained that ePWM2 would be triggering a SOC
+event on the ADC. In this section, we will provide the code to configure the
+ADC. More details about the configuration of the ADC can be found in
+<a class="reference internal" href="../../c2000_analog_subsystem/c2000_analog_to_digital_converter.html"><span class="doc std std-doc">Analog-to-Digital Converter (ADC)</span></a>.
+However, notice that we have setup a SOC to be triggered by ePWM2 and that we
+have setup the ADC to interrupt at the end of a conversion. This interrupt will
+be used to trigger a CLA task that will implement the FIR lowpass filtering
+routine. The ADC is also setup in continuous mode so that the ADC register
+always contains the most recent sample.</p>
+<p>Add ADC by clicking ‘+’ in SysConfig screen to add ADC1.</p>
+<p><img alt="ADC1" src="../../../_images/lab_adc1.png" /></p>
+<p><img alt="ADC2" src="../../../_images/lab_adc2.png" /></p>
+<div class="admonition-for-devices-f280039c admonition">
+<p class="admonition-title">For Devices F280039C:</p>
+<p>Set analog reference voltage using asysctl parameter.</p>
+<p>If the ADC module has already been added, select ASYSCTL in the ANALOG group
+and change the analog reference voltage to be an internal voltage of 2.5V. Otherwise,
+add ASYSCTL by clicking ‘+’ in ANALOG group and then add internal
+reference of 2.5V.</p>
+<p><img alt="ASYSCTL" src="../../../_images/lab_adc_internal_ref.png" /></p>
+</div>
+</section>
+<section id="configure-the-cla">
+<h2>Configure the CLA<a class="headerlink" href="#configure-the-cla" title="Permalink to this heading">#</a></h2>
+<p>Now that we have reviewed the linker script additions needed by the CLA and the
+CLA C compiler, we can go ahead and configure CLA.</p>
+<p>Add CLA by clicking ‘+’ in SysConfig <code class="docutils literal notranslate"><span class="pre">System</span></code> group.</p>
+<p><img alt="CLA1" src="../../../_images/lab_cla1.png" /></p>
+<p><img alt="CLA2" src="../../../_images/lab_cla2.png" /></p>
+</section>
+<section id="configure-the-memcfg">
+<h2>Configure the MEMCFG<a class="headerlink" href="#configure-the-memcfg" title="Permalink to this heading">#</a></h2>
+<p>Now we can configure program and data memory of CLA1 using sysconfig MEMCFG
+module. Please use the table below to select LS memory for CLA program and CLA data
+for your device.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>CLA Program Memory</p></th>
+<th class="head"><p>CPU and CLA Shared Data Memory</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379xD</p></td>
+<td><p>LS1</p></td>
+<td><p>LS5</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>LS1</p></td>
+<td><p>LS5</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>LS0</p></td>
+<td><p>LS3</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28003x</p></td>
+<td><p>LS0</p></td>
+<td><p>LS1</p></td>
+</tr>
+</tbody>
+</table>
+<p>Add MEMCFG by clicking ‘+’ in SysConfig <code class="docutils literal notranslate"><span class="pre">System</span></code> group</p>
+<p><img alt="MEMCFG1" src="../../../_images/lab_memcfg.png" /></p>
+</section>
+<section id="define-the-cla-tasks">
+<h2>Define the CLA tasks<a class="headerlink" href="#define-the-cla-tasks" title="Permalink to this heading">#</a></h2>
+<p>In this section, we will define the necessary global variables and includes.
+A FIR lowpass filter of order 31 is used in this lab, hence,
+the number of coefficients or length of the filter is 32. Notice that the
+<code class="docutils literal notranslate"><span class="pre">coeffs</span></code> array contains the FIR filter coefficients, and the macro <code class="docutils literal notranslate"><span class="pre">FIR_LEN</span></code>
+contains the FIR filter length. The <code class="docutils literal notranslate"><span class="pre">coeffs</span></code> array is one of the initialized
+global variables stored in the <code class="docutils literal notranslate"><span class="pre">.const_bss</span></code> section. Additionally, observe that
+we have defined another global variable <code class="docutils literal notranslate"><span class="pre">delay</span></code>, which is used as a delay line
+for our FIR filter.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;driverlib.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;board.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;lab_shared.h&quot;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">coeffs</span><span class="p">[</span><span class="n">FIR_LEN</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="mf">-0.0006103139426196</span><span class="p">,</span><span class="mf">-0.005592184655005</span><span class="p">,</span><span class="mf">-0.01292485322836</span><span class="w"> </span><span class="p">,</span><span class="mf">-0.01926532895538</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">-0.01762908502044</span><span class="w">  </span><span class="p">,</span><span class="mf">-0.004303218458627</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01563724674838</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">0.02815885544785</span><span class="p">,</span>
+<span class="w">     </span><span class="mf">0.01902562195175</span><span class="w">  </span><span class="p">,</span><span class="mf">-0.01290472511163</span><span class="w"> </span><span class="p">,</span><span class="mf">-0.04827630093442</span><span class="w"> </span><span class="p">,</span><span class="mf">-0.0545188692635</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">-0.006464860729499</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">0.09270744275212</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">0.2064249836238</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="mf">0.2822241125204</span><span class="p">,</span>
+<span class="w">     </span><span class="mf">0.2822241125204</span><span class="w">   </span><span class="p">,</span><span class="w"> </span><span class="mf">0.2064249836238</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="mf">0.09270744275212</span><span class="w"> </span><span class="p">,</span><span class="mf">-0.006464860729499</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">-0.0545188692635</span><span class="w">   </span><span class="p">,</span><span class="mf">-0.04827630093442</span><span class="w"> </span><span class="p">,</span><span class="mf">-0.01290472511163</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">0.01902562195175</span><span class="p">,</span>
+<span class="w">     </span><span class="mf">0.02815885544785</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="mf">0.01563724674838</span><span class="w"> </span><span class="p">,</span><span class="mf">-0.004303218458627</span><span class="p">,</span><span class="mf">-0.01762908502044</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">-0.01926532895538</span><span class="w">  </span><span class="p">,</span><span class="mf">-0.01292485322836</span><span class="w"> </span><span class="p">,</span><span class="mf">-0.005592184655005</span><span class="p">,</span><span class="mf">-0.0006103139426196</span>
+<span class="p">};</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">delay</span><span class="p">[</span><span class="n">FIR_LEN</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>Now we will provide the code for the FIR lowpass filtering task <code class="docutils literal notranslate"><span class="pre">Cla1Task1()</span></code>.
+Observe that a sample is read from the ADC result register. Using the macros,
+a bias value is subtracted from the ADC sample, and
+the result is scaled and stored in <code class="docutils literal notranslate"><span class="pre">filter_in</span></code>. This step is needed to convert
+the PWM waveform into a square wave expressed in volts. Unlike the PWM
+waveform, a square wave does not have a zero frequency component, which in
+turn, allows us to observe a sinusoidal waveform at the output of our lowpass
+filter. Subsequent code implements the FIR lowpass filter. Finally, observe
+that the <code class="docutils literal notranslate"><span class="pre">filter_out</span></code> global variable contains the filtered sample. The
+<code class="docutils literal notranslate"><span class="pre">filter_out</span></code> and <code class="docutils literal notranslate"><span class="pre">filter_in</span></code> global variables are stored in the
+<code class="docutils literal notranslate"><span class="pre">Cla1ToCpuMsgRAM</span></code> section, which allows the CPU to access the FIR lowpass
+filter input and output samples in the CLA ISR.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// FIR LP filter task.</span>
+<span class="n">__attribute__</span><span class="p">((</span><span class="n">interrupt</span><span class="p">))</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Cla1Task1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">tmpData</span><span class="p">;</span>
+<span class="w">    </span><span class="n">filter_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Uncomment this to debug the CLA while connected to the debugger</span>
+<span class="w">    </span><span class="c1">//__mdebugstop();</span>
+<span class="w">    </span><span class="c1">// Read in new sample and subtract off the bias.</span>
+<span class="w">    </span><span class="n">tmpData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ADC_readResult</span><span class="p">(</span><span class="n">myADC0_RESULT_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">myADC0_SOC0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">filter_in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="kt">float</span><span class="p">)(</span><span class="n">tmpData</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="w"> </span><span class="p">(</span><span class="n">ADC_BITS</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)))</span><span class="o">*</span><span class="n">ADC_VSTEP</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Shift the delay line to the right by 1.</span>
+<span class="w">    </span><span class="cp">#pragma UNROLL(FIR_LEN - 1)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FIR_LEN</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">delay</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">delay</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">];</span>
+<span class="w">        </span><span class="n">filter_out</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">delay</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Add the new ADC sample to the delay line.</span>
+<span class="w">    </span><span class="n">delay</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter_in</span><span class="p">;</span>
+<span class="w">    </span><span class="n">filter_out</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">coeffs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">delay</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, we provide the code for the one time initialization routine
+<code class="docutils literal notranslate"><span class="pre">Cla1Task8()</span></code>. This routine zeros out the delay line for the FIR filter.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">__attribute__</span><span class="p">((</span><span class="n">interrupt</span><span class="p">))</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Cla1Task8</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="w"> </span><span class="p">((</span><span class="kt">int16_t</span><span class="p">)</span><span class="n">FIR_LEN</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">delay</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This concludes the coding of the tasks in <code class="docutils literal notranslate"><span class="pre">lab_cla_tasks.cla</span></code>.</p>
+</section>
+<section id="define-global-macros-and-variables-in-main">
+<h2>Define global macros and variables in main<a class="headerlink" href="#define-global-macros-and-variables-in-main" title="Permalink to this heading">#</a></h2>
+<p>First, we will define some necessary macros and global variables. A description
+of these macros and global variables will be addressed in the following
+sections. Unless told otherwise, assume that all code goes in
+<code class="docutils literal notranslate"><span class="pre">lab_main.c</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;driverlib.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;device.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;board.h&quot;</span>
+<span class="cp">#define BUF_BITS    7                           </span><span class="c1">// Buffer bits &amp;lt;= 16.</span>
+<span class="cp">#define BUF_LEN     (1 &amp;lt;&amp;lt; BUF_BITS)             </span><span class="c1">// Buffer length.</span>
+<span class="cp">#define BUF_MASK    ((uint16_t)(BUF_LEN - 1))   </span><span class="c1">// Buffer mask.</span>
+<span class="kt">float</span><span class="w">       </span><span class="n">ClaBuf</span><span class="p">[</span><span class="n">BUF_LEN</span><span class="p">];</span><span class="w">                    </span><span class="c1">// Buffer to store filtered samples.</span>
+<span class="kt">float</span><span class="w">       </span><span class="n">AdcBuf</span><span class="p">[</span><span class="n">BUF_LEN</span><span class="p">];</span><span class="w">                    </span><span class="c1">// Buffer for un-filtered samples.</span>
+<span class="kt">uint16_t</span><span class="w">    </span><span class="n">ClaBufIdx</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                    </span><span class="c1">// Buffer index for ClaBuf.</span>
+<span class="kt">uint16_t</span><span class="w">    </span><span class="n">AdcBufIdx</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                    </span><span class="c1">// Buffer index for AdcBufIdx.</span>
+<span class="kt">uint16_t</span><span class="w">    </span><span class="n">LedCtr</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="cp">#pragma DATA_SECTION(filter_out,&quot;Cla1ToCpuMsgRAM&quot;);</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">filter_out</span><span class="p">;</span>
+<span class="cp">#pragma DATA_SECTION(filter_in,&quot;Cla1ToCpuMsgRAM&quot;);</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">filter_in</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="define-main">
+<h2>Define main()<a class="headerlink" href="#define-main" title="Permalink to this heading">#</a></h2>
+<p>Next, we will populate <code class="docutils literal notranslate"><span class="pre">main()</span></code> as shown below.
+That being said, we still need to know the system clock frequency in order to
+configure the ePWM modules necessary for this lab. The system clock frequency
+value that is configured via <code class="docutils literal notranslate"><span class="pre">Device_init()</span></code> is defined as <code class="docutils literal notranslate"><span class="pre">DEVICE_SYSCLK_FREQ</span></code>
+in <code class="docutils literal notranslate"><span class="pre">&lt;projectroot&gt;/device/device.h</span></code>. Observe that the main function only handles
+initialization routines. Most of the activity in this lab will lie in the CLA
+tasks and interrupt service routine (ISR).</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Configure system clock and PLL, enable peripherals, and configure</span>
+<span class="w">    </span><span class="c1">// flash if used.</span>
+<span class="w">    </span><span class="n">Device_init</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Initialize the PIE module and vector table.</span>
+<span class="w">    </span><span class="n">Interrupt_initModule</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Interrupt_initVectorTable</span><span class="p">();</span>
+<span class="w">	</span><span class="n">Board_init</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Enable global interrupts.</span>
+<span class="w">    </span><span class="n">EINT</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Enable real-time debug.</span>
+<span class="w">    </span><span class="n">ERTM</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">NOP</span><span class="p">;</span><span class="w">  </span><span class="c1">// Do nothing.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="define-the-cla-isr">
+<h2>Define the CLA ISR<a class="headerlink" href="#define-the-cla-isr" title="Permalink to this heading">#</a></h2>
+<p>Lastly, we will define the CLA ISR routine. Given the small order of our
+filter, it is reasonable to assume that the runtime of <code class="docutils literal notranslate"><span class="pre">Cla1Task1()</span></code> will be
+lower than the sampling period. Thus, this ISR will be called at a rate of
+approximately 8kHz, i.e., the sampling rate of the ADC. Note that the values of
+<code class="docutils literal notranslate"><span class="pre">filter_in</span></code> and <code class="docutils literal notranslate"><span class="pre">filter_out</span></code> are copied into the circular buffers <code class="docutils literal notranslate"><span class="pre">AdcBuf</span></code> and
+<code class="docutils literal notranslate"><span class="pre">ClaBuf</span></code>, respectively. Finally, the global variable <code class="docutils literal notranslate"><span class="pre">LedCtr</span></code> is used to divide
+the ISR call rate by 8000 in order to toggle an indicator LED at 1Hz.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">__interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">cla1Isr1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Clear interrupt flags.</span>
+<span class="w">    </span><span class="n">ADC_clearInterruptStatus</span><span class="p">(</span><span class="n">myADC0_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">ADC_INT_NUMBER1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Interrupt_clearACKGroup</span><span class="p">(</span><span class="n">INT_myCLA01_INTERRUPT_ACK_GROUP</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Store raw ADC sample in AdcBuf.</span>
+<span class="w">    </span><span class="n">AdcBuf</span><span class="p">[</span><span class="n">AdcBufIdx</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter_in</span><span class="p">;</span>
+<span class="w">    </span><span class="n">AdcBufIdx</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="n">BUF_MASK</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Store filtered output in ClaBuf.</span>
+<span class="w">    </span><span class="n">ClaBuf</span><span class="p">[</span><span class="n">ClaBufIdx</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter_out</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ClaBufIdx</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="n">BUF_MASK</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Toggle LED1 at a rate of 1Hz.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">LedCtr</span><span class="o">++</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="mi">8000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GPIO_togglePin</span><span class="p">(</span><span class="n">myBoardLED0_GPIO</span><span class="p">);</span>
+<span class="w">        </span><span class="n">LedCtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This concludes the coding portion of this lab.</p>
+</section>
+<section id="build-and-run-interactive-debug-session">
+<h2>Build and run interactive debug session<a class="headerlink" href="#build-and-run-interactive-debug-session" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Ensure that the USB cable from your LaunchPad or controlCARD is connected to
+your computer.</p></li>
+<li><p>Under the <strong>Build</strong> button, activate the <strong>CPU1_RAM</strong> build configuration.
+Build the program and fix any compilation errors.
+Alternatively, feel free to use the corresponding flash build configuration
+if desired.</p></li>
+<li><p>Connect the ePWM1A GPIO pin to the ADCINA0 GPIO pin using a jumper cable. If
+you have an oscilloscope, connect a probe to the ePWM1A GPIO pin on your
+board.</p></li>
+</ol>
+<p><strong>LaunchPad</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>EPWM1A Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>30</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>70</p></td>
+<td><p>80</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28003x</p></td>
+<td><p>70</p></td>
+<td><p>40</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ControlCARD</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>EPWM1A Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28003x</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple" start="4">
+<li><p>Now we will start the debug session. Under the debug button, start the debug
+session using the new configuration. You should now see the debugging
+session open up and the debugger should have reached <code class="docutils literal notranslate"><span class="pre">main()</span></code>.</p></li>
+<li><p>Click the <strong>Resume</strong> button. You should see the LED on your board toggling
+at about 1Hz which indicates that the CLA ISR is being called at 8kHz as
+expected. This also suggests that <code class="docutils literal notranslate"><span class="pre">Cla1Task1()</span></code> is completing at a rate of
+8kHz.</p></li>
+<li><p>Now we will view the unfiltered and filtered waveforms in real-time using
+the two circular buffers implemented in the CLA ISR. Click on
+<strong>Tools→Graph→Dual Time</strong>, set <strong>Acquisition Buffer Size</strong> to be
+<strong>128</strong>, set <strong>Dsp Data Type</strong> to be <strong>32 bit floating point</strong>, set
+<strong>Sampling Rate Hz</strong> to be <strong>8000</strong>, set <strong>Start Address A</strong> to be
+<strong>AdcBuf</strong>, set <strong>Start Address B</strong> to be <strong>ClaBuf</strong>, set <strong>Display Data
+Size</strong> to be <strong>64</strong>, set <strong>Time Display Unit</strong> to be <strong>ms</strong>, and leave the
+other settings as their default value. Click <strong>OK</strong> and you should see two
+plot windows open up.</p></li>
+</ol>
+<div class="admonition-important admonition">
+<p class="admonition-title">Important</p>
+<p>Note: If you do not see CCS menu <strong>Tools → Graph</strong>, please refer to
+<a class="reference internal" href="../../c2000_get_started/c2000_getstarted.html"><span class="doc std std-doc">Getting Started (Setting CCS for graph)</span></a>
+to see the instruction on how to enable CCS graphing tool in your perspective.</p>
+</div>
+<p><img alt="Plot Configuration" src="../../../_images/plot_settings.png" /></p>
+<ol class="arabic simple" start="7">
+<li><p>Activate the <strong>Continuous Refresh</strong> option in both of the plot windows and
+watch the plot windows update. If all is well, the <strong>DualTimeA</strong> plot window
+should contain a square waveform and the <strong>DualTimeB</strong> plot window should
+contain a sinusoidal waveform. Note the effect that the lower sampling rate
+has on the sinusoidal waveform.</p></li>
+</ol>
+<p><img alt="PWM Waveform" src="../../../_images/unfiltered_plot.png" /></p>
+<p><img alt="PWM Waveform" src="../../../_images/filtered_plot.png" /></p>
+<ol class="arabic simple" start="8">
+<li><p>Terminate the debug session and close the project. This concludes the lab
+assignment.</p></li>
+</ol>
+</section>
+<section id="full-solution">
+<h2>Full Solution<a class="headerlink" href="#full-solution" title="Permalink to this heading">#</a></h2>
+<p>The full solution to this lab exercise is included as part of the C2000Ware
+SDK. Import the project from
+<code class="docutils literal notranslate"><span class="pre">&lt;c2000ware_install_path&gt;/training/device/&lt;device_name&gt;/advance_topics/lab_cla</span></code>.</p>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="../communications_lab/c2000_lab_sci.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Serial Communication Interface (SCI) Lab</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_lab_dma.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Direct Memory Access (DMA) Lab</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solutions">
+   Solutions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lab-setup">
+   Lab Setup
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hardware-setup">
+     Hardware Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#software-setup">
+     Software Setup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-empty-project">
+   Import Empty Project
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-the-gpio">
+   Configure the GPIO
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#steps-to-add-gpio-configuration">
+     Steps to add GPIO configuration:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-epwm1-and-epwm2">
+   Configure ePWM1 and ePWM2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-the-adc">
+   Configure the ADC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-the-cla">
+   Configure the CLA
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-the-memcfg">
+   Configure the MEMCFG
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-the-cla-tasks">
+   Define the CLA tasks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-global-macros-and-variables-in-main">
+   Define global macros and variables in main
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-main">
+   Define main()
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-the-cla-isr">
+   Define the CLA ISR
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-and-run-interactive-debug-session">
+   Build and run interactive debug session
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-solution">
+   Full Solution
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

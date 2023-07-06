@@ -1,0 +1,34 @@
+CLB Related Collateral
+====================================
+
+**Foundational**
+
+- `C2000™ Configurable Logic Block (CLB) Series <https://www.ti.com/video/series/C2000-configurable-logic-block.html>`_
+
+- `Customizing on-chip peripherals defies conventional logic <https://e2e.ti.com/blogs\_/b/industrial\_strength/archive/2020/01/13/customizing-on-chip-peripherals-defies-conventional-logic>`_
+
+- `Enable Differentiation and win with CLB in various applications Application Report <https://www.ti.com/lit/slyp681>`_
+
+- `Enable Differentiation with Configurable Logic in Various Automotive Applications <https://www.ti.com/video/6195168576001>`_
+
+**Getting Started**
+
+- `C2000™ Position Manager PTO API Reference Guide Application Report <www.ti.com/lit/SPRAC77>`_
+
+- `CLB Tool User Guide <http://www.ti.com/lit/SPRUIR8>`_
+
+- `Designing With The C2000 Configurable Logic Block Application Report <https://ti.com/lit/SPRACL3>`_
+
+- `How do I add SYSCONFIG support (Pinmux and Peripheral Initialization) to an existing driverlib project? <https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/910829/faq-how-do-i-add-sysconfig-support-pinmux-and-peripheral-initialization-to-an-existing-driverlib-project>`_
+
+- `How to Migrate Custom Logic From an FPGA/CPLD to C2000 Microcontrollers Application Report <https://ti.com/lit/SPRACO2>`_
+
+**Expert**
+
+- `Achieve Delayed Protection for Three-Level Inverter With CLB Application Report <https://ti.com/lit/SPRACY3>`_
+
+- `Diagnosing Delta-Sigma Modulator Bitstream Using C2000™ Configurable Logic Block Application Report <https://www.ti.com/lit/SPRAD53>`_
+
+- `How to Implement Custom Serial Interfaces Using Configurable Logic Block (CLB) Application Report <https://www.ti.com/lit/SPRAD62>`_
+
+- `Tamagawa T-Format Absolute-Encoder Master Interface Reference Design for C2000™ MCUs <www.ti.com/lit/TIDUE74>`_

@@ -1,0 +1,65 @@
+# LF240x Workshop
+
+:::{warning} Disclaimer The workshop materials on this page are no longer being
+   updated or maintained, and are provided "as is". However, the workshop
+   materials can still be very useful for learning about the device. The CCS
+   projects which are used with the lab exercise source files may need to be
+   recreated for use with later versions of the software. Also, the hardware
+   target (ie. development board) may be discontinued.
+:::
+
+The C2000 TMS320LF240x Microcontroller Workshop is a hands-on technical course
+based on the TMS320LF2407A device. Learning is accomplished through detailed
+presentation materials and hands-on lab exercises. This workshop has been
+developed to decrease the learning curve from months to days, reduce
+development time, and accelerate product time to market. Also, this workshop is
+perfect for both the beginner and advanced users. 
+
+The workshop starts with the basic concepts and progresses to more advanced
+topics in a logical fashion. Each topic and lab exercise builds on the previous
+one that was presented, running a common theme throughout the workshop. All of
+the lab exercises are written in assembly and are performed on the Spectrum
+Digital EVM320LF2407A Evaluation Module. The materials guide the user through
+system initialization, peripheral setup, and programming an application into
+flash memory. 
+
+## Workshop Outline
+
+1. Introduction and Architectural Overview
+2. Program Development Tools
+3. Addressing Modes
+4. Basic Programming Techniques
+5. Advanced Programming Techniques
+6. Numerical Issues
+7. Implementing Algorithms
+8. Logical Operations
+9. System Initialization
+10. Interrupts
+11. Analog-to-Digital Converter
+12. Event Manager
+13. System Design
+14. Communications
+15. C Compiler
+16. Development Support
+
+## Running the Labs
+
+In order to run the labs, you will need:
+
+- PC running Windows XP or greater
+
+- Adobe Acrobat Reader
+
+- Spectrum Digital EVM320LF2407A Evaluation Module
+
+- Code Composer Studio (CCS) v4.12 - Discontinued
+
+- Jumper Wire
+
+## Workshop Materials - Revision 4.2 February 2002
+
+- [ LF240x Microcontroller Workshop Manual](resources/DSP24_Workshop.pdf) (pdf file)
+
+- [ Lab Files ](resources/labs.zip) (zip file)
+
+- [ Solution Files ](resources/solutions.zip) (zip file)

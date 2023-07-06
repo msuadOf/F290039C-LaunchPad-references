@@ -1,0 +1,16 @@
+ECAN Related Collateral
+====================================
+
+**Foundational**
+
+- `Automotive CAN Overview and Training <https://www.ti.com/video/5236633580001>`_
+
+- `CAN Physical layer <https://www.ti.com/video/6078637405001>`_
+
+- `CAN and CAN FD Overview <https://www.ti.com/video/6078637459001>`_
+
+- `CAN and CAN FD Protocol <https://www.ti.com/video/6078640832001>`_ - Only applicable to: F280013x, F280015x, F28002x, F28003x, F28004x, F2807x, F2837xD, F2837xS, F2838x, F28P55x, F28P65x
+
+**Expert**
+
+- `Calculator for CAN Bit Timing Parameters Application Report <https://ti.com/lit/SPRAC35>`_

@@ -1,0 +1,36 @@
+SDFM Related Collateral
+====================================
+
+**Foundational**
+
+- `How delta-sigma ADCs work, Part 1 Application Report <https://www.ti.com/lit/slyt423>`_
+
+- `How delta-sigma ADCs work, Part 2 Application Report <https://www.ti.com/lit/slyt438>`_
+
+- `Nuts and Bolts of the Delta-Sigma Converter <https://www.ti.com/video/3888145066001>`_
+
+- `Sigma Delta Filter Module (SDFM) Training for C2000™ MCUs <https://www.ti.com/video/series/C2000-sigma-delta-filter-modulator.html>`_
+
+**Getting Started**
+
+- `Achieving Better Signal Integrity With Isolated Delta-Sigma Modulators in Motor Drives Application Report <https://www.ti.com/lit/tida033>`_
+
+- `Using Sigma Delta Filter Module (SDFM) to Measure the Analog Input Signal <https://www.mathworks.com/help/supportpkg/texasinstrumentsc2000/ug/sdfmexample.html>`_
+
+**Expert**
+
+- `C2000 DesignDRIVE Development Kit for Industrial Motor Control <https://www.ti.com/tool/TMDXIDDK379D>`_ - Only applicable to: F28003x, F28004x, F2838x
+
+- `Diagnosing Delta-Sigma Modulator Bitstream Using C2000™ Configurable Logic Block Application Report <https://www.ti.com/lit/SPRAD53>`_
+
+- `Isolated Current Shunt and Voltage Measurement Kit Application Report <https://www.ti.com/lit/tidu499>`_
+
+- `Isolated, Shunt-Based Current Sensing Reference Design <https://www.ti.com/tool/TIPD165>`_
+
+- `Quick Response Control of PMSM Using Fast Current Loop Application Report <https://www.ti.com/lit/spracl1>`_
+
+- `Single-Phase Inverter Reference Design With Voltage Source and Grid Connected Modes <https://www.ti.com/tool/TIDM-HV-1PH-DCAC>`_ - Only applicable to: F28004x
+
+- `The case for isolated delta-sigma modulators: Is my system fast enough for short-circuit detection? <https://e2e.ti.com/blogs\_/archives/b/precisionhub/archive/2014/11/10/the-case-for-isolated-delta-sigma-modulators-is-my-system-fast-enough-for-short-circuit-detection>`_
+
+- `Vienna Rectifier-Based Three Phase Power Factor Correction Reference Design Using C2000 MCU <https://www.ti.com/tool/TIDM-1000>`_ - Only applicable to: F280015x, F28004x

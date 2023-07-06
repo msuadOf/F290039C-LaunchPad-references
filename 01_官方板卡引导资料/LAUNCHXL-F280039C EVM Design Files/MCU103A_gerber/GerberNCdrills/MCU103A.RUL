@@ -1,0 +1,14 @@
+DRC Rules Export File for PCB: C:\Users\a0232540\AppData\Local\TempReleases\Snapshot\1\MCU103A.PcbDoc
+RuleKind=Clearance|RuleName=Clearance_FiducialMark|Scope=Board|Minimum=0.00
+RuleKind=Clearance|RuleName=USB101|Scope=Board|Minimum=7.87
+RuleKind=Clearance|RuleName=Clearance_1|Scope=Board|Minimum=19.69
+RuleKind=Clearance|RuleName=ISVIA|Scope=Board|Minimum=7.87
+RuleKind=Clearance|RuleName=Clearance_Boardedge|Scope=Board|Minimum=11.81
+RuleKind=MinimumAnnularRing|RuleName=MinimumAnnularRing|Scope=Board|Minimum=3.94
+RuleKind=MinimumAnnularRing|RuleName=MinimumAnnularRing_ThermalPadVias|Scope=Board|Minimum=3.94
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=2.00
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=5.00
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=5.91
+RuleKind=Clearance|RuleName=INPOLYGON|Scope=Board|Minimum=11.81
+RuleKind=Width|RuleName=Analog|Scope=Board|Minimum=8.00

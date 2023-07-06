@@ -1,0 +1,63 @@
+# Communications Overview
+
+C2000 devices contain features that allow several methods of communication and data
+exchange between the MCU and other devices. Many of the most commonly used
+communication techniques are presented in this module.
+
+The intent of this module is not to give exhaustive design details of the
+communication peripherals, but rather to provide an overview of the features
+and capabilities. Once these features and capabilities are understood,
+additional information can be obtained from various resources such as
+documentation, as needed. 
+
+# Communications Techniques 
+
+Several methods of
+implementing a communications system are possible. The method selected for a
+particular design should be one that meets the required data rate
+at the lowest cost. Various categories of interface are available. Each of the
+categories will be described in this module.
+
+Serial ports provide a simple, hardware-efficient means of high-level
+communication between devices. Like the GPIO pins, they may be used in
+stand-alone or multiprocessing systems.
+
+In a multiprocessing system, they are an excellent choice when both devices have
+an identical serial port and the data rate requirement is relatively low.
+Serial interface is even more desirable when the devices are physically distant
+from each other because the inherently low number of wires provides a simpler
+interconnection.
+
+Serial ports require separate lines to implement, and they do not interfere in
+any way with the data and address lines of the processor. The only overhead
+they require is to read/write new words from/to the ports as each word is
+received/transmitted. This process can be performed as a short interrupt
+service routine under hardware control, requiring only a few cycles to
+maintain.
+
+The C28x family of devices have both synchronous and asynchronous serial
+ports. 
+
+## Synchronous
+
+* Short Distance (on-board)
+* High data rate
+* Explicit clock
+
+![Synchronous Communication](images/sync_comm.png)
+
+## Asynchronous
+
+* Longer distances
+* Lower data rate (~1/8 of SPI)
+* Implied clock (clk/data mixed)
+* Economical with reasonable performance
+
+![Asynchronous Communication](images/async_comm.png)
+
+------------------------------------------
+
+```{admonition} Feedback
+Please provide any feedback you may have about the content within C2000 Academy to: <c2000_academy_feedback@list.ti.com>
+
+```

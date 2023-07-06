@@ -1,0 +1,27 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: MCU103A.PcbDoc   12/14/2021  3:48:05 PM
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Signal to Bottom Signal
+ASCII RoundHoles File : MCU103A-RoundHoles.TXT
+ASCII SlotHoles File : MCU103A-SlotHoles.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      8mil (0.2mm)                                              Round             7         PTH        0.00inch (0.00mm)
+T2      10mil (0.25mm)                                            Round             726       PTH        0.00inch (0.00mm)
+T3      12mil (0.3mm)                                             Round             22        PTH        0.00inch (0.00mm)
+T4      16mil (0.4mm)                                             Round             17        PTH        0.00inch (0.00mm)
+T5      24mil (0.6mm)                                             Slot              2         PTH        0.00inch (0.00mm)
+T6      25mil (0.635mm)                                           Round             8         PTH        0.00inch (0.00mm)
+T7      28mil (0.7mm)                                             Slot              4         PTH        0.00inch (0.00mm)
+T8      40mil (1.02mm)                                            Round             80        PTH        0.00inch (0.00mm)
+T9      43mil (1.1mm)           +/-2mil (0.05mm)                  Round             10        PTH        0.00inch (0.00mm)
+T10     43mil (1.1mm)                                             Round             20        PTH        0.00inch (0.00mm)
+T11     45mil (1.15mm)                                            Round             27        PTH        0.00inch (0.00mm)
+T12     35mil (0.9mm)                                             Round             2         NPTH       0.00inch (0.00mm)
+T13     125mil (3.175mm)                                          Round             4         NPTH       0.00inch (0.00mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              929
+
+Total Processing Time (hh:mm:ss) : 00:00:01

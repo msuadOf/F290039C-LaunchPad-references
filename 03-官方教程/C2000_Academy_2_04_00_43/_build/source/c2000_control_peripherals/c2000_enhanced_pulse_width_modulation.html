@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Enhanced Pulse Width Modulation (ePWM) &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_control_peripherals/c2000_enhanced_pulse_width_modulation';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_control_peripherals/c2000_enhanced_pulse_width_modulation.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Enhanced Capture Module (eCAP)" href="c2000_enhanced_capture_module.html" />
+    <link rel="prev" title="Analog System Interconnect" href="../c2000_analog_subsystem/c2000_analog_interconnect.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="enhanced-pulse-width-modulation-epwm">
+<h1>Enhanced Pulse Width Modulation (ePWM)<a class="headerlink" href="#enhanced-pulse-width-modulation-epwm" title="Permalink to this heading">#</a></h1>
+<p>The C2000 high-performance control peripherals are an integral component for all
+digital control systems. This module will cover pulse width modulation (PWM).</p>
+<section id="what-is-pulse-width-modulation">
+<h2>What is pulse width modulation?<a class="headerlink" href="#what-is-pulse-width-modulation" title="Permalink to this heading">#</a></h2>
+<p>Pulse width modulation (PWM) is a method for representing an analog signal with
+a digital approximation. The PWM signal consists of a sequence of variable
+width, constant amplitude pulses which contain the same total energy as the
+original analog signal.</p>
+<p>This property is valuable in digital motor control as sinusoidal current
+(energy) can be delivered to the motor using PWM signals applied to the power
+converter. Although energy is input to the motor in discrete packets, the
+mechanical inertia of the rotor acts as a smoothing filter. Dynamic motor
+motion is therefore similar to having applied the sinusoidal currents
+directly.</p>
+<p>PWM is a scheme to represent a signal as a sequence of pulses:
+* Fixed carrier frequency
+* Fixed pulse amplitude
+* Pulse width proportional to instantaneous signal amplitude
+* PWM energy ~ original signal energy</p>
+<p><img alt="Pulse Width Modulation" src="../../_images/pwm.png" /></p>
+</section>
+<section id="why-use-pwm-with-power-switching-devices">
+<h2>Why use PWM with Power Switching Devices?<a class="headerlink" href="#why-use-pwm-with-power-switching-devices" title="Permalink to this heading">#</a></h2>
+<p>Power switching devices can be difficult to control when operating in the proportional region, but
+are easy to control in the saturation and cutoff regions. Since PWM is a digital signal by nature
+and easy for an MCU to generate, it is ideal for use with power switching devices. Essentially,
+PWM performs a DAC function, where the duty cycle is equivalent to the DAC analog amplitude
+value.</p>
+<p><img alt="Power Switching Devices" src="../../_images/switching_devices.png" /></p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-epwm-module">
+<h1>The ePWM Module<a class="headerlink" href="#the-epwm-module" title="Permalink to this heading">#</a></h1>
+<p>The ePWM modules are highly programmable, extremely flexible, and easy to use, while being
+capable of generating complex pulse width waveforms with minimal CPU overhead or
+intervention. Each ePWM module is identical with two PWM outputs, EPWMxA and EPWMxB,
+and multiple modules that can be synchronized to operate together as required by the system application
+design. The generated PWM waveforms are available as outputs on the GPIO pins. Additionally,
+the EPWM module can generate ADC start of conversion signals and generate interrupts to the
+PIE block. External trip zone signals can trip the output, as well as generate interrupts. The
+outputs of the comparators are used as inputs to the ePWM X-Bar.</p>
+<p><img alt="ePWM Module Signals and Connections" src="../../_images/epwm_modules.png" /></p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>The order in which the ePWM modules are connected is determined by the device synchronization scheme.</p>
+</div>
+<p>Various ePWM modules (and eCAP units) can be grouped together for synchronization.</p>
+<p>The ePWM module consists of eight submodules: time-base, counter-compare, action-qualifier,
+dead-band generator, PWM chopper, trip-zone, digital-compare, and event-trigger.</p>
+<section id="epwm-time-base-sub-module">
+<h2>ePWM Time-Base Sub-Module<a class="headerlink" href="#epwm-time-base-sub-module" title="Permalink to this heading">#</a></h2>
+<p>The time-base submodule consists of a dedicated 16-bit counter, along with built-in
+synchronization logic to allow multiple ePWM modules to work together as a single system.</p>
+<p>A clock pre-scaler divides the EPWM clock to the counter and a period register
+is used to control the frequency and period of the generated waveform.</p>
+<ul>
+<li><p>Calculations:</p>
+<p><code class="docutils literal notranslate"><span class="pre">TBCLK</span></code> = EPWMCLK / (HSPCLKDIV * CLKDIV)</p>
+<p>Clock Prescaler = HSPCLKDIV * CLKDIV</p>
+</li>
+</ul>
+<p>The period register has a shadow register, which acts like a buffer to allow the
+register updates to be synchronized with the counter, thus avoiding corruption
+or spurious operation from the register being modified asynchronously by the
+software.</p>
+<p><img alt="ePWM Time-Base Functional Diagram" src="../../_images/epwm_time_base_functional_diagram.png" /></p>
+<p>The time-base counter operates in three modes:<strong>up-count</strong>,<strong>down-count</strong>, and <strong>up-down-count</strong>.</p>
+<ul class="simple">
+<li><p>In <u>up-count mode</u> the time-base counter starts counting from zero and
+increments until it reaches the period register value, then the time-base
+counter resets to zero and the count sequence starts again.</p></li>
+<li><p>In <u>down-count mode</u> the time-base counter starts counting from the period
+register value and decrements until it reaches zero, then the time-base
+counter is loaded with the period value and the count sequence starts
+again.</p></li>
+<li><p>In <u>up-down-count mode</u> the time-base counter starts counting from zero and
+increments until it reaches the period register value, then the timebase
+counter decrements until it reaches zero and the count sequence repeats. The
+up-count and down-count modes are used to generate asymmetrical waveforms,
+and the up-down-count mode is used to generate symmetrical waveforms.</p></li>
+</ul>
+<p><img alt="ePWM Time-Base Count Modes" src="../../_images/epwm_time_base_count_modes.png" /></p>
+<p><strong>Synchronization</strong></p>
+<p>Synchronization allows multiple ePWM modules to work together as a single system. The
+synchronization is based on a synch-in signal. Additionally, the waveform can be phase-shifted.</p>
+<p><img alt="ePWM Phase Synchronization Example" src="../../_images/epwm_phase_sync_ex.png" /></p>
+</section>
+<section id="epwm-compare-sub-module">
+<h2>ePWM Compare Sub-Module<a class="headerlink" href="#epwm-compare-sub-module" title="Permalink to this heading">#</a></h2>
+<p>The counter-compare submodule continuously compares the time-base count value to four
+counter compare registers (CMPA, CMPB, CMPC, and CMPD) and generates four independent
+compare events (i.e. time-base counter equals a compare register value) which are fed to the
+action-qualifier and event-trigger submodules.</p>
+<p>The counter compare registers are shadowed to prevent corruption or glitches
+during the active PWM cycle.</p>
+<ul class="simple">
+<li><p>Typically CMPA and CMPB are used to control the duty cycle of the generated
+PWM waveform</p></li>
+<li><p>All four compare registers can be used to start an ADC conversion or
+generate an ePWM interrupt.</p></li>
+</ul>
+<p>For the up-count and down count modes, a counter match occurs only once per
+cycle, however for the up-down-count mode a counter match occurs twice per
+cycle since there is a match on the up count and down count.</p>
+<p><img alt="ePWM Counter Compare Event Waveforms" src="../../_images/epwm_compare_event_waveforms.png" /></p>
+<p>The above ePWM Compare Event Waveform diagram shows the compare matches which are fed
+into the action qualifier. Notice that with the count up and count down mode, there are matches
+on the up-count and down-count.</p>
+<p><img alt="ePWM Counter Compare Functional Diagram" src="../../_images/epwm_counter_compare_func_diagram.png" /></p>
+</section>
+<section id="epwm-action-qualifier-sub-module">
+<h2>ePWM Action Qualifier Sub-Module<a class="headerlink" href="#epwm-action-qualifier-sub-module" title="Permalink to this heading">#</a></h2>
+<p>The action-qualifier submodule is the key element in the ePWM module which is responsible for
+constructing and generating the switched PWM waveforms. It utilizes match events from the
+time-base and counter-compare submodules for performing actions on the EPWMxA and
+EPWMxB output pins. These first three submodules are the main blocks which are used for
+generating a basic PWM waveform.</p>
+<p><strong>ePWM Action Qualifier Actions</strong></p>
+<p>Tx Event Sources = <code class="docutils literal notranslate"><span class="pre">DCAEVT1</span></code>, <code class="docutils literal notranslate"><span class="pre">DCAEVT2</span></code>, <code class="docutils literal notranslate"><span class="pre">DCBEVT1</span></code>, <code class="docutils literal notranslate"><span class="pre">DCBEVT2</span></code>, <code class="docutils literal notranslate"><span class="pre">TZ1</span></code>, <code class="docutils literal notranslate"><span class="pre">TZ2</span></code>, <code class="docutils literal notranslate"><span class="pre">TZ3</span></code>, <code class="docutils literal notranslate"><span class="pre">EPWMxSYNCIN</span></code></p>
+<p><img alt="ePWM Action Qualifier Actions" src="../../_images/epwm_action_qualifier_actions.png" /></p>
+<p>The Action Qualifier actions are setting the pin high, clearing the pin low,
+toggling the pin, or do nothing to the pin, based independently on count-up and
+count-down time-base match event.</p>
+<p>The match events occur when the time-base counter equals the period register
+value, the time-base counter is zero, the time-base counter equals CMPA, the
+time-base counter equals CMPB, or for a Trigger event (T1 and T2) based on a
+comparator, trip, or sync signal.</p>
+<p>Note that zero and period actions are fixed in time, whereas CMPA and CMPB
+actions are moveable in time by programming their respective registers. Actions
+are configured independently for each output using shadowed registers, and any
+or all events can be configured to generate actions on either output. Also, the
+output pins can be forced to any action using software.</p>
+<p>The next few figures show how the setting of the action qualifier with the
+compare matches are used to modulate the output pins.</p>
+<p><img alt="ePWM Count Up Asymmetric Waveform 1" src="../../_images/epwm_asym_waveform.png" /></p>
+<p>Notice that the output pins for EPWMA and EPWMB are completely independent. In
+the figure above, the EPWMA
+output is being set high on the zero match and
+cleared low on the compare A match. The EPWMB output is being set high on the
+zero match and cleared low on the compare B match.</p>
+<p><img alt="ePWM Count Up Asymmetric Waveform 2" src="../../_images/epwm_asym_waveform_A.png" /></p>
+<p>In the figure above, the
+EPWMA output is being set high on the compare A match
+and being cleared low on the compare B match, while the EPWMB output is being
+toggled on the zero match.</p>
+<p><img alt="ePWM Count Up-Down Symmetric Waveform 1" src="../../_images/epwm_sym_waveform.png" /></p>
+<p>In the figure above,
+there are different output actions on the up-count and
+down-count using a single compare register. The EPWMA and EPWMB outputs are
+being set high on the compare A and B up-count matches and cleared low on the
+compare A and B down-count matches.</p>
+<p><img alt="ePWM Count Up-Down Symmetric Waveform 2" src="../../_images/epwm_sym_waveform_A.png" /></p>
+<p>And finally in the figure above,
+again using different output actions on the
+up-count and down count, the EPWMA output is being set high on the compare A
+up-count match and being cleared low on the compare B down-count match. The
+EPWMB output is being cleared low on the zero match and being set high on the
+period match.</p>
+</section>
+<section id="asymmetric-and-symmetric-waveform-generation-using-the-epwm">
+<h2>Asymmetric and Symmetric Waveform Generation using the ePWM<a class="headerlink" href="#asymmetric-and-symmetric-waveform-generation-using-the-epwm" title="Permalink to this heading">#</a></h2>
+<p><strong>PWM Switching Frequency:</strong></p>
+<p>The PWM carrier frequency is determined by the value contained in the time-base period register,
+and the frequency of the clocking signal. The value needed in the period register is:</p>
+<p><strong>Asymmetric PWM</strong></p>
+<ul class="simple">
+<li><p>Period register = (switching period/ timer period) -1</p></li>
+<li><p>Period register = (T<sub>pwm</sub> / T<sub>TBCLK</sub>) -1</p></li>
+</ul>
+<p><strong>Symmetric PWM</strong></p>
+<ul class="simple">
+<li><p>Period register = switching period/ 2(timer period)</p></li>
+<li><p>Period register = T<sub>pwm</sub> / (2 * T<sub>TBCLK</sub>)</p></li>
+</ul>
+<p>Notice that in the symmetric case, the period value is half that of the asymmetric case. This is
+because for up/down counting, the actual timer period is twice that specified in the period register
+(i.e. the timer counts up to the period register value, and then counts back down).</p>
+<p><strong>PWM Resolution:</strong></p>
+<p>The PWM compare function resolution can be computed once the period register value is
+determined. The largest power of 2 that is less than (or close to) the period value is used for the function
+resolution. As an example, if asymmetric was 1000, and symmetric was 500, then:</p>
+<ul class="simple">
+<li><p><strong>Asymmetric PWM</strong>: approx. 10 bit resolution since 2^10 = 1024, approximately equal to 1000</p></li>
+<li><p><strong>Symmetric PWM</strong>: approx. 9 bit resolution since 2^9 = 512, approximately equal to 500</p></li>
+</ul>
+<p><strong>PWM Duty Cycle:</strong></p>
+<p>Duty cycle calculations are used to define where CMP registers are set. These calculations are simple, provided one
+remembers that the PWM signal is initially inactive during any particular timer period, and becomes active
+after the (first) compare match occurs. The timer compare register should be loaded with the value as follows:</p>
+<ul class="simple">
+<li><p><strong>Asymmetric PWM</strong>: <code class="docutils literal notranslate"><span class="pre">CMPX</span></code> = (100% - duty cycle)∗<code class="docutils literal notranslate"><span class="pre">TBPRD</span></code></p></li>
+<li><p><strong>Symmetric PWM</strong>: <code class="docutils literal notranslate"><span class="pre">CMPX</span></code> = (100% - duty cycle)∗<code class="docutils literal notranslate"><span class="pre">TBPRD</span></code></p></li>
+</ul>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>For symmetric PWM, the desired duty cycle is only achieved if the compare registers
+contain the computed value for both the up-count compare and down-count compare portions of
+the time-base period.</p>
+</div>
+</section>
+<section id="pwm-computation-example">
+<h2>PWM Computation Example<a class="headerlink" href="#pwm-computation-example" title="Permalink to this heading">#</a></h2>
+<p><strong>Symmetric PWM Computation Example</strong></p>
+<p>Determine TBPRD and CMPA for 100 kHz, 25% duty symmetric PWM from a 100 MHz time base clock</p>
+<p><img alt="ePWM Symmetric PWM Computation Example" src="../../_images/epwm_sym_computation_example.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">TBPRD</span></code> = .5* (F<sub>TBCLK</sub>/F<sub>PWM</sub>) = .5(100 MHz/ 100 kHz) = 500</p>
+<p>CMPA = (100% - duty cycle) <code class="docutils literal notranslate"><span class="pre">TBPRD</span></code> = 0.75 * 500=375</p>
+<p><strong>Asymmetric PWM Computation Example</strong></p>
+<p>Determine TBPRD and CMPA for 100 kHz, 25% duty asymmetric PWM from a 100 MHz time base clock</p>
+<p><img alt="ePWM Asymmetric PWM Computation Example" src="../../_images/epwm_asym_computation_example.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">TBPRD</span></code> = (F<sub>TBCLK</sub>/F<sub>PWM</sub>) -1 = (100 MHz/ 100 kHz) -1 = 999</p>
+<p>CMPA = (100% - duty cycle) (<code class="docutils literal notranslate"><span class="pre">TBPRD</span></code> +1) -1 = 0.75 * (999 + 1) -1 = 749</p>
+</section>
+<section id="epwm-dead-band-sub-module">
+<h2>ePWM Dead-Band Sub-Module<a class="headerlink" href="#epwm-dead-band-sub-module" title="Permalink to this heading">#</a></h2>
+<p>The dead-band sub-module provides a means to delay the switching of a gate
+signal, thereby allowing time for gates to turn off and preventing a short
+circuit.</p>
+<p>This sub-module supports independently programmable rising-edge and falling-edge
+delays with various options for generating the appropriate signal outputs on
+EPWMxA and EPWMxB.</p>
+<p><strong>Motivation for Dead-Band</strong></p>
+<ol class="arabic simple">
+<li><p>Transistor gates turn on faster than they shut off</p></li>
+</ol>
+<ul class="simple">
+<li><p>Short circuit if both gates are on at the same time</p></li>
+</ul>
+<p><img alt="ePWM Deadband Motivation" src="../../_images/epwm_deadband_motivation.png" /></p>
+<p><img alt="ePWM Deadband Motivation 2" src="../../_images/epwm_deadband_motivation_2.png" /></p>
+<p>To explain further, power-switching devices turn on faster than they shut off. This issue would
+momentarily provide a path from supply rail to ground, giving us a short circuit. The dead-band
+sub-module alleviates this issue.</p>
+<p>Dead-band control provides a convenient means of combating current
+shoot-through problems in a power converter. Shoot-through occurs when both the
+upper and lower gates in the same phase of a power converter are open
+simultaneously. This condition shorts the power supply and results in a large
+current draw. Shoot-through problems occur because transistors open faster than
+they close, and because high-side and low-side power converter gates are
+typically switched in a complimentary fashion. Although the duration of the
+shoot-through current path is finite during PWM cycling, (i.e. the closing gate
+will eventually shut), even brief periods of a short circuit condition can
+produce excessive heating and overstress in the power converter and power
+supply.</p>
+<p><img alt="ePWM Deadband Block Diagram" src="../../_images/epwm_deadband_block_diagram.png" /></p>
+<p>Two basic approaches exist for controlling shoot-through:</p>
+<p><strong>Modify the transistors</strong></p>
+<ul class="simple">
+<li><p>The opening time of the transistor gate must be increased so that it
+(slightly) exceeds the closing time. One way to accomplish this is by
+adding a cluster of passive components such as resistors and diodes in
+series with the transistor gate, as shown in the image below.</p></li>
+<li><p>The resistor acts to limit the current rise rate towards the gate during
+transistor opening, thus increasing the opening time. When closing the
+transistor however, current flows unimpeded from the gate via the by-pass
+diode and closing time is therefore not affected. While this passive
+approach offers an inexpensive solution that is independent of the control
+microprocessor, it is imprecise, the component parameters must be
+individually tailored to the power converter, and it cannot adapt to
+changing system conditions.</p></li>
+</ul>
+<p><strong>Modify the PWM gate signals controlling the transistors</strong></p>
+<ul class="simple">
+<li><p>This approach separates transitions on complimentary PWM signals with a
+fixed period of time. This is called dead-band. While it is possible to
+perform software implementation of dead-band, the C28x offers on-chip
+hardware for this purpose that requires no additional CPU overhead.
+Compared to the passive approach, dead-band offers more precise control
+of gate timing requirements. In addition, the dead time is typically
+specified with a single program variable that is easily changed for
+different power converters or adapted on-line.</p></li>
+</ul>
+<p><img alt="ePWM Shoot-Through Control" src="../../_images/epwm_shoot_through.png" /></p>
+</section>
+<section id="epwm-chopper-sub-module">
+<h2>ePWM Chopper Sub-Module<a class="headerlink" href="#epwm-chopper-sub-module" title="Permalink to this heading">#</a></h2>
+<p>The PWM chopper submodule is used with pulse transformer-based gate drives to
+control the power switching devices.</p>
+<p>This submodule modulates a high-frequency carrier signal with the PWM waveform
+that is generated by the action-qualifier and dead-band submodules.</p>
+<p>Programmable options are available to support the magnetic properties and
+characteristics of the transformer and associated circuitry.</p>
+<p>Shown in the figure below, a high-frequency carrier signal is ANDed with the
+ePWM outputs. Also, this circuit provides an option to include a larger,
+one-shot pulse width before the sustaining pulses.</p>
+<p><img alt="ePWM Chopper Waveform" src="../../_images/epwm_chopper_waveform.png" /></p>
+</section>
+<section id="epwm-trip-zone-and-digital-compare-sub-modules">
+<h2>ePWM Trip-Zone and Digital Compare Sub-Modules<a class="headerlink" href="#epwm-trip-zone-and-digital-compare-sub-modules" title="Permalink to this heading">#</a></h2>
+<p>The trip zone and digital compare sub-modules provide a protection mechanism to protect the
+output pins from abnormalities, such as over-voltage, over-current, and excessive temperature
+rise.</p>
+<p><strong>Trip Zone Features:</strong></p>
+<ol class="arabic simple">
+<li><p>Trip-Zone has a fast, clock-independent logic path to high-impedance the EPWMxA/B output pins</p></li>
+</ol>
+<ul class="simple">
+<li><p>Interrupt latency may not protect hardware when responding to over current
+conditions or short-circuits through ISR software</p></li>
+<li><p>Supports:</p>
+<ul>
+<li><p>One-shot trip for major short circuits or over current conditions</p></li>
+<li><p>Cycle-by-cycle trip for current limiting operation</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="ePWM Trip Zone Features" src="../../_images/epwm_trip_zone_features.png" /></p>
+<p>The trip-zone submodule utilizes a fast clock-independent logic mechanism to
+quickly handle fault conditions by forcing the EPWMxA and EPWMxB outputs to a
+safe state, such as high, low, or high-impedance, thus avoiding any interrupt
+latency that may not protect the hardware when responding to over current
+conditions or short circuits through ISR software.</p>
+<p>The submodule supports one-shot trips for major short circuits or over current
+conditions, and cycle-by-cycle trips for current limiting operation.</p>
+<p>The trip-zone signals can be generated externally from any GPIO pin which is
+mapped through the Input X-Bar (TZ1 – TZ3), internally from an inverted eQEP
+error signal (TZ4), system clock failure (TZ5), or from an emulation stop
+output from the CPU (TZ6). Additionally, numerous trip-zone source signals can
+be generated from the digital-compare subsystem.</p>
+<p>The power drive protection is a safety feature that is provided for the safe
+operation of systems such as power converters and motor drives. It can be used
+to inform the monitoring program of motor drive abnormalities such as
+over-voltage, over-current, and excessive temperature rise. If the power drive
+protection interrupt is unmasked, the PWM output pins will be put in a safe state
+immediately after the pin is driven low. An interrupt will also be generated.</p>
+<p><img alt="ePWM Digital Compare Trip Inputs" src="../../_images/epwm_digital_compare_trip_inputs.png" /></p>
+<p>The digital compare submodules receive their trip signals from the Input X-BAR and ePWM XBAR.</p>
+<p><strong>ePWM X-Bar</strong></p>
+<p>The ePWM X-BAR is used to route various internal and external signals to the ePWM modules.
+Eight trip signals from the ePWM X-BAR are routed to all of the ePWM modules.</p>
+<p>The ePWM X-BAR architecture block diagram shown below is replicated 8 times.
+The ePWM XBAR can select a single signal or logically OR up to 32 signals. The
+table in the figure defines the various trip sources that can be multiplexed to
+the trip-zone and digital compare submodules.</p>
+<p><img alt="ePWM X-Bar Architecture" src="../../_images/epwm_xbar_architecture.png" /></p>
+<p><strong>Purpose of the Digital Compare Sub-Module</strong></p>
+<ul class="simple">
+<li><p>Generates ‘compare’ events that can:</p>
+<ul>
+<li><p>Trip the ePWM</p></li>
+<li><p>Generate a Trip interrupt</p></li>
+<li><p>Sync the ePWM</p></li>
+<li><p>Generate an ADC start of conversion</p></li>
+</ul>
+</li>
+<li><p>Digital compare module inputs are:</p>
+<ul>
+<li><p>Input X-Bar</p></li>
+<li><p>ePWM X-Bar</p></li>
+<li><p>Trip-zone input pins</p></li>
+</ul>
+</li>
+<li><p>A compare event is generated when one or more of its selected inputs are either high or low</p></li>
+<li><p>Optional ‘Blanking’ can be used to temporarily disable the compare action
+in alignment with PWM switching to eliminate noise effects</p></li>
+</ul>
+<p><strong>Digital Compare Sub-Module Signals</strong></p>
+<p><img alt="ePWM Digital Compare Submodule" src="../../_images/epwm_digital_compare_submodule.png" /></p>
+<p>The digital-compare subsystem compares signals external to the ePWM module, such
+as a signal from the CMPSS analog comparators, to directly generate PWM events
+or actions which are then used by the trip-zone, time-base, and event-trigger
+submodules.</p>
+<p>These ‘compare’ events can trip the ePWM module, generate a trip interrupt, sync
+the ePWM module, or generate an ADC start of conversion. A compare event is
+generated when one or more of its selected inputs are either high or low. The
+signals can originate from any external GPIO pin which is mapped through the
+Input X-Bar and from various internal peripherals which are mapped through the
+ePWM X-Bar.</p>
+<p>Additionally, an optional ‘blanking’ function can be used to temporarily disable
+the compare action in alignment with PWM switching to eliminate noise effects.</p>
+<p><strong>Digital Compare Events</strong></p>
+<ul class="simple">
+<li><p>The user selects the input for each of DCAH, DCAL, DCBH, DCBL</p></li>
+<li><p>Each A and B compare uses its corresponding DCyH/L inputs (y = A or B)
+The user selects the signal state that triggers each compare from the following choices:</p></li>
+</ul>
+<p><img alt="ePWM Digital Compare Trigger Sources" src="../../_images/epwm_digital_compare_choices.png" /></p>
+</section>
+<section id="epwm-event-trigger-sub-module">
+<h2>ePWM Event-Trigger Sub-Module<a class="headerlink" href="#epwm-event-trigger-sub-module" title="Permalink to this heading">#</a></h2>
+<p>The event-trigger submodule manages the events generated by the time-base, counter-compare,
+and digital-compare submodules to generate an interrupt to the CPU and/or a start of
+conversion pulse to the ADC when a selected event occurs.</p>
+<p><img alt="ePWM Event-Trigger Interrupts and SOC" src="../../_images/epwm_event_trigger_interrupts.png" /></p>
+<p>These event triggers can occur when the time-base counter equals zero, period, zero or period,
+the up/down count match of a compare register.</p>
+<p>Recall that the digital-compare subsystem
+can also generate an ADC start of conversion based on one or more compare events. Notice
+counter up and down are independent and separate.</p>
+<p>The event-trigger submodule also incorporates pre-scaling logic to issue an interrupt request or
+ADC start of conversion at every event or up to every fifteenth event.</p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<section id="epwm-related-collateral">
+<h3>EPWM Related Collateral<a class="headerlink" href="#epwm-related-collateral" title="Permalink to this heading">#</a></h3>
+<p><strong>Foundational</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/lit/eb/slyy211/slyy211.pdf">Real-Time Control Reference Guide</a></p></li>
+</ul>
+<p><strong>Getting Started</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/lit/sprad12">C2000 ePWM Developer’s Guide Application Report</a> - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2807x, F2837x, F2838x</p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/series/C2000-enhanced-pulse-width-modulator.html">Enhanced Pulse Width Modulator (ePWM) Training for C2000 MCUs</a> - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2837x, F2838x</p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRT723">Flexible PWMs Enable Multi-Axis Drives, Multi-Level Inverters Application Report</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/5775904537001">Getting Started with the C2000 ePWM Module</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRAA88">Using PWM Output as a Digital-to-Analog Converter on a TMS320F280x Digital Signal Control Application Report</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRAAI1">Using the Enhanced Pulse Width Modulator (ePWM) Module Application Report</a></p></li>
+</ul>
+<p><strong>Expert</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/reference-designs/index.html#search?famid=4,5014">C2000 real-time microcontrollers - Reference designs</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACX0">CRM/ZVS PFC Implementation Based on C2000 Type-4 PWM Module Application Report</a> - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2837x, F2838x</p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACY1">Leverage New Type ePWM Features for Multiple Phase Control Application Report</a> - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2837x, F2838x</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="high-resolution-pwm-hrpwm">
+<h1>High Resolution PWM (HRPWM)<a class="headerlink" href="#high-resolution-pwm-hrpwm" title="Permalink to this heading">#</a></h1>
+<p>The ePWM module is capable of significantly increasing its time resolution
+capabilities over the standard conventionally derived digital PWM. This is
+accomplished by adding 8-bit extensions to the counter compare register
+(CMPxHR), period register (TBPRDHR), and phase register(TBPHSHR), providing a
+finer time granularity for edge positioning control. This is known as
+high-resolution PWM (HRPWM) and it is based on micro edge positioner
+(MEP) technology.</p>
+<p>The MEP logic is capable of positioning an edge very finely by sub-dividing one
+coarse system clock of the conventional PWM generator with time step accuracy
+on the order of 150 picoseconds. A self-checking software diagnostics mode is
+used to determine if the MEP logic is running optimally, under all operating
+conditions such as for variations caused by temperature, voltage, and process.
+HRPWM is typically used when the PWM resolution falls below approximately 9 or
+10 bits.</p>
+<p><img alt="High-Resolution PWM (HRPWM)" src="../../_images/hrpwm.png" /></p>
+<ul class="simple">
+<li><p>Significantly increases the resolution of conventionally derived digital PWM</p></li>
+<li><p>Adds 8-bit extensions to Compare registers (CMPxHR), Period register
+(TBPRDHR) and Phase register (TBPHSHR) for edge positioning control</p></li>
+<li><p>Typically used when PWM resolution falls below ~9-10 bits</p></li>
+</ul>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>Not all ePWM outputs support the HRPWM feature (see device datasheet)</p>
+</div>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="../c2000_analog_subsystem/c2000_analog_interconnect.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Analog System Interconnect</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_enhanced_capture_module.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Enhanced Capture Module (eCAP)</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Enhanced Pulse Width Modulation (ePWM)
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-is-pulse-width-modulation">
+     What is pulse width modulation?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-use-pwm-with-power-switching-devices">
+     Why use PWM with Power Switching Devices?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-epwm-module">
+   The ePWM Module
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#epwm-time-base-sub-module">
+     ePWM Time-Base Sub-Module
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#epwm-compare-sub-module">
+     ePWM Compare Sub-Module
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#epwm-action-qualifier-sub-module">
+     ePWM Action Qualifier Sub-Module
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#asymmetric-and-symmetric-waveform-generation-using-the-epwm">
+     Asymmetric and Symmetric Waveform Generation using the ePWM
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pwm-computation-example">
+     PWM Computation Example
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#epwm-dead-band-sub-module">
+     ePWM Dead-Band Sub-Module
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#epwm-chopper-sub-module">
+     ePWM Chopper Sub-Module
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#epwm-trip-zone-and-digital-compare-sub-modules">
+     ePWM Trip-Zone and Digital Compare Sub-Modules
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#epwm-event-trigger-sub-module">
+     ePWM Event-Trigger Sub-Module
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#resources">
+     Resources
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#epwm-related-collateral">
+       EPWM Related Collateral
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#high-resolution-pwm-hrpwm">
+   High Resolution PWM (HRPWM)
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

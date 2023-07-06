@@ -1,0 +1,597 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Enhanced Capture Module (eCAP) &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_control_peripherals/c2000_enhanced_capture_module';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_control_peripherals/c2000_enhanced_capture_module.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Enhanced Quadrature Encoder Pulse (eQEP)" href="c2000_enhanced_quadrature_encoder_pulse.html" />
+    <link rel="prev" title="Enhanced Pulse Width Modulation (ePWM)" href="c2000_enhanced_pulse_width_modulation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="enhanced-capture-module-ecap">
+<h1>Enhanced Capture Module (eCAP)<a class="headerlink" href="#enhanced-capture-module-ecap" title="Permalink to this heading">#</a></h1>
+<p>The C2000 enhanced capture module allows time-based logging of external signal
+transitions. It is used to accurately time external events by time stamping
+transitions on the capture input pin.</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>For dual-core devices, control peripherals are common
+between the two CPU subsystems. After reset they are connected to the CPU1
+subsystem, and a series of CPU Select registers are used to configure each
+peripheral individually to be either controlled by the CPU1 or CPU2 subsystem.</p>
+</div>
+<p>eCAP can be used to measure the speed of a rotating machine, determine the
+elapsed time between pulses, calculate the period and duty cycle of a pulse
+train signal, and decode current/voltage measurements derived from duty cycle
+encoded current/voltage sensors.</p>
+<p><img alt="Capture Module" src="../../_images/ecap.png" /></p>
+<p>Capture units can be configured to trigger an A/D conversion that is
+synchronized with an external event. There are several potential advantages to
+using the capture for this function over the ADCEXTSOC pin associated with the
+ADC module.</p>
+<ul class="simple">
+<li><p>The ADCEXTSOC pin is level triggered, and therefore only low to high
+external signal transitions can start a conversion. The capture unit does
+not suffer from this limitation since it is edge triggered and can be
+configured to start a conversion on either rising edges or falling
+edges.</p></li>
+<li><p>If the ADCEXTSOC pin is held high longer than one conversion period, a
+second conversion will be immediately initiated upon completion of the
+first. This unwanted second conversion could still be in progress when a
+desired conversion is needed. In addition, if the end-of-conversion ADC
+interrupt is enabled, this second conversion will trigger an unwanted
+interrupt upon its completion.</p></li>
+</ul>
+<p><u>The two problems mentioned above are not a concern with the capture unit.</u></p>
+<p>The capture unit can send an interrupt request to the CPU while it
+simultaneously initiates the A/D conversion. This can save time when
+computations are driven by an external event since the interrupt allows
+preliminary calculations to begin at the start-of-conversion, rather than at
+the end-of-conversion using the ADC end-of conversion interrupt. The ADCEXTSOC
+pin does not offer a start-of-conversion interrupt. Rather, polling of the
+ADCSOC bit in the control register would need to be performed to trap the
+externally initiated start of conversion.</p>
+<section id="ecap-module-capture-mode">
+<h2>eCAP Module - Capture Mode<a class="headerlink" href="#ecap-module-capture-mode" title="Permalink to this heading">#</a></h2>
+<p>The eCAP module captures signal transitions on a dedicated input pin and
+sequentially loads a 32-bit time-base counter value in up to four 32-bit
+time-stamp capture registers (CAP1 – CAP4).</p>
+<p>By using a 32-bit counter, rollover is minimized. Independent edge polarity can
+be configured as rising or falling edge, and the module can be run in either
+one-shot mode for up to four timestamp events or continuous mode to capture up
+to four time-stamp events operating as a circular buffer.</p>
+<p>The capture input pin is routed through the Input X-Bar, allowing any GPIO pin
+on the device to be used as the input. Also, the input capture signal can be
+pre-scaled and interrupts can be generated on any of the four capture events.
+The time-base counter can be run in either absolute or difference
+(delta) time-stamp mode. In absolute mode the counter runs continuously,
+whereas in difference mode the counter resets on each capture.</p>
+</section>
+<section id="ecap-module-apwm-mode">
+<h2>eCAP Module - APWM Mode<a class="headerlink" href="#ecap-module-apwm-mode" title="Permalink to this heading">#</a></h2>
+<p><img alt="ECAP Block Diagram APWM Mode" src="../../_images/ecap_block_diagram_apwm.png" /></p>
+<p>If the module is not used in capture mode, the eCAP module can be configured to
+operate as a single channel asymmetrical PWM module (i.e. time-base counter
+operates in count-up mode).</p>
+<p>The capture unit interrupts offer immediate CPU notification of externally
+captured events. In situations where this is not required, the interrupts can
+be masked and flag testing/polling can be used instead. This offers increased
+flexibility for resource management.</p>
+<p><strong>Example: Consider a servo application where a capture unit is being used for
+low-speed velocity estimation via a pulsing sensor.</strong></p>
+<p>The velocity estimate is not used until the next control law calculation is
+made, which is driven in real-time using a timer interrupt. Upon entering the
+timer interrupt service routine, software can test the capture interrupt flag
+bit. If sufficient servo motion has occurred since the last control law
+calculation, the capture interrupt flag will be set and software can proceed to
+compute a new velocity estimate. If the flag is not set, then sufficient motion
+has not occurred and some alternate action would be taken for updating the
+velocity estimate. As a second example, consider the case where two successive
+captures are needed before a computation proceeds. If the width of the pulse is
+needed as soon as the pulse ends, then the capture interrupt is the best
+option. However, the capture interrupt will occur after each of the two
+captures, the first of which will waste a small number of cycles while the CPU
+is interrupted and then determines that it is indeed only the first capture. If
+the width of the pulse is not needed as soon as the pulse ends, the CPU can
+check, as needed, the capture registers to see if two captures have occurred,
+and proceed from there.</p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<section id="ecap-related-collateral">
+<h3>ECAP Related Collateral<a class="headerlink" href="#ecap-related-collateral" title="Permalink to this heading">#</a></h3>
+<p><strong>Getting Started</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACO5">Leveraging High Resolution Capture (HRCAP) for Single Wire Data Transfer Application Report</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="high-resolution-capture-hrcap">
+<h1>High Resolution Capture (HRCAP)<a class="headerlink" href="#high-resolution-capture-hrcap" title="Permalink to this heading">#</a></h1>
+<section id="hrcap-overview">
+<h2>HRCAP Overview<a class="headerlink" href="#hrcap-overview" title="Permalink to this heading">#</a></h2>
+<p>The HRCAP module enhances the capture resolution of the eCAP. This is achieved
+by using the high-speed asynchronous clock source HRCLK. Some common usage
+cases of the HRCAP module include:</p>
+<ul class="simple">
+<li><p>Capacitive touch applications</p></li>
+<li><p>High-resolution period and duty cycle measurements of pulse train cycles</p></li>
+<li><p>Instantaneous speed measurements</p></li>
+<li><p>Instantaneous frequency measurements</p></li>
+<li><p>Voltage measurements across an isolation boundary</p></li>
+<li><p>Distance/sonar measurement and scanning</p></li>
+<li><p>Measuring flow</p></li>
+</ul>
+<p>The features of the HRCAP module include:</p>
+<ul class="simple">
+<li><p>Pulse-width capture in either non-high-resolution or high-resolution modes</p></li>
+<li><p>Absolute mode pulse-width capture</p></li>
+<li><p>Continuous or one-shot capture</p></li>
+<li><p>Interrupt on either falling or rising edge</p></li>
+<li><p>Continuous mode capture of pulse widths in 4-deep buffer</p></li>
+<li><p>Hardware calibration logic for precision high-resolution capture</p></li>
+</ul>
+<p>Additionally, each HRCAP-capable channel has the following independent key resources:</p>
+<ul class="simple">
+<li><p>All hardware of the respective eCAP</p></li>
+<li><p>High-resolution calibration logic</p></li>
+<li><p>Dedicated calibration interrupt</p></li>
+</ul>
+</section>
+<section id="hrcap-initialization-sequence">
+<h2>HRCAP Initialization Sequence<a class="headerlink" href="#hrcap-initialization-sequence" title="Permalink to this heading">#</a></h2>
+<p>To set up the HRCAP to make time-converted measurements:</p>
+<ol class="arabic simple">
+<li><p>Configure the eCAP module as desired, including interrupts</p></li>
+<li><p>Enable interrupts using <code class="docutils literal notranslate"><span class="pre">HRCAP_enableCalibrationInterrupt()</span></code></p></li>
+<li><p>Enable continuous calibration using <code class="docutils literal notranslate"><span class="pre">HRCAP_setCalibrationMode()</span></code></p></li>
+<li><p>Set calibration period using <code class="docutils literal notranslate"><span class="pre">HRCAP_setCalibrationPeriod()</span></code></p></li>
+<li><p>Enable HR mode using <code class="docutils literal notranslate"><span class="pre">HRCAP_enableHighResolution()</span></code></p></li>
+<li><p>Enable HRCLK using <code class="docutils literal notranslate"><span class="pre">HRCAP_enableHighResolutionCLock()</span></code></p></li>
+<li><p>Delay 1 microsecond</p></li>
+<li><p>Start calibration using <code class="docutils literal notranslate"><span class="pre">HRCAP_startCalibration()</span></code></p></li>
+</ol>
+<p>Steps 2, 3, 4, and 8 only apply for time-converted measurements. When using the
+HRCAP to take relative-time measurements, only steps 1, 5, 6, and 7 are
+required. Note that not all eCAP modules have the HRCAP capability, see your
+device data sheet for more details.</p>
+</section>
+<section id="hrcap-calibration">
+<h2>HRCAP Calibration<a class="headerlink" href="#hrcap-calibration" title="Permalink to this heading">#</a></h2>
+<p>It has been observed that high-speed clocks such as HRCLK are highly sensitive
+to temperature and voltage fluctuations. This can cause error in the HRCAP
+measurements. To further mitigate the effects of error due to temperature and
+voltage changes, the HRCAP has a built-in calibration unit for time-converted
+measurements. The calibration unit can be used to determine a scaling factor
+ratio between the system clock (SYSCLK) and HRCLK, which allows for the
+estimated period of HRCLK to be expressed in terms of the SYSCLK period.</p>
+<p>The scaling factor is calculated using two free-running 32 bit counters
+HRSYSCLKCNT and HRCLKCNT, which are fed by SYSCLK and HRCLK, respectively. When
+HRSYSCLKCNT equals the programmable value of HRCALIBPERIOD, the values in
+HRSYSCLKCNT and HRCLKCNT are stored in HRSYSCLKCAP and HRCLKCAP, respectively.
+An interrupt is then triggered, which allows a new scaling factor to be
+calculated via the equation: ScaleFactor=HRSYSCLKCAP/HRCLKCAP. Therefore, a
+time-converted measurement from the HRCAP can be converted to nano-seconds
+using</p>
+<p>(ECAP_REGS_CAPx*ScaleFactor*SYSCLKPRD)/128,</p>
+<p>where 128 is a constant determined by the hardware of the HRCAP module. It is
+important to note that in most cases, HRCALIBPERIOD is selected in such a way
+that the value of HRCLKCAP will be much larger than HRSYSCLKCAP, which
+effectively averages the period of HRCLK and thus yields more accurate
+readings.</p>
+</section>
+<section id="id1">
+<h2>Resources<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<section id="hrcap-related-collateral">
+<h3>HRCAP Related Collateral<a class="headerlink" href="#hrcap-related-collateral" title="Permalink to this heading">#</a></h3>
+<p><strong>Getting Started</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACO5">Leveraging High Resolution Capture (HRCAP) for Single Wire Data Transfer Application Report</a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="c2000_enhanced_pulse_width_modulation.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Enhanced Pulse Width Modulation (ePWM)</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_enhanced_quadrature_encoder_pulse.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Enhanced Quadrature Encoder Pulse (eQEP)</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Enhanced Capture Module (eCAP)
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ecap-module-capture-mode">
+     eCAP Module - Capture Mode
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ecap-module-apwm-mode">
+     eCAP Module - APWM Mode
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#resources">
+     Resources
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ecap-related-collateral">
+       ECAP Related Collateral
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#high-resolution-capture-hrcap">
+   High Resolution Capture (HRCAP)
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hrcap-overview">
+     HRCAP Overview
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hrcap-initialization-sequence">
+     HRCAP Initialization Sequence
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hrcap-calibration">
+     HRCAP Calibration
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Resources
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#hrcap-related-collateral">
+       HRCAP Related Collateral
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

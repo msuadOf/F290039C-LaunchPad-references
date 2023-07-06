@@ -1,0 +1,71 @@
+# Digital-to-Analog Converter (DAC)
+
+The buffered 12-bit DAC module allows for the conversion of digital signals to 
+analog voltages. It can also be used to provide a programmable reference
+output voltage and it includes an analog output buffer that is capable of
+driving an external load. 
+
+```{admonition} DAC Module
+Not all C2000 devices have a DAC module. Refer to the 
+<i>[Peripheral Reference Guide](https://www.ti.com/lit/spru566)</i>
+for a list of supported modules on your device.
+```
+
+## DAC Features
+
+* 12-bit DAC provides a programmable reference output voltage
+
+* Analog output buffer is capable of driving an external load
+
+* Selectable reference voltage
+
+* Can be used as a general-purpose DAC for generating a DC voltage and AC
+    waveforms (e.g. sine, square, triangle, etc.)
+
+* Ability to be synchronized with EPWMSYNCPER events
+
+
+## Buffered DAC Block Diagram
+
+```{admonition} Note: 
+The following image is for a DAC of type 2. A DAC of type 1
+does not include the internal reference portion (gain options) and has a
+pull down resistor at the output. 
+Refer to the [Peripheral Reference Guide](https://ti.com/lit/SPRU566) to 
+check the DAC type of your device.
+```
+
+![Buffered DAC Block Diagram](images/adc/dac_buffered_block_diagram.png)
+
+Two sets of DACVAL registers are present in the buffered DAC module: DACVALA and
+DACVALS:
+
+* **DACVALA**- Read-only register that actively controls the DAC value.
+
+* **DACVALS**- Writable shadow register that loads into DACVALA either
+immediately or synchronized with the next PWMSYNC event. The ideal output of
+the internal DAC can be calculated as shown in the equation above.
+
+## Resources
+
+```{eval-rst}
+
+.. only:: internal_only
+
+  .. include:: ../../source/MARKDOWN_staging/dac_internal.rst
+
+```
+
+```{eval-rst}
+
+.. only:: external_only
+
+  .. include:: ../../source/MARKDOWN_staging/dac.rst
+
+```
+------------------------------------------
+
+```{admonition} Feedback
+Please provide any feedback you may have about the content within C2000 Academy to: <c2000_academy_feedback@list.ti.com>
+
+```

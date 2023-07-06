@@ -1,0 +1,1068 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Enhanced Pulse Width Modulation (ePWM) Lab &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_academy_labs/control_peripherals/c2000_lab_pwm';</script>
+    <script src="../../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_academy_labs/control_peripherals/c2000_lab_pwm.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Enhanced Quadrature Encoder Pulse (eQEP) Lab" href="c2000_lab_qep.html" />
+    <link rel="prev" title="Analog-to-Digital Converter Lab" href="../analog_subsystem/c2000_lab_adc.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="enhanced-pulse-width-modulation-epwm-lab">
+<h1>Enhanced Pulse Width Modulation (ePWM) Lab<a class="headerlink" href="#enhanced-pulse-width-modulation-epwm-lab" title="Permalink to this heading">#</a></h1>
+<p>The objective of this lab is to gain familiarity with the Enhanced Pulse Width
+Modulation (ePWM) module through a guided lab example. This lab will walk
+through generating a PWM signal of a specified frequency and duty cycle. It
+will then walk through the steps of sampling that PWM signal with the ADC,
+which requires using a second PWM signal to trigger the ADC. We will also
+measure the duty cycle and period of our first PWM signal with the eCAP module.
+This lab should leave readers more knowledgeable about the capabilities of
+C2000’s ePWM, eCAP, and ADC modules.</p>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h2>
+<p>All solutions are located in the directory: <code class="docutils literal notranslate"><span class="pre">[C2000Ware_Install_Path]/training/device/[device_name]</span></code>.</p>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>In this lab, we will use the Sysconfig GUI to generate a waveform with one of
+the ePWM modules. The period and duty cycle of the PWM waveform will be
+measured by one of the eCAP modules. In addition, we will sample the PWM
+waveform using the ADC. We will store the corresponding samples in a circular
+buffer, which will allow us to view the PWM waveform inside of a Code Composer
+Studio debug session. The SysConfig GUI tool will also be used to configure the
+eCAP and ADC modules.</p>
+<p><img alt="lab_epwm_intro" src="../../../_images/lab_epwm_intro.png" /></p>
+</section>
+<section id="lab-setup">
+<h2>Lab Setup<a class="headerlink" href="#lab-setup" title="Permalink to this heading">#</a></h2>
+<section id="hardware-setup">
+<h3>Hardware Setup<a class="headerlink" href="#hardware-setup" title="Permalink to this heading">#</a></h3>
+<p>You will need the following hardware for this lab:</p>
+<ul class="simple">
+<li><p>A C2000 controlCARD or LaunchPad with the supplied USB cable.</p></li>
+<li><p>Jumper cables.</p></li>
+<li><p>Oscilloscope (optional).</p></li>
+</ul>
+<p>Use the supplied USB cable to connect your C2000 board’s USB port to the
+standard USB Type-A connector in your computer. You should see some LEDs light
+up on your board. In addition to powering the board, a JTAG communication link
+is also established between the device and Code Composer Studio.</p>
+<p>Later in the lab we will be routing the output pin of the PWM waveform to the
+input pin of the ADC, so make sure that you have enough jumper cables to
+facilitate this.</p>
+</section>
+<section id="software-setup">
+<h3>Software Setup<a class="headerlink" href="#software-setup" title="Permalink to this heading">#</a></h3>
+<p>The following software will need to be installed on your computer:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/tool/CCSTUDIO-C2000">Code Composer Studio</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/tool/C2000WARE">C2000Ware</a></p></li>
+</ul>
+</section>
+</section>
+<section id="import-empty-project">
+<h2>Import Empty Project<a class="headerlink" href="#import-empty-project" title="Permalink to this heading">#</a></h2>
+<p>Our first task is to import an empty project to our Code Composer
+Studio (CCS) workspace.
+The basic instructions are as follows:</p>
+<ol class="arabic simple">
+<li><p>Open CCS and go to <strong>Project→Import CCS Projects</strong>. A new window should
+appear. Ensure that the <strong>Select search-directory</strong> option is activated.</p></li>
+<li><p>Click the <strong>Browse</strong> button and select the
+<code class="docutils literal notranslate"><span class="pre">[C20000ware_Install_dir]/training/device/[device]/empty_lab</span></code>
+directory.
+Note that the default Windows [C20000ware_Install_dir] is <code class="docutils literal notranslate"><span class="pre">C:/ti/c2000/C2000Ware_4_xx_xx_xx</span></code>.</p></li>
+<li><p>Under <strong>Discovered Projects</strong>, you should now see the
+<code class="docutils literal notranslate"><span class="pre">lab_[board]_[device]</span></code> project. Select the appropriate project for either the control card or the launchpad.</p></li>
+</ol>
+<p><img alt="Discovered_Projects" src="../../../_images/c2000_lab_epwm_ecap_start_small3.png" /></p>
+<ol class="arabic simple" start="4">
+<li><p>Click <strong>Finish</strong> to import and copy the <code class="docutils literal notranslate"><span class="pre">lab_[board]_[device]</span></code> project
+into your workspace.</p></li>
+<li><p>Rename the project to your liking</p>
+<ul class="simple">
+<li><p>“Right-click on the project in Project Explorer pane”. Select ‘Rename’ from
+the drop down menu and rename the project to ‘c2000_epwm_lab’ or a name
+of your choosing.</p></li>
+<li><p>Now click the ‘Down Arrow’ located to the left of the imported project to
+expand it and select lab_main.c. Right-click on the file, and
+select ‘Rename’ to rename the file to c2000_epwm_lab_main.c or a name of
+your choosing.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="configure-the-gpio">
+<h2>Configure the GPIO<a class="headerlink" href="#configure-the-gpio" title="Permalink to this heading">#</a></h2>
+<p>We will configure the necessary GPIO pins as shown below. Our PWM
+waveform will be output from ePWM1A. We will also
+configure one of the board LEDs as an indicator.</p>
+</section>
+<section id="steps-to-add-gpio-configuration">
+<h2>Steps to add GPIO configuration:<a class="headerlink" href="#steps-to-add-gpio-configuration" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In the project, open the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file by double-clicking it.</p></li>
+<li><p>In the SysConfig GUI, select the “Hardware” tab, as shown below.</p></li>
+</ul>
+<p><img alt="lab_epwm_led" src="../../../_images/lab_epwm_led.png" /></p>
+<ul class="simple">
+<li><p>If you have a Launchpad, click ‘+’ to add LED5. If you have a controlCard, click ‘+’ to add D2.</p></li>
+<li><p>Select the LED option like below.</p></li>
+</ul>
+<p><img alt="lab_epwm_led2" src="../../../_images/lab_epwm_led2.png" /></p>
+</section>
+<section id="configure-epwm1-and-epwm2">
+<h2>Configure ePWM1 and ePWM2<a class="headerlink" href="#configure-epwm1-and-epwm2" title="Permalink to this heading">#</a></h2>
+<div class="admonition-for-devices-f2837xd-f2837xs-f2838x-and-f28003x admonition">
+<p class="admonition-title">For Devices F2837xD, F2837xS, F2838x, and F28003x:</p>
+<p>The SYSCLK generated from the internal oscillator is higher than 100MHz on these
+devices. This means that the EPWM clock for F28003x is 120MHz. The maximum EPWM
+clock is still 100MHz on  F2837xD, F2837xS, and F2838x, but the ADC clock is
+equal to the device SYSCLK. When clock dividers are selected in the following
+modules, you may need to modify your dividers to achieve exactly the same
+results.</p>
+<p>You may also notice that your device has different parameters than the ones seen
+in the images below. Do not worry, as all of the essential parameters for this
+lab are available on all devices.</p>
+</div>
+<p>In this section, we will first configure ePWM1A to output a 2kHz PWM waveform
+with a 25% duty cycle. We begin by setting the ePWM clock prescalars. The
+ePWM clock frequency has been set to be 100MHz. If you have a F2837xD or F2838x
+based device, the ePWM clock frequency is half of <code class="docutils literal notranslate"><span class="pre">DEVICE_SYSCLK_FREQ</span></code> by
+default, otherwise <code class="docutils literal notranslate"><span class="pre">DEVICE_SYSCLK_FREQ</span></code> and the ePWM clock frequency are
+equal. Since the time base counter is 16 bits wide and (10^8/2000 &lt; 2^16),
+there is no need to divide the ePWM clock. Hence, we set the clock
+division to 1.</p>
+<p>Next, we set the time base period. In this lab, we will use the up/down
+counting mode for a symmetric PWM waveform, which leads to</p>
+<p><span class="math notranslate nohighlight">\(\text{Time Base Period}=\frac{f_{tbclk}}{2f_{pwm}}=\frac{100* 10^6}{2* 2000}=25000.\)</span></p>
+<p>Note that for the strict up or down counting mode,</p>
+<p><span class="math notranslate nohighlight">\(\text{Time Base Period}=\frac{f_{tbclk}}{f_{pwm}}-1.\)</span></p>
+<p>Additionally, we have set the period load mode to shadow and set the phase
+shift to be 0 since we will not be performing any synchronization.</p>
+<p>Now we will configure the parameters of the counter compare module for ePWM1A
+to achieve a 25% duty cycle. Since we are in up/down counting mode, a counter
+compare event will happen twice: once during the up count, and once during the
+down count. This suggests that</p>
+<p><span class="math notranslate nohighlight">\(\text{Counter Compare Value}=(1-\frac{duty}{100})* tbprd=(1-\frac{25}{100})25000=18750\)</span></p>
+<p>for a 25% duty cycle. Notice that the global variable <code class="docutils literal notranslate"><span class="pre">PwmDuty</span></code> has been
+initialized accordingly. For the strict up or down count modes,</p>
+<p><span class="math notranslate nohighlight">\(\text{Counter Compare Value}=(1-\frac{duty}{100})*(tbprd+1)-1.\)</span></p>
+<p>Next, we set the counter compare load mode to load a new counter compare value
+on zero or at the period count. This will allow us to change the value of
+<code class="docutils literal notranslate"><span class="pre">PwmDuty</span></code> in a real-time CCS debug session. Shadow load mode is also enabled to
+avoid output glitches when we change the counter compare value.</p>
+<p>Finally, we set the counter mode to up/down mode. Note that we still have not
+enabled the clock to the ePWM modules. This completes the configuration of
+ePWM1A.</p>
+<p>In order to view the PWM waveform in CCS, we must sample the PWM waveform using
+the ADC. The ePWM modules can be used to trigger a SOC event on the ADC. We
+will use this technique to sample our PWM waveform with a sampling rate of
+50kHz using ePWM2. The first steps in the configuration of ePWM2 are identical
+to ePWM1. However, we will use the up count mode rather than the up/down
+counting mode, thus, to achieve a sampling rate of 50kHz, we need</p>
+<p><span class="math notranslate nohighlight">\(\text{Time Base Period}=\frac{100* 10^6}{50000}-1=1999.\)</span></p>
+<p>Next, we configure ePWM2 to trigger SOCA on the ADC. Notice that the trigger
+source is set to be the time base period event, hence, a SOC event will happen
+at a rate of 50kHz. The event prescale setting is set to 1 since we would like
+the SOC to happen at each time base period event.</p>
+<p><strong>Table of all Changes to be made in SysConfig:</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>EPWM1</p></th>
+<th class="head"><p>EPWM2</p></th>
+<th class="head"><p>ADC</p></th>
+<th class="head"><p>ECAP</p></th>
+<th class="head"><p>InputXBAR</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Change 1</p></td>
+<td><p>Change Clock Dividers</p></td>
+<td><p>Change Clock Dividers</p></td>
+<td><p>Set clock prescaler</p></td>
+<td><p>Set ‘Capture stops at Event’</p></td>
+<td><p>Set ‘INPUTs to be used’</p></td>
+</tr>
+<tr class="row-odd"><td><p>Change 2</p></td>
+<td><p>Set time base period</p></td>
+<td><p>Set time base period</p></td>
+<td><p>Enable ADC SOC</p></td>
+<td><p>Set Event Polarities</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>Change 3</p></td>
+<td><p>Set count mode</p></td>
+<td><p>Set count mode</p></td>
+<td><p>Configure ADC Trigger Settings</p></td>
+<td><p>Register and Enable Interrupt</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-odd"><td><p>Change 4</p></td>
+<td><p>Set counter compare</p></td>
+<td><p>Configure Event Trigger Settings</p></td>
+<td><p>Set ADC Sample Window</p></td>
+<td><p>Select Interrupt Source</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>Change 5</p></td>
+<td><p>Shadow Mode Enable</p></td>
+<td><p>Pinmux configuration</p></td>
+<td><p>Enable ADCINT1</p></td>
+<td><p>Change ECAP Interrupt Handler</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-odd"><td><p>Change 6</p></td>
+<td><p>Events to configure for ePWMxA output</p></td>
+<td><p>n/a</p></td>
+<td><p>Register Interrupt 1 with the PIE</p></td>
+<td><p>Enable Interrupt in PIE</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>Change 7</p></td>
+<td><p>Pinmux configuration</p></td>
+<td><p>n/a</p></td>
+<td><p>Change ADC Interrupt Handler</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-odd"><td><p>Change 8</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+<td><p>Enable Interrupt 1 with the PIE</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>To implement these specifications with SysConfig, first click the ‘+’ by EPWM
+in the SysConfig screen to open an instance of the EPWM module.</p></li>
+</ul>
+<p><img alt="epwm_init" src="../../../_images/epwm_start_11.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘EPWM Time Base’ dropdown menu, and apply the changes circled below.</p></li>
+<li><p>Expand the ‘EPWM Counter Compare’ dropdown menu, and again apply the circled changes.</p></li>
+</ul>
+<p><img alt="EPWM1_1" src="../../../_images/lab_epwm1_12.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘EPWM Action Qualifier’ dropdown menu, then apply the changes circled below.</p></li>
+</ul>
+<p><img alt="EPWM1_2" src="../../../_images/lab_epwm1_22.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘ePWMxA Event Output Configuration’ dropdown menu, then apply the changes circled below.</p></li>
+</ul>
+<p><img alt="EPWM1_2" src="../../../_images/lab_epwm1_actions1.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘PinMux Peripheral and Pin Configuration’ dropdown menu. For ‘EPWM
+Peripheral’, make sure to select instance EPWM1. Also, make sure to
+select ‘GPIO0’ for ‘EPWMA’ and select ‘GPIO1’ for ‘EPWMB’, as shown below.
+The pin number will vary based on hardware.</p></li>
+</ul>
+<p><img alt="EPWM1_3" src="../../../_images/lab_epwm1_32.png" /></p>
+<ul class="simple">
+<li><p>Now click the ‘+’ by EPWM to open another instance of the EPWM module.</p></li>
+</ul>
+<p><img alt="epwm_init2" src="../../../_images/epwm_start_21.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘EPWM Time Base’ dropdown menu, and apply the changes circled below.</p></li>
+</ul>
+<p><img alt="EPWM2_1" src="../../../_images/lab_epwm2_12.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘EPWM Event-Trigger’ dropdown menu, and apply the changes circled below.</p></li>
+</ul>
+<p><img alt="EPWM2_2" src="../../../_images/lab_epwm2_22.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘PinMux Peripheral and Pin Configuration’ dropdown menu, and apply
+the changes circled below. Also, make sure to select ‘GPIO2’ for ‘EPWMA’ and
+select ‘GPIO3’ for ‘EPWMB’, as shown below. The pin number will vary based on
+hardware.</p></li>
+</ul>
+<p><img alt="EPWM2_3" src="../../../_images/lab_epwm2_32.png" /></p>
+<p>This concludes the configuration of the ePWM modules.</p>
+</section>
+<section id="configure-the-adc">
+<h2>Configure the ADC<a class="headerlink" href="#configure-the-adc" title="Permalink to this heading">#</a></h2>
+<p>In the previous section, we explained that ePWM2 would be triggering a SOC
+event on the ADC. In this section, we will provide the code to configure the
+ADC. More details about the configuration of the ADC can be found in
+<a class="reference internal" href="../../c2000_analog_subsystem/c2000_analog_to_digital_converter.html"><span class="doc std std-doc">Analog-to-Digital Converter (ADC)</span></a>.
+However, notice that we have setup a SOC to be triggered by ePWM2 and that we
+have setup the ADC to interrupt at the end of a conversion. Hence, the
+interrupt service routine will be triggered at a rate of 50kHz. The ADC is also
+setup in continuous mode so that the ADC register always contains the most
+recent sample.</p>
+<ul class="simple">
+<li><p>Add ADC by clicking the ‘+’ by ADC in the SysConfig screen. Make sure to make
+the changes circled below. If your device SYSCLK is not 100MHz, you will need
+to change the ADC Clock Prescaler to acheive the same results.</p></li>
+<li><p>For the ‘SOC0 Sample Window[SYSCLK counts]’ parameter, the same value may
+result in a different ‘SOC0 Sample Time[ns]’ on different devices, due to
+varying SYSCLK frequencies across devices. Make sure that the generated ‘SOC0
+Sample Time[ns]’ is about 80ns.</p></li>
+</ul>
+<p><img alt="ADC1" src="../../../_images/epwm_adc_11.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘Register PIE Interrupt Handlers’ dropdown menu, and register
+Interrupt 1, as shown below. This should trigger the ‘ADCA Interrupt 1’
+dropdown menu to appear.</p></li>
+<li><p>Expand the ‘ADCA Interrupt 1’ dropdown menu, and change the interrupt handler
+to ‘adcA1ISR’. Make sure this interrupt handler matches the name of the
+interrupt in the ISR code snippet below. Also click the checkbox to enable
+the interrupt in PIE, as shown below.</p></li>
+</ul>
+<p><img alt="ADC2" src="../../../_images/lab_adc_21.png" /></p>
+<div class="admonition-for-devices-f280025c-f280039c-f2800137-and-f2800157 admonition">
+<p class="admonition-title">For Devices F280025C, F280039C, F2800137, and F2800157:</p>
+<p>Set analog reference voltage using asysctl parameter.</p>
+<p>Add ASYSCTL by clicking ‘+’ in ANALOG group and then add internal
+reference of 2.5V.</p>
+<p><img alt="ASYSCTL" src="../../../_images/lab_adc_internal_ref2.png" /></p>
+</div>
+</section>
+<section id="define-the-adc-interrupt-service-routine">
+<h2>Define the ADC interrupt service routine<a class="headerlink" href="#define-the-adc-interrupt-service-routine" title="Permalink to this heading">#</a></h2>
+<p>In this section, we will define the ADC interrupt service routine. This
+interrupt service routine will store samples from the ADC in a circular buffer
+so we can view the PWM waveform using the real-time debug features in CCS. The
+necessary code is shown below. In addition to storing the ADC samples in a
+circular buffer, this interrupt service routine also toggles one of the board
+LEDs at a rate of 1Hz and allows for the duty cycle of ePWM1A to be changed on
+the fly or modulated during a CCS debug session. The global flag variable
+<code class="docutils literal notranslate"><span class="pre">DutyModOn</span></code> controls whether or not the duty cycle is modulated. When
+<code class="docutils literal notranslate"><span class="pre">DutyModOn</span></code> is set, the PWM waveform duty cycle will change slowly from 5% to
+95% and alternate between increasing and decreasing.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">__interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">adcA1ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Clear interrupt flags.</span>
+<span class="w">    </span><span class="n">Interrupt_clearACKGroup</span><span class="p">(</span><span class="n">INT_myADC0_1_INTERRUPT_ACK_GROUP</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ADC_clearInterruptStatus</span><span class="p">(</span><span class="n">myADC0_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">ADC_INT_NUMBER1</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Write contents of the ADC register to a circular buffer.</span>
+<span class="w">    </span><span class="o">*</span><span class="n">AdcBufPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ADC_readResult</span><span class="p">(</span><span class="n">myADC0_RESULT_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">myADC0_SOC0</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">AdcBufPtr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="n">AdcBuf</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">49</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Force buffer to wrap around.</span>
+<span class="w">        </span><span class="n">AdcBufPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdcBuf</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">AdcBufPtr</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">LedCtr</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="mi">49999</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Divide 50kHz sample rate by 50e3 to toggle LED at a rate of 1Hz.</span>
+<span class="w">        </span><span class="n">GPIO_togglePin</span><span class="p">(</span><span class="n">myBoardLED0_GPIO</span><span class="p">);</span>
+<span class="w">        </span><span class="n">LedCtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LedCtr</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">DutyModOn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Divide 50kHz sample rate by 16 to slow down duty modulation.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">DutyModCtr</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">DutyModDir</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Increment State =&amp;gt; Decrease Duty Cycle.</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ePwm_curDuty</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="n">ePwm_MinDuty</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">DutyModDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">ePwm_curDuty</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Decrement State =&amp;gt; Increase Duty Cycle.</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ePwm_curDuty</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="n">ePwm_MaxDuty</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">DutyModDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">ePwm_curDuty</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">DutyModCtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">DutyModCtr</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Set the counter compare value.</span>
+<span class="w">    </span><span class="n">EPWM_setCounterCompareValue</span><span class="p">(</span><span class="n">myEPWM0_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">EPWM_COUNTER_COMPARE_A</span><span class="p">,</span><span class="w"> </span><span class="n">ePwm_curDuty</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="configure-ecap1">
+<h2>Configure eCAP1<a class="headerlink" href="#configure-ecap1" title="Permalink to this heading">#</a></h2>
+<p>We can use the eCAP peripheral to measure the duty cycle and period of our PWM
+waveform. We start by resetting the eCAP1 peripheral, disabling time stamp
+capture, and stopping the internal counter. This will put the eCAP1 registers
+in a known state, and it will freeze the internal eCAP counter. This way, when
+we start the eCAP, it will initially behave in a predictable manner which can
+be important for many practical usage scenarios. Notice that <code class="docutils literal notranslate"><span class="pre">XBAR_INPUT7</span></code> has
+been mapped to GPIO0 which contains our PWM waveform. Accordingly, the input of
+eCAP1 is set to be <code class="docutils literal notranslate"><span class="pre">ECAP_INPUT_INPUTXBAR7</span></code>.</p>
+<p>The following code enables continuous capture mode with 4 sequential
+timestamped events. Notice the configuration of the 4 different event
+polarities. This configuration allows us to measure the duty cycle from events
+1 and 2, and measure the period from events 1 and 3. Since we need the internal
+counter to hold its count from event 1 to event 4, we have disabled the counter
+reset on these events.</p>
+<p>Next, we enable an interrupt after event 3 is captured. This allows us to
+calculate the period and duty cycle in the interrupt service routine.</p>
+<ul class="simple">
+<li><p>Add ECAP by clicking ‘+’ in SysConfig screen, and apply the changes circled below.</p></li>
+</ul>
+<p><img alt="ECAP1" src="../../../_images/ecap_1.png" /></p>
+<ul class="simple">
+<li><p>Expand the ‘eCAP Interrupt’ dropdown menu, and change the interrupt handler
+to ‘ecap1ISR’. Make sure this interrupt handler matches the name of the
+interrupt in the ISR code snippet below. Also click the checkbox to enable
+the interrupt in PIE, as shown below.</p></li>
+</ul>
+<p><img alt="ECAP2" src="../../../_images/ecap_2.png" /></p>
+<ul class="simple">
+<li><p>Add INPUTXBAR by clicking ‘+’ in SysConfig screen, and apply the changes
+circled below. Make sure the interrupt handler matches the name of the
+interrupt in the ISR code snippet below.</p></li>
+</ul>
+<p><img alt="INPUTXBAR" src="../../../_images/inputxbar.png" /></p>
+<p>This concludes the configuration of the eCAP and inputXbar.</p>
+</section>
+<section id="define-the-ecap-interrupt-service-routine">
+<h2>Define the eCAP interrupt service routine<a class="headerlink" href="#define-the-ecap-interrupt-service-routine" title="Permalink to this heading">#</a></h2>
+<p>In the last section, we enabled an interrupt on the eCAP. The corresponding
+interrupt service routine is named <code class="docutils literal notranslate"><span class="pre">ecap1ISR</span></code> and is shown below. The global
+variable <code class="docutils literal notranslate"><span class="pre">eCapPwmPeriod</span></code> stores the difference between the eCAP timestamps from
+event 3 and 1, which allows us to calculate the period. Since the eCAP units
+operate on the system clock, the frequency of the PWM waveform can be
+calculated using</p>
+<p><span class="math notranslate nohighlight">\(f_{pwm}\approx\frac{\text{DEVICE_SYSCLK_FREQ}}{\text{eCapPwmPeriod}}.\)</span></p>
+<p>The global variable <code class="docutils literal notranslate"><span class="pre">eCapPwmDuty</span></code> stores the difference between the eCAP
+timestamps from event 2 and 1, which allows us to calculate the duty cycle. The
+duty cycle can be calculated vias</p>
+<p><span class="math notranslate nohighlight">\(\text{duty}\approx\frac{\text{eCapPwmDuty}}{\text{eCapPwmPeriod}}100.\)</span></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">__interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ecap1ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Interrupt_clearACKGroup</span><span class="p">(</span><span class="n">INT_myECAP0_INTERRUPT_ACK_GROUP</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ECAP_clearGlobalInterrupt</span><span class="p">(</span><span class="n">myECAP0_BASE</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ECAP_clearInterrupt</span><span class="p">(</span><span class="n">myECAP0_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">ECAP_ISR_SOURCE_CAPTURE_EVENT_3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">eCapPwmDuty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span><span class="n">ECAP_getEventTimeStamp</span><span class="p">(</span><span class="n">myECAP0_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">ECAP_EVENT_2</span><span class="p">)</span><span class="w"> </span><span class="o">-</span>
+<span class="w">                  </span><span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span><span class="n">ECAP_getEventTimeStamp</span><span class="p">(</span><span class="n">myECAP0_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">ECAP_EVENT_1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">eCapPwmPeriod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span><span class="n">ECAP_getEventTimeStamp</span><span class="p">(</span><span class="n">myECAP0_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">ECAP_EVENT_3</span><span class="p">)</span><span class="w"> </span><span class="o">-</span>
+<span class="w">                    </span><span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span><span class="n">ECAP_getEventTimeStamp</span><span class="p">(</span><span class="n">myECAP0_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">ECAP_EVENT_1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="define-global-macros-and-variables">
+<h2>Define Global Macros and Variables<a class="headerlink" href="#define-global-macros-and-variables" title="Permalink to this heading">#</a></h2>
+<p>First, we will define some necessary macros and global variables.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ePwm_TimeBase</span><span class="p">;</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">ePwm_MinDuty</span><span class="p">;</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">ePwm_MaxDuty</span><span class="p">;</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">ePwm_curDuty</span><span class="p">;</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">AdcBuf</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span><span class="w">            </span><span class="c1">// Buffer to store ADC samples.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="o">*</span><span class="n">AdcBufPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdcBuf</span><span class="p">;</span><span class="w">   </span><span class="c1">// Pointer to ADC buffer samples.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">LedCtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">            </span><span class="c1">// Counter to slow down LED toggle in ADC ISR.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">DutyModOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">         </span><span class="c1">// Flag to turn on/off duty cycle modulation.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">DutyModDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">        </span><span class="c1">// Flag to control duty mod direction up/down.</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">DutyModCtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">        </span><span class="c1">// Counter to slow down rate of modulation.</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">eCapPwmDuty</span><span class="p">;</span><span class="w">            </span><span class="c1">// Percent = (eCapPwmDuty/eCapPwmPeriod)*100.</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">eCapPwmPeriod</span><span class="p">;</span><span class="w">          </span><span class="c1">// Frequency = DEVICE_SYSCLK_FREQ/eCapPwmPeriod.</span>
+</pre></div>
+</div>
+</section>
+<section id="define-main">
+<h2>Define main()<a class="headerlink" href="#define-main" title="Permalink to this heading">#</a></h2>
+<p>Next, we will populate <code class="docutils literal notranslate"><span class="pre">main()</span></code> as shown below.</p>
+<p>That being said, we will still need to know the system clock frequency in order
+to configure our PWM waveform frequency. The system clock frequency value is
+defined via the macro <code class="docutils literal notranslate"><span class="pre">DEVICE_SYSCLK_FREQ</span></code> in <code class="docutils literal notranslate"><span class="pre">[projectroot]/device/device.h</span></code>. Observe that
+the main function only handles initialization routines. Most of the activity in
+this lab lies in the peripherals themselves and their interrupt service
+routines.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Device_init</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Interrupt_initModule</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Interrupt_initVectorTable</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Board_init</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Initialize variables for ePWM Duty Cycle</span>
+<span class="w">    </span><span class="n">ePwm_TimeBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EPWM_getTimeBasePeriod</span><span class="p">(</span><span class="n">myEPWM0_BASE</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ePwm_MinDuty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)(</span><span class="mf">0.95f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">ePwm_TimeBase</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ePwm_MaxDuty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)(</span><span class="mf">0.05f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">ePwm_TimeBase</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ePwm_curDuty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EPWM_getCounterCompareValue</span><span class="p">(</span><span class="n">myEPWM0_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">EPWM_COUNTER_COMPARE_A</span><span class="p">);</span>
+<span class="w">    </span><span class="n">EINT</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ERTM</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">NOP</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This concludes the coding portion of this lab.</p>
+</section>
+<section id="build-and-run-interactive-debug-session">
+<h2>Build and run interactive debug session<a class="headerlink" href="#build-and-run-interactive-debug-session" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Ensure that the USB cable from your LaunchPad or controlCARD is connected to
+your computer.</p></li>
+<li><p>Under the <strong>Build</strong> button, activate the <strong>CPU1_RAM</strong> build configuration.</p></li>
+<li><p>Make sure your project’s target configuration file (.ccxml) is active.</p></li>
+<li><p>Connect the ePWM1A GPIO pin to the ADCINA0 GPIO pin using a jumper cable. If
+you have an oscilloscope, connect a probe to the ePWM1A GPIO pin on your
+board.</p></li>
+</ol>
+<p><strong>LaunchPad</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>EPWM1A Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>30</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>70</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28002x</p></td>
+<td><p>69</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-even"><td><p>F28003x</p></td>
+<td><p>70</p></td>
+<td><p>80</p></td>
+</tr>
+<tr class="row-odd"><td><p>F280013x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>F280015x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ControlCARD</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>EPWM1A Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28002x</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+<tr class="row-even"><td><p>F28003x</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+<tr class="row-odd"><td><p>F280013x</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+<tr class="row-even"><td><p>F280015x</p></td>
+<td><p>9</p></td>
+<td><p>49</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple" start="5">
+<li><p>Now we will start the debug session. Under the debug button, start the debug
+session using the new configuration. You should now see the debugging
+session open up and the debugger should have reached <code class="docutils literal notranslate"><span class="pre">main()</span></code>.</p></li>
+<li><p>Click the <strong>Resume</strong> button. You should see the LED on your board toggling
+at about 1Hz which indicates that the sampling rate is 50kHz as desired.</p></li>
+<li><p>Find the <code class="docutils literal notranslate"><span class="pre">eCapPwmDuty</span></code> and <code class="docutils literal notranslate"><span class="pre">eCapPwmPeriod</span></code> global variables in the debug
+source code window, highlight their text, right click, and click <strong>Add Watch
+Expression</strong>. Activate the <strong>Continuous Refresh</strong> option. If all is well,
+the expressions pane should show values of <code class="docutils literal notranslate"><span class="pre">eCapPwmDuty</span></code> and <code class="docutils literal notranslate"><span class="pre">eCapPwmPeriod</span></code>
+such that <span class="math notranslate nohighlight">\(\frac{\text{eCapPwmDuty}}{\text{eCapPwmPeriod}}100\approx25\)</span>
+which indicates the correct duty cycle of 25%. Additionally,
+<span class="math notranslate nohighlight">\(\frac{\text{DEVICE_SYSCLK_FREQ}}{\text{eCapPwmPeriod}}\approx2000\)</span>
+which indicates the correct PWM frequency of 2kHz.</p></li>
+</ol>
+<p><img alt="Watch Expression List" src="../../../_images/watch_expression.png" /></p>
+<ol class="arabic simple" start="8">
+<li><p>Now we will view our waveform from the samples in <code class="docutils literal notranslate"><span class="pre">AdcBuf</span></code>. Click on
+<strong>Tools→Graph→Single Time</strong>, set <strong>Acquisition Buffer Size</strong> to be
+<strong>50</strong>, set <strong>Dsp Data Type</strong> to be <strong>16 bit unsigned integer</strong>, set
+<strong>Sampling Rate Hz</strong> to be <strong>50000</strong>, set <strong>Start Address</strong> to be
+<strong>AdcBuf</strong>, set <strong>Time Display Unit</strong> to be <strong>us</strong>, and leave the other
+settings as their default value. Click <strong>OK</strong> and you should see the plot
+window open up. Activate the <strong>Continuous Refresh</strong> option in the plot
+window. You should now see several periods of the PWM waveform in the plot
+updating in real-time. If desired, you can use the measurement tool to
+verify the duty cycle and period.</p></li>
+</ol>
+<div class="admonition-important admonition">
+<p class="admonition-title">Important</p>
+<p>Note: If you do not see CCS menu <strong>Tools → Graph</strong>, please refer to
+<a class="reference internal" href="../../c2000_get_started/c2000_getstarted.html"><span class="doc std std-doc">Getting Started (Setting CCS for graph)</span></a>
+to see the instruction on how to enable CCS graphing tool in your perspective.</p>
+</div>
+<p><img alt="Plot Configuration" src="../../../_images/plot_setup1.png" /></p>
+<p><img alt="PWM Waveform" src="../../../_images/plot_pwm1.png" /></p>
+<ol class="arabic simple" start="9">
+<li><p>Next, add <code class="docutils literal notranslate"><span class="pre">PwmDuty</span></code> to the watch expression list. Play with values of
+<code class="docutils literal notranslate"><span class="pre">PwmDuty</span></code> from 1250 to 23750. You should see the duty cycle of the PWM
+waveform change in real-time in the plot window. The readings from the eCAP
+should also update in real-time.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">DutyModOn</span></code> to the watch expression list. Change the value to 1. You
+should now see the duty cycle modulate in real-time from 5% to 95% in the
+plot window.
+<img alt="PWM Duty Mod" src="../../../_images/plot_pwm_mod.png" /></p></li>
+<li><p>Terminate the debug session and close the project. This concludes the lab
+assignment.</p></li>
+</ol>
+</section>
+<section id="full-solution">
+<h2>Full Solution<a class="headerlink" href="#full-solution" title="Permalink to this heading">#</a></h2>
+<p>The full solution to this lab exercise is included as part of the C2000Ware
+SDK. Import the project from <code class="docutils literal notranslate"><span class="pre">&lt;c2000ware_install_path&gt;/training/device/&lt;device_name&gt;/control_peripherals/lab_ePwm_eCap</span></code>.</p>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="../analog_subsystem/c2000_lab_adc.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Analog-to-Digital Converter Lab</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_lab_qep.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Enhanced Quadrature Encoder Pulse (eQEP) Lab</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solution">
+   Solution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lab-setup">
+   Lab Setup
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hardware-setup">
+     Hardware Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#software-setup">
+     Software Setup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-empty-project">
+   Import Empty Project
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-the-gpio">
+   Configure the GPIO
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#steps-to-add-gpio-configuration">
+   Steps to add GPIO configuration:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-epwm1-and-epwm2">
+   Configure ePWM1 and ePWM2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-the-adc">
+   Configure the ADC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-the-adc-interrupt-service-routine">
+   Define the ADC interrupt service routine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-ecap1">
+   Configure eCAP1
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-the-ecap-interrupt-service-routine">
+   Define the eCAP interrupt service routine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-global-macros-and-variables">
+   Define Global Macros and Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-main">
+   Define main()
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-and-run-interactive-debug-session">
+   Build and run interactive debug session
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-solution">
+   Full Solution
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

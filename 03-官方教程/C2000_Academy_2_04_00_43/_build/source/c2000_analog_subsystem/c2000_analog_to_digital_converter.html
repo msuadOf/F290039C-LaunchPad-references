@@ -1,0 +1,792 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Analog-to-Digital Converter (ADC) &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_analog_subsystem/c2000_analog_to_digital_converter';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_analog_subsystem/c2000_analog_to_digital_converter.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Comparator Subsystem (CMPSS)" href="c2000_comparator_subsystem.html" />
+    <link rel="prev" title="Flash Configuration and Memory Performance" href="../c2000_system/c2000_flash.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analog-to-digital-converter-adc">
+<h1>Analog-to-Digital Converter (ADC)<a class="headerlink" href="#analog-to-digital-converter-adc" title="Permalink to this heading">#</a></h1>
+<p>C2000 devices support multiple analog-to-digital converters (ADCs) in 12-bit mode and/or
+16-bit mode. Each ADC module has a single sample-and-hold (S/H) circuit and using multiple
+ADC modules enables simultaneous sampling or independent operation
+(sequential sampling). The ADC module is implemented using a successive
+approximation (SAR) type ADC.</p>
+<div class="admonition-adc-module admonition">
+<p class="admonition-title">ADC Module</p>
+<p>Not all C2000 devices have the same ADC type or capabilities. Refer to the
+<i><a class="reference external" href="https://www.ti.com/lit/spru566">Peripheral Reference Guide</a></i> to find your
+specific device’s ADC type and feature set.</p>
+</div>
+<section id="differential-signal-mode">
+<h2>Differential Signal Mode<a class="headerlink" href="#differential-signal-mode" title="Permalink to this heading">#</a></h2>
+<p>In this mode, a pair of pins (positive input ADCINxP and negative input ADCINxN)
+are sampled and the input applied to the converter is the difference between the
+two pins (ADCINxP – ADCINxN). A benefit of differential signaling mode is the
+ability to cancel noise that may be introduced common to both inputs.</p>
+</section>
+<section id="single-ended-signal-mode">
+<h2>Single-Ended Signal Mode<a class="headerlink" href="#single-ended-signal-mode" title="Permalink to this heading">#</a></h2>
+<p>In single-ended mode, a single pin (ADCINx) is sampled and applied to the input of
+the converter.</p>
+</section>
+<section id="start-of-conversion-soc">
+<h2>Start of Conversion (SOC)<a class="headerlink" href="#start-of-conversion-soc" title="Permalink to this heading">#</a></h2>
+<p>The ADC triggering and conversion sequencing is managed by a series of
+start-of-conversion (SOCx) configuration registers.</p>
+<p>Each SOCx register
+configures a single channel conversion, where the SOCx register specifies the
+trigger source that starts the conversion, the channel to convert, and the
+acquisition sample window duration.</p>
+<p>Multiple SOCx registers can be configured
+for the same trigger, channel, and/or acquisition window. Configuring multiple
+SOCx registers to use the same trigger will cause that trigger to perform a
+sequence of conversions, and configuring multiple SOCx registers for the same
+trigger and channel can oversample the signal.</p>
+<p>The various trigger sources that can be used to start an ADC conversion include
+the General Purpose Timers, the ePWM modules, an external pin, and by software.
+Also, the flag setting of either ADCINT1 or ADCINT2 can be configured as a
+trigger source which can be used for continuous conversion operation.</p>
+<p>The ADC
+interrupt logic can generate up to four interrupts. The results for SOC 0
+through 15 appear in result registers 0 through 15, respectively.</p>
+<p><img alt="ADC SOCx Functional Diagram" src="../../_images/adc_soc_functional_diagram.png" />
+<br/></p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>The diagram above is for the F28004x, other devices might have
+different trigger sources. Please refer to the ‘ADC Triggering’ section of this
+module for more information.</p>
+</div>
+<p>The figure above is a conceptual view highlighting a single ADC
+start-of-conversion functional flow from triggering to interrupt generation.
+This figure is replicated 16 times and the Driverlib functions highlight the
+sections that they modify.</p>
+</section>
+<section id="adc-triggering">
+<h2>ADC Triggering<a class="headerlink" href="#adc-triggering" title="Permalink to this heading">#</a></h2>
+<div class="admonition-trigger-sources admonition">
+<p class="admonition-title">Trigger Sources: </p>
+<p>As discussed previously, each ADC module has multiple trigger sources that can
+be used to initiate an ADC conversion. For a complete list of trigger sources
+please reference the ‘ADC Triggering’ section of the TRM.</p>
+</div>
+<p>Point about triggering:</p>
+<ul class="simple">
+<li><p>There is fine granularity and coupling for when the ADC conversion can be
+sampled vs the control loop (especially with an EPWM-trigger +
+EPWM-actuation scheme), which is convenient for avoiding noise and
+optimizing response times (phase margin).</p></li>
+<li><p>Parallel ADCs allow for true simultaneous sampling, which is good for
+correlated signals (like Voltage + Current for a power supply)</p></li>
+<li><p>The sampling rate is software configurable, so the ADC sampling can be
+adjusted on-the-fly to match the input signal</p></li>
+</ul>
+<section id="triggering-examples">
+<h3>Triggering Examples<a class="headerlink" href="#triggering-examples" title="Permalink to this heading">#</a></h3>
+<p>The top example shows channels A1, A3, and A5 being
+converted with a trigger from EPWM1. After A5 is converted, ADCINT1 is
+generated.</p>
+<p>The bottom example shows channels A2, A4, and A6 being converted
+initially by a software trigger. Then, after A6 is converted, ADCINT2 is
+generated and also fed back as a trigger to start the process again.</p>
+<p><img alt="ADC Triggering" src="../../_images/adc_triggers.png" />
+<br/></p>
+<p>The ADC ping-pong triggering example shows channels B0 through B5 being
+converted, triggered initially by software. After channel B2 is converted,
+ADCINT1 is generated, which also triggers channel B3. After channel B5 is
+converted, ADCINT2 is generated and is also fed back to start the process again
+from the beginning. Additionally, ADCINT1 and ADCINT2 are being used to manage
+the ping-pong interrupts for the interrupt service routines.</p>
+<p><img alt="ADC Ping-Pong Triggering" src="../../_images/adc_ping_pong_triggering.png" />
+<br/></p>
+</section>
+</section>
+<section id="adc-conversion-priority">
+<h2>ADC Conversion Priority<a class="headerlink" href="#adc-conversion-priority" title="Permalink to this heading">#</a></h2>
+<p>When multiple triggers are received at the same time, the ADC conversion
+priority determines the order in which they are converted.</p>
+<p>Three different priority modes are supported. Lets take a look at each:</p>
+<section id="round-robin-priority-default">
+<h3>Round Robin Priority (default)<a class="headerlink" href="#round-robin-priority-default" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>No SOC has an inherent higher priority than another</p></li>
+<li><p>Priority depends on the round robin pointer which operates in a circular
+buffer</p></li>
+</ul>
+</section>
+<section id="high-priority">
+<h3>High Priority<a class="headerlink" href="#high-priority" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>High priority SOC will interrupt the round robin wheel after current
+conversion completes and insert itself as the next conversion</p></li>
+<li><p>One or more than one SOC can be assigned as ‘high priority’</p></li>
+<li><p>High priority mode is assigned first to the lower number
+start-of-conversion and then in increasing numerical order.</p></li>
+<li><p>If two high priority start-of-conversion triggers occur at the same time,
+the lower number will take precedence.</p></li>
+<li><p>After its conversion completes, the round robin wheel will continue where
+it was interrupted</p></li>
+</ul>
+</section>
+<section id="round-robin-burst-mode">
+<h3>Round Robin Burst Mode<a class="headerlink" href="#round-robin-burst-mode" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Allows a single trigger to convert one or more SOCs in the round robin
+wheel</p></li>
+<li><p>Uses BURSTTRIG instead of TRIGSEL for all round robin SOCs (not high
+priority) to select the burst size and trigger source</p></li>
+</ul>
+<p><img alt="ADC Conversion Priority Functional Diagram" src="../../_images/adc_conversion_priority.png" /></p>
+<p>In the ADC Conversion Priority Functional Diagram, the Start-of-Conversion Priority Control Register
+contains two bit fields. The Start-of-Conversion Priority bit fields determine the cutoff point
+between high priority and round robin mode, whereas the Round-Robin Pointer bit fields contains
+the last converted round robin start-of-conversion which determines the order of conversions.</p>
+<p><img alt="ADC Round Robin Priority Example" src="../../_images/adc_round_robin_priority_example.png" /></p>
+<p><img alt="ADC High Priority Example" src="../../_images/adc_high_priority_example.png" /></p>
+<p><img alt="ADC Round Robin Burst Mode Diagram" src="../../_images/adc_round_robin_burst_mode.png" /></p>
+<p>The Round-Robin Burst mode utilizes an ADC Burst Control Register to enable the burst mode,
+determine the burst size, and select the burst trigger source.</p>
+</section>
+</section>
+<section id="post-processing-block">
+<h2>Post Processing Block<a class="headerlink" href="#post-processing-block" title="Permalink to this heading">#</a></h2>
+<p>To further enhance the capabilities of the ADC, each ADC module incorporates
+post processing blocks (PPBs), and each PPB can be linked to any of the ADC
+result registers (ADCRESULTx). The PPBs can be used for offset correction, calculating an
+error from a set-point, detecting a limit and zero-crossing, and capturing a
+trigger-to-sample delay.</p>
+<p>1.<strong>Offset Correction</strong></p>
+<ul class="simple">
+<li><p>Simultaneously remove an offset associated with an ADCIN channel possibly
+caused by external sensors and signal sources (zero-overhead; saving
+cycles)</p></li>
+</ul>
+<p>2.<strong>Error from Set-point Calculation</strong></p>
+<ul class="simple">
+<li><p>Subtract out a reference value which can be used to automatically calculate
+an error from a set-point or expected value (reduces the sample to output
+latency and software overhead)</p></li>
+</ul>
+<p>3.<strong>Limit and Zero-Crossing Detection</strong></p>
+<ul class="simple">
+<li><p>Automatically perform a check against a high/low limit or zero- crossing
+and can generate a trip to the ePWM and/or an interrupt (decreases the
+sample to ePWM latency and reduces software overhead; trip the ePWM based
+on an out of range ADC conversion without CPU intervention) which is
+useful for safety cautious applications.</p></li>
+</ul>
+<p>4.<strong>Trigger-to-Sample Delay Capture</strong></p>
+<ul class="simple">
+<li><p>Capable of recording the delay between when the SOC is triggered and when it
+begins to be sampled (allows software techniques to reduce the delay
+error)</p></li>
+</ul>
+<p>5.<strong>Post Processing Block Interrupt Event</strong></p>
+<ul class="simple">
+<li><p>Each ADC module contains Post Processing Blocks</p></li>
+<li><p>Each Post Processing Block can be associated with any of the 16 ADCRESULTx registers</p></li>
+</ul>
+<p><img alt="ADC Post Processing Interrupt Event" src="../../_images/adc_post_processing_interrupt.png" /></p>
+</section>
+<section id="adc-clocking-flow">
+<h2>ADC Clocking Flow<a class="headerlink" href="#adc-clocking-flow" title="Permalink to this heading">#</a></h2>
+<p>In order to configure the clock for the ADC module, first the SYSCLK needs to be
+generated. This clock is the CPU frequency and is configured through the
+<code class="docutils literal notranslate"><span class="pre">SysCtl_setClock()</span></code> function. This function lets you choose the input clock
+source and configure the PLL settings. Once the SYSCLK is setup, the clock to
+each ADC module used must be enabled using the <code class="docutils literal notranslate"><span class="pre">SysCtl_enablePeripheral()</span></code>
+function. Upon enabling the clock, a prescalar value can be selected
+through the <code class="docutils literal notranslate"><span class="pre">ADC_setPrescaler()</span></code> function that will scale down the SYSCLK
+frequency to go to the ADC core. Make sure to check the datasheet for the MAX
+ADC frequency, this is lower than SYSCLK.</p>
+<p><strong>Example of configuring the clock settings for a device</strong></p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>The values in this example may not apply to all devices but the flow
+will be the same.</p>
+</div>
+<p><img alt="ADC Clocking Flow" src="../../_images/adc_clocking_flow.png" /></p>
+</section>
+<section id="adc-timing">
+<h2>ADC Timing<a class="headerlink" href="#adc-timing" title="Permalink to this heading">#</a></h2>
+<p>Below is an example of how to calculate the maximum sampling rate. For this
+example, <code class="docutils literal notranslate"><span class="pre">SYSCLK</span></code> is 100MHz (10ns period) and <code class="docutils literal notranslate"><span class="pre">ADCCLK</span></code> is 50MHz (20ns period)</p>
+<p>Sample + Hold (sampling window) time: 8 * 10 ns = 80 ns</p>
+<p>Conversion time: 21 * 10 ns = 210 ns</p>
+<p>Sampling Rate: 80 ns + 210 ns = 290 ns -&gt;<strong>3.45 MSPS (Mega samples per second)</strong></p>
+<p><img alt="ADC Timing Example" src="../../_images/adc_timings.png" /></p>
+</section>
+<section id="adc-conversion-result-registers">
+<h2>ADC Conversion Result Registers<a class="headerlink" href="#adc-conversion-result-registers" title="Permalink to this heading">#</a></h2>
+<p>The ADC conversion results are stored within the ADCRESULTx register. The
+<code class="docutils literal notranslate"><span class="pre">ADC_readResult()</span></code> function can be utilized to read the result given an ADC
+module and SOC number.</p>
+<ul class="simple">
+<li><p>Selectable internal reference of 2.5 V or 3.3 V (Not available on multi-core devices)</p></li>
+<li><p>Ratiometric external reference set by VREFHI/VREFLO</p></li>
+</ul>
+<p><img alt="ADC Conversion Register" src="../../_images/adc_conversion_register.png" /></p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>The table above is based on internal
+reference of 3.3 V; for external reference VREFHI is VDDA maximum, however
+VREFHI is typically selected as 2.5 V or 3.0 V</p>
+</div>
+</section>
+<section id="adc-calibration-and-reference">
+<h2>ADC Calibration and Reference<a class="headerlink" href="#adc-calibration-and-reference" title="Permalink to this heading">#</a></h2>
+<section id="built-in-calibration">
+<h3>Built-In Calibration<a class="headerlink" href="#built-in-calibration" title="Permalink to this heading">#</a></h3>
+<p>TI reserved OTP contains device specific calibration
+data for the ADC, internal oscillators and buffered DAC</p>
+<ul class="simple">
+<li><p>The Boot ROM contains a Device_cal() routine that copies the calibration data
+to their respective registers</p></li>
+<li><p>Device_cal() must be run to meet the specifications in the datasheet</p>
+<ul>
+<li><p>The Bootloader automatically calls Device_cal() such that no action is
+normally required by the user</p></li>
+<li><p>If the Bootloader is bypassed (e.g. during development) Device_cal
+() should be called by the application:</p></li>
+</ul>
+</li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Device_cal()</span></code> function is called by the <code class="docutils literal notranslate"><span class="pre">SysCtl_deviceCal()</span></code> function
+within the sysctl.h file which is called by the <code class="docutils literal notranslate"><span class="pre">Device_init()</span></code> function. The
+Device_init() function is found within device.c. This is what C2000Ware
+examples utilize to initialize the device.</p>
+</section>
+<section id="manual-adc-calibration">
+<h3>Manual ADC Calibration<a class="headerlink" href="#manual-adc-calibration" title="Permalink to this heading">#</a></h3>
+<p>If the offset and gain errors in the datasheet are unacceptable for your
+application, or you want to also compensate for board level errors (e.g. sensor
+or amplifier offset), you can manually calibrate</p>
+<ul class="simple">
+<li><p>Offset error (12-bit mode)</p>
+<ul>
+<li><p>Compensated in analog with the ADCOFFTRIM register</p></li>
+<li><p>No reduction in full-scale range</p></li>
+<li><p>Configure input to VREFLO, set ADCOFFTRIM to maximum offset error, and
+take a reading</p></li>
+<li><p>Re-adjust ADCOFFTRIM to make result zero</p></li>
+</ul>
+</li>
+<li><p>Gain error</p>
+<ul>
+<li><p>Compensated in software</p></li>
+<li><p>Some loss in full-scale range</p></li>
+<li><p>Requires use of a second ADC input pin and an upper-range reference
+voltage on that pin</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="ADC Manual Calibration" src="../../_images/adc_manual_calibration.png" /></p>
+</section>
+</section>
+<section id="analog-subsystem-external-reference">
+<h2>Analog Subsystem External Reference<a class="headerlink" href="#analog-subsystem-external-reference" title="Permalink to this heading">#</a></h2>
+<div class="admonition-setting-up-an-external-reference admonition">
+<p class="admonition-title">Setting up an External Reference</p>
+<p>For an example of how to setup an external reference refer to the ‘Designing an
+External Reference Circuit’ section within the device’s Technical Reference Manual
+(TRM).</p>
+</div>
+<p>The following image shows
+an example of the reference generation scheme for the F28004x device:</p>
+<p><img alt="ADC Subsystem External Reference" src="../../_images/adc_external_reference.png" /></p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<section id="adc-related-collateral">
+<h3>ADC Related Collateral<a class="headerlink" href="#adc-related-collateral" title="Permalink to this heading">#</a></h3>
+<p><strong>Foundational</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACT6">ADC Input Circuit Evaluation for C2000 MCUs (TINA-TI) Application Report</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/tool/PSPICE-FOR-TI">PSpice for TI design and simulation tool</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/eb/slyy211/slyy211.pdf">Real-Time Control Reference Guide</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/tool/TINA-TI">TI Precision Labs - ADCs</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/5783793652001">TI Precision Labs: Driving the reference input on a SAR ADC</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/6163538486001">TI Precision Labs: Introduction to analog-to-digital converters (ADCs)</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/5476574757001">TI Precision Labs: SAR ADC input driver design</a></p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/967811/tms320f28388d-connecting-both-vdda-and-vrefhi-to-3-3v/3575387?tisearch=e2e-sitesearch&amp;amp;keymatch=ADC%252520VREFHI%252520driver#3575387">TI e2e: Connecting VDDA to VREFHI</a></p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/1065493/tms320f280049-q1-opamp-powered-by-5v-to-buffer-gpio">TI e2e: Topologies for ADC Input Protection</a></p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/1024667/tms320f280049c-why-does-the-adc-input-voltage-drop-with-sampling/3787995?tisearch=e2e-sitesearch&amp;amp;keymatch=ADC%25252525252520voltage%25252525252520divider#3787995">TI e2e: Why does the ADC Input Voltage drop with sampling?</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/SLAA013">Understanding Data Converters Application Report</a></p></li>
+</ul>
+<p><strong>Getting Started</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.mathworks.com/help/supportpkg/texasinstrumentsc2000/ug/adc-pwm-synchronization-via-adc-interrupt.html">ADC-PWM Synchronization Using ADC Interrupt</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/series/C2000-analog-to-digital-converter.html">Analog-to-Digital Converter (ADC) Training for C2000 MCUs</a> - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2837x, F2838x</p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/spracz9">Hardware Design Guide for F2800x C2000 Real-Time MCU Series</a></p></li>
+</ul>
+<p><strong>Expert</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/tool/ANALOG-ENGINEER-CALC">Analog Engineer’s Calculator</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/seclit/eb/slyw038c/slyw038c.pdf">Analog Engineer’s Pocket Reference</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACZ0">Charge-Sharing Driving Circuits for C2000 ADCs (using PSPICE-FOR-TI) Application Report</a> - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2807x, F2837xD, F2837xS, F2838x</p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACV0">Charge-Sharing Driving Circuits for C2000 ADCs (using TINA-TI) Application Report</a> - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2807x, F2837xD, F2837xS, F2838x</p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/blogs_/b/analogwire/archive/2017/08/17/debugging-an-integrated-adc-in-a-microcontroller-using-an-oscilloscope">Debugging an integrated ADC in a microcontroller using an oscilloscope</a></p></li>
+<li><p><a class="reference external" href="https://ti.com/lit/SPRACW9">Methods for Mitigating ADC Memory Cross-Talk Application Report</a> - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2807x, F2837xD, F2837xS, F2838x</p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/5466126729001">TI Precision Labs: ADC AC specifications</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/5438477774001">TI Precision Labs: ADC Error sources</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/6114701198001">TI Precision Labs: ADC Noise</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/6279972316001">TI Precision Labs: Analog-to-digital converter (ADC) drive topologies</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/6025680789001">TI Precision Labs: Electrical overstress on data converters</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/5527915856001">TI Precision Labs: High-speed ADC fundamentals</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/video/6228191712001">TI Precision Labs: SAR &amp;amp; Delta-Sigma: Understanding the Difference</a></p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/902366/tms320f28377d-ep-adc-bandwidth-clarification/3335570?tisearch=e2e-sitesearch&amp;amp;keymatch=aperture%20jitter#3335570">TI e2e: ADC Bandwidth Clarification</a></p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/587441/faq-tms320f28035-adc-calibration-and-total-unadjusted-error">TI e2e: ADC Calibration and Total Unadjusted Error</a></p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/477506/faq-adc-reference-in-tms320f28377dzwt">TI e2e: ADC Reference Driver Options</a></p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/815285/tms320f280049-about-the-actual-adc-resolution/3017272#3017272">TI e2e: ADC Resolution with Oversampling</a></p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/757435/tms320f28379d-adc-configuration-for-interleaved-mode/2799102?tisearch=e2e-sitesearch&amp;amp;keymatch=aperture%2525252520jitter#2799102">TI e2e: ADC configuration for interleaved mode</a></p></li>
+<li><p><a class="reference external" href="https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/930245/tms320f280049-simultaneous-sampling-with-single-adc/3437033?tisearch=e2e-sitesearch&amp;amp;keymatch=burst%2520mode#3437033">TI e2e: Simultaneous Sampling with Single ADC</a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="../c2000_system/c2000_flash.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Flash Configuration and Memory Performance</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_comparator_subsystem.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Comparator Subsystem (CMPSS)</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#differential-signal-mode">
+   Differential Signal Mode
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#single-ended-signal-mode">
+   Single-Ended Signal Mode
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#start-of-conversion-soc">
+   Start of Conversion (SOC)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adc-triggering">
+   ADC Triggering
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#triggering-examples">
+     Triggering Examples
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adc-conversion-priority">
+   ADC Conversion Priority
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#round-robin-priority-default">
+     Round Robin Priority (default)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#high-priority">
+     High Priority
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#round-robin-burst-mode">
+     Round Robin Burst Mode
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#post-processing-block">
+   Post Processing Block
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adc-clocking-flow">
+   ADC Clocking Flow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adc-timing">
+   ADC Timing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adc-conversion-result-registers">
+   ADC Conversion Result Registers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adc-calibration-and-reference">
+   ADC Calibration and Reference
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#built-in-calibration">
+     Built-In Calibration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#manual-adc-calibration">
+     Manual ADC Calibration
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analog-subsystem-external-reference">
+   Analog Subsystem External Reference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adc-related-collateral">
+     ADC Related Collateral
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

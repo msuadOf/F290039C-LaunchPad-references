@@ -1,0 +1,6 @@
+BGCRC Related Collateral
+====================================
+
+**Getting Started**
+
+- `CRC Engines in C2000 Devices Application Report <https://www.ti.com/lit/spracr3>`_

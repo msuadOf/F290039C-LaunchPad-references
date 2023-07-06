@@ -1,0 +1,24 @@
+CLA Related Collateral
+====================================
+
+**Foundational**
+
+- `C2000 CLA C Compiler Series <https://www.ti.com/video/3871287205001>`_
+
+- `CLA Hands On Workshop <https://www.ti.com/video/5432122168001>`_
+
+- `CLA usage in Valley Switching Boost Power Factor Correction (PFC) Reference Design <https://www.ti.com/video/6050578280001>`_
+
+- `Enhancing the Computational Performance of the C2000™ Microcontroller Family Application Report <https://ti.com/lit/SPRY288>`_
+
+**Getting Started**
+
+- `CLA Software Development Guide <https://software-dl.ti.com/C2000/docs/cla\_software\_dev\_guide/index.html>`_
+
+- `Software Examples to Showcase Unique Capabilities of TI's C2000™ CLA Application Report <https://ti.com/lit/SPRACS0>`_
+
+**Expert**
+
+- `Digital Control of Two Phase Interleaved PFC and Motor Drive Using MCU With CLA Application Report <https://ti.com/lit/SPRABS5>`_
+
+- `Sensorless Field Oriented Control:3-Phase Perm.Magnet Synch. Motors With CLA Application Report <https://ti.com/lit/SPRABQ5>`_

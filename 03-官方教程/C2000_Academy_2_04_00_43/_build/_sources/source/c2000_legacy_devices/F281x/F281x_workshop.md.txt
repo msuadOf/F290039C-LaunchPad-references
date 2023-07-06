@@ -1,0 +1,63 @@
+# F281x Workshop
+
+:::{warning} Disclaimer The workshop materials on this page are no longer being
+   updated or maintained, and are provided "as is". However, the workshop
+   materials can still be very useful for learning about the device. The CCS
+   projects which are used with the lab exercise source files may need to be
+   recreated for use with later versions of the software. Also, the hardware
+   target (ie. development board) may be discontinued.
+:::
+
+The C2000 TMS320F281x Microcontroller Workshop is a hands-on technical course
+based on the TMS320F2812 device. Learning is accomplished through detailed
+presentation materials and hands-on lab exercises. This workshop has been
+developed to decrease the learning curve from months to days, reduce
+development time, and accelerate product time to market. Also, this workshop is
+perfect for both the beginner and advanced users. 
+
+The workshop starts with the basic concepts and progresses to more advanced
+topics in a logical fashion. Each topic and lab exercise builds on the previous
+one that was presented, running a common theme throughout the workshop. All of
+the lab exercises are written using the Peripheral Register Header Files and
+are performed on the Spectrum Digital eZdsp F2812 target board. The materials
+guide the user through system initialization, peripheral setup, and programming
+an application into flash memory using the Code Composer Studio on-chip flash
+programmer.
+
+## Workshop Outline
+
+1. Architecture Overview
+2. Programming Development Environment -- <i> Lab: Linker command file &amp; DSP/BIOS configuration tool </i>
+3. Peripheral Register Header Files
+4. Reset and Interrupts
+5. System Initialization -- <i> Lab: Watchdog and interrupts </i>
+6. Analog-to-Digital Converter -- <i> Lab: Build a data acquisition system </i>
+7. Event Manager -- <i> Lab: Generate and graph a PWM waveform </i>
+8. Numerical Concepts and IQ Math -- <i> Lab: Low-pass filter the PWM waveform </i>
+9. Using DSP/BIOS -- <i> Lab: Change the code to use DSP/BIOS </i>
+10. System Design -- <i> Lab: Run the code from flash memory </i>
+11. Communications
+12. Support Resources
+
+## Running the Labs
+
+In order to run the labs, you will need:
+
+- PC running Windows XP or greater
+
+- Adobe Acrobat Reader
+
+- Spectrum Digital eZdsp F2812
+
+- Code Composer Studio (CCS) v3.1.0 (DSP/BIOS 4.9)
+
+- Jumper Wire
+
+
+## Workshop Materials - Revision 5.2 January 2005
+
+- [ F281x Microcontroller Workshop Manual ](resources/F281x_workshop.pdf) (pdf file)
+
+- [ Lab Files ](resources/Labs.zip) (zip file)
+
+- [ Solution Files ](resources/Solutions.zip) (zip file)

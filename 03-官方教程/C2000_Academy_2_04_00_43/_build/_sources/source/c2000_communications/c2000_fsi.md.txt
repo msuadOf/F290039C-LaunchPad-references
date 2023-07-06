@@ -1,0 +1,122 @@
+# Fast Serial Interface (FSI)
+
+The FSI module is a highly reliable high-speed serial communication peripheral
+capable of operating at dual data rate, providing 100 Mbps transfer using a 50
+MHz clock. 
+
+The FSI consists of independent transmitter and receiver cores that are
+configured and operated independently.
+
+FSI is a point-to-point communication protocol operating in a single main
+node/single remote node configuration. With this high-speed data rate and low
+channel count, the FSI can be used to increase the amount of information
+transmitted and reduce the costs to communicate over an isolation barrier.
+
+```{admonition} FSI Module
+Not all C2000 devices have an FSI module. Refer to the 
+[Peripheral Reference Guide](https://www.ti.com/lit/spru566)
+for a list of supported modules on your device.
+```
+
+## FSI Features
+
+* Ensure reliable high-speed serial communication across an isolation barrier
+  (provides galvanic isolation where different circuits do not have common
+  power and ground connections)
+
+* Consists of independent transmitter (FSITX) and receiver (FSIRX) cores
+
+* Each core is configured and operated independently
+
+* Point-to-point (single main node/single remote node)
+
+* Fast transfer: 50 MHz
+
+* Dual data rate (100 Mbps @ 50 MHz clock)
+
+* Single or dual data lines
+
+* Programmable data length
+
+* Hardware- or software-calculated CRC
+
+* Frame error detection
+
+* Two interrupts per FSI core
+
+
+## Transmitter/ Receiver CPU Interface
+
+![FSI Transmitter/Receiver CPU Interface](images/FSI_transmit_recieve.png)
+
+
+## Transmitter/ Receiver Core Signals
+
+### Transmitter Core Signals
+
+Signal     | Description                                 | Multi-lane transmission
+-----------|---------------------------------------------|-------------------------------------------------------
+TXCLK      | Transmit clock                              | 
+TXD0       | Primary data output line for transmission   | Contains all the even numbered bits of the data and CRC bytes/ Other frame fields will be transmitted in full
+TXD1       | Additional data output line for transmission| Contains all the odd numbered bits of the data and CRC bytes/ Applies only to the data words and the CRC bytes
+
+### Receiver Core Signals
+
+Signal     | Description                              | Connection
+-----------|------------------------------------------|-------------------------------------------------------
+RXCLK      | Receive clock                            | Connected to the TXCLK of the transmitting FSI module
+RXD0       | Primary data input line for reception    | Connected to the TXD0 of the transmitting FSI module
+RXD1       | Additional data input line for reception | Connected to the TXD1 of the transmitting FSI module if multilane transmission is used
+
+
+## Point to Point Connection
+
+![FSI Point to Point](images/FSI_point_to_point.png)
+
+
+```{admonition} Note:
+While there is no true concept of a main node or a remote node in the FSI protocol,
+this example uses this nomenclature as a simple way to describe the data flow
+
+```
+
+## FSI Summary
+
+* Highly reliable high-speed serial peripheral for communicating over an
+ isolation barrier
+
+* High-speed data rate and low channel count (increases the amount of
+ information transmitted and reduce the costs)
+
+* Separate transmit and receive modules
+
+* Point-to-point communication protocol (FSI transmitter core communicates
+ directly to a single FSI receiver core)
+
+* Skew compensation for signal delay due to isolation
+
+* Line break detection
+   
+## Resources
+
+```{eval-rst}
+
+.. only:: internal_only
+
+  .. include:: ../../source/MARKDOWN_staging/fsi_internal.rst
+
+```
+
+```{eval-rst}
+
+.. only:: external_only
+
+  .. include:: ../../source/MARKDOWN_staging/fsi.rst
+
+```
+-------------------------------------------------
+
+```{admonition} Feedback
+Please provide any feedback you may have about the content within C2000 Academy to: <c2000_academy_feedback@list.ti.com>
+
+```

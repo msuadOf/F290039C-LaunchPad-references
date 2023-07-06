@@ -1,0 +1,28 @@
+EPWM Related Collateral
+====================================
+
+**Foundational**
+
+- `Real-Time Control Reference Guide <https://www.ti.com/lit/eb/slyy211/slyy211.pdf>`_
+
+**Getting Started**
+
+- `C2000 ePWM Developer's Guide Application Report <https://www.ti.com/lit/sprad12>`_ - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2807x, F2837x, F2838x
+
+- `Enhanced Pulse Width Modulator (ePWM) Training for C2000 MCUs <https://www.ti.com/video/series/C2000-enhanced-pulse-width-modulator.html>`_ - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2837x, F2838x
+
+- `Flexible PWMs Enable Multi-Axis Drives, Multi-Level Inverters Application Report <https://ti.com/lit/SPRT723>`_
+
+- `Getting Started with the C2000 ePWM Module <https://www.ti.com/video/5775904537001>`_
+
+- `Using PWM Output as a Digital-to-Analog Converter on a TMS320F280x Digital Signal Control Application Report <https://ti.com/lit/SPRAA88>`_
+
+- `Using the Enhanced Pulse Width Modulator (ePWM) Module Application Report <https://ti.com/lit/SPRAAI1>`_
+
+**Expert**
+
+- `C2000 real-time microcontrollers - Reference designs <https://www.ti.com/reference-designs/index.html#search?famid=4,5014>`_
+
+- `CRM/ZVS PFC Implementation Based on C2000 Type-4 PWM Module Application Report <https://ti.com/lit/SPRACX0>`_ - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2837x, F2838x
+
+- `Leverage New Type ePWM Features for Multiple Phase Control Application Report <https://ti.com/lit/SPRACY1>`_ - Only applicable to: F280013x, F28002x, F28003x, F28004x, F2837x, F2838x

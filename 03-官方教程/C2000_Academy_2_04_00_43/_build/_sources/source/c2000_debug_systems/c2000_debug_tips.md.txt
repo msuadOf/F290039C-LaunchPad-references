@@ -1,0 +1,539 @@
+# Debug Tips &amp; Tricks
+
+This module describes various topics related to debugging issues on the C2000 family of 
+devices. Select the topic from the navigation pane on the right-side of the page.
+
+# JTAG Connectivity
+
+## Device enumerated properly
+
+For the JTAG debug probe to communicate with the PC, the driver files need 
+to be installed. This typically occurs co-incident to the installation 
+of Code Composer Studio (CCS). To verify that the drivers are 
+successfully installed, connect the PC to the JTAG debug probe and 
+power up. Then go to 
+[Windows Device Manager](https://support.microsoft.com/en-us/windows/open-device-manager-a7f2db46-faaf-24f0-8b7b-9e4a6032fc8c) and locate the associated 
+debug probe as shown below.
+
+![Windows Device Manager](images/c2000_win_devenum.png)
+
+
+## Install FTDI device driver
+
+If debug probe is not showing up in the host PC/MAC system, download 
+and install [
+FTDI Driver](https://ftdichip.com/drivers/). Typically this occurs with the installation of 
+CCS.
+
+## Update TI Emulation Software
+
+Update TI Code Composer Emulation driver to the latest version. It 
+can be done either going to CCS menu **Help→Check for Updates**
+or by downloading and installing [TI XDS Emulation Software (EMUPack)](https://software-dl.ti.com/ccs/esd/documents/xdsdebugprobes/emu_xds_software_package_download.html) manually.
+
+## Debug probe
+
+If you are using a TI EVM, then you can use an onboard debug probe or 
+external debug probe.
+ * <b>Launchpad</b> : C2000 Launchpads have an xds100v2 or xds110 
+   debug probe. Make sure you are using the correct debug 
+   probe in the active target configuration file. Some of the 
+   launchpads (F280025C, F280049C, F280039C) use cJTAG mode in 
+   2-pin advanced mode. Check the target configuration file to 
+   match the setting with what is available on the board. Refer 
+   to the Launchpad's user guide for detailed 
+   information
+ * <b>controlCARD</b> : C2000 controlCARDs have an onboard xds100v2 
+   or xds110 debug probe. controlCARD also supports external 
+   debug probe - xds110, xds200, xds560v2. If you are using 
+   external debug probe then make sure the switch for debug 
+   probe on controlCARD are set appropriately.
+ * <b>Custom Board</b> : If you are using a custom board with 
+   an external debug probe, then make sure debug probe selected 
+   in the target configuration file is the correct one. Based on 
+   drive strength of the board, you may need to adjust the JTAG 
+   clock. Refer to video on [Experimenting with JTAG Clock Speed](https://www.youtube.com/embed/mKxaztkCsYw).
+
+## Useful Links for Debugging JTAG Connectivity:
+
+ * [Debugging JTAG](https://software-dl.ti.com/ccs/esd/documents/ccs_debugging_jtag_connectivity_issues.html)
+ * [
+   Application Note : C2000 MCU JTAG Connectivity Debug](https://www.ti.com/lit/spracf0)
+ * [
+    TI XDS110 Debug Probe ](https://www.ti.com/tool/TMDSEMU110-U)
+ * [
+    TI XDS200 Debug Probe ](https://www.ti.com/tool/TMDSEMU200-U)
+
+
+# Compiling and Building the application
+
+## Linker Error - Program does not fit
+
+As the scope of projects increase, and more code/variables are 
+added to the project, the developer may encounter a linker error that 
+the program does not fit into memory. Here are the steps to identify and 
+resolve.
+ * Review the console output
+ * Identify the section which is not fitting in the supplied
+   memory section
+ * Check which memory section has spare memory space and can be 
+   used
+ * Split the problematic section to multiple memory sections. The 
+   syntax to split the section to multiple memory sections is 
+   explained in 
+   [TI Linker Command File Primer](https://software-dl.ti.com/ccs/esd/documents/sdto_cgt_Linker-Command-File-Primer.html#allocate-to-multiple-memory-ranges) page.
+
+
+# RAM related debug Tips
+
+In the case where there is seemingly not enough memory to store data, 
+there are few ways to proceed. When this error appears after building 
+the project, go to View &gt; Memory Allocation and then build the project 
+to see a visualization of which RAM is not able to fit any more data 
+or code. If there is a specific section in the linker file that does 
+not have enough memory, then the section can have more RAM appended 
+to it using the '|' operator (i.e. "".ebss : &gt;&gt; RAMLS5 | RAMGS0 | RAMGS1"). 
+It is better to choose RAM units that are adjacent in their memory 
+boundaries, this way the memory can be accessed directly in sequential order.
+
+In the case where there is a function that needs to span multiple RAM 
+units, the following can be used:
+
+```
+.TI.ramfunc : LOAD = FLASH3,
+              RUN &gt;&gt; RAML0 | RAML1
+              table(BINIT)
+              PAGE = 0
+.binit &gt; FLASH3
+```
+
+The "RUN &gt;&gt; "RAML0 | RAML1" will make sure the linker spans the function 
+across the 2 RAM units.
+
+When copying functions or data from Flash to RAM, the .binit should be 
+used in place of the memcpy function because memcpy operates on the 
+assumption that there is a single contiguous memory space. Using 
+.binit is more appropriate when copying functions because it is a 
+boot table that runs before main as a predefine in the linker. If the 
+function or data is needed before main can execute, using .binit makes 
+it available. This is why it is required in the RTOS environment because 
+main is not necessarily the first function that will execute.
+
+# Flash related debug Tips
+
+## Steps needed to run the code from flash
+
+In order to convert a RAM based application to the flash based, 
+the following steps are needed:
+
+* Replace RAM linker cmd file with flash linker cmd file (these 
+ are available in C2000ware).
+* If you need to modify the flash linker cmd files, make sure 
+ to map any initialized sections only to flash (as you can notice 
+ in the linker cmd files provided in C2000Ware).
+* When the device is configured for boot to flash, bootROM will 
+ re-direct to the flash entry point location (defined as BEGIN in 
+ TI provided flash linker cmd files) at the end of boot code 
+ execution.  Make sure there is a branch instruction at flash 
+ entry point to the beginning of code execution.  C2000Ware 
+ examples use CodeStartBranch.asm file to accomplish this.  The 
+ code in this file is allocated to codestart section.  In the flash 
+ linker cmd file, you will notice that the codestart section is 
+ mapped to the flash entry point (and hence CodeStartBranch.asm is 
+ the first code that gets executed after the bootROM execution).  
+ This code branches to _c_int00 routine, which initializes all the 
+ global variables and then re-directs to the application main. 
+* To achieve the best performance for flash execution, configure the 
+ flash wait-states as per the operating frequency (check datasheet) 
+ and enable prefetch/cache.  Note that any code that configures the 
+ flash control registers (Ex: Flash_initModule() in C2000Ware) must 
+ run from RAM.  Hence, the function that configures the flash 
+ wait-states and prefetch/cache should be copied to RAM before 
+ executing it.  This can be accomplished by assigning this function 
+ to .TI.ramfunc section and then copying it to RAM at runtime using 
+ memcpy() before executing it.  In the linker cmd file, this section 
+ should be mapped to flash for load and RAM for execution.  Please 
+ take a look at the flash based linker cmd files provided in C2000Ware.   
+* Make sure the boot mode pins are configured for flash boot.  This tells 
+ bootROM that it has to re-direct to the application programmed into the 
+ flash after boot code execution.  
+
+
+C2000Ware example projects are provided with both RAM and Flash build 
+configurations. To change the build configuration from RAM to Flash, users 
+can import the project into CCS and right click on the project and 
+select **Build Configurations → Set Active → CPU1_FLASH**. <br/>
+
+By selecting this Flash configuration, users can notice that:
+ * <b>_FLASH</b> symbol is defined in the "Predefined symbols" 
+   section under Project Build settings. This is used to define and 
+   execute any Flash-build specific code.
+ * Flash based linker command file is chosen for the application 
+   instead of a RAM based linker command file. Flash based linker command 
+   files are provided in C2000Ware for reference (Ex: XXX_FLASH_lnk_cpu1.cmd 
+   at C2000Ware_x_xx_xx_xx\device_support\XXX\common\cmd). Flash based 
+   linker command files will have codestart mapped to Flash entry point address.
+ * All the initialized sections are mapped to Flash memory in the Flash based 
+   linker command file.
+ * All the functions that need to execute from RAM (for initialization or 
+   0-wait performance purpose) are assigned to .TI.ramfunc section in the code.
+   * Ex: Flash_initModule() is assigned to .TI.ramfunc section. This Flash 
+     initialization routine (configures Flash wait-states, prefetch/cache mode, 
+     power etc.) must be executed from RAM.  If flash initialization routine 
+     is not executed, note that the flash performance will be poor.  
+     <b>Reason</b>:  Flash accesses are not as fast as RAM accesses.  When 
+     CPU fetches/reads from RAM, there are no additional wait cycles required.  
+     But, flash is not 0-wait memory.  It takes certain time to fetch/read 
+     from flash.  CPU is much faster than the flash and hence, CPU has to 
+     wait for few cycles (wait states) before it can get the required data 
+     from the flash after it (CPU) issues the flash address from which it 
+     needs the data.  As the frequency of the CPU increases compared to 
+     that of the flash, the number of wait-states that the CPU has to wait 
+     to get valid data from flash will increase.  Flash initialization routine 
+     configures these wait-states (along with other flash parameters).  
+     Since this function configures the critical flash parameters, it should 
+     not be executed from the flash itself.
+ * `.TI.ramfunc` section is mapped to a Flash address for <b>Load</b> and a 
+   RAM address for <b>RUN</b> in the Flash based linker command file.
+ * All the sections mapped to Flash are aligned on a 128-bit boundary using 
+   ALIGN() directive in the Flash based linker command file.
+ * <b>memcpy()</b> function is called in the application to copy the 
+   .TI.ramfunc content from Flash to RAM. memcpy() is called before executing 
+   any code that is assigned to .TI.ramfunc section.
+ * For EABI type executable: All uninitialized sections mapped to RAM are defined 
+   as NOINIT sections using the directive `type=NOINIT` in the linker cmd file.
+ * Note: During debug in CCS environment, if you need to place a breakpoint 
+   in the RAM space, you need to do it after copying the code from flash to RAM.  
+   If you do it before the copy, the breakpoint insertion will be overwritten 
+   by the code copied via memcpy.
+
+
+## Other debug tips:
+
+ * <b>Boot Pin</b> : To run the application in standalone mode, make sure to 
+   configure the boot mode pins for flash boot (please refer to TRM's BootROM 
+   chapter for details).
+ * Please make sure that all the variables are initialized as needed in the 
+   application.  Using uninitialized variables sometimes causes garbage values 
+   to be used for them resulting in differences in the application behavior. 
+ * If you still have issues running from flash in standalone mode (and if it 
+   works fine when debugger is connected): 
+   * <b>ECC</b>: Please make sure that ECC is programmed correctly for the flash image 
+     (Make sure that AutoEccGeneration in CCS Flash Plugin GUI or UniFlash 
+     GUI is left enabled - this is the default option).
+
+   * <b>Watchdog Timer</b>: Disable watchdog in the f28x_codestartbranch.asm 
+     `WD_DISABLE  .set  1`
+     This helps to avoid watchdog reset before reaching main().  If there are 
+     lot of global variables in the application, the cinit routine may take more 
+     time to initialize all of them before reaching main.  During this time, 
+     watchdog may expire and hence suggested to disable it.  You can enable it 
+     again in the main() as needed by your application.
+
+   * Please make sure that f28x_codestartbranch.asm file is included in your 
+     application and that the codestart is mapped to the flash entry point 
+     location (generally defined as BEGIN in TI provided linker CMD files) 
+     in the linker cmd file.
+
+   * Make sure that code_start (--entry_point=code_start) is added as the 
+     entry point in the project's linker options.     
+
+    **Project build settings → Build → C2000 Linker → Advanced options 
+     → Symbol Management → --entry_point:  code_start**
+
+## Useful Links for Debugging Flash issues:
+
+* [
+    E2E Frequently Asked Question: - How to modify an application 
+    from RAM configuration to Flash configuration?
+](https://e2e.ti.com/f/1/t/878674)
+
+# Compiler Related 
+
+## Atomic Access
+
+The C language does not have a keyword/construct for `atomic` operations. 
+There is no guarantee that the compiler will generate a single atomic 
+instruction for operations on any data type.
+
+For AND/OR/XOR etc.. You could make use of a few compiler intrinsics 
+that map directly to the assembly read-modify-write instructions 
+Intrinsic functions like `__and`, `__or` and `__xor` are documented in 
+[Compiler Users's Guide](https://www.ti.com/lit/SPRU514).
+If you have a segment of code that needs to be atomic, then 
+you need to disable and enable interrupts around the code. 
+
+(There are intrinsics to do this  - documented in the same user's guide).
+If the segment is in an ISR, then interrupts are automatically 
+disabled when the interrupt is entered and remain so until they 
+are reenabled by the application.
+
+From a C28x architecture standpoint:
+The pipeline is: F1, F2, D1, D2, R1, R2, E, W
+Once an instruction makes it to D2 (decode2) it will always run to completion. 
+
+That is, when an interrupt comes in: 
+ * Any opcode in D2 + continues through the pipeline. 
+ * Any opcode in F1, F2, and D1 is dropped and re-fetched 
+   after the interrupt returns.
+
+This issue only applies to an access involving multiple opcodes. 
+ * 16-bit datatypes: load/store are one opcode - no issue.
+ * float32 datatypes: load/stores are one opcode - no issue.
+ * int32/uint32: it is possible this will be broken into two 16-bit 
+   accesses by the compiler. It is possible one can be in D2 while the 
+   other is in D1 when an interrupt is taken.  
+
+There are two recommended approaches:
+ * Use an atomic compiler intrinsic if one is available.
+   * These are documented in the [Compiler Users's Guide](https://www.ti.com/lit/SPRU514). 
+   The description will say `in an atomic way`.
+ * Disable / enable interrupts around load/stores that must be atomic. 
+   There are intrinsics to assist:
+   * `__disable_interrupts( );`
+   * `__enable_interrupts( );`
+
+<u>Additional notes:</u>
+ * Atomic accesses within an ISR: By default, accesses within an 
+   ISR are atomic. The INTM bit is automatically set (disable 
+   interrupts) by the hardware during the context switch. The 
+   exception would be if the application re-enables interrupts 
+   within the ISR in order to nest interrupts.
+ * Examining assembly is possible, of course. However it also 
+   doesnot seem practical. 
+ * It may make sense to group atomic accesses together, if possible. 
+   Or perhaps create a function to perform the sequence disable/access/enable.
+
+ * 16-bit reads and writes are atomic.
+ * For other operations, from C source code, the only way to 
+   guarantee using the other atomic C28 instructions (ADD, 
+   ADDL, AND, OR, DEC, INC) for all compiler option combinations 
+   and all contexts is to use the intrinsics.
+ * For var16++, with some compiler options and surrounding context, 
+   the compiler will generate the INC instruction, however it is 
+   not guaranteed.  
+
+# ADC debugging
+
+## Clocks
+
+ * <b>Symptoms</b> 
+   * ADCCLK too slow: Sampled waveform is different than expected (due to reduced sample rate)
+   * ADCCLK too fast: Distortion, linearity, and/or gain errors. 
+  * Note that the ADC can sometimes perform surprisingly well under nominal conditions 
+      with higher ADCCLK (say 100MHz instead of expected 50MHz) so the results may be more 
+      subtle than expected.  
+   * SYSCLK too fast: Various strange behavior.  Device can be unreliable or give unexpected 
+     digital results.  S+H could be too short since it is clocked from SYSCLK. 
+     Can result in ADCCLK too fast (see above)
+ * <b>Debug Actions</b>
+   * Verify SYSCLK via XCLKOUT 
+   * Some Launchpads don't have correct GPIO for XCLKOUT; have used simple ePWM code in the 
+     past, but note that ePWM timebase has lots of potential dividers to account for. 
+   * Verify ADCCLK via examining PRESCALE setting
+   * Verify the ADC sample rate directly by adding a large series resistor (say 10kohm) 
+     and then using a scope to examine the kick-back from each sample
+   * Debug enhancement for future: Add ADCCLK observability to XCLKOUT
+
+## Reference
+
+ * <b>Symptoms</b>
+   * Floating reference in external reference mode: Max-scale or zero-scale conversions 
+     or just erratic/unexpected conversion results
+   * No reference in internal reference mode: Same as above.  Can occur if reference 
+     pins are ganged (say ADCA + ADCC) but customer only configures the reference 
+     that is disabled (need to configure both even if only using one of the ganged ADCs)
+   * Driving a voltage on VREFHI while also configuring for internal reference 
+     mode: Contention will shift ref voltage and reduce accuracy and cause distortion 
+   * Inaccurate reference voltage: inaccurate conversion results (possible cause 
+     if in internal reference mode is missing/corrupt bandgap trim)
+   * Using VDDA as a reference: Noisy results, low accuracy
+   * Unstable reference driver: Very noisy results or very inaccurate conversions
+   * This can occur if the reference driver can't handle the load capacitance or 
+     if the customer selects an uncompensated (not unity gain stable) op-amp, 
+     but then uses it as a voltage-follower. 
+ * <b>Debug Actions</b>
+   * Verify voltage on VREFHI pins (both presence and accuracy) using DMM
+   * Note 3.3V range internal reference will output 1.65V to the pin
+   * Verify that driver is adequate (in external reference mode) and external 
+     capacitor (should be uF range) is present and placed close to device 
+   * Use [
+       TI Training : Driving the reference input on a SAR ADC](https://training.ti.com/node/1139107) to design 
+       reference. It should be using high bandwidth op-amp
+   * Note that op-amp stability / phase margin is critical and should be 
+       verified with SPICE simulation
+   * Verify no pin oscillations with oscilloscope
+   * Verify reference mode (internal / external) and range in internal 
+     reference mode (2.5V or 3.3V) in SW / expressions window
+   * Note: all ganged together ADCs may need to be configured even if not 
+       all ADCs are used (only one reference is not disabled by OTP 
+       loading into device configs)
+   * Verify bandgap trim is populated in expressions window
+
+## Input Design
+
+ * <b>Symptoms</b>
+   * Poor ADC driver settling (S+H too short and/or driver impedance 
+     too high and/or op-amp bandwidth too low): "memory cross-talk" 
+     (refer to [Application Report : ADC Input Circuit Evaluation 
+     for C2000 MCUs](https://www.ti.com/lit/an/spract6/spract6.pdf)), distorted signal, poor accuracy (particularly 
+     gain error), and/or erratic conversion results.
+   * For near-minium S+H time, customer needs to be in the ballpark 
+       of op-amp with ~10MHz BW, series R of 10's of ohms, and C on 
+       ADC pin of 100's of pF
+   * Many issues arise from customer using voltage divider with 
+       high effective source impedance (R equivalent = R1 || R2) 
+       without an op-amp buffer 
+   * Sampling too fast for charge-sharing input (refer to 
+     [Application Report : 
+     Charge-Sharing Driving Circuits for C2000 ADCs](https://www.ti.com/lit/an/spracv0/spracv0.pdf)): Issues 
+     with signal distortion or gain error, sampled value depends 
+     on sample rate, oversampling makes results less accurate.  
+   * For a charge-sharing input, the same rate is generally 
+       going to be closer to 10's of kHz or less vs. high-speed 
+       sampling in the 100s of kHz
+ * <b>Debug Actions</b>
+   * Analyze signal conditioning circuits to ensure appropriate settling. 
+   * Quick check: "Choosing an acquisition window duration" formulas 
+       from TRM
+   * Better: Use following application reports to simulate input: 
+    * [ADC Input Circuit Evaluation for C2000 MCUs](https://www.ti.com/lit/an/spract6/spract6.pdf)
+    * [Charge-Sharing Driving Circuits for C2000 ADCs](https://www.ti.com/lit/an/spracv0/spracv0.pdf) 
+   * For charge sharing inputs (inputs with a large capacitor) 
+     it may be worth getting the customer to measure the inrush 
+     current into the ADC pin (due to repeated charging of the 
+     S+H capacitor) to help them understand that the input is 
+     not high-impedance, but actually a switched-capacitor circuit. 
+   * Also worth noting that high-speed sampling will result in 
+       an inrush current on the ADC pin that will be larger than 
+       the pin leakage specification.  This is expected and not 
+       indicative of a damaged ADC or the device not meeting the 
+       DS leakage spec'. 
+
+## Over/Under Voltage on Input
+
+ * <b>Symptoms</b>
+   * Input damaged by EOS: Reading stuck (at 0 or full-scale or some 
+     random code) on particular input, or full ADC does not operate
+   * One input experiencing over-or-under voltage while other inputs 
+     are converting: inaccurate or stuck-at readings, or cross-talk 
+     similar to "Memory cross-talk" (but note cause is not the same 
+     as memory cross-talk)
+   * Note: cross-talk or disturbance effect will be much greater 
+       if the over or under voltage is sampled 
+ * <b>Debug Actions</b>
+   * For pins suspected to be damaged by EOS, use a source meter 
+     (or a DMM + stimulus source) to measure the input/output current 
+     on the pin while the ADC is not converting.  Pins damaged by EOS 
+     (or ESD) will exhibit large leakage currents.
+   * Note: if the ADC is converting at a high sample rate the 
+       input may experience an in-rush current much larger than the 
+       specified pin leakage.  This is normal/expected operation and 
+       not indicative of damage (or the device not meeting DS) so 
+       perform the leakage test while the ADC is not converting. 
+   * For strange / unexplained issues, asking the customer to confirm 
+     that other adc inputs are not exceeding VSSA to VDDA range can 
+     be a good question
+   * [
+     Application Report : Electrical overstress on data converters](https://training.ti.com/node/1139109) is a 
+     good resource and also explains some strategies for protecting 
+     the ADC inputs from damage
+
+## ADC Evaluation
+
+ * <b>Symptoms</b>
+   * Using battery as signal source: poor DC code spread, lots of 
+     low-frequency noise, and other issues due to signal impedance 
+     since a batter has very low bandwidth (see "Input Design" above)
+   * Using a potentiometer to generate DC voltage for testing: Lots 
+     of issues due to high impedance (see "Input Design" above)
+   * Note: sampling slow and using a large capacitor "Charge-sharing" 
+       input design can work, see 
+       [Application Report : Charge-Sharing Driving Circuits for 
+       C2000 ADCs](https://www.ti.com/lit/an/spracv0/spracv0.pdf)
+   * Poor cabling (long cables and/or unshielded cables with no or 
+     poor return path): noisy results and distorted results due to 
+     high effective input impedance (see "Input Design" above)
+   * Leaving DMMs and/or scope probes connected during ADC testing 
+       can be a source of noise coupling into the ADC input
+   * Using an inappropriate or uncalibrated instrument to check ADC: 
+     poor noise and/or accuracy
+   * Oscilloscopes do not have good accuracy for checking DC voltages
+   * Common to see DAC on something like "Analog Discovery" board 
+       used as reference, but this has worse accuracy and resolution 
+       than C2000 ADC
+   * Cheap signal generators may only be 12-bit resolution
+   * Poor ADC performance on launchpad
+   * Launchpad does not have cap. footprints on the ADC inputs (and 
+       no shielded connections with ground-return connection like 
+       SMA/BNC) so getting good performance can be challenging
+   * Poor ADC performance on ControlCard
+   * ControlCard does have ADC input R-C footprints and should generally 
+       be possible to get OK performance, but may need to do some significant 
+       work to build signal conditioning circuits in the protoboard area and 
+       to clean-up ground paths (see ControlCard Analog Testing). 
+ * <b>Debug Actions</b>
+   * Check that an appropriate source is being used for ADC evaluation
+   * For AC testing: [PSIEVM](https://www.ti.com/tool/PSIEVM) or instrument like 
+       Stanford research DS360 or Audio Precision 27xx
+   * For DC testing: function generator or DAC (check accuracy specifications) 
+       or PSI-EVM
+   * Check quality of cabling: use shielded cables or twisted cables where 
+     possible.  Ensure good ground return path.  Buffer locally on PCB if 
+     high speed or short S+H sampling is needed.  
+   * Check if oscilloscope is being used as baseline for ADC DC readings 
+     (vertical resolution usually only ~8-10 bits and accuracy usually 
+     in the 10's of mV / several % error)
+
+## Layout
+
+ * <b>Symptoms</b>
+   * Noisy results, poor DC codespread, or random spikes in the ADC output:  This can 
+     be caused by poor layout of the ADC channels, VREFHI/LO, or analog power
+ * <b>Debug Actions</b>
+   * Layout review
+   * Analog signals and signal conditioning circuits are physically separated 
+       from noisy circuits like comms, external memory, and power stage as much 
+       as possible
+   * Signals have good return paths 
+     * Should have adjacent ground or power plane or adjacent routed ground return trace 
+     * Includes analog signals like ADC inputs and VREFH/LO but also digital 
+         signals that could be noise generators
+     * Split in the ground plane can result in extremely bad return path if a 
+         critical signal is routed across the split
+   * Capacitor(s) for VREFHI/LO is SMT and placed close to the pins
+   * Appropriate PCB stackup
+
+# Profiling application
+
+There are a number of different ways to measure performance of devices. 
+C2000 family of devices provide a quick and easy way to count cycles. 
+The profile clock uses silicon resources to count CPU cycles between 
+two breakpoints.
+
+## Setup and Read Cycle Count
+
+ * Set the breakpoints at beginning of the function and at the 
+   end of the function.
+
+ * Enable profile clock using CCS menu **Run → Clock → Enable** as shown 
+   in the image below
+
+   ![Enable Cycles Count](images/debug_profile_1.png)
+
+ * Run to first breakpoint of the code 
+ 
+ * Clear the CPU cycles count by double-clicking the `clock` icon as 
+   shown in the image below
+    ![Clear Cycles Count](images/debug_profile_2.png) 
+   
+ * Run to the second breakpoint, and read the cycles count
+   ![Read Cycles Count](images/debug_profile_3.png)
+
+------------------------------------------
+
+```{admonition} Feedback
+Please provide any feedback you may have about the content within C2000 Academy to: <c2000_academy_feedback@list.ti.com>
+
+```
+

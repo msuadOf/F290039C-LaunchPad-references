@@ -1,0 +1,14 @@
+DAC Related Collateral
+====================================
+
+**Foundational**
+
+- `High Speed, Digital to Analog Converters Basics Application Report <https://www.ti.com/lit/SLAA523A>`_
+
+- `Real-Time Control Reference Guide <https://www.ti.com/lit/eb/slyy211/slyy211.pdf>`_
+
+- `Understanding Data Converters Application Report <https://www.ti.com/lit/SLAA013>`_
+
+**Getting Started**
+
+- `MathWorks F2807x/F2837xD/F2837xS/F28004x/F2838x DAC <https://www.mathworks.com/help/supportpkg/texasinstrumentsc2000/ref/f2807xf2837xdf2837xsf28004xf28003xf2838xdac.html>`_ - Only applicable to: F28004x, F2807x, F2837xD, F2837xS, F2838x

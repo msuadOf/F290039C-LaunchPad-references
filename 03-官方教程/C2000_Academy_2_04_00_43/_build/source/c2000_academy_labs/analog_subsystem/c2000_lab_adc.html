@@ -1,0 +1,1365 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Analog-to-Digital Converter Lab &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_academy_labs/analog_subsystem/c2000_lab_adc';</script>
+    <script src="../../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_academy_labs/analog_subsystem/c2000_lab_adc.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Enhanced Pulse Width Modulation (ePWM) Lab" href="../control_peripherals/c2000_lab_pwm.html" />
+    <link rel="prev" title="Interprocessor Communications (IPC)" href="../../c2000_advanced_topics/c2000_interprocessor_communications.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analog-to-digital-converter-lab">
+<h1>Analog-to-Digital Converter Lab<a class="headerlink" href="#analog-to-digital-converter-lab" title="Permalink to this heading">#</a></h1>
+<p>The objective of this lab exercise is to become familiar with the programming
+and operation of the on-chip analog-to-digital converter (ADC). The
+microcontroller (MCU) will be setup to sample a single ADC input channel at a
+prescribed sampling rate and store the conversion result in a circular memory
+buffer. In the second part of this lab exercise, the digital-to-analog
+converter (DAC) will be explored. This lab should leave readers more
+knowledgeable about the capabilities of the ADC and DAC modules, as well as how
+this analog subsystem commonly interacts with other modules.</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>This lab is the same as the Analog Systems Lab, but
+utilizes SysConfig to setup the ADC, PWM, and DAC</p>
+</div>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h2>
+<p>All solutions are located in the directory: <code class="docutils literal notranslate"><span class="pre">[C2000Ware_Install_Path]/training/device/[device_name]</span></code>.</p>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>In this lab exercise, one of the ePWMs will be configured to trigger the SOCA
+signal for the ADC at the desired sampling rate. The ADC will use an
+end-of-conversion interrupt to prompt the CPU to copy the results of the ADC
+conversion into a results buffer in memory. This buffer pointer will be managed
+in a circular fashion, such that new conversion results will continuously
+overwrite the oldest conversion results in the buffer. In order to generate an
+interesting input signal, the code will also alternately toggle <code class="docutils literal notranslate"><span class="pre">GPIO3</span></code> high
+and low in the ADC interrupt service routine. This pin will be connected to the
+ADC input pin, and sampled. Later in the lab, the DAC will be used to generate
+a sine wave, which will be sampled by the ADC.</p>
+<p><img alt="Lab Objective" src="../../../_images/objective.png" /></p>
+</section>
+<section id="lab-setup">
+<h2>Lab Setup<a class="headerlink" href="#lab-setup" title="Permalink to this heading">#</a></h2>
+<section id="hardware-setup">
+<h3>Hardware Setup<a class="headerlink" href="#hardware-setup" title="Permalink to this heading">#</a></h3>
+<p>You will need the following hardware for this lab:</p>
+<ul class="simple">
+<li><p>A C2000 controlCARD or LaunchPad with the supplied USB cable</p></li>
+<li><p>Jumper wire (at least 2 connections)</p></li>
+</ul>
+<p>Use the supplied USB cable to connect your C2000 board’s USB port to the
+standard USB Type-A connector in your computer. You should see some LEDs light
+up on your board. In addition to powering the board, a JTAG communication link
+is also established between the device and Code Composer Studio. Refer to
+<a class="reference internal" href="../../c2000_get_started/c2000_getstarted.html"><span class="doc std std-doc">Getting Started</span></a> module for more
+details if needed.</p>
+</section>
+<section id="software-setup">
+<h3>Software Setup<a class="headerlink" href="#software-setup" title="Permalink to this heading">#</a></h3>
+<p>The following software will need to be installed on your computer:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/tool/CCSTUDIO-C2000">Code Composer Studio</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/tool/C2000WARE">C2000Ware</a></p></li>
+</ul>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>For this lab exercise a CCS version 11 or higher is required
+as well as a C2000Ware version 4 or higher.</p>
+</div>
+</section>
+</section>
+<section id="import-empty-project">
+<h2>Import Empty project<a class="headerlink" href="#import-empty-project" title="Permalink to this heading">#</a></h2>
+<p>Our first task is to import an empty project to our Code Composer
+Studio (CCS) workspace.
+The basic instructions are as follows:</p>
+<ol class="arabic simple">
+<li><p>Open CCS and go to <strong>Project→Import CCS Projects</strong>. A new window should
+appear. Ensure that the <strong>Select search-directory</strong> option is activated.</p></li>
+<li><p>Click the <strong>Browse</strong> button and select the
+<code class="docutils literal notranslate"><span class="pre">[C20000ware_Install_dir]/training/device/[device]/empty_lab</span></code>
+directory. <br/> Note that the default Windows [C20000ware_Install_dir] is <code class="docutils literal notranslate"><span class="pre">C:/ti/c2000/C2000Ware_4_xx_xx_xx</span></code>.</p></li>
+<li><p>Under <strong>Discovered Projects</strong>, you should now see the
+<code class="docutils literal notranslate"><span class="pre">lab_[board]_[device]</span></code> project. Select the appropriate project for either the control card or the launchpad.</p></li>
+</ol>
+<p><img alt="Discovered_Projects" src="../../../_images/c2000_lab_epwm_ecap_start_small1.png" /></p>
+<ol class="arabic simple" start="4">
+<li><p>Click <strong>Finish</strong> to import and copy the <code class="docutils literal notranslate"><span class="pre">lab_[board]_[device]</span></code> project
+into your workspace.</p></li>
+<li><p>Rename the project to your liking</p>
+<ul class="simple">
+<li><p>“Right-click on the project in Project Explorer pane”. Select ‘Rename’ from
+the drop down menu and rename the project to ‘c2000_adc_lab’ or a name of
+your choosing.</p></li>
+<li><p>Now click the ‘Down Arrow’ located to the left of the imported project to
+expand it and select lab_main.c. Right-click on the file, and
+select ‘Rename’ to rename the file to c2000_adc_lab_main.c or a name of
+your choosing.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="part-1-adc">
+<h2>Part 1: ADC<a class="headerlink" href="#part-1-adc" title="Permalink to this heading">#</a></h2>
+<section id="task-1-setting-up-the-gpios">
+<h3>Task 1: Setting up the GPIOs<a class="headerlink" href="#task-1-setting-up-the-gpios" title="Permalink to this heading">#</a></h3>
+<p>We will begin this lab exercise by configuring the required GPIOs within the
+<code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file of the project. Double click the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file within the project to
+open it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">GPIO</span> <span class="pre">16</span></code> will always remain high and <code class="docutils literal notranslate"><span class="pre">GPIO</span> <span class="pre">3</span></code> will toggle between a high and low state.</p>
+<p>Configure GPIO 16 as an output that is pulled constantly high
+and is serving as one of the possible ADC inputs. Within SysConfig perform the
+following steps:</p>
+<ul class="simple">
+<li><p>Add a GPIO by clicking the (+) icon next to ‘GPIO’ on the left pane</p></li>
+<li><p>Set the name of the GPIO as ‘myGPIOHigh’</p></li>
+<li><p>Set the GPIO as an output</p></li>
+<li><p>Set the Pin Type as “Pull-up enabled in input mode”</p></li>
+<li><p>Check the box to enable a write of an initial value</p></li>
+<li><p>Set the initial value as “1: GPIO state is HIGH”</p></li>
+</ul>
+<p><img alt="GPIO 16 Setup" src="../../../_images/SysConfigGPIO16.png" /></p>
+<p>Now, we have to choose which GPIO we are configuring, in this case
+GPIO16. Upon expanding the “PinMux” view we can choose the desired
+GPIO. Follow the steps below:</p>
+<ul class="simple">
+<li><p>Click on the three dot icon at the top right of the SysConfig window</p></li>
+<li><p>Select “Preferences &amp; Actions”</p></li>
+<li><p>Under preferences, click on the ‘Device Pin Label’ drop down arrow
+and enable “Device pin name”. This is not part of the default
+SysConfig settings but allows us to see the pin name along with the
+pin number</p></li>
+<li><p>Within the GPIO Mux select GPIO16 as the desired GPIO. The device pin
+number will vary depending on hardware.</p></li>
+</ul>
+<p><img alt="GPIO 16 Setup" src="../../../_images/SysConfigGPIO_16.png" /></p>
+<p>Now, we can add another GPIO (GPIO3). This GPIO will be toggled in the
+application in order to serve as another possible input to the ADC.
+Follow the same steps as required to setup GPIO16 but with a name of “myGPIOToggle”.</p>
+<p><img alt="GPIO 3 Setup" src="../../../_images/SysConfigGPIO3.png" /></p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>The device pin numbers on the images above may vary depending on the device used.</p>
+</div>
+<p>Lastly, is the addition of an LED. This LED will be toggled within the ISR to show
+that the code is executing properly.
+Refer to the table below for the GPIO number:</p>
+<ul class="simple">
+<li><p>Select GPIO number for your device and board from the table below.</p></li>
+</ul>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>LaunchPad</p></th>
+<th class="head"><p>controlCARD</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>Pin-66 (GPIO-31)</p></td>
+<td><p>Pin-66 (GPIO-31)</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>n/a</p></td>
+<td><p>Pin-66 (GPIO-31)</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>Pin-81 (GPIO-23)</p></td>
+<td><p>Pin-99(GPIO-31)</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28002x</p></td>
+<td><p>Pin-2 (GPIO-31)</p></td>
+<td><p>Pin-2 (GPIO-31)</p></td>
+</tr>
+<tr class="row-even"><td><p>F28003x</p></td>
+<td><p>Pin-83(GPIO-22)</p></td>
+<td><p>Pin-99(GPIO-31)</p></td>
+</tr>
+<tr class="row-odd"><td><p>F280013x</p></td>
+<td><p>n/a</p></td>
+<td><p>Pin-35 (GPIO-24)</p></td>
+</tr>
+<tr class="row-even"><td><p>F280015x</p></td>
+<td><p>n/a</p></td>
+<td><p>Pin-41 (GPIO-24)</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>The parameters should be filled like below. This name will be referenced in
+the ADC ISR, so make sure the name is ‘myBoardLED0_GPIO’. Make sure the GPIO
+number is correct, do not worry about device pin.</p></li>
+</ul>
+<p><img alt="LED Configuration" src="../../../_images/sysconfig_led_1.png" /></p>
+</section>
+<section id="task-2-initialize-the-epwm-module">
+<h3>Task 2: Initialize the EPWM Module<a class="headerlink" href="#task-2-initialize-the-epwm-module" title="Permalink to this heading">#</a></h3>
+<p>The EPWM module will be used to automatically trigger an ADC SOC. The
+desired EPWM frequency is 50kHz. For more information on the PWM, please
+review the Control Peripherals module.</p>
+<p>We will start by adding a PWM instance within Sysconfig by clicking on the (+) sign
+next to ‘EPWM’ within the left pane of Sysconfig. Setup the EPWM module in the following way:</p>
+<p><img alt="EPWM Setup" src="../../../_images/SysConfigEPWMSetup.png" /></p>
+<p>Now that we have added an EPWM instance, we will configure the EPWM ‘Timebase’ submodule as follows:</p>
+<p><img alt="EPWM Timebase Setup" src="../../../_images/SysConfigEPWMTimebase.png" /></p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>The image above is representative of the F2807x, F28004x, F2837xD, and F2837xS devices. For other
+devices the “Sync Out Pulse” default option may be different or there might be a “Sync In Pulse”
+option. For this lab, we are not configuring the “Sync Out Pulse” or “Sync In Pulse” so leaving
+all synchronization options at the default state is okay.</p>
+</div>
+<p>Secondly, we will enable ADC SOC triggering through the “Event-Trigger’ submodule
+as follows:</p>
+<p><img alt="EPWM Event Trigger Setup" src="../../../_images/SysConfigEPWMEventTrigger.png" /></p>
+</section>
+<section id="task-3-setup-the-adc">
+<h3>Task 3: Setup the ADC<a class="headerlink" href="#task-3-setup-the-adc" title="Permalink to this heading">#</a></h3>
+<p>To setup the ADC we need to add an ADC instance within SysConfig by clicking on the plus
+sign next to ADC on the left most pane of the SysConfig start menu. Setup the ADC in the following way:</p>
+<p><img alt="ADC Initialization" src="../../../_images/SysConfigADCInit.png" /></p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>The image above is for devices with an ADC-Type 4, for devices with an ADC Type-5 you will not have the
+‘ADC Resolution Mode’ or ‘ADC Signal Mode options’</p>
+</div>
+<p>We will now configure the ADC SOC (start of conversion). The trigger for SOC0 is epwm1</p>
+<p><img alt="ADC SOC Setup" src="../../../_images/SysConfigADC_SOCSetup.png" /></p>
+<p>Next, we need to setup the ADC interrupt. In this case ADCINT1 will generate an interrupt at
+the end of the conversions (EOC). This is done in this way so that when we read the ADC results
+from within the ISR the ADC conversion results are ready.</p>
+<p><img alt="ADC Interrupt Configuration" src="../../../_images/SysConfigADC_InterruptConfig.png" /></p>
+<p>Lastly, we need to setup the ADC interrupt. This is done by enabling the ADC interrupt and
+configuring the ADC interrupt handler name.</p>
+<p><img alt="ADC Interrupts" src="../../../_images/SysConfigADC_Interrupts.png" /></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+ASYSCTL<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If your device has an ADC of Type-5 you will also need to configure ASYSCTL as shown below.</p>
+<p class="sd-card-text"><img alt="ASYSCTL" src="../../../_images/SysConfigASYSCTL.png" /></p>
+</div>
+</details></section>
+<section id="task-4-setup-the-adc-isr">
+<h3>Task 4: Setup the ADC ISR<a class="headerlink" href="#task-4-setup-the-adc-isr" title="Permalink to this heading">#</a></h3>
+<p>Now that we have configured the ADC and PWM modules within SysConfig, we can switch to
+the application code portion of this lab. Within the project, click on the .c file under the name you chose.</p>
+<p>Within the .c file we need to write the code that will be executed every time there is
+an ADC interrupt, otherwise known as the ISR (interrupt service routine).</p>
+<p>This project requires defining <code class="docutils literal notranslate"><span class="pre">ADCBufPtr</span></code> (variable used to place ADC results in the buffer). The
+following code is used to declare the variable within the ISR as well as the variable we will
+use to change the state of the LED.</p>
+<p>Note: The name of the ISR function is what we defined earlier within the SysConfig configuration
+for the ADC.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">INT_myADCA_1_ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="o">*</span><span class="n">AdcBufPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdcBuf</span><span class="p">;</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">volatile</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">LED_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>lab_main.c: INT_myADCA_1_ISR</strong></p>
+<p>The next part of the ISR is used to store the ADC results within the buffer. We also need
+to handle the case where our buffer becomes full. One way to do this is to overwrite
+previous values.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// Read the ADC Result</span>
+<span class="w">    </span><span class="o">*</span><span class="n">AdcBufPtr</span><span class="o">++</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ADC_readResult</span><span class="p">(</span><span class="n">myADCA_RESULT_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">myADCA_SOC0</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Brute Force the circular buffer</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">AdcBufPtr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="n">AdcBuf</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ADC_BUF_LEN</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">AdcBufPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdcBuf</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>lab_main.c: INT_myADCA_1_ISR</strong></p>
+<p>The next step is to toggle a GPIO so that we can use this as an ADC input.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// Toggle the pin</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">DEBUG_TOGGLE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GPIO_togglePin</span><span class="p">(</span><span class="n">myGPIOToggle</span><span class="p">);</span><span class="w">             </span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>lab_main.c: INT_myADCA_1_ISR</strong></p>
+<p>Now we have the option to toggle an LED on the device. This will tell us that
+the program is functioning properly and indeed entering the ISR.</p>
+<p>Notice how we toggle the LED whenever LED_count &gt; 25000. This corresponds to
+~ 0.5 sec/ toggle. We arrive at this by solving for x.</p>
+<p>(1/50000 sec/sample)(1 samples/interrupt)(25000 interrupts/toggle) = (x sec/toggle)</p>
+<p>(1/50000 sec/sample)(1 samples/interrupt)(25000 interrupts/toggle) = (0.5 sec/toggle)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">LED_count</span><span class="o">++</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="mi">25000</span><span class="p">)</span><span class="w">                      </span><span class="c1">// Toggle slowly to see the LED blink</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GPIO_togglePin</span><span class="p">(</span><span class="n">myBoardLED0_GPIO</span><span class="p">);</span><span class="w">                   </span><span class="c1">// Toggle the pin</span>
+<span class="w">        </span><span class="n">LED_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                           </span><span class="c1">// Reset the counter</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>lab_main.c: INT_myADCA_1_ISR</strong></p>
+<p>Lastly, we must acknowledge the PIE group as well as clear the interrupt status flag
+so that we can continue to service interrupts in the future.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">Interrupt_clearACKGroup</span><span class="p">(</span><span class="n">INT_myADCA_1_INTERRUPT_ACK_GROUP</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ADC_clearInterruptStatus</span><span class="p">(</span><span class="n">myADCA_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">ADC_INT_NUMBER1</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// End of ADC ISR</span>
+</pre></div>
+</div>
+<p><strong>lab_main.c: INT_myADCA_1_ISR</strong></p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>Notice that throughout the .c file, the naming convention
+generated by SysConfig was followed. Below is a snippet taken from the
+<code class="docutils literal notranslate"><span class="pre">board.h</span></code> file located within the project’s Generated Source files. Do not edit
+<code class="docutils literal notranslate"><span class="pre">board.h</span></code> directly, as your changes will be overwritten when the file is
+autogenerated from the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file.</p>
+<p><img alt="SysConfig Naming Convention" src="../../../_images/SysConfigNames_1.png" /></p>
+</div>
+</section>
+<section id="task-5-setup-the-c-file">
+<h3>Task 5: Setup the .c file<a class="headerlink" href="#task-5-setup-the-c-file" title="Permalink to this heading">#</a></h3>
+<p>The last thing we have to do is define any variables we are using throughout the
+project and setup the content within main() which includes device
+initialization.</p>
+<p>We begin by including the sysconfig generated header file <code class="docutils literal notranslate"><span class="pre">board.h</span></code>. This should
+already be included by default. Do not edit <code class="docutils literal notranslate"><span class="pre">board.h</span></code> directly, as your changes
+will be overwritten when the file is autogenerated from the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//</span>
+<span class="c1">// Included Files</span>
+<span class="c1">//</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;board.h&quot;</span>
+</pre></div>
+</div>
+<p><strong>lab_main.c</strong></p>
+<p>Then we define <code class="docutils literal notranslate"><span class="pre">ADC_BUF_LEN</span></code>, the length of our ADC value buffer and the buffer itself</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//</span>
+<span class="c1">// Global variables and definitions</span>
+<span class="c1">//</span>
+<span class="cp">#define ADC_BUF_LEN         50</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">DEBUG_TOGGLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">    </span><span class="c1">// Used for real-time mode</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">AdcBuf</span><span class="p">[</span><span class="n">ADC_BUF_LEN</span><span class="p">];</span><span class="w">  </span><span class="c1">// ADC buffer allocation</span>
+</pre></div>
+</div>
+<p><strong>lab_main.c</strong></p>
+<p>Next, we need to declare the functions used within the project. In this project,
+SysConfig is used for all of the ADC/PWM setup so we only need to declare the ISR.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//</span>
+<span class="c1">// Function Declarations</span>
+<span class="c1">//</span>
+<span class="n">_interrupt</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">INT_myADCA_1_ISR</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>lab_main.c</strong></p>
+<p>Lastly, we define the contents within main() which includes device initialization and peripheral setup:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// CPU Initialization</span>
+<span class="w">        </span><span class="n">Device_init</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Interrupt_initModule</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Interrupt_initVectorTable</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// Configure the GPIOs/ADC/PWM through SysConfig generated function found within</span>
+<span class="w">        </span><span class="c1">// board.c</span>
+<span class="w">        </span><span class="n">Board_init</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// Enable global interrupts and real-time debug</span>
+<span class="w">        </span><span class="n">EINT</span><span class="p">;</span>
+<span class="w">        </span><span class="n">ERTM</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// Main Loop</span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span>
+</pre></div>
+</div>
+<p><strong>main() within  lab_main.c</strong></p>
+</section>
+<section id="task-6-build-the-code">
+<h3>Task 6: Build the code<a class="headerlink" href="#task-6-build-the-code" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Make sure your board is connected to your computer. If you are using a
+LaunchPad then set the LaunchPad target configuration as the active one
+within the project. This is done by expanding the <code class="docutils literal notranslate"><span class="pre">TargetConfigs</span></code> folder
+within the folder and right-clicking on the LaunchPad ccxml and
+selecting “Set as Active Target Configuration”.</p></li>
+<li><p>Click the “Build” button and watch the tools run in the Console window. Check
+for errors in the Problems window, and fix any that may have occurred.</p></li>
+<li><p>Setup a debug and target configuration. For more information on launching a
+target configuration refer to <strong>Getting Started → “Build and Load the
+Project” → “Setup Target Configuration”</strong>.</p></li>
+</ul>
+</section>
+</section>
+<section id="task-7-run-the-code">
+<h2>Task 7: Run the Code<a class="headerlink" href="#task-7-run-the-code" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Press the debug button to transition into the debug perspective.</p></li>
+<li><p>Now that you are in the debug perspective, the program should be paused at the
+first line of code in <code class="docutils literal notranslate"><span class="pre">main()</span></code>. Press the resume icon in order for the code
+to start running.</p></li>
+<li><p>Open a memory browser by going to the top menu and selecting <code class="docutils literal notranslate"><span class="pre">View</span></code> and then
+<code class="docutils literal notranslate"><span class="pre">Memory</span> <span class="pre">Browser</span></code> from the drop down list. In memory browser search bar type
+<code class="docutils literal notranslate"><span class="pre">&amp;amp;AdcBuf</span></code> and enter. This will allow us to view the contents of the ADC
+results buffer.</p></li>
+</ul>
+<p><img alt="Memory Browser Window" src="../../../_images/memory_browser1.png" /></p>
+<ul class="simple">
+<li><p>Using a jumper wire, connect the <code class="docutils literal notranslate"><span class="pre">ADCINA0</span></code> pin to <code class="docutils literal notranslate"><span class="pre">GND</span></code>. Then run the code
+using the <code class="docutils literal notranslate"><span class="pre">Resume</span></code> button, and <code class="docutils literal notranslate"><span class="pre">Suspend</span></code> it after a few seconds. Verify that
+the ADC results buffer contains the expected value of ~0x0000.</p></li>
+</ul>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>EPWM1A Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>30</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>n/a</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>70</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28002x</p></td>
+<td><p>69</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-even"><td><p>F28003x</p></td>
+<td><p>70</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-odd"><td><p>F280013x</p></td>
+<td><p>n/a</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-even"><td><p>F280015x</p></td>
+<td><p>n/a</p></td>
+<td><p>9</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-important admonition">
+<p class="admonition-title">Important</p>
+<p>Exercise care when connecting any jumper wires to the LaunchPad or ControlCARD header pins
+since the power to the USB connector is on!</p>
+</div>
+<ul class="simple">
+<li><p>Adjust the jumper wire to connect the <code class="docutils literal notranslate"><span class="pre">ADCINA0</span></code> pin to <code class="docutils literal notranslate"><span class="pre">+3.3V</span></code> or <code class="docutils literal notranslate"><span class="pre">GPIO16</span></code> which we set high.
+Then <code class="docutils literal notranslate"><span class="pre">Resume</span></code> the code again, and <code class="docutils literal notranslate"><span class="pre">Suspend</span></code> it after a few seconds. Verify that
+the ADC results buffer contains the expected value of ~0x0FFF.</p></li>
+</ul>
+<p><strong>LaunchPad</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>GPIO16 Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>30</p></td>
+<td><p>33</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>70</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28002x</p></td>
+<td><p>69</p></td>
+<td><p>76</p></td>
+</tr>
+<tr class="row-even"><td><p>F28003x</p></td>
+<td><p>70</p></td>
+<td><p>76</p></td>
+</tr>
+<tr class="row-odd"><td><p>F280013x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>F280015x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ControlCARD</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>GPIO16 Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>9</p></td>
+<td><p>67</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>9</p></td>
+<td><p>67</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>9</p></td>
+<td><p>67</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28002x</p></td>
+<td><p>9</p></td>
+<td><p>67</p></td>
+</tr>
+<tr class="row-even"><td><p>F28003x</p></td>
+<td><p>9</p></td>
+<td><p>67</p></td>
+</tr>
+<tr class="row-odd"><td><p>F280013x</p></td>
+<td><p>9</p></td>
+<td><p>67</p></td>
+</tr>
+<tr class="row-even"><td><p>F280015x</p></td>
+<td><p>9</p></td>
+<td><p>67</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Adjust the jumper wire to connect the <code class="docutils literal notranslate"><span class="pre">ADCINA0</span></code> to <code class="docutils literal notranslate"><span class="pre">GPIO3</span></code>. Then <code class="docutils literal notranslate"><span class="pre">Resume</span></code> the code again,
+and <code class="docutils literal notranslate"><span class="pre">Pause</span></code> it after a few seconds. Examine the contents of the ADC results buffer
+(the contents should be alternating ~0x0000 and ~0x0FFF values).</p></li>
+</ul>
+<p><strong>LaunchPad</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>GPIO3 Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>30</p></td>
+<td><p>37</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>70</p></td>
+<td><p>55</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28002x</p></td>
+<td><p>69</p></td>
+<td><p>37</p></td>
+</tr>
+<tr class="row-even"><td><p>F28003x</p></td>
+<td><p>70</p></td>
+<td><p>37</p></td>
+</tr>
+<tr class="row-odd"><td><p>F280013x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>F280015x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ControlCARD</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>GPIO3 Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>9</p></td>
+<td><p>55</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>9</p></td>
+<td><p>55</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>9</p></td>
+<td><p>55</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28002x</p></td>
+<td><p>9</p></td>
+<td><p>55</p></td>
+</tr>
+<tr class="row-even"><td><p>F28003x</p></td>
+<td><p>9</p></td>
+<td><p>55</p></td>
+</tr>
+<tr class="row-odd"><td><p>F280013x</p></td>
+<td><p>9</p></td>
+<td><p>55</p></td>
+</tr>
+<tr class="row-even"><td><p>F280015x</p></td>
+<td><p>9</p></td>
+<td><p>55</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Open and set up a graph to plot a 50-point window of the ADC results buffer.
+Click: <strong>Tools → Graph → Single Time</strong> and set the following values (then press <code class="docutils literal notranslate"><span class="pre">ok</span></code>):</p></li>
+</ul>
+<div class="admonition-important admonition">
+<p class="admonition-title">Important</p>
+<p>Note: If you do not see CCS menu <strong>Tools → Graph</strong>, please refer to
+<a class="reference internal" href="../../c2000_get_started/c2000_getstarted.html"><span class="doc std std-doc">Getting Started (Setting CCS for graph)</span></a>
+to see the instruction on how to enable CCS graphing tool in your perspective.</p>
+</div>
+<p><img alt="Graph Properties Window" src="../../../_images/graph_properties.png" /></p>
+<ul class="simple">
+<li><p>Recall that the code toggled the <code class="docutils literal notranslate"><span class="pre">GPIO3</span></code> pin alternately high and low. If you
+had an oscilloscope available to display <code class="docutils literal notranslate"><span class="pre">GPIO3</span></code>, you would expect to see a
+square-wave.</p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Why does Code Composer Studio plot resemble a triangle wave? What is the signal processing term for what is happening here?<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We are under sampling the signal. If we were to increase our sampling frequency we would
+see that it is actually a square wave.</p>
+</div>
+</details><p><img alt="Graph of Toggled Pin" src="../../../_images/toggled_pin_graph.png" /></p>
+<section id="task-8-use-real-time-emulation">
+<h3>Task 8: Use Real-Time Emulation<a class="headerlink" href="#task-8-use-real-time-emulation" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The memory and graph windows displaying AdcBuf should still be open. The jumper wire
+between <code class="docutils literal notranslate"><span class="pre">ADCINA0</span></code> and <code class="docutils literal notranslate"><span class="pre">GPIO3</span></code> should still be connected. In real-time mode, we will have our
+window continuously refresh at the default rate. To view the refresh rate click: <strong>Window
+→ Preferences…</strong> and in the section on the left select the “Code Composer Studio” category.
+Click the sign (‘+’ or ‘&gt;’) to the left of “Code Composer Studio” and select “Debug”. In the
+section on the right notice the default setting. Click Cancel.</p></li>
+</ul>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>Decreasing the “Continuous refresh interval” causes all enabled continuous refresh
+windows to refresh at a faster rate. This can be problematic when a large number of
+windows are enabled, as bandwidth over the emulation link is limited. Updating too many
+windows can cause the refresh frequency to bog down. In this case you can just
+selectively enable continuous refresh for the individual windows of interest.</p>
+</div>
+<p><img alt="DAC Sine Output" src="../../../_images/continuous_refresh_rate.png" /></p>
+<ul class="simple">
+<li><p>Next we need to enable the graph window for continuous refresh. Select the “Single
+Time” graph. In the graph window toolbar, left-click on the yellow icon with the arrows
+rotating in a circle over a pause sign. Note when you hover your mouse over the icon,
+it will show “Enable Continuous Refresh”. This will allow the graph to continuously
+refresh in real-time while the program is running.</p></li>
+</ul>
+<p><img alt="Continuous Refresh" src="../../../_images/continuous_refresh_button_graph_window.png" /></p>
+<ul class="simple">
+<li><p>Enable the Memory Browser for continuous refresh using the same procedure as the
+previous step.</p></li>
+</ul>
+<p><img alt="Continuous Refresh" src="../../../_images/continuous_refresh_membrowser.png" /></p>
+<ul class="simple">
+<li><p>To enable and run real-time emulation mode, click the “Enable Silicon Real-time Mode”
+toolbar button. A window may open and if prompted select Yes to the “Do you want to
+enable real-time mode?” question. This will force the debug enable mask bit (DBGM) in
+status register ST1 to ‘0’, which will allow the memory and register values to be passed to
+the host processor for updating (i.e. debug events are enabled).</p></li>
+</ul>
+<p><img alt="Real Time Enabled" src="../../../_images/realtime_enable.png" /></p>
+<ul class="simple">
+<li><p>While in real-time mode, carefully remove and reconnect the jumper wire.
+The values should be continuously updating in the memory browser if real-time mode is working
+properly. <code class="docutils literal notranslate"><span class="pre">Suspend</span></code> the code.</p></li>
+<li><p>So far, we have seen data flowing from the MCU to the debugger in real-time. Now, we will flow
+data from the debugger to the MCU.</p></li>
+<li><p>Open and inspect the project’s .c file “lab_main.c”. Notice that the global
+variable <code class="docutils literal notranslate"><span class="pre">DEBUG_TOGGLE</span></code> is used to control the toggling of the <code class="docutils literal notranslate"><span class="pre">GPIO3</span></code> pin. This is the pin
+being read with the ADC.</p></li>
+<li><p>Highlight <code class="docutils literal notranslate"><span class="pre">DEBUG_TOGGLE</span></code> with the mouse, right click and select “Add Watch
+Expression…” and then select OK. The global variable <code class="docutils literal notranslate"><span class="pre">DEBUG_TOGGLE</span></code> should
+now be in the Expressions window with a value of “1”.</p></li>
+<li><p>Enable the Expressions window for continuous refresh.</p></li>
+<li><p>Run the code in real-time mode and change the value to “0”. Are the results shown
+in the memory and graph window as expected? Change the value back to “1”. As
+you can see, we are modifying data memory contents while the processor is running
+in real-time (i.e. we are not halting the MCU nor interfering with its operation in any
+way)! When done, halt the CPU.</p></li>
+</ul>
+<p>This concludes <strong>Part 1: ADC</strong>. Terminate the active debug session using the <strong>Terminate</strong> button.
+This will close the debugger and return Code Composer Studio to the CCS Edit perspective view.</p>
+</section>
+</section>
+<section id="part-2-dac">
+<h2>Part 2: DAC<a class="headerlink" href="#part-2-dac" title="Permalink to this heading">#</a></h2>
+<p>This is a continuation of Part 1. The purpose of this part of the lab is to generate a
+sine wave utilizing the DAC and feed that to the ADC as an input .</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>Part 2 is only intended for devices
+which have a buffered DAC. We will be using the same code as before but will add a
+few lines to support the DAC and enable us to generate a sine wave.</p>
+</div>
+<section id="task-1-setup-the-dac">
+<h3>Task 1: Setup the DAC<a class="headerlink" href="#task-1-setup-the-dac" title="Permalink to this heading">#</a></h3>
+<p>We will start by setting up the configuration for the DAC module. This part will be done through
+SysConfig. Open the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file within the project and add a DAC instance by selecting
+the (+) next to ‘DAC’ on the left side of the SysConfig window.</p>
+<p>The key elements of initializing the DAC are to set a reference voltage,
+determine a load mode (when the DAC converts the value in the shadow register),
+and enable output.</p>
+<p>We will select DACB as our DAC instance, use the ADC VREFHI reference voltage, set up the
+load mode to be “Load on next SYSCLK”, and lastly the shadow value (in this case 800).</p>
+<p>For devices with a DAC of <code class="docutils literal notranslate"><span class="pre">Type</span> <span class="pre">2</span></code> and above we will
+also need to set the gain. For more info on DAC types and device peripherals, refer to
+the <a class="reference external" href="https://www.ti.com/lit/spru566">Peripherals Reference Guide</a>.</p>
+<p><strong>DAC of Type 1:</strong></p>
+<p><img alt="DAC Setup- Type 1" src="../../../_images/SysConfig_DACSetup.png" /></p>
+<p><strong>DAC of Type 2:</strong></p>
+<p>In order to setup the DAC on a device with DAC Type 2 we need to set the correct
+ADC reference voltage. This is done through the ‘ASYSCTL’ options within SysConfig.
+Setup the ADC to have an internal reference voltage of 1.65V (3.3V Conversion Range).</p>
+<p><img alt="DAC Setup- Type 2" src="../../../_images/SysConfig_Adc_sysctl.png" /></p>
+<p>Then we setup the DAC with a gain mode of 2.</p>
+<p><img alt="DAC Setup- Type 2" src="../../../_images/SysConfig_DACSetupType2.png" /></p>
+</section>
+<section id="task-2-additions-to-the-c-file">
+<h3>Task 2: Additions to the (.c) file<a class="headerlink" href="#task-2-additions-to-the-c-file" title="Permalink to this heading">#</a></h3>
+<p>Keeping the same code as before, go to the global variables section
+and add the below table as well as a few global variables. The global variables
+will enable us to change the DAC output in real time and the lookup table will
+allow us to generate a sine wave.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">DacOutput</span><span class="p">;</span><span class="w">                       </span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">DacOffset</span><span class="p">;</span><span class="w">                       </span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">SINE_ENABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                </span>
+<span class="c1">// quadrature look-up table: contains 4 quadrants of sinusoidal data points</span>
+<span class="cp">#define SINE_PTS 25</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">QuadratureTable</span><span class="p">[</span><span class="n">SINE_PTS</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="mh">0x0000</span><span class="p">,</span><span class="w">         </span><span class="c1">// [0]  0.0</span>
+<span class="w">        </span><span class="mh">0x1FD4</span><span class="p">,</span><span class="w">         </span><span class="c1">// [1]  14.4</span>
+<span class="w">        </span><span class="mh">0x3DA9</span><span class="p">,</span><span class="w">         </span><span class="c1">// [2]  28.8</span>
+<span class="w">        </span><span class="mh">0x579E</span><span class="p">,</span><span class="w">         </span><span class="c1">// [3]  43.2</span>
+<span class="w">        </span><span class="mh">0x6C12</span><span class="p">,</span><span class="w">         </span><span class="c1">// [4]  57.6</span>
+<span class="w">        </span><span class="mh">0x79BB</span><span class="p">,</span><span class="w">         </span><span class="c1">// [5]  72.0</span>
+<span class="w">        </span><span class="mh">0x7FBE</span><span class="p">,</span><span class="w">         </span><span class="c1">// [6]  86.4</span>
+<span class="w">        </span><span class="mh">0x7DBA</span><span class="p">,</span><span class="w">         </span><span class="c1">// [7]  100.8</span>
+<span class="w">        </span><span class="mh">0x73D0</span><span class="p">,</span><span class="w">         </span><span class="c1">// [8]  115.2</span>
+<span class="w">        </span><span class="mh">0x629F</span><span class="p">,</span><span class="w">         </span><span class="c1">// [9]  129.6</span>
+<span class="w">        </span><span class="mh">0x4B3B</span><span class="p">,</span><span class="w">         </span><span class="c1">// [10] 144.0</span>
+<span class="w">        </span><span class="mh">0x2F1E</span><span class="p">,</span><span class="w">         </span><span class="c1">// [11] 158.4</span>
+<span class="w">        </span><span class="mh">0x100A</span><span class="p">,</span><span class="w">         </span><span class="c1">// [12] 172.8</span>
+<span class="w">        </span><span class="mh">0xEFF6</span><span class="p">,</span><span class="w">         </span><span class="c1">// [13] 187.2</span>
+<span class="w">        </span><span class="mh">0xD0E2</span><span class="p">,</span><span class="w">         </span><span class="c1">// [14] 201.6</span>
+<span class="w">        </span><span class="mh">0xB4C5</span><span class="p">,</span><span class="w">         </span><span class="c1">// [15] 216.0</span>
+<span class="w">        </span><span class="mh">0x9D61</span><span class="p">,</span><span class="w">         </span><span class="c1">// [16] 230.4</span>
+<span class="w">        </span><span class="mh">0x8C30</span><span class="p">,</span><span class="w">         </span><span class="c1">// [17] 244.8</span>
+<span class="w">        </span><span class="mh">0x8246</span><span class="p">,</span><span class="w">         </span><span class="c1">// [18] 259.2</span>
+<span class="w">        </span><span class="mh">0x8042</span><span class="p">,</span><span class="w">         </span><span class="c1">// [19] 273.6</span>
+<span class="w">        </span><span class="mh">0x8645</span><span class="p">,</span><span class="w">         </span><span class="c1">// [20] 288.0</span>
+<span class="w">        </span><span class="mh">0x93EE</span><span class="p">,</span><span class="w">         </span><span class="c1">// [21] 302.4</span>
+<span class="w">        </span><span class="mh">0xA862</span><span class="p">,</span><span class="w">         </span><span class="c1">// [22] 316.8</span>
+<span class="w">        </span><span class="mh">0xC257</span><span class="p">,</span><span class="w">         </span><span class="c1">// [23] 331.2</span>
+<span class="w">        </span><span class="mh">0xE02C</span><span class="w">          </span><span class="c1">// [24] 345.6</span>
+<span class="w">        </span><span class="p">};</span>
+</pre></div>
+</div>
+<p><strong>lab_main.c</strong></p>
+<p>Now navigate to the ADC ISR function and add a static variable that will be
+used to index the lookup table we recently initialized. We will also add some code
+to write to the DAC when we are in the ISR. Notice how the most important piece of
+code here is <code class="docutils literal notranslate"><span class="pre">DAC_setShadowValue()</span></code> which places the next value to be converted
+by the DAC into a shadow register.</p>
+<p>Add this code before acknowledging and clearing the interrupt status.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Write to DAC-B to create input to ADC-A0</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">iQuadratureTable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">        </span><span class="c1">// Quadrature table index</span>
+<span class="k">if</span><span class="p">(</span><span class="n">SINE_ENABLE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">DacOutput</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DacOffset</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">((</span><span class="n">QuadratureTable</span><span class="p">[</span><span class="n">iQuadratureTable</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mh">0x8000</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">DacOutput</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DacOffset</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="p">(</span><span class="n">iQuadratureTable</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="p">(</span><span class="n">SINE_PTS</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w">        </span><span class="c1">// Wrap the index</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">iQuadratureTable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">DAC_setShadowValue</span><span class="p">(</span><span class="n">myDACB_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">DacOutput</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>lab_main.c: INT_myADCA_1_ISR()</strong></p>
+</section>
+<section id="task-3-build-and-run">
+<h3>Task 3: Build and Run<a class="headerlink" href="#task-3-build-and-run" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Build the code and fix any errors.</p></li>
+<li><p>Open a debug perspective and add <code class="docutils literal notranslate"><span class="pre">SINE_ENABLE</span></code> and <code class="docutils literal notranslate"><span class="pre">DacOffset</span></code> to the expression windows.</p></li>
+<li><p>Adjust the jumper wire to connect the <code class="docutils literal notranslate"><span class="pre">ADCINA0</span></code> pin to the <code class="docutils literal notranslate"><span class="pre">DACB</span></code> pin.</p></li>
+<li><p>For devices showing ‘n/a’, there is no launchpad available for that device.</p></li>
+</ol>
+<p><strong>LaunchPad</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>DACB Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>30</p></td>
+<td><p>70</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>70</p></td>
+<td><p>30</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28002x</p></td>
+<td><p>69</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>F28003x</p></td>
+<td><p>70</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-odd"><td><p>F280013x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>F280015x</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ControlCARD</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>ADCINA0 Pin</p></th>
+<th class="head"><p>DACB Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>F28379D</p></td>
+<td><p>9</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-odd"><td><p>F2838x</p></td>
+<td><p>9</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-even"><td><p>F28004x</p></td>
+<td><p>9</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-odd"><td><p>F28002x</p></td>
+<td><p>9</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>F28003x</p></td>
+<td><p>9</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-odd"><td><p>F280013x</p></td>
+<td><p>9</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-even"><td><p>F280015x</p></td>
+<td><p>9</p></td>
+<td><p>11</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple" start="5">
+<li><p>Run the code</p></li>
+<li><p>At this point, the graph should be displaying a DC signal near zero (if you
+closed the graph, reopen it). Click on the <code class="docutils literal notranslate"><span class="pre">DacOffset</span></code> variable in the
+Expressions window and change the value to 800. This changes the DC output of
+the DAC which is applied to the ADC input. The level of the graph display
+should be about 800 and this should be reflected in the value shown in the
+memory buffer (note: 800 decimal = 0x320 hex).</p></li>
+<li><p>Enable the sine generator by changing the variable <code class="docutils literal notranslate"><span class="pre">SINE_ENABLE</span></code> in the Expressions
+window to 1.</p></li>
+<li><p>You should now see a sine wave in the graph window.</p></li>
+</ol>
+<p><img alt="DAC Sine Output" src="../../../_images/sine_output.png" /></p>
+<p>You have now completed the lab. Terminate the active debug session using the<strong>Terminate</strong>button.
+This will close the debugger and return Code Composer Studio to the CCS Edit perspective view. Also
+close the project by right clicking on the project in the<strong>Project Explorer</strong>.</p>
+</section>
+</section>
+<section id="full-solution">
+<h2>Full Solution<a class="headerlink" href="#full-solution" title="Permalink to this heading">#</a></h2>
+<p>The full solution to this lab exercise is included as part of the C2000Ware SDK. Import the project from
+<code class="docutils literal notranslate"><span class="pre">[C2000Ware_Install_Path]/training/device/[device_name]/analog_subsystems/lab_adc</span></code>.</p>
+<p>Note that the solution includes code for both the ADC and DAC, but it will still
+compile on devices that do not have a buffered DAC.</p>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="../../c2000_advanced_topics/c2000_interprocessor_communications.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Interprocessor Communications (IPC)</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="../control_peripherals/c2000_lab_pwm.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Enhanced Pulse Width Modulation (ePWM) Lab</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solution">
+   Solution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lab-setup">
+   Lab Setup
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hardware-setup">
+     Hardware Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#software-setup">
+     Software Setup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-empty-project">
+   Import Empty project
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-1-adc">
+   Part 1: ADC
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-1-setting-up-the-gpios">
+     Task 1: Setting up the GPIOs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-2-initialize-the-epwm-module">
+     Task 2: Initialize the EPWM Module
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-3-setup-the-adc">
+     Task 3: Setup the ADC
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-4-setup-the-adc-isr">
+     Task 4: Setup the ADC ISR
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-5-setup-the-c-file">
+     Task 5: Setup the .c file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-6-build-the-code">
+     Task 6: Build the code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-7-run-the-code">
+   Task 7: Run the Code
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-8-use-real-time-emulation">
+     Task 8: Use Real-Time Emulation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-2-dac">
+   Part 2: DAC
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-1-setup-the-dac">
+     Task 1: Setup the DAC
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-2-additions-to-the-c-file">
+     Task 2: Additions to the (.c) file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-3-build-and-run">
+     Task 3: Build and Run
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-solution">
+   Full Solution
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

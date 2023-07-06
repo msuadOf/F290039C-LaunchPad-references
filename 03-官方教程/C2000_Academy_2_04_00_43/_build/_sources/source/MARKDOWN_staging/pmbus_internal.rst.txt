@@ -1,0 +1,16 @@
+PMBUS Related Collateral
+====================================
+
+**Foundational**
+
+- `Seven things to know about PMBus <https://www.ti.com/video/5097829453001>`_
+
+**Getting Started**
+
+- `C28x PMBus Communications Stack User's Guide Application Report <https://dev.ti.com/tirex/explore/node?node=AIS0ctl.bh6PlfjdZFKNiw\_\_gYkahfz\_\_LATEST>`_
+
+- `Software Implementation of PMBus over I2C for TMS320F2803x Application Report <https://ti.com/lit/SPRABJ6>`_
+
+**Expert**
+
+- `9 things you need to know about PMBus Point-of-Load Power <https://www.ti.com/video/4649804908001>`_

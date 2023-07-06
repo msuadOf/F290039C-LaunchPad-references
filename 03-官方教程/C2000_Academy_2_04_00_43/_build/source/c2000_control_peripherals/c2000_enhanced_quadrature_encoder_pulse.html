@@ -1,0 +1,776 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Enhanced Quadrature Encoder Pulse (eQEP) &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_control_peripherals/c2000_enhanced_quadrature_encoder_pulse';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_control_peripherals/c2000_enhanced_quadrature_encoder_pulse.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Sigma Delta Filter Module (SDFM)" href="c2000_sigma_delta_filter.html" />
+    <link rel="prev" title="Enhanced Capture Module (eCAP)" href="c2000_enhanced_capture_module.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="enhanced-quadrature-encoder-pulse-eqep">
+<h1>Enhanced Quadrature Encoder Pulse (eQEP)<a class="headerlink" href="#enhanced-quadrature-encoder-pulse-eqep" title="Permalink to this heading">#</a></h1>
+<p>The Enhanced Quadrature Encoder Pulse (eQEP) module is essential when
+integrating C2000 devices in any application that requires motor control. The
+eQEP module enables the C2000 device to interact with linear or rotary
+incremental encoders to determine necessary motor information from rotating
+machines.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-is-an-incremental-quadrature-encoder">
+<h1>What is an Incremental Quadrature Encoder?<a class="headerlink" href="#what-is-an-incremental-quadrature-encoder" title="Permalink to this heading">#</a></h1>
+<p>At a high-level, an incremental quadrature encoder is a digital angular
+position sensor. A generic incremental encoder is composed of a disk, a pair of
+optical sensors, and a light source. An incremental encoder disk is patterned
+with a track of slots (windows which allow light to pass through) around the
+periphery of the disk.</p>
+<p><img alt="Incremental Encoder Diagram" src="../../_images/eqep_1_alt.png" /></p>
+<p>The optical sensors are positioned directly across from the light source on
+either side of this slotted track, and as the motor rotates, the sensors detect
+a pattern of light and dark lines. A light line is perceived when the optical
+sensor is positioned over a slot in the disk, and a dark line is perceived when
+the light source becomes obstructed by the disk.</p>
+<p>The data perceived  by these optical sensors are denoted by two channels,
+channel A and channel B, that are offset by some phase difference. The
+frequency of these signals and their phase difference can be used to calculate
+information such as the direction, speed, and position of the rotating motor.</p>
+<p><img alt="Incremental Encoder Animation" src="../../_images/eQEP_GIF1.gif" /></p>
+<p>The incremental encoder disk may feature a second track with a single slot
+located at a fixed point. This second track can be used to produce an index
+signal which acts as a zero reference. This index signal, when fed into the
+eQEP peripheral, aids in motor positioning and pulse count verification.
+Because this index slot is positioned at a fixed point, this pulse occurs once
+per rotation and indicates to the device when a complete rotation has been made.</p>
+<section id="how-is-direction-determined-from-quadrature-signals">
+<h2>How is direction determined from quadrature signals?<a class="headerlink" href="#how-is-direction-determined-from-quadrature-signals" title="Permalink to this heading">#</a></h2>
+<p>Quadrature signals carry valuable data that can be used to determine the
+direction of a motor’s rotation. The slots on a quadrature encoder are
+separated by a known angular difference θ, which results in the phase
+difference between pulse waveforms in channel A and B being fixed at θ/4 (90°
+offset). The channel A and B quadrature signals can be fed into the eQEP
+module, and the direction of motion can be decoded using a state machine.</p>
+<p><img alt="Encoder Direction" src="../../_images/eqep_2.png" /></p>
+<p>The state encodings represent the states of channels A and B at any point in
+time.</p>
+<ul class="simple">
+<li><p>when both channels are low, the encoding is (00)</p></li>
+<li><p>when both channels are high, the encoding is (11)</p></li>
+<li><p>when channel A is high and channel B is low, the encoding is (10)</p></li>
+<li><p>when channel A is low and channel B is high, the encoding is (01)</p></li>
+</ul>
+<p>Accordingly, the state transitions over one period uniquely encode the
+direction of rotation. For example, the state transitions (00,10,11,01)
+indicate a clockwise rotation, and the state transitions (01,11,10,00) indicate
+a counter-clockwise rotation.</p>
+<p>Because channels A and B are offset by a fixed phase difference θ/4, they
+cannot both change states simultaneously. This means that in the state machine,
+a direct transition from (00) to (11) or vice versa represents an illegal state
+change. The same is true between states (01) and (10).</p>
+</section>
+<section id="how-is-angular-position-and-velocity-determined-from-quadrature-signals">
+<h2>How is angular position and velocity determined from quadrature signals?<a class="headerlink" href="#how-is-angular-position-and-velocity-determined-from-quadrature-signals" title="Permalink to this heading">#</a></h2>
+<p>The angular position of the incremental encoder can be determined in multiple
+ways depending on the design of the encoder. The eQEP module has a counter
+which keeps track of the number of pulses coming in from channels A and B.
+A clockwise movement results in an increment of the counter and a
+counter-clockwise movement results in a decrement.</p>
+<p>The number of slots in an incremental quadrature encoder, referred to as the
+resolution of the encoder, is equivalent to the number of pulses in a single
+rotation. The number of pulses in a single rotation is denoted by PPR (pulses
+per rotation). Hence, the angular position of the rotary encoder is stored in
+the counter, incrementing and decrementing depending on the rotation of the
+motor.</p>
+<p>If the quadrature encoder contains an index pulse, the position of the encoder
+can be found by comparing the counter value to the counter value at the
+previous index pulse. Alternately, the index can be used to verify the value of
+the encoder counter value and the angular position.</p>
+<p><img alt="Encoder Position Counter" src="../../_images/eqep_3.png" /></p>
+<p>For every revolution of the encoder disk, there is typically one revolution of
+the motor. Thus, the frequency of the channel A and B pulses is directly
+proportional to the velocity of the motor. This relation is described by the
+following equation:</p>
+<img src="https://render.githubusercontent.com/render/math?math=RPM = \frac{freq. \times 60}{PPR}"/>
+<!-- Encoder Resolution (ppr) = ( Pulse Frequency x 60 ) / Motor RPM -->
+<p>For example, a 1000-slot incremental encoder coupled to a motor running at 5000
+revolutions per minute (RPM) results in channel A and B pulsing at a frequency
+of 300 kHz. Thus, the angular velocity can be calculated by measuring the time
+it takes for an arbitrary number of pulses to occur.</p>
+<!-- The velocity is thus found through a first-order approximation involving the position counter and the time elapsed. -->
+</section>
+<section id="applications-of-the-eqep-module">
+<h2>Applications of the eQEP Module<a class="headerlink" href="#applications-of-the-eqep-module" title="Permalink to this heading">#</a></h2>
+<p>The eQEP module on C2000 devices is responsible for decoding the pulse signals
+from incremental quadrature encoders, and is used specifically in
+high-performance motion and position-control systems. It is typically used as
+part of a control interface for tight loop motor controls in motor control
+applications for industrial and automotive end equipment. The eQEP module can
+be used to determine the position, direction, and speed of quadrature encoders.
+The internal position counter also enables the eQEP module to be able to keep
+count of the number of pulses from the input signals.</p>
+<p>The eQEP works directly with pulse train output (PTO) module signals, which are
+primarily utilized in position controllers. A PTO module issues pulses to a
+motor which directly rotates the shaft of the motor and thus has direct control
+over the motor. Common types of PTO signals include clockwise (CW) and
+counter-clockwise (CCW) pulses. Each pulse corresponds to a fractional
+rotation, where CW indicates a positive increment and CCW indicates a negative
+increment. CW/CCW signals can function in active-high or active-low.
+Active-high CW/CCW signals realize motor movements when the CW or CCW signals
+go high, and active-low signals realize movements when the signals are brought
+low.</p>
+<p><img alt="CW and CCW Signals" src="../../_images/CW_CCW.png" /></p>
+<p>These PTO signals can be directly driven into the eQEP module. The eQEP module
+converts them directly into direction and clock signals, which the C2000 chip
+further produces into pulse-width modulation (PWM) signals intended to drive
+motors.</p>
+<p><img alt="Clock and Direction Signals" src="../../_images/Clock_Dir.png" /></p>
+<p>The eQEP module may also function as a 16-bit capture unit in applications
+where additional capture units are required beyond the dedicated eCAP modules
+provided on these microcontrollers. Each eQEP module features an edge-capture
+unit (discussed in detail further) which, in typical motor applications, aids
+in providing accurate estimates for low speed measurements. This capture
+submodule enables the eQEP module to serve as a general-purpose capture unit.</p>
+</section>
+<section id="eqep-block-diagram">
+<h2>eQEP Block Diagram<a class="headerlink" href="#eqep-block-diagram" title="Permalink to this heading">#</a></h2>
+<p>The figure below shows a summary of the connections to the eQEP module.</p>
+<p><img alt="EQEP Module Connections" src="../../_images/eQEP_Module_Connections2.png" /></p>
+<p>The inputs include two pins (EQEPxA/QEPA and EQEPxB/QEPB) for quadrature-clock
+mode or direction-count mode, an index pin (EQEPxI/QEPI), and a strobe pin
+(EQEPxS/QEPS). These pins are configured using the GPIO multiplexer and need to
+be enabled for synchronous input.</p>
+<p>In quadrature-clock mode, two square wave signals from a position encoder are
+inputs to QEPA and QEPB which are 90 electrical degrees out of phase. This
+phase relationship is used to determine the direction of rotation. If the
+position encoder provides direction and clock outputs, instead of quadrature
+outputs, direction-count mode can be used. QEPA input will provide the
+clock signal (XCLK) and QEPB input will have the direction information (XDIR).</p>
+<p>The QEPI index signal occurs once per revolution and can be used to indicate an
+absolute start position from which position information is incrementally
+encoded using quadrature pulses. The QEPS strobe signal can be connected to a
+sensor or limit switch to indicate that a defined position has been reached.</p>
+</section>
+<section id="eqep-functional-units">
+<h2>eQEP Functional Units<a class="headerlink" href="#eqep-functional-units" title="Permalink to this heading">#</a></h2>
+<p>The eQEP peripheral contains a number of major functional units:</p>
+<ul class="simple">
+<li><p>Programmable input qualification for each pin (part of the GPIO MUX)</p></li>
+<li><p>Quadrature decoder unit (QDU)</p></li>
+<li><p>Position counter and control unit for position measurement (PCCU)</p></li>
+<li><p>Quadrature edge-capture unit for low-speed measurement (QCAP)</p></li>
+<li><p>Unit time base for speed/frequency measurement (UTIME)</p></li>
+<li><p>Watchdog timer for detecting stalls (QWDOG)</p></li>
+<li><p>Quadrature Mode Adapter (QMA)</p></li>
+</ul>
+<p>The diagram below shows
+a high-level block diagram of the eQEP module and its major functional units on
+C2000 devices.</p>
+<p><img alt="EQEP Block Diagram" src="../../_images/eQEP_Block_Diagram2.png" /></p>
+<section id="gpio-mux-input-qualification">
+<h3>GPIO MUX Input Qualification<a class="headerlink" href="#gpio-mux-input-qualification" title="Permalink to this heading">#</a></h3>
+<p>Inputs into the eQEP module (EQEPxA, EQEPxB, EQEPxI, EQEPxS) can undergo GPIO
+input qualification before they are fed into the eQEP module. In instances
+where potential noise may distort the eQEP input signals, input qualification
+can aid in making the inputs more immune to noise, resulting in more stable
+speed and position measurement. The input qualification sampling period and
+type of qualification can be individually configured.</p>
+<p><img alt="GPIO MUX Block Diagram" src="../../_images/GPIOMUX.png" /></p>
+<p>Outputs of the GPIO MUX block (EQEPxA_IN, EQEPxB_IN, EQEPxI_IN, EQEPxS_IN) are
+connected to the QMA (on applicable devices) and the QDU.</p>
+</section>
+<section id="quadrature-decoder-unit-qdu">
+<h3>Quadrature Decoder Unit (QDU)<a class="headerlink" href="#quadrature-decoder-unit-qdu" title="Permalink to this heading">#</a></h3>
+<p>The <strong>Quadrature Decoder Unit</strong> is the primary functional unit within the eQEP
+module which allows for motor control measurement. It is responsible for
+generating clock (QCLK) and direction (QDIR) signals which are fed into the
+rest of the eQEP module (e.g., position counter and control unit, edge-capture
+unit, etc.)</p>
+<p><img alt="QDU Block Diagram" src="../../_images/QDU.png" /></p>
+<p>There are 4 input modes which determine the clock and direction
+inputs into the position counter. These are Quadrature-Count mode,
+Direction-Count mode, Up-Count mode, and Down-count mode.</p>
+<p>In <strong>Quadrature-Count mode</strong>, the quadrature decoder generates the direction
+and clock signals from quadrature inputs QEPA, QEPB, and QEPI. The quadrature
+decoder uses direction decoding logic to determine the leading signal between
+QEPA and QEPB. The direction of movement is then fed into other functional
+units. Note that because the quadrature decoder samples both edges of inputs
+QEPA and QEPB, the generated QCLK freqency is four times the frequency of the
+input sequence.</p>
+<p><img alt="eQEP in Quadrature-Count Mode" src="../../_images/eQEP_GIF2.gif" /></p>
+<p><strong>Direction-Count mode</strong> is intended for use with encoders that provide
+direction and clock outputs as opposed to quadrature outputs. In this mode,
+QEPA will provide the clock signal (XCLK), and QEPB will provide the direction
+information (XDIR). The position counter is incremented on every QEPA rising
+edge when direction (QEPB) is high and decremented when the direction is low.</p>
+<p>In <strong>Up-Count mode</strong> and <strong>Down-Count mode</strong>, the counter direction is always
+hard-wired high for up-count mode or low for down-count mode. The position
+counter is then used to measure the frequency of the QEPA input. In these
+modes, the QDU unit can be configured to generate clock events on both rising
+and falling edges of the QEPA input, essentially doubling the measurement
+resolution.</p>
+<p>The inputs into the eQEP are validated and can be manipulated through software.
+When an invalid quadrature transition occurs (as described in
+How is direction determined from quadrature signals?)
+a phase error flag (PHE) will be set within the QDU. Each eQEP input can be
+inverted prior to being input into the quadrature decoder. Optionally, inputs
+QEPA and QEPB can be swapped through software, resulting in the counting
+direction being reversed.</p>
+</section>
+</section>
+<section id="position-counter-and-control-unit-pccu">
+<h2>Position Counter and Control Unit (PCCU)<a class="headerlink" href="#position-counter-and-control-unit-pccu" title="Permalink to this heading">#</a></h2>
+<p>The <strong>Position Counter and Control Unit</strong> is responsible for keeping count of
+the encoder pulses being received by the eQEP module.</p>
+<p>The QCLK and QDIR signals being output from the quadrature decoder unit are
+received by the position counter. The position counter counts the number of
+QCLK pulses for a particular direction in a specified period of time. The value
+of the position counter is directly related to the number of encoder pulses in
+that period. The frequency of the input signals can then be calculated, which
+in turn allows for the calculation of the position and speed.</p>
+<p><img alt="PCCU Block Diagram" src="../../_images/PCCU.png" /></p>
+<p>By adjusting the signal or event that resets the position counter, the position
+counter can be used to record the total number of encoder pulses received, to
+document only the encoder position in the current motor revolution, or to
+perform another custom function. Four different modes are available, which
+include:</p>
+<ul class="simple">
+<li><p>Position-Counter Reset on Index Event</p></li>
+<li><p>Position-Counter Reset on Maximum Position</p></li>
+<li><p>Position-Counter Reset on the first Index Event</p></li>
+<li><p>Position-Counter Reset on Unit Time Out Event (Frequency Measurement)</p></li>
+</ul>
+<p>The position counter has a max configurable position value which determines the
+upper limit of the position counter. Regardless of the mode, when a reset
+condition has been met, the position counter will reset to 0 if the reset
+occurs during forward movement. If the reset occurs during reverse movement,
+the position counter will be reset to the maximum position counter value.</p>
+<p>The eQEP module can be configured to latch the position value when a specified
+event occurs on the index and strobe inputs.</p>
+<p>Latching on an index event can be useful in applications which want to utilize
+position counter error checking and whereby the position counter is <em>not</em>
+configured to reset on the index event. In these applications, the position
+counter keeps track of the number of encoder pulses over multiple motor
+revolutions. By latching on index events, it is possible to verify whether or
+not the position counter accumulated the correct number of counts between index
+events. For example, in a 1000-line encoder, the expected count difference
+after one full rotation should be 4000.</p>
+<p>The position counter can be configured to initialize to a specific value upon
+an index event, a strobe event, or through software initialization.</p>
+<p>The eQEP peripheral contains a position-compare unit which can be used to
+generate sync outputs and/or interrupts on position-compare events. This unit
+has support for shadow mode, where the shadow values are loaded during a
+compare match or a position counter zero event.</p>
+<section id="quadrature-edge-capture-unit-qcap">
+<h3>Quadrature Edge-Capture Unit (QCAP)<a class="headerlink" href="#quadrature-edge-capture-unit-qcap" title="Permalink to this heading">#</a></h3>
+<p>The <strong>Quadrature Edge-Capture Unit</strong> is included in the eQEP module for
+accurate low-speed measurements. This functional unit features an internal
+16-bit capture timer that is derived from the prescaled system clock
+(SYSCLKOUT) and a 4-bit binary divider, which is used to generate unit position
+events from the QCLK signal.</p>
+<p><img alt="QCAP Block Diagram" src="../../_images/QCAP.png" /></p>
+<p>On every unit position event, the value of the
+capture timer is stored, and the capture timer is reset. The QCAP unit measures
+the elapsed time between unit position events and can use this information to
+calculate the velocity of the motor. This is described below in the following
+equation:</p>
+<img src="https://render.githubusercontent.com/render/math?math=v(k) = \frac{X}{t(k) - t(k-1)} = \frac{X}{\Delta T}"/>
+<ul class="simple">
+<li><p><em>X</em> defines the unit position</p></li>
+<li><p><em>ΔT</em> defines the elapsed time between unit position events</p></li>
+<li><p><em>v(k)</em> describes the velocity at time <em>k</em>.</p></li>
+</ul>
+<p>The low-speed measurement is accurate as long as the capture timer does not
+overflow (period between unit position events must be less than 65,535) and
+there is no change in direction. Relevant error flags will be thrown when these
+conditions are not met.</p>
+</section>
+<section id="unit-time-base-utime">
+<h3>Unit Time Base (UTIME)<a class="headerlink" href="#unit-time-base-utime" title="Permalink to this heading">#</a></h3>
+<p>The <strong>Unit Time Base</strong> is responsible for issuing period interrupts to the CPU
+for velocity calculations. These interrupts are clocked by a 32-bit unit timer,
+and the frequency of interrupts can be manually configured. This functional
+unit can also be configured to capture the position counter, capture timer, and
+capture period values on interrupt. These values can then be used for QCAP
+velocity calculation.</p>
+<p><img alt="UTIME Block Diagram" src="../../_images/UTIME.png" /></p>
+</section>
+<section id="watchdog-timer-qwdog">
+<h3>Watchdog Timer (QWDOG)<a class="headerlink" href="#watchdog-timer-qwdog" title="Permalink to this heading">#</a></h3>
+<p>The eQEP module is able to detect potential stalls and issue fault flags using
+the integrated <strong>Watchdog Timer</strong>. A time-out duration value can be configured
+within the QWDOG. When no quadrature clock events are detected in a time period
+such that the watchdog timer exceeds the time-out duration, the watchdog will
+issue an interrupt flag.</p>
+<p><img alt="QWDOG Block Diagram" src="../../_images/QWDOG.png" /></p>
+</section>
+<section id="quadrature-mode-adapter-qma">
+<h3>Quadrature Mode Adapter (QMA)<a class="headerlink" href="#quadrature-mode-adapter-qma" title="Permalink to this heading">#</a></h3>
+<div class="admonition-qma-only-on-eqep-type-1-and-above admonition">
+<p class="admonition-title">QMA Only on eQEP Type 1 and Above</p>
+<p>The Quadrature Mode Adapter unit is available only on device families with eQEP
+Type 1 or later. Refer to the
+<a class="reference external" href="https://www.ti.com/lit/spru566">C2000 Real-Time Control MCU Peripherals Reference Guide</a>
+for more information on eQEP types.</p>
+</div>
+<p>The eQEP module features two additional modes of operation which support direct
+interfacing with CW/CCW signals. The <strong>Quadrature Mode Adapter</strong> enables
+support for these modes and alters the QEPA and QEPB inputs before they are fed
+into the rest of the eQEP module. The QMA module receives CW/CCW signals and
+converts them to clock and direction signals which can then be used by the eQEP
+module. It also incorporates error detection logic to detect illegal
+transitions on the QEPA and QEPB inputs.</p>
+<p><img alt="QMA Block Diagram" src="../../_images/QMA.png" /></p>
+<p>By default (QMA Mode 0), the QMA is bypassed and QEPA and QEPB have a direct
+connection from the pins to the eQEP module. To utilize the Quadrature Mode
+Adapter unit, QMA Mode 1 or QMA Mode 2 must be enabled and the Quadrature
+Decoder Unit configured to function in Direction-Count mode.</p>
+<p>QMA Mode 1 is intended for use when the eQEP is receiving active-low CW/CCW
+signals. QMA Mode 2 is intended for use when the eQEP is receiving active-high
+CW/CCW signals.</p>
+</section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<section id="eqep-related-collateral">
+<h3>EQEP Related Collateral<a class="headerlink" href="#eqep-related-collateral" title="Permalink to this heading">#</a></h3>
+<p><strong>Foundational</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/video/6308652805112">Interfacing with Quadrature Encoders</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/eb/slyy211/slyy211.pdf">Real-Time Control Reference Guide</a></p></li>
+</ul>
+<p><strong>Getting Started</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="www.ti.com/lit/SPRAC77">C2000™ Position Manager PTO API Reference Guide Application Report</a></p></li>
+</ul>
+<p><strong>Expert</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ti.com/lit/SPRABX2">CW/CCW Support on the C2000 eQEP Module Application Report</a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="c2000_enhanced_capture_module.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Enhanced Capture Module (eCAP)</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_sigma_delta_filter.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Sigma Delta Filter Module (SDFM)</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Enhanced Quadrature Encoder Pulse (eQEP)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-an-incremental-quadrature-encoder">
+   What is an Incremental Quadrature Encoder?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-is-direction-determined-from-quadrature-signals">
+     How is direction determined from quadrature signals?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-is-angular-position-and-velocity-determined-from-quadrature-signals">
+     How is angular position and velocity determined from quadrature signals?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applications-of-the-eqep-module">
+     Applications of the eQEP Module
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eqep-block-diagram">
+     eQEP Block Diagram
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eqep-functional-units">
+     eQEP Functional Units
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gpio-mux-input-qualification">
+       GPIO MUX Input Qualification
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#quadrature-decoder-unit-qdu">
+       Quadrature Decoder Unit (QDU)
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#position-counter-and-control-unit-pccu">
+     Position Counter and Control Unit (PCCU)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#quadrature-edge-capture-unit-qcap">
+       Quadrature Edge-Capture Unit (QCAP)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#unit-time-base-utime">
+       Unit Time Base (UTIME)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#watchdog-timer-qwdog">
+       Watchdog Timer (QWDOG)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#quadrature-mode-adapter-qma">
+       Quadrature Mode Adapter (QMA)
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#resources">
+     Resources
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#eqep-related-collateral">
+       EQEP Related Collateral
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

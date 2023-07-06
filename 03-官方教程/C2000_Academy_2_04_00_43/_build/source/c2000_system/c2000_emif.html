@@ -1,0 +1,548 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>External Memory Interface (EMIF) &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_system/c2000_emif';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_system/c2000_emif.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Flash Configuration and Memory Performance" href="c2000_flash.html" />
+    <link rel="prev" title="Memory Controller" href="c2000_memory.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="external-memory-interface-emif">
+<h1>External Memory Interface (EMIF)<a class="headerlink" href="#external-memory-interface-emif" title="Permalink to this heading">#</a></h1>
+<p>When an application requires more memory than what is available on-chip, the
+EMIF controller can be used to connect to external memory devices. It
+provides a means for the CPU, DMA, and CLA to connect to synchronous
+(SDRAM) and asynchronous (SRAM, NOR Flash) memories. EMIF can also be
+used to interface with FPGAs. Note that EMIF is a different peripheral
+compared to EPI and XINTF that are featured on some older C2000 devices.</p>
+<p>Devices that feature dual-core architecture support two EMIF modules
+(EMIF1 and EMIF2) in order to have a dedicated EMIF for each CPU
+subsystem. Both modules are identical but have different address/data-bus
+sizes. EMIF1 is shared between the CPU1 and CPU2, whereas EMIF2 is
+dedicated to the CPU1 subsystem. Either CPU can claim the controller
+ownership for EMIF1 by configuring the EMIF1MSEL register. On
+devices with two EMIF modules, both can be used in parallel, with
+some constraints. The EMIF modules contain Address, Data, Clock,
+Chip-select (CS) and Read/Write signals.</p>
+<p>To summarize, the F2837xD and F2838x devices include two EMIFs:</p>
+<ul class="simple">
+<li><p>EMIF1 - 16/32-bit interface that can be assigned to CPU1 or CPU2</p></li>
+<li><p>EMIF2 - 16-bit interface dedicated to CPU1</p></li>
+</ul>
+<section id="emif-features">
+<h2>EMIF features<a class="headerlink" href="#emif-features" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Each EMIF supports SRAM or SDRAM interface.</p></li>
+<li><p>EMIF1 supports 32-bit data bus whereas EMIF2 supports 16-bit
+data bus (max). Note that the upper 16-bits (31:16) of EMIF1
+data bus is multiplexed with the EMIF2 data bus (15:0).</p></li>
+<li><p>Memory protection logic to protect the data from getting corrupted
+by other controllers.</p></li>
+<li><p>Support of multiplexing the SRAM and SDRAM accesses.</p></li>
+<li><p>Memory interface supports contiguous memory access independent of
+data bus width, thus enabling code execution directly from SRAM.</p></li>
+<li><p>Each EMIF module has a finite number of address pins available for encoding.</p></li>
+<li><p>Support for multiple Chip-select (CS) signals.</p></li>
+<li><p>Each CS has an independent set of registers that must be configured
+before accessing the attached memory.</p></li>
+<li><p>Each CS signal is assigned to a bounded range of 16-bit word addresses
+that cannot be changed and will automatically assert during read and
+write operations to that address space.</p></li>
+<li><p>Each CS space supports only one type of interface (asynchronous or synchronous)</p></li>
+</ul>
+</section>
+<section id="memory-protection">
+<h2>Memory Protection<a class="headerlink" href="#memory-protection" title="Permalink to this heading">#</a></h2>
+<p><b>EMIF1</b>: Once controller ownership is grabbed by a CPUx subsystem, user
+can further enable/disable following accesses by configuring EMIF1ACCPROT
+register.</p>
+<ul class="simple">
+<li><p>CPU_FETCH_PROT: Disables CPU fetch from external memory if set to ‘1’.</p></li>
+<li><p>CPU_WR_PROT     : Disables CPU writes to external memory if set to ‘1’.</p></li>
+<li><p>DMA_WR_PROT    : Disables DMA writes to external memory if set to ‘1’.</p></li>
+</ul>
+<p><b>EMIF2</b>: EMIF2 is only accessible by CPU1 subsystem (CPU1/CPU1.CLA1).
+User can further enable/disable following access by configuring EMIF2ACCPROT
+register.</p>
+<ul class="simple">
+<li><p>CPU_FETCH_PROT: Disables CPU fetch from external memory if set to ‘1’.</p></li>
+<li><p>CPU_WR_PROT     : Disables CPU writes to external memory if set to ‘1’.</p></li>
+</ul>
+</section>
+<section id="asynchronous-sram-and-nor-flash-memory-support">
+<h2>Asynchronous (SRAM and NOR Flash) Memory Support<a class="headerlink" href="#asynchronous-sram-and-nor-flash-memory-support" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>EMIF1 supports 32-bit data bus. EMIF2 supports only 16-bit data bus.</p></li>
+<li><p>EMIF1 supports up to 3 -CS signals (-CS2, -CS3 &amp; -CS4) and EMIF2
+supports 1 (-CS2).</p></li>
+<li><p>Address on A[x:0] is always 32-bit address. BA[1:0] are used for
+byte/16-bit address.</p></li>
+<li><p>Including Bank address (BA[1:0]), EMIF1 can support up to 22 address
+lines and EMIF2, up to 13 address lines.</p></li>
+<li><p>Programmable read and write cycle timings. Each CS has dedicated
+configuration registers and hence can have different configurations
+for SETUP/STROBE/HOLD timings.</p></li>
+<li><p>Zero turnaround time between “WR to WR” and “RD to RD” for same
+CSx and 1 cycle turnaround for different CSx.</p></li>
+<li><p>Configurable memory size (8-bit/16-bit/32-bit).</p></li>
+<li><p>External “Wait” input for slower memories. Extended Wait option with
+programmable timeout</p></li>
+<li><p>Supports “Normal Strobe Mode” as well as “Select Strobe Mode”
+(CSx toggles as strobe).</p></li>
+<li><p>Supports program execution as well as data access from each CPU
+(CPU1.CLA1 has only data access - no execution).</p></li>
+<li><p>Supports for up to 200 MHz EMIF CLK (Full Speed).</p></li>
+</ul>
+</section>
+<section id="synchronous-sdram-memory-support">
+<h2>Synchronous (SDRAM) Memory Support<a class="headerlink" href="#synchronous-sdram-memory-support" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>EMIF1 supports 32-bit data bus. EMIF2 supports only 16-bit data bus.</p></li>
+<li><p>Support of 1 CSx (-CS0) on each EMIF.</p></li>
+<li><p>EMIF1 can support up to 13 address lines and EMIF2, up to 12 address lines.</p></li>
+<li><p>One, two, and four banks of SDRAM</p></li>
+<li><p>Devices with eight, nine, ten, and eleven column address</p></li>
+<li><p>Supports CAS latency of 2 or 3 clock cycles (configurable).</p></li>
+<li><p>Supports up to 100 MHz operations.</p></li>
+<li><p>Configurable memory size (8-bit/16-bit/32-bit).</p></li>
+<li><p>Provides flexibility through programmable parameters such as the refresh
+rate, CAS latency, and many other SDRAM timings.</p></li>
+<li><p>Supports only data access from CPUx/CPU1.CLA1.</p></li>
+<li><p>Self-refresh and power-down modes</p></li>
+<li><p>POWERDOWN (pre-charged powerdown) command which can be used for low
+power mode.</p></li>
+</ul>
+<p><img alt="EMIF Signals" src="../../_images/emif_signals.png" /></p>
+</section>
+<section id="configurations-for-emif">
+<h2>Configurations for EMIF<a class="headerlink" href="#configurations-for-emif" title="Permalink to this heading">#</a></h2>
+<p><img alt="EMIF Configurations" src="../../_images/emif_configs.png" /></p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>In the figure above, the
+maximum address width on EMIF2 is 12-bit for F28379D and 13-bit for F2838xD</p>
+</div>
+</section>
+<section id="emif-performance">
+<h2>EMIF Performance<a class="headerlink" href="#emif-performance" title="Permalink to this heading">#</a></h2>
+<p>The content below assumes a SYSCLK of 200MHz</p>
+<p><img alt="CPU cycles based on Memory and Access Type" src="../../_images/emif_performance.png" /></p>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A ‘word’ can be a 16-or 32-bit access</p></li>
+<li><p>ASRAM assumed to have ta(A) of 10 or 12 ns (access time)</p>
+<ul>
+<li><p>ASRAM read setup/strobe/hold timings are 1/4/1, add 2 cycles bus start, 1 cycle data latency to CPU; 9 cycles
+(successive reads that are back-to-back do not incur the 1 cycle data latency, so 8 * N+1 cycles for N repeat transfers)</p></li>
+<li><p>ASRAM write setup/strobe/hold timings are 1/1/1, add 2 cycles bus start ; 5 cycles</p></li>
+<li><p>ASRAM read assumes ta(OE); 5 ns (This is typical for 10 or 12 ns ASRAM)</p></li>
+<li><p>DRAM read, 100 MHz DRAM ; 14 cycles</p></li>
+<li><p>DRAM write, 100 MHz DRAM; 9 cycles</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<section id="emif-related-collateral">
+<h3>EMIF Related Collateral<a class="headerlink" href="#emif-related-collateral" title="Permalink to this heading">#</a></h3>
+<p><strong>Getting Started</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ti.com/lit/SPRAC96">Design and Usage Guidelines for the C2000 External Memory Interface (EMIF) Application Report</a> - Only applicable to: F2807x, F2837xD, F2837xS, F2838x</p></li>
+</ul>
+<p><strong>Expert</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/lit/spraby4">Accessing External SDRAM on the TMS320F2837x/2807x Microcontrollers Using C/C++ Application Report</a> - Only applicable to: F2807x, F2837xD, F2837xS, F2838x</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="c2000_memory.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Memory Controller</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_flash.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Flash Configuration and Memory Performance</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#emif-features">
+   EMIF features
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#memory-protection">
+   Memory Protection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#asynchronous-sram-and-nor-flash-memory-support">
+   Asynchronous (SRAM and NOR Flash) Memory Support
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#synchronous-sdram-memory-support">
+   Synchronous (SDRAM) Memory Support
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configurations-for-emif">
+   Configurations for EMIF
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#emif-performance">
+   EMIF Performance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notes">
+   Notes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#emif-related-collateral">
+     EMIF Related Collateral
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,245 @@
+# Interprocessor Communications (IPC)
+
+The Inter-Processor Communications (IPC) module allows communication between two
+CPU subsystems(ex. CPU1 and CPU2).
+
+```{admonition} Note: 
+This module is only applicable to **F2837xD** and the **F2838xD**
+device families. The F2837xD device family has CPU1-CPU2 communication. The
+F2838xD device family has CPU1-CPU2, CM-CPU1, and CM-CPU2 communication (CM 
+here means Connectivity Manager).
+```
+
+## IPC Features
+
+Allows communications between the two CPU subsystems:
+ * Message RAMs
+ * IPC flags and interrupts
+ * IPC command registers
+ * Flash pump semaphore
+ * Clock configuration semaphore
+ * Free-running counter
+
+All IPC features are independent of each other
+
+## IPC Global Shared RAM and Message RAM
+
+### Global Shared RAM
+
+* Device contains up to 16 blocks of global shared RAM (Blocks named GS0 –
+  GS15)
+* Each block can be configured to be used by CPU1 or CPU2 (Selected by
+  MemCfgRegs.GSxMSEL register)
+* Individual memory blocks can be shared between the CPU and DMA
+
+![Global Shared RAM](images/ipc/global_shared_ram.png)
+
+
+**Note:** Register lock protected
+
+There are up to 16 blocks of shared RAM. These shared RAM
+blocks are typically used by the application, but can also be used for
+transferring messages and data.
+
+Each block can individually be owned by either CPU1 or CPU2.
+
+CPU1 core ownership: At reset, CPU1 owns all of the shared RAM blocks. In this
+configuration CPU1 core can freely use the memory blocks. CPU1 can read, write
+or execute from the block and CPU1.DMA can read or write.
+
+On the CPU2 core, CPU2 and CPU2.DMA can only read from these blocks. Blocks
+owned by the CPU1 core can be used by the CPU1 to send CPU2 messages. This is
+referred to as “C1toC2”.
+
+CPU2 core ownership: After reset, the CPU1 application can assign ownership of
+blocks to the CPU2 subsystem. In this configuration, CPU2 core can freely use
+the blocks. CPU2 can read, write or execute from the block and the CPU2.DMA can
+read or write. CPU1 core, however, can only read from the block. Blocks owned by
+CPU2 core can be used to send messages from the CPU2 to CPU1. This
+is referred to as “C2toC1”.
+
+### IPC Message RAM
+
+Unlike the shared RAM blocks, message RAM blocks provide communication in one
+direction only and cannot be reconfigured.
+   * Device contains 2 blocks of Message RAM
+   * Each block is always enabled and the configuration is fixed
+   * Used to transfer messages or data between two CPU subsystems
+
+<u>Message RAM for CPU1 and CPU2</u>
+
+The first message RAM is the CPU1 to CPU2. This block can be read or written to
+by the CPU1 and read by the CPU2.
+
+The second message RAM is the CPU2 to CPU1. This block can be read or written to
+by CPU2 and read by CPU1. After the sending CPU writes a message it can inform the
+receiver CPU that it is available through an interrupt or flag.
+
+![IPC Message RAM](images/ipc/IPC_message_ram.png)
+
+<u>Message RAM for CPU1 and CM on F2838xD</u>
+
+Similar to the CPU1 and CPU2 message RAM blocks, the first message RAM allows
+CPU1 to write a message to be sent to CM and the second RAM block allows the CM
+to send data to CPU1.
+
+![IPC Message RAM CM and CPU1](images/ipc/IPC_message_ram_CM_CPU1.png)
+
+<u>Message RAM for CPU2 and CM on F2838xD</u>
+
+Similar to the CPU1 and CPU2 message RAM blocks, the first message RAM allows
+CPU2 to write a message to be sent to CM and the second RAM block allows the CM
+to send data to CPU2.
+
+![IPC Message RAM CM and CPU2](images/ipc/IPC_message_ram_CM_CPU2.png)
+
+
+## IPC Message Registers
+
+* Provides very simple and flexible messaging
+
+* Dedicated registers mapped to both CPU’s
+
+![IPC Message Registers](images/ipc/IPC_message_registers.png)
+
+
+* The definition (what the register content means) is up to the application
+  software
+
+* TI’s IPC-Lite drivers use the IPC message registers
+
+
+## Interrupts and Flags
+
+### IPC Flags and Interrupts
+
+* CPU1 to CPU2 / CPU2 to CPU1: 32 flags with 4 interrupts (IPC0-3)
+
+<u>For F2838xD:</u>
+* CPU1 to CM / CM to CPU1 : 32 flags with 7 interrupts (IPC0-7)
+* CPU2 to CM / CM to CPU2 : 32 flags with 7 interrupts (IPC0-7)
+
+![IPC Flags and Interrupts](images/ipc/requesting_receiving_cpu.png)
+
+When the sending CPU wants to inform the receiver that a message is ready, it
+can make use of an interrupt or flag. There are identical IPC interrupt and
+flag resources on all cores.
+
+4 Interrupts: There are 4 interrupts that CPU1 can send to CPU2 (and vice-versa)
+through the Peripheral Interrupt Expansion (PIE) module. Each of the interrupts
+has a dedicated vector within the PIE, IPC0 – IPC3.
+
+28 Flags: In addition, there are 28 flags available for CPU1 and CPU2. These
+flags can be used for messages that are not time critical or they can be used
+to send status back to originating processor. The flags and interrupts can be
+used however the application sees fit and are not tied to a particular operation
+in hardware.
+
+### Messaging with IPC Flags and Interrupts: CPU1-CPU2
+
+![IPC Flags](images/ipc/IPC_flags.png)
+
+## IPC Data Transfer
+
+Basic option - no software drivers needed and easy to use!
+
+* Use the Message RAMs or global shared RAMs to transfer data between processors
+  at a known address
+
+* Use the IPC flag registers to tell the other processor that the data is ready
+
+![IPC Data Transfer](images/ipc/IPC_data_transfer.png)
+
+At the most basic level, the application does not need any separate software
+drivers to communicate between processors. It can utilize the message RAM’s and
+shared RAM blocks to pass data between processors at a fixed address known to
+both processors. Then the sending processor can use the IPC flag registers
+merely to flag to the receiving processor that the data is ready. Once the
+receiving processor has grabbed the data, it will then acknowledge the
+corresponding IPC flag to indicate that it is ready for more messages.
+
+As an example (similar situation with CPU1-CM and CPU2-CM):
+
+* First, CPU1 would write a message to the CPU2 in C1toC2 MSG RAM.
+* Then the CPU1 would write a 1 to the appropriate flag bit in the
+ C1TOC2IPCSET register. This sets the C1TOC2IPCFLG, which also sets the
+ C1TOC2IPCSTS register on CPU2, letting CPU2 know that a message is
+ available.
+* Then CPU2 sees that a bit in the C1TOC2IPCSTS register is set.
+* Next CPU2 reads the message from the C1toC2 MSG RAM.
+* Then CPU2 writes a 1 to the same bit in the C1TOC2IPCACK register to acknowledge
+ that it has received the message. This subsequently clears the flag bit in
+ C1TOC2IPCFLG and C1TOC2IPCSTS.
+* CPU1 can then send more messages using that particular flag bit.
+
+## IPC Software Solutions
+
+There are three options to use the IPC on the device.
+
+### Basic option:
+
+A very simple option that does not require any drivers. This option only
+requires IPC registers to implement very simple flagging of messages passed
+between processors.
+
+### Driver options:
+
+If the application code needs a set of basic IPC driver functions for reading or
+writing data, setting/clearing bits, and function calls, then there are 2 IPC
+software driver solutions provided by TI.
+
+## IPC-Lite
+
+* Only uses the IPC registers. No additional memory such as message RAM or
+  shared RAM is needed.
+
+* Only one IPC ISR can be used at a time.
+
+* Can only process one message at a time.
+
+* CPU1 can use IPC lite to communicate with the CPU2 boot ROM. The CPU2 boot ROM
+  processes basic IPC read, write, bit manipulation, function call, and branch
+  commands. Main IPC Software API Driver: (This is a more feature filled IPC
+  solution)
+
+* Allows application to queue up to 4 messages prior to processing
+  (configurable).
+
+* Allows application to use multiple IPC ISR’s at a time.
+
+* Requires additional setup in application code prior to use.
+
+## IPC Software Solutions Summary
+
+### Basic Option
+
+   * No software drivers needed
+
+   * Uses IPC registers only (simple message passing)
+
+### IPC-Lite Software API Driver
+
+   * Uses IPC registers only (no memory used)
+
+   * Limited to 1 IPC interrupt at a time
+
+   * Limited to 1 command/message at a time
+
+   * CPU1 can use IPC-Lite to communicate with CPU2 boot ROM
+
+### Main IPC Software API Driver
+
+   * Uses circular buffer message RAMs
+
+   * Can queue up to 4 messages prior to processing (configurable)
+
+   * Can use multiple IPC ISRs at a time
+
+   * Requires additional setup in application code prior to use
+
+------------------------------------------
+
+```{admonition} Feedback
+Please provide any feedback you may have about the content within C2000 Academy to: <c2000_academy_feedback@list.ti.com>
+
+```

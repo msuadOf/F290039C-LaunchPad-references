@@ -1,0 +1,18 @@
+PGA Related Collateral
+====================================
+
+**Foundational**
+
+- `An Engineer's Guide to Designing with Precision Amplifiers <https://www.ti.com/lit/eb/slyy209/slyy209.pdf>`_ - Only applicable to: F28004x, F28P55x
+
+**Getting Started**
+
+- `Inverting op amp with non-inverting positive reference voltage circuit Application Report <https://www.ti.com/lit/an/sboa264a/sboa264a.pdf>`_ - Only applicable to: F28004x, F28P55x
+
+- `Non-inverting op amp with inverting positive reference voltage circuit Application Report <https://www.ti.com/lit/an/sboa262a/sboa262a.pdf>`_ - Only applicable to: F28004x, F28P55x
+
+**Expert**
+
+- `AN-20 An Applications Guide for Op Amps Application Report <https://www.ti.com/lit/an/snoa621c/snoa621c.pdf>`_ - Only applicable to: F28004x, F28P55x
+
+- `Using An Op Amp for High-Side Current Sensing Application Report <https://www.ti.com/lit/an/sboa347a/sboa347a.pdf>`_ - Only applicable to: F28004x, F28P55x

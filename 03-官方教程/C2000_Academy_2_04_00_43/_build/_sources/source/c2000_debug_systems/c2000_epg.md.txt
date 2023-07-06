@@ -1,0 +1,65 @@
+# Embedded Pulse Generator (EPG)
+
+C2000 real-time microcontrollers architecture includes an embedded 
+customizable pattern and clock generator that can be used by the 
+application to test in various scenarios.
+
+```{admonition} EPG Module
+Not all C2000 devices have an EPG module. Refer to the 
+<i>[Peripheral Reference Guide](https://www.ti.com/lit/spru566)</i>
+for a list of supported modules on your device.
+```
+## What is Embedded Pulse Generator (EPG)
+
+The Embedded Pattern Generator (EPG) module is a customizable pattern and clock
+generator that could serve many test and application scenarios that require a
+simple pattern generator or a periodic clock generator. The EPG module can also
+be used to capture an incoming serial stream of data.
+
+The EPG module provides the ability to design new clock generators, pulse width
+modulators (PWMs), serial communication modules, and so forth.
+
+The EPG module can be used as an independent peripheral or it can be used along
+side other peripherals such as CAN. When used alongside other peripherals, such
+as CAN, EPG can provide signal patterns for testing and running diagnostic
+inside the C2000™ device.
+
+## Clock Generator
+
+The EPG can be used to generate clock signals. These clock signals can be used
+internally by the EPG (the EPG SIGGENx modules), or be exported out of the EPG
+through EPGOUTx signals. If exported out of the EPG through the EPGOUTx
+signals, then these clock signals can be used by other peripherals through the
+XBARs or be sent out of the device through GPIOs.
+
+## Signal Generator
+
+EPG signal generators (SIGGENx) modules can generate or capture complex digital
+patterns. SIGGENx modules can be configured to many different modes
+(rotate right mode, shift right mode, and so forth). SIGGENx modules are
+clocked from the CLKGENx modules. Therefore, the CLKGENx modules must be
+configured.
+
+## Resources
+
+```{eval-rst}
+
+.. only:: internal_only
+
+  .. include:: ../../source/MARKDOWN_staging/epg_internal.rst
+
+```
+
+```{eval-rst}
+
+.. only:: external_only
+
+  .. include:: ../../source/MARKDOWN_staging/epg.rst
+
+```
+------------------------------------------
+
+```{admonition} Feedback
+Please provide any feedback you may have about the content within C2000 Academy to: <c2000_academy_feedback@list.ti.com>
+
+```

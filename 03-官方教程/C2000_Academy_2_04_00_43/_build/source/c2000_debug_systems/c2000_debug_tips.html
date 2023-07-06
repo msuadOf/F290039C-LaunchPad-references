@@ -1,0 +1,1081 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Debug Tips &amp; Tricks &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_debug_systems/c2000_debug_tips';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_debug_systems/c2000_debug_tips.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Embedded Pulse Generator (EPG)" href="c2000_epg.html" />
+    <link rel="prev" title="Embedded Real-time Analysis and Diagnostic (ERAD)" href="c2000_erad.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="debug-tips-tricks">
+<h1>Debug Tips &amp; Tricks<a class="headerlink" href="#debug-tips-tricks" title="Permalink to this heading">#</a></h1>
+<p>This module describes various topics related to debugging issues on the C2000 family of
+devices. Select the topic from the navigation pane on the right-side of the page.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="jtag-connectivity">
+<h1>JTAG Connectivity<a class="headerlink" href="#jtag-connectivity" title="Permalink to this heading">#</a></h1>
+<section id="device-enumerated-properly">
+<h2>Device enumerated properly<a class="headerlink" href="#device-enumerated-properly" title="Permalink to this heading">#</a></h2>
+<p>For the JTAG debug probe to communicate with the PC, the driver files need
+to be installed. This typically occurs co-incident to the installation
+of Code Composer Studio (CCS). To verify that the drivers are
+successfully installed, connect the PC to the JTAG debug probe and
+power up. Then go to
+<a class="reference external" href="https://support.microsoft.com/en-us/windows/open-device-manager-a7f2db46-faaf-24f0-8b7b-9e4a6032fc8c">Windows Device Manager</a> and locate the associated
+debug probe as shown below.</p>
+<p><img alt="Windows Device Manager" src="../../_images/c2000_win_devenum.png" /></p>
+</section>
+<section id="install-ftdi-device-driver">
+<h2>Install FTDI device driver<a class="headerlink" href="#install-ftdi-device-driver" title="Permalink to this heading">#</a></h2>
+<p>If debug probe is not showing up in the host PC/MAC system, download
+and install <a class="reference external" href="https://ftdichip.com/drivers/">
+FTDI Driver</a>. Typically this occurs with the installation of
+CCS.</p>
+</section>
+<section id="update-ti-emulation-software">
+<h2>Update TI Emulation Software<a class="headerlink" href="#update-ti-emulation-software" title="Permalink to this heading">#</a></h2>
+<p>Update TI Code Composer Emulation driver to the latest version. It
+can be done either going to CCS menu <strong>Help→Check for Updates</strong>
+or by downloading and installing <a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/xdsdebugprobes/emu_xds_software_package_download.html">TI XDS Emulation Software (EMUPack)</a> manually.</p>
+</section>
+<section id="debug-probe">
+<h2>Debug probe<a class="headerlink" href="#debug-probe" title="Permalink to this heading">#</a></h2>
+<p>If you are using a TI EVM, then you can use an onboard debug probe or
+external debug probe.</p>
+<ul class="simple">
+<li><p><b>Launchpad</b> : C2000 Launchpads have an xds100v2 or xds110
+debug probe. Make sure you are using the correct debug
+probe in the active target configuration file. Some of the
+launchpads (F280025C, F280049C, F280039C) use cJTAG mode in
+2-pin advanced mode. Check the target configuration file to
+match the setting with what is available on the board. Refer
+to the Launchpad’s user guide for detailed
+information</p></li>
+<li><p><b>controlCARD</b> : C2000 controlCARDs have an onboard xds100v2
+or xds110 debug probe. controlCARD also supports external
+debug probe - xds110, xds200, xds560v2. If you are using
+external debug probe then make sure the switch for debug
+probe on controlCARD are set appropriately.</p></li>
+<li><p><b>Custom Board</b> : If you are using a custom board with
+an external debug probe, then make sure debug probe selected
+in the target configuration file is the correct one. Based on
+drive strength of the board, you may need to adjust the JTAG
+clock. Refer to video on <a class="reference external" href="https://www.youtube.com/embed/mKxaztkCsYw">Experimenting with JTAG Clock Speed</a>.</p></li>
+</ul>
+</section>
+<section id="useful-links-for-debugging-jtag-connectivity">
+<h2>Useful Links for Debugging JTAG Connectivity:<a class="headerlink" href="#useful-links-for-debugging-jtag-connectivity" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/ccs_debugging_jtag_connectivity_issues.html">Debugging JTAG</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/spracf0">
+Application Note : C2000 MCU JTAG Connectivity Debug</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/tool/TMDSEMU110-U">
+TI XDS110 Debug Probe </a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/tool/TMDSEMU200-U">
+TI XDS200 Debug Probe </a></p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="compiling-and-building-the-application">
+<h1>Compiling and Building the application<a class="headerlink" href="#compiling-and-building-the-application" title="Permalink to this heading">#</a></h1>
+<section id="linker-error-program-does-not-fit">
+<h2>Linker Error - Program does not fit<a class="headerlink" href="#linker-error-program-does-not-fit" title="Permalink to this heading">#</a></h2>
+<p>As the scope of projects increase, and more code/variables are
+added to the project, the developer may encounter a linker error that
+the program does not fit into memory. Here are the steps to identify and
+resolve.</p>
+<ul class="simple">
+<li><p>Review the console output</p></li>
+<li><p>Identify the section which is not fitting in the supplied
+memory section</p></li>
+<li><p>Check which memory section has spare memory space and can be
+used</p></li>
+<li><p>Split the problematic section to multiple memory sections. The
+syntax to split the section to multiple memory sections is
+explained in
+<a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/sdto_cgt_Linker-Command-File-Primer.html#allocate-to-multiple-memory-ranges">TI Linker Command File Primer</a> page.</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ram-related-debug-tips">
+<h1>RAM related debug Tips<a class="headerlink" href="#ram-related-debug-tips" title="Permalink to this heading">#</a></h1>
+<p>In the case where there is seemingly not enough memory to store data,
+there are few ways to proceed. When this error appears after building
+the project, go to View &gt; Memory Allocation and then build the project
+to see a visualization of which RAM is not able to fit any more data
+or code. If there is a specific section in the linker file that does
+not have enough memory, then the section can have more RAM appended
+to it using the ‘|’ operator (i.e. “”.ebss : &gt;&gt; RAMLS5 | RAMGS0 | RAMGS1”).
+It is better to choose RAM units that are adjacent in their memory
+boundaries, this way the memory can be accessed directly in sequential order.</p>
+<p>In the case where there is a function that needs to span multiple RAM
+units, the following can be used:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">TI</span><span class="p">.</span><span class="n">ramfunc</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">LOAD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FLASH3</span><span class="p">,</span>
+<span class="w">              </span><span class="n">RUN</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="n">RAML0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">RAML1</span>
+<span class="w">              </span><span class="n">table</span><span class="p">(</span><span class="n">BINIT</span><span class="p">)</span>
+<span class="w">              </span><span class="n">PAGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">.</span><span class="n">binit</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="n">FLASH3</span>
+</pre></div>
+</div>
+<p>The “RUN &gt;&gt; “RAML0 | RAML1” will make sure the linker spans the function
+across the 2 RAM units.</p>
+<p>When copying functions or data from Flash to RAM, the .binit should be
+used in place of the memcpy function because memcpy operates on the
+assumption that there is a single contiguous memory space. Using
+.binit is more appropriate when copying functions because it is a
+boot table that runs before main as a predefine in the linker. If the
+function or data is needed before main can execute, using .binit makes
+it available. This is why it is required in the RTOS environment because
+main is not necessarily the first function that will execute.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="flash-related-debug-tips">
+<h1>Flash related debug Tips<a class="headerlink" href="#flash-related-debug-tips" title="Permalink to this heading">#</a></h1>
+<section id="steps-needed-to-run-the-code-from-flash">
+<h2>Steps needed to run the code from flash<a class="headerlink" href="#steps-needed-to-run-the-code-from-flash" title="Permalink to this heading">#</a></h2>
+<p>In order to convert a RAM based application to the flash based,
+the following steps are needed:</p>
+<ul class="simple">
+<li><p>Replace RAM linker cmd file with flash linker cmd file (these
+are available in C2000ware).</p></li>
+<li><p>If you need to modify the flash linker cmd files, make sure
+to map any initialized sections only to flash (as you can notice
+in the linker cmd files provided in C2000Ware).</p></li>
+<li><p>When the device is configured for boot to flash, bootROM will
+re-direct to the flash entry point location (defined as BEGIN in
+TI provided flash linker cmd files) at the end of boot code
+execution.  Make sure there is a branch instruction at flash
+entry point to the beginning of code execution.  C2000Ware
+examples use CodeStartBranch.asm file to accomplish this.  The
+code in this file is allocated to codestart section.  In the flash
+linker cmd file, you will notice that the codestart section is
+mapped to the flash entry point (and hence CodeStartBranch.asm is
+the first code that gets executed after the bootROM execution).<br />
+This code branches to _c_int00 routine, which initializes all the
+global variables and then re-directs to the application main.</p></li>
+<li><p>To achieve the best performance for flash execution, configure the
+flash wait-states as per the operating frequency (check datasheet)
+and enable prefetch/cache.  Note that any code that configures the
+flash control registers (Ex: Flash_initModule() in C2000Ware) must
+run from RAM.  Hence, the function that configures the flash
+wait-states and prefetch/cache should be copied to RAM before
+executing it.  This can be accomplished by assigning this function
+to .TI.ramfunc section and then copying it to RAM at runtime using
+memcpy() before executing it.  In the linker cmd file, this section
+should be mapped to flash for load and RAM for execution.  Please
+take a look at the flash based linker cmd files provided in C2000Ware.</p></li>
+<li><p>Make sure the boot mode pins are configured for flash boot.  This tells
+bootROM that it has to re-direct to the application programmed into the
+flash after boot code execution.</p></li>
+</ul>
+<p>C2000Ware example projects are provided with both RAM and Flash build
+configurations. To change the build configuration from RAM to Flash, users
+can import the project into CCS and right click on the project and
+select <strong>Build Configurations → Set Active → CPU1_FLASH</strong>. <br/></p>
+<p>By selecting this Flash configuration, users can notice that:</p>
+<ul class="simple">
+<li><p><b>_FLASH</b> symbol is defined in the “Predefined symbols”
+section under Project Build settings. This is used to define and
+execute any Flash-build specific code.</p></li>
+<li><p>Flash based linker command file is chosen for the application
+instead of a RAM based linker command file. Flash based linker command
+files are provided in C2000Ware for reference (Ex: XXX_FLASH_lnk_cpu1.cmd
+at C2000Ware_x_xx_xx_xx\device_support\XXX\common\cmd). Flash based
+linker command files will have codestart mapped to Flash entry point address.</p></li>
+<li><p>All the initialized sections are mapped to Flash memory in the Flash based
+linker command file.</p></li>
+<li><p>All the functions that need to execute from RAM (for initialization or
+0-wait performance purpose) are assigned to .TI.ramfunc section in the code.</p>
+<ul>
+<li><p>Ex: Flash_initModule() is assigned to .TI.ramfunc section. This Flash
+initialization routine (configures Flash wait-states, prefetch/cache mode,
+power etc.) must be executed from RAM.  If flash initialization routine
+is not executed, note that the flash performance will be poor.<br />
+<b>Reason</b>:  Flash accesses are not as fast as RAM accesses.  When
+CPU fetches/reads from RAM, there are no additional wait cycles required.<br />
+But, flash is not 0-wait memory.  It takes certain time to fetch/read
+from flash.  CPU is much faster than the flash and hence, CPU has to
+wait for few cycles (wait states) before it can get the required data
+from the flash after it (CPU) issues the flash address from which it
+needs the data.  As the frequency of the CPU increases compared to
+that of the flash, the number of wait-states that the CPU has to wait
+to get valid data from flash will increase.  Flash initialization routine
+configures these wait-states (along with other flash parameters).<br />
+Since this function configures the critical flash parameters, it should
+not be executed from the flash itself.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.TI.ramfunc</span></code> section is mapped to a Flash address for <b>Load</b> and a
+RAM address for <b>RUN</b> in the Flash based linker command file.</p></li>
+<li><p>All the sections mapped to Flash are aligned on a 128-bit boundary using
+ALIGN() directive in the Flash based linker command file.</p></li>
+<li><p><b>memcpy()</b> function is called in the application to copy the
+.TI.ramfunc content from Flash to RAM. memcpy() is called before executing
+any code that is assigned to .TI.ramfunc section.</p></li>
+<li><p>For EABI type executable: All uninitialized sections mapped to RAM are defined
+as NOINIT sections using the directive <code class="docutils literal notranslate"><span class="pre">type=NOINIT</span></code> in the linker cmd file.</p></li>
+<li><p>Note: During debug in CCS environment, if you need to place a breakpoint
+in the RAM space, you need to do it after copying the code from flash to RAM.<br />
+If you do it before the copy, the breakpoint insertion will be overwritten
+by the code copied via memcpy.</p></li>
+</ul>
+</section>
+<section id="other-debug-tips">
+<h2>Other debug tips:<a class="headerlink" href="#other-debug-tips" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p><b>Boot Pin</b> : To run the application in standalone mode, make sure to
+configure the boot mode pins for flash boot (please refer to TRM’s BootROM
+chapter for details).</p></li>
+<li><p>Please make sure that all the variables are initialized as needed in the
+application.  Using uninitialized variables sometimes causes garbage values
+to be used for them resulting in differences in the application behavior.</p></li>
+<li><p>If you still have issues running from flash in standalone mode (and if it
+works fine when debugger is connected):</p>
+<ul class="simple">
+<li><p><b>ECC</b>: Please make sure that ECC is programmed correctly for the flash image
+(Make sure that AutoEccGeneration in CCS Flash Plugin GUI or UniFlash
+GUI is left enabled - this is the default option).</p></li>
+<li><p><b>Watchdog Timer</b>: Disable watchdog in the f28x_codestartbranch.asm
+<code class="docutils literal notranslate"><span class="pre">WD_DISABLE</span>&#160; <span class="pre">.set</span>&#160; <span class="pre">1</span></code>
+This helps to avoid watchdog reset before reaching main().  If there are
+lot of global variables in the application, the cinit routine may take more
+time to initialize all of them before reaching main.  During this time,
+watchdog may expire and hence suggested to disable it.  You can enable it
+again in the main() as needed by your application.</p></li>
+<li><p>Please make sure that f28x_codestartbranch.asm file is included in your
+application and that the codestart is mapped to the flash entry point
+location (generally defined as BEGIN in TI provided linker CMD files)
+in the linker cmd file.</p></li>
+<li><p>Make sure that code_start (–entry_point=code_start) is added as the
+entry point in the project’s linker options.</p></li>
+</ul>
+<p><strong>Project build settings → Build → C2000 Linker → Advanced options
+→ Symbol Management → –entry_point:  code_start</strong></p>
+</li>
+</ul>
+</section>
+<section id="useful-links-for-debugging-flash-issues">
+<h2>Useful Links for Debugging Flash issues:<a class="headerlink" href="#useful-links-for-debugging-flash-issues" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://e2e.ti.com/f/1/t/878674">
+E2E Frequently Asked Question: - How to modify an application
+from RAM configuration to Flash configuration?
+</a></p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="compiler-related">
+<h1>Compiler Related<a class="headerlink" href="#compiler-related" title="Permalink to this heading">#</a></h1>
+<section id="atomic-access">
+<h2>Atomic Access<a class="headerlink" href="#atomic-access" title="Permalink to this heading">#</a></h2>
+<p>The C language does not have a keyword/construct for <code class="docutils literal notranslate"><span class="pre">atomic</span></code> operations.
+There is no guarantee that the compiler will generate a single atomic
+instruction for operations on any data type.</p>
+<p>For AND/OR/XOR etc… You could make use of a few compiler intrinsics
+that map directly to the assembly read-modify-write instructions
+Intrinsic functions like <code class="docutils literal notranslate"><span class="pre">__and</span></code>, <code class="docutils literal notranslate"><span class="pre">__or</span></code> and <code class="docutils literal notranslate"><span class="pre">__xor</span></code> are documented in
+<a class="reference external" href="https://www.ti.com/lit/SPRU514">Compiler Users’s Guide</a>.
+If you have a segment of code that needs to be atomic, then
+you need to disable and enable interrupts around the code.</p>
+<p>(There are intrinsics to do this  - documented in the same user’s guide).
+If the segment is in an ISR, then interrupts are automatically
+disabled when the interrupt is entered and remain so until they
+are reenabled by the application.</p>
+<p>From a C28x architecture standpoint:
+The pipeline is: F1, F2, D1, D2, R1, R2, E, W
+Once an instruction makes it to D2 (decode2) it will always run to completion.</p>
+<p>That is, when an interrupt comes in:</p>
+<ul class="simple">
+<li><p>Any opcode in D2 + continues through the pipeline.</p></li>
+<li><p>Any opcode in F1, F2, and D1 is dropped and re-fetched
+after the interrupt returns.</p></li>
+</ul>
+<p>This issue only applies to an access involving multiple opcodes.</p>
+<ul class="simple">
+<li><p>16-bit datatypes: load/store are one opcode - no issue.</p></li>
+<li><p>float32 datatypes: load/stores are one opcode - no issue.</p></li>
+<li><p>int32/uint32: it is possible this will be broken into two 16-bit
+accesses by the compiler. It is possible one can be in D2 while the
+other is in D1 when an interrupt is taken.</p></li>
+</ul>
+<p>There are two recommended approaches:</p>
+<ul class="simple">
+<li><p>Use an atomic compiler intrinsic if one is available.</p>
+<ul>
+<li><p>These are documented in the <a class="reference external" href="https://www.ti.com/lit/SPRU514">Compiler Users’s Guide</a>.
+The description will say <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">an</span> <span class="pre">atomic</span> <span class="pre">way</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Disable / enable interrupts around load/stores that must be atomic.
+There are intrinsics to assist:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">__disable_interrupts(</span> <span class="pre">);</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__enable_interrupts(</span> <span class="pre">);</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p><u>Additional notes:</u></p>
+<ul class="simple">
+<li><p>Atomic accesses within an ISR: By default, accesses within an
+ISR are atomic. The INTM bit is automatically set (disable
+interrupts) by the hardware during the context switch. The
+exception would be if the application re-enables interrupts
+within the ISR in order to nest interrupts.</p></li>
+<li><p>Examining assembly is possible, of course. However it also
+doesnot seem practical.</p></li>
+<li><p>It may make sense to group atomic accesses together, if possible.
+Or perhaps create a function to perform the sequence disable/access/enable.</p></li>
+<li><p>16-bit reads and writes are atomic.</p></li>
+<li><p>For other operations, from C source code, the only way to
+guarantee using the other atomic C28 instructions (ADD,
+ADDL, AND, OR, DEC, INC) for all compiler option combinations
+and all contexts is to use the intrinsics.</p></li>
+<li><p>For var16++, with some compiler options and surrounding context,
+the compiler will generate the INC instruction, however it is
+not guaranteed.</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="adc-debugging">
+<h1>ADC debugging<a class="headerlink" href="#adc-debugging" title="Permalink to this heading">#</a></h1>
+<section id="clocks">
+<h2>Clocks<a class="headerlink" href="#clocks" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><b>Symptoms</b></p>
+<ul>
+<li><p>ADCCLK too slow: Sampled waveform is different than expected (due to reduced sample rate)</p></li>
+<li><p>ADCCLK too fast: Distortion, linearity, and/or gain errors.</p></li>
+</ul>
+</li>
+<li><p>Note that the ADC can sometimes perform surprisingly well under nominal conditions
+with higher ADCCLK (say 100MHz instead of expected 50MHz) so the results may be more
+subtle than expected.</p></li>
+<li><p>SYSCLK too fast: Various strange behavior.  Device can be unreliable or give unexpected
+digital results.  S+H could be too short since it is clocked from SYSCLK.
+Can result in ADCCLK too fast (see above)</p></li>
+<li><p><b>Debug Actions</b></p>
+<ul>
+<li><p>Verify SYSCLK via XCLKOUT</p></li>
+<li><p>Some Launchpads don’t have correct GPIO for XCLKOUT; have used simple ePWM code in the
+past, but note that ePWM timebase has lots of potential dividers to account for.</p></li>
+<li><p>Verify ADCCLK via examining PRESCALE setting</p></li>
+<li><p>Verify the ADC sample rate directly by adding a large series resistor (say 10kohm)
+and then using a scope to examine the kick-back from each sample</p></li>
+<li><p>Debug enhancement for future: Add ADCCLK observability to XCLKOUT</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><b>Symptoms</b></p>
+<ul>
+<li><p>Floating reference in external reference mode: Max-scale or zero-scale conversions
+or just erratic/unexpected conversion results</p></li>
+<li><p>No reference in internal reference mode: Same as above.  Can occur if reference
+pins are ganged (say ADCA + ADCC) but customer only configures the reference
+that is disabled (need to configure both even if only using one of the ganged ADCs)</p></li>
+<li><p>Driving a voltage on VREFHI while also configuring for internal reference
+mode: Contention will shift ref voltage and reduce accuracy and cause distortion</p></li>
+<li><p>Inaccurate reference voltage: inaccurate conversion results (possible cause
+if in internal reference mode is missing/corrupt bandgap trim)</p></li>
+<li><p>Using VDDA as a reference: Noisy results, low accuracy</p></li>
+<li><p>Unstable reference driver: Very noisy results or very inaccurate conversions</p></li>
+<li><p>This can occur if the reference driver can’t handle the load capacitance or
+if the customer selects an uncompensated (not unity gain stable) op-amp,
+but then uses it as a voltage-follower.</p></li>
+</ul>
+</li>
+<li><p><b>Debug Actions</b></p>
+<ul>
+<li><p>Verify voltage on VREFHI pins (both presence and accuracy) using DMM</p></li>
+<li><p>Note 3.3V range internal reference will output 1.65V to the pin</p></li>
+<li><p>Verify that driver is adequate (in external reference mode) and external
+capacitor (should be uF range) is present and placed close to device</p></li>
+<li><p>Use <a class="reference external" href="https://training.ti.com/node/1139107">
+TI Training : Driving the reference input on a SAR ADC</a> to design
+reference. It should be using high bandwidth op-amp</p></li>
+<li><p>Note that op-amp stability / phase margin is critical and should be
+verified with SPICE simulation</p></li>
+<li><p>Verify no pin oscillations with oscilloscope</p></li>
+<li><p>Verify reference mode (internal / external) and range in internal
+reference mode (2.5V or 3.3V) in SW / expressions window</p></li>
+<li><p>Note: all ganged together ADCs may need to be configured even if not
+all ADCs are used (only one reference is not disabled by OTP
+loading into device configs)</p></li>
+<li><p>Verify bandgap trim is populated in expressions window</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="input-design">
+<h2>Input Design<a class="headerlink" href="#input-design" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><b>Symptoms</b></p>
+<ul>
+<li><p>Poor ADC driver settling (S+H too short and/or driver impedance
+too high and/or op-amp bandwidth too low): “memory cross-talk”
+(refer to <a class="reference external" href="https://www.ti.com/lit/an/spract6/spract6.pdf">Application Report : ADC Input Circuit Evaluation
+for C2000 MCUs</a>), distorted signal, poor accuracy (particularly
+gain error), and/or erratic conversion results.</p></li>
+<li><p>For near-minium S+H time, customer needs to be in the ballpark
+of op-amp with ~10MHz BW, series R of 10’s of ohms, and C on
+ADC pin of 100’s of pF</p></li>
+<li><p>Many issues arise from customer using voltage divider with
+high effective source impedance (R equivalent = R1 || R2)
+without an op-amp buffer</p></li>
+<li><p>Sampling too fast for charge-sharing input (refer to
+<a class="reference external" href="https://www.ti.com/lit/an/spracv0/spracv0.pdf">Application Report :
+Charge-Sharing Driving Circuits for C2000 ADCs</a>): Issues
+with signal distortion or gain error, sampled value depends
+on sample rate, oversampling makes results less accurate.</p></li>
+<li><p>For a charge-sharing input, the same rate is generally
+going to be closer to 10’s of kHz or less vs. high-speed
+sampling in the 100s of kHz</p></li>
+</ul>
+</li>
+<li><p><b>Debug Actions</b></p>
+<ul>
+<li><p>Analyze signal conditioning circuits to ensure appropriate settling.</p></li>
+<li><p>Quick check: “Choosing an acquisition window duration” formulas
+from TRM</p></li>
+<li><p>Better: Use following application reports to simulate input:</p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/an/spract6/spract6.pdf">ADC Input Circuit Evaluation for C2000 MCUs</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/an/spracv0/spracv0.pdf">Charge-Sharing Driving Circuits for C2000 ADCs</a></p></li>
+<li><p>For charge sharing inputs (inputs with a large capacitor)
+it may be worth getting the customer to measure the inrush
+current into the ADC pin (due to repeated charging of the
+S+H capacitor) to help them understand that the input is
+not high-impedance, but actually a switched-capacitor circuit.</p></li>
+<li><p>Also worth noting that high-speed sampling will result in
+an inrush current on the ADC pin that will be larger than
+the pin leakage specification.  This is expected and not
+indicative of a damaged ADC or the device not meeting the
+DS leakage spec’.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="over-under-voltage-on-input">
+<h2>Over/Under Voltage on Input<a class="headerlink" href="#over-under-voltage-on-input" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><b>Symptoms</b></p>
+<ul>
+<li><p>Input damaged by EOS: Reading stuck (at 0 or full-scale or some
+random code) on particular input, or full ADC does not operate</p></li>
+<li><p>One input experiencing over-or-under voltage while other inputs
+are converting: inaccurate or stuck-at readings, or cross-talk
+similar to “Memory cross-talk” (but note cause is not the same
+as memory cross-talk)</p></li>
+<li><p>Note: cross-talk or disturbance effect will be much greater
+if the over or under voltage is sampled</p></li>
+</ul>
+</li>
+<li><p><b>Debug Actions</b></p>
+<ul>
+<li><p>For pins suspected to be damaged by EOS, use a source meter
+(or a DMM + stimulus source) to measure the input/output current
+on the pin while the ADC is not converting.  Pins damaged by EOS
+(or ESD) will exhibit large leakage currents.</p></li>
+<li><p>Note: if the ADC is converting at a high sample rate the
+input may experience an in-rush current much larger than the
+specified pin leakage.  This is normal/expected operation and
+not indicative of damage (or the device not meeting DS) so
+perform the leakage test while the ADC is not converting.</p></li>
+<li><p>For strange / unexplained issues, asking the customer to confirm
+that other adc inputs are not exceeding VSSA to VDDA range can
+be a good question</p></li>
+<li><p><a class="reference external" href="https://training.ti.com/node/1139109">
+Application Report : Electrical overstress on data converters</a> is a
+good resource and also explains some strategies for protecting
+the ADC inputs from damage</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="adc-evaluation">
+<h2>ADC Evaluation<a class="headerlink" href="#adc-evaluation" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><b>Symptoms</b></p>
+<ul>
+<li><p>Using battery as signal source: poor DC code spread, lots of
+low-frequency noise, and other issues due to signal impedance
+since a batter has very low bandwidth (see “Input Design” above)</p></li>
+<li><p>Using a potentiometer to generate DC voltage for testing: Lots
+of issues due to high impedance (see “Input Design” above)</p></li>
+<li><p>Note: sampling slow and using a large capacitor “Charge-sharing”
+input design can work, see
+<a class="reference external" href="https://www.ti.com/lit/an/spracv0/spracv0.pdf">Application Report : Charge-Sharing Driving Circuits for
+C2000 ADCs</a></p></li>
+<li><p>Poor cabling (long cables and/or unshielded cables with no or
+poor return path): noisy results and distorted results due to
+high effective input impedance (see “Input Design” above)</p></li>
+<li><p>Leaving DMMs and/or scope probes connected during ADC testing
+can be a source of noise coupling into the ADC input</p></li>
+<li><p>Using an inappropriate or uncalibrated instrument to check ADC:
+poor noise and/or accuracy</p></li>
+<li><p>Oscilloscopes do not have good accuracy for checking DC voltages</p></li>
+<li><p>Common to see DAC on something like “Analog Discovery” board
+used as reference, but this has worse accuracy and resolution
+than C2000 ADC</p></li>
+<li><p>Cheap signal generators may only be 12-bit resolution</p></li>
+<li><p>Poor ADC performance on launchpad</p></li>
+<li><p>Launchpad does not have cap. footprints on the ADC inputs (and
+no shielded connections with ground-return connection like
+SMA/BNC) so getting good performance can be challenging</p></li>
+<li><p>Poor ADC performance on ControlCard</p></li>
+<li><p>ControlCard does have ADC input R-C footprints and should generally
+be possible to get OK performance, but may need to do some significant
+work to build signal conditioning circuits in the protoboard area and
+to clean-up ground paths (see ControlCard Analog Testing).</p></li>
+</ul>
+</li>
+<li><p><b>Debug Actions</b></p>
+<ul>
+<li><p>Check that an appropriate source is being used for ADC evaluation</p></li>
+<li><p>For AC testing: <a class="reference external" href="https://www.ti.com/tool/PSIEVM">PSIEVM</a> or instrument like
+Stanford research DS360 or Audio Precision 27xx</p></li>
+<li><p>For DC testing: function generator or DAC (check accuracy specifications)
+or PSI-EVM</p></li>
+<li><p>Check quality of cabling: use shielded cables or twisted cables where
+possible.  Ensure good ground return path.  Buffer locally on PCB if
+high speed or short S+H sampling is needed.</p></li>
+<li><p>Check if oscilloscope is being used as baseline for ADC DC readings
+(vertical resolution usually only ~8-10 bits and accuracy usually
+in the 10’s of mV / several % error)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="layout">
+<h2>Layout<a class="headerlink" href="#layout" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><b>Symptoms</b></p>
+<ul>
+<li><p>Noisy results, poor DC codespread, or random spikes in the ADC output:  This can
+be caused by poor layout of the ADC channels, VREFHI/LO, or analog power</p></li>
+</ul>
+</li>
+<li><p><b>Debug Actions</b></p>
+<ul>
+<li><p>Layout review</p></li>
+<li><p>Analog signals and signal conditioning circuits are physically separated
+from noisy circuits like comms, external memory, and power stage as much
+as possible</p></li>
+<li><p>Signals have good return paths</p>
+<ul>
+<li><p>Should have adjacent ground or power plane or adjacent routed ground return trace</p></li>
+<li><p>Includes analog signals like ADC inputs and VREFH/LO but also digital
+signals that could be noise generators</p></li>
+<li><p>Split in the ground plane can result in extremely bad return path if a
+critical signal is routed across the split</p></li>
+</ul>
+</li>
+<li><p>Capacitor(s) for VREFHI/LO is SMT and placed close to the pins</p></li>
+<li><p>Appropriate PCB stackup</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="profiling-application">
+<h1>Profiling application<a class="headerlink" href="#profiling-application" title="Permalink to this heading">#</a></h1>
+<p>There are a number of different ways to measure performance of devices.
+C2000 family of devices provide a quick and easy way to count cycles.
+The profile clock uses silicon resources to count CPU cycles between
+two breakpoints.</p>
+<section id="setup-and-read-cycle-count">
+<h2>Setup and Read Cycle Count<a class="headerlink" href="#setup-and-read-cycle-count" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>Set the breakpoints at beginning of the function and at the
+end of the function.</p></li>
+<li><p>Enable profile clock using CCS menu <strong>Run → Clock → Enable</strong> as shown
+in the image below</p>
+<p><img alt="Enable Cycles Count" src="../../_images/debug_profile_1.png" /></p>
+</li>
+<li><p>Run to first breakpoint of the code</p></li>
+<li><p>Clear the CPU cycles count by double-clicking the <code class="docutils literal notranslate"><span class="pre">clock</span></code> icon as
+shown in the image below
+<img alt="Clear Cycles Count" src="../../_images/debug_profile_2.png" /></p></li>
+<li><p>Run to the second breakpoint, and read the cycles count
+<img alt="Read Cycles Count" src="../../_images/debug_profile_3.png" /></p></li>
+</ul>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="c2000_erad.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Embedded Real-time Analysis and Diagnostic (ERAD)</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_epg.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Embedded Pulse Generator (EPG)</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Debug Tips &amp; Tricks
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jtag-connectivity">
+   JTAG Connectivity
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#device-enumerated-properly">
+     Device enumerated properly
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-ftdi-device-driver">
+     Install FTDI device driver
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#update-ti-emulation-software">
+     Update TI Emulation Software
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debug-probe">
+     Debug probe
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#useful-links-for-debugging-jtag-connectivity">
+     Useful Links for Debugging JTAG Connectivity:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compiling-and-building-the-application">
+   Compiling and Building the application
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linker-error-program-does-not-fit">
+     Linker Error - Program does not fit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ram-related-debug-tips">
+   RAM related debug Tips
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flash-related-debug-tips">
+   Flash related debug Tips
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#steps-needed-to-run-the-code-from-flash">
+     Steps needed to run the code from flash
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-debug-tips">
+     Other debug tips:
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#useful-links-for-debugging-flash-issues">
+     Useful Links for Debugging Flash issues:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compiler-related">
+   Compiler Related
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#atomic-access">
+     Atomic Access
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adc-debugging">
+   ADC debugging
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clocks">
+     Clocks
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reference">
+     Reference
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#input-design">
+     Input Design
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#over-under-voltage-on-input">
+     Over/Under Voltage on Input
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adc-evaluation">
+     ADC Evaluation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#layout">
+     Layout
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#profiling-application">
+   Profiling application
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setup-and-read-cycle-count">
+     Setup and Read Cycle Count
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

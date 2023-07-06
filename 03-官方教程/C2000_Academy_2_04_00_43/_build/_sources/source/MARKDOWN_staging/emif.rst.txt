@@ -1,0 +1,10 @@
+EMIF Related Collateral
+====================================
+
+**Getting Started**
+
+- `Design and Usage Guidelines for the C2000 External Memory Interface (EMIF) Application Report <https://ti.com/lit/SPRAC96>`_ - Only applicable to: F2807x, F2837xD, F2837xS, F2838x
+
+**Expert**
+
+- `Accessing External SDRAM on the TMS320F2837x/2807x Microcontrollers Using C/C++ Application Report <https://www.ti.com/lit/spraby4>`_ - Only applicable to: F2807x, F2837xD, F2837xS, F2838x

@@ -1,0 +1,668 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Interrupts &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_system/c2000_interrupt';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_system/c2000_interrupt.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CPU Timers" href="c2000_timers.html" />
+    <link rel="prev" title="Reset and Boot Process" href="c2000_boot.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="interrupts">
+<h1>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this heading">#</a></h1>
+<p>An interrupt is a response by the processor to an event that needs attention.
+The processor executes instructions that are defined within the interrupt
+service routine (ISR) as soon as is capable, and then goes back to normal
+operational tasks. Unlike idle loops where code waits for an event to occur,
+interrupts provide the opportunity to have non-idle code loops that execute
+based on the CPU’s availability and priority of tasks.</p>
+<section id="interrupt-architecture-within-c2000-devices">
+<h2>Interrupt Architecture within C2000 devices<a class="headerlink" href="#interrupt-architecture-within-c2000-devices" title="Permalink to this heading">#</a></h2>
+<p>Refer to the ‘Device Interrupt Architecture’ figure of the device’s Technical
+Reference Manual (TRM) for a visual representation of the interrupt
+architecture described below.</p>
+<p>The internal interrupt sources include the general purpose timers 0, 1, and 2,
+and all of the peripherals on the device.</p>
+<p>External interrupt sources include the five external interrupt lines. From the
+Input X-BAR, INPUT4 maps to XINT1, INPUT5 maps to XINT2, INPUT6 maps to XINT3,
+INPUT13 maps to XINT4, and INPUT14 maps to XINT5.</p>
+<p>The Peripheral Interrupt Expansion block, known as the PIE block, is used to
+expand the core interrupt capability. Timer 0 is directly connected to the
+PIE block as well as the WAKEINT signal from the Watchdog module. For dual core
+devices, each core has its own
+PIE block and the XINTx signals are shared between the two cores as well as the
+peripheral interrupts, and inter-processor (IPC) signals.</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>On the F2838x family of devices, CM_STATUS (CPU1 only), SYS_ERR, and
+CPUx.CRC flags are also mapped to the PIE block</p>
+</div>
+<p>The core has 14 interrupt lines (for dual core devices, each core has its own
+set of 14 interrupt lines). Interrupts 1-12 come from the PIE block, interrupt
+13 is mapped to Timer 1 and interrupt 14 is mapped to Timer 2. The NMI module
+is directly connected to the NMI interrupt which is mapped to the core.</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>ERAD is directly connected to RTOSINT for the following device families:</p>
+<ul class="simple">
+<li><p>F28004x</p></li>
+<li><p>F28002x</p></li>
+<li><p>F28003x</p></li>
+<li><p>F280013x</p></li>
+<li><p>F280015x</p></li>
+</ul>
+</div>
+</section>
+<section id="peripheral-interrupt-expansion-pie">
+<h2>Peripheral Interrupt Expansion (PIE)<a class="headerlink" href="#peripheral-interrupt-expansion-pie" title="Permalink to this heading">#</a></h2>
+<p><img alt="Peripheral Interrupt Expansion" src="../../_images/PIE.png" /></p>
+<p>A Peripheral Interrupt Expansion (PIE) module multiplexes up to sixteen
+peripheral interrupts into each of the twelve CPU interrupt lines, further
+expanding support for up to 192 peripheral interrupt signals.</p>
+<p>The PIE module also expands the interrupt vector table, allowing each unique
+interrupt signal to have its own interrupt service routine (ISR), permitting
+the CPU to support a large number of peripherals.</p>
+<p>The PIE block consists of 12 groups. Within each group, there are sixteen
+interrupt sources. Each group has a PIE interrupt enable register and a PIE
+interrupt flag register.</p>
+<p>Any interrupt lines that do not go through the PIE block are directly connected
+to the CPU like Timer 1/2 and NMI.</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note:</p>
+<p>To view the PIE block mapping refer to the ‘PIE Channel Mapping’ table within
+the device’s Technical Reference Manual (TRM). The figure below shows an example
+of the PIE channel mapping for the F2838x device.</p>
+<p><img alt="PIE Channel Mapping Example" src="../../_images/pie_channel_mapping.png" />
+<br/></p>
+</div>
+<p>The PIE assignment table maps each peripheral interrupt to the unique vector
+location for that interrupt service routine. The interrupt numbers on the left
+(rows) represent the twelve core group interrupt lines and the interrupt
+numbers across the top (columns) represent the channel number within the core
+group interrupt line.</p>
+<p>Each of the 12 PIE groups has a 16-bit flag register (PIEIFRx), a 16-bit enable
+register (PIEIERx), and a bit field in the PIE acknowledge register
+(PIEACK) which acts as a common interrupt mask for the entire group.</p>
+<p>For a peripheral interrupt to propagate to the CPU, the appropriate PIEIFR must
+be set, the PIEIER enabled, the CPU IFR set, the IER enabled, and the INTM
+enabled. Note that some peripherals can have multiple events trigger the same
+interrupt signal, and the cause of the interrupt can be determined by reading
+the peripheral’s status register.</p>
+<p>The enable PIE bit in the PIECTRL register is used to activate the PIE module.
+Note that when using the Driverlib function to enable and disable interrupts,
+both the PIEIER and CPU core IER registers are modified.</p>
+<p>Driverlib functions to modify both the PIEIER and core IER registers:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Interrupt_enable</span><span class="p">(</span><span class="n">interruptNumber</span><span class="p">);</span>
+<span class="n">Interrupt_disable</span><span class="p">(</span><span class="n">interruptNumber</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="pie-block-initialization">
+<h2>PIE Block Initialization<a class="headerlink" href="#pie-block-initialization" title="Permalink to this heading">#</a></h2>
+<p>Two separate functions are called to initialize the interrupt module and PIE block.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Interrupt_initModule</span><span class="p">();</span>
+<span class="n">Interrupt_initVectorTable</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>During processor initialization the interrupt vectors, as mapped in the PIE
+interrupt mapping table, are copied to the PIE RAM and then the PIE module
+is enabled by setting ENPIE to ‘1’.</p>
+<p>When the CPU receives an interrupt, the vector address of the ISR is fetched
+from the PIE RAM, and the interrupt with the highest priority that is both
+flagged and enabled is executed.</p>
+<p>Priority is determined by the location within the interrupt vector table. The
+lowest numbered interrupt has the highest priority when multiple interrupts are
+pending.</p>
+<p>In summary, the PIE initialization code flow is as follows:</p>
+<ul class="simple">
+<li><p>After the device is reset and execution of the boot code is completed, the
+selected boot option determines the code entry point.</p></li>
+<li><p>The CodeStartBranch.asm file has a long branch instruction to the entry point
+of the runtime support library. After the runtime support library completes
+execution, main is called.</p></li>
+<li><p>In main, a function is called to initialize the interrupt process and enable
+the PIE module.</p></li>
+<li><p>When the CPU receives an interrupt, the vector address of the ISR is fetched
+from the PIE RAM, and the interrupt with the highest priority that is both
+flagged and enabled is executed.</p></li>
+<li><p>Priority is determined by the location within the interrupt vector table.</p></li>
+</ul>
+</section>
+<section id="interrupt-processing">
+<h2>Interrupt Processing<a class="headerlink" href="#interrupt-processing" title="Permalink to this heading">#</a></h2>
+<p><img alt="Maskable Interrupt Processing" src="../../_images/maskable_interrupt_sources.png" /></p>
+<p>By using a series of flag and enable registers, the CPU can be configured to
+service one interrupt while others remain pending, or perhaps disabled when
+servicing certain critical tasks.</p>
+<ul class="simple">
+<li><p><strong>Interrupt Flag Register (IFR)</strong>: When an interrupt signal occurs on a core
+line, IFR for that core line is set.</p></li>
+<li><p><strong>Interrupt Enable Register (IER)</strong>: If the appropriate IER is enabled for the
+desired core line and INTM is enabled, the interrupt signal will propagate
+to the core.</p></li>
+<li><p><strong>Interrupt Global Mask (INTM)</strong>: This switch is a global switch that allows
+for the interrupts to propagate to the core.</p></li>
+</ul>
+<p>In order to program a task for the interrupt, an <strong>interrupt service routine
+(ISR)</strong> can be linked to an interrupt.</p>
+<ul class="simple">
+<li><p>Once the ISR starts processing the interrupt, the INTM bit is disabled to
+prevent nested interrupts.</p></li>
+<li><p>The IFR is cleared and ready for the next interrupt signal.</p></li>
+<li><p>When the interrupt servicing is completed, the INTM bit is automatically
+enabled, allowing the next interrupt to be serviced. Notice that when the
+INTM bit is ‘0’, the “switch” is closed and enabled. When the bit is ‘1’,
+the “switch” is open and disabled. The INTM bit in the status register is
+managed by using a Driverlib function or in-line assembly instructions (macro).</p></li>
+<li><p>The IER is managed by enabling and disabling Driverlib parameter values.</p></li>
+</ul>
+</section>
+<section id="interrupt-flag-register-ifr">
+<h2>Interrupt Flag Register (IFR)<a class="headerlink" href="#interrupt-flag-register-ifr" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Compiler generates atomic instructions (non-interruptible) for setting/clearing IFR</p></li>
+<li><p>If another interrupt occurs when writing to the IFR, the interrupt has priority.</p></li>
+<li><p>The bits of the IFR register are cleared when the interrupt is acknowledged by CPU through the PIEACK register (this is usually done at the end of the interrupt service routine (ISR)).</p></li>
+</ul>
+<p>Driverlib function used to acknowledge PIE group:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// group parameter is a logical OR of the values: INTERRUPT_ACK_GROUPx, </span>
+<span class="c1">// where x is the interrupt number between 1 and 12</span>
+
+<span class="c1">// Acknowledges group and clears any interrupt flag within group</span>
+<span class="c1">// Required to receive further interrupts in PIE group (done in ISR)</span>
+<span class="w">  </span><span class="n">Interrupt_clearACKGroup</span><span class="p">(</span><span class="n">group</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The IFR register is cleared on reset</p></li>
+</ul>
+</section>
+<section id="interrupt-enable-register-ier">
+<h2>Interrupt Enable Register (IER)<a class="headerlink" href="#interrupt-enable-register-ier" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Compiler generates atomic instructions (non-interruptible) for setting/clearing IER</p></li>
+<li><p>IER is cleared on reset</p></li>
+</ul>
+<p>Driverlib functions used to modify IER:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// cpuInterrupt parameter is a logical OR of the values:</span>
+<span class="c1">// INTERRUPT_CPU_INTx, where x is the interrupt number between 1 and 14</span>
+<span class="c1">// INTERRUPT_CPU_DLOGINT (CPU Data Log Interrupt)</span>
+<span class="c1">// INTERRUPT_CPU_RTOSINT (CPU RTOS Interrupt)</span>
+<span class="n">Interrupt_enableInCPU</span><span class="p">(</span><span class="n">cpuInterrupt</span><span class="p">);</span>
+<span class="n">Interrupt_disableInCPU</span><span class="p">(</span><span class="n">cpuInterrupt</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="interrupt-global-mask-bit-intm">
+<h2>Interrupt Global Mask Bit (INTM)<a class="headerlink" href="#interrupt-global-mask-bit-intm" title="Permalink to this heading">#</a></h2>
+<p>INTM used to globally enable/disable interrupts:</p>
+<p>• Enable: INTM = 0</p>
+<p>• Disable: INTM = 1 (reset value)</p>
+<p>Driverlib functions used to modify INTM:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Interrupt_enableGlobal</span><span class="p">();</span>
+<span class="n">Interrupt_disableGlobal</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Alternatively the following macros can be used:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">EINT</span><span class="p">;</span><span class="w"> </span><span class="c1">//defined as - asm(&quot; clrc INTM&quot;);</span>
+<span class="n">DINT</span><span class="p">;</span><span class="w"> </span><span class="c1">//defined as - asm(&quot; setc INTM&quot;);</span>
+</pre></div>
+</div>
+</section>
+<section id="interrupt-signal-flow-summary">
+<h2>Interrupt Signal Flow-Summary<a class="headerlink" href="#interrupt-signal-flow-summary" title="Permalink to this heading">#</a></h2>
+<p>In summary, the following steps occur during an interrupt process:</p>
+<ol class="arabic simple">
+<li><p>A peripheral interrupt is generated and the PIE interrupt flag register is
+set. If the PIE interrupt enable register is enabled, then the core interrupt
+flag register will be set.</p></li>
+<li><p>If the core interrupt enable register and global interrupt mask are enabled,
+the PIE vector table will redirect the code to the interrupt service routine.</p></li>
+</ol>
+<p><img alt="Interrupt Signal Flow" src="../../_images/interrupt_signal_flow.png" /></p>
+</section>
+<section id="interrupt-response-and-latency">
+<h2>Interrupt Response and Latency<a class="headerlink" href="#interrupt-response-and-latency" title="Permalink to this heading">#</a></h2>
+<section id="interrupt-response-hardware-sequence">
+<h3>Interrupt Response - Hardware Sequence<a class="headerlink" href="#interrupt-response-hardware-sequence" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>CPU Action</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Registers -&gt; stack</p></td>
+<td><p>14 Register words auto saved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0 -&gt; IFR (bit)</p></td>
+<td><p>Clear corresponding IFR bit</p></td>
+</tr>
+<tr class="row-even"><td><p>0 -&gt; IER (bit)</p></td>
+<td><p>Clear corresponding IER bit</p></td>
+</tr>
+<tr class="row-odd"><td><p>1 -&gt; INTM/DBGM</p></td>
+<td><p>Disable global ints/debug events</p></td>
+</tr>
+<tr class="row-even"><td><p>Vector -&gt; PC</p></td>
+<td><p>Loads PC with int vector address</p></td>
+</tr>
+<tr class="row-odd"><td><p>Clear other status bit</p></td>
+<td><p>Clear LOOP, EALLOW, IDLESTAT</p></td>
+</tr>
+</tbody>
+</table>
+<p>Note: some actions occur simultaneously, none are interruptible</p>
+</section>
+<section id="interrupt-latency">
+<h3>Interrupt Latency<a class="headerlink" href="#interrupt-latency" title="Permalink to this heading">#</a></h3>
+<p>Interrupt latency is an important factor in understanding the response time of a
+real-time system. The typical method by which interrupt latency of a system is
+assessed is the number of cycles it takes for the hardware to respond to an
+interrupt and branch to the interrupt vector (hardware latch and respond).</p>
+<p><img alt="Interrupt Latency" src="../../_images/interrupt_latency.png" /></p>
+<p>Minimum latency (to when real work occurs in the ISR):</p>
+<ul class="simple">
+<li><p>Internal interrupts: 14 cycles</p></li>
+<li><p>External interrupts: 16 cycles</p></li>
+</ul>
+<p>Maximum latency: Depends on wait states, INTM, etc.</p>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="c2000_boot.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Reset and Boot Process</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="c2000_timers.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">CPU Timers</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interrupt-architecture-within-c2000-devices">
+   Interrupt Architecture within C2000 devices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#peripheral-interrupt-expansion-pie">
+   Peripheral Interrupt Expansion (PIE)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pie-block-initialization">
+   PIE Block Initialization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interrupt-processing">
+   Interrupt Processing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interrupt-flag-register-ifr">
+   Interrupt Flag Register (IFR)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interrupt-enable-register-ier">
+   Interrupt Enable Register (IER)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interrupt-global-mask-bit-intm">
+   Interrupt Global Mask Bit (INTM)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interrupt-signal-flow-summary">
+   Interrupt Signal Flow-Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interrupt-response-and-latency">
+   Interrupt Response and Latency
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interrupt-response-hardware-sequence">
+     Interrupt Response - Hardware Sequence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interrupt-latency">
+     Interrupt Latency
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

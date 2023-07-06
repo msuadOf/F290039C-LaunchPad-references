@@ -1,0 +1,78 @@
+# Programmable Gain Amplifier (PGA)
+
+A Programmable Gain Amplifier (PGA) is an integrated module that amplifies small
+input signals to increase the dynamic range of the downstream ADC and CMPSS
+modules. The amplification is done through a programmable gain amplifier. 
+
+```{admonition} PGA Module
+Not all C2000 devices have a PGA. Refer to the 
+[Peripheral Reference Guide](https://www.ti.com/lit/spru566)
+for a list of supported modules on your device.
+```
+
+## When would you use it?
+The PGA module is typically used to amplify signals from
+analog sensors such as temperature sensors, pressure sensors, and strain
+gauges. The amplified signal is then digitized by the analog-to-digital
+converter (ADC) module.
+
+## Key Benefits of using a PGA:
+* Reduces cost and design effort over external standalone amplifiers
+  * On-chip integration ensures compatibility with ADC and CMPSS
+  * Internally powered by VDDA and VSSA
+* Adaptable to various performance needs
+  * Software selectable gain and filter settings
+* Hardware based analog offset and gain trimming reduces offset and gain error
+  * Instead of software post-processing
+
+## PGA Block Diagram
+
+![PGA Block Diagram](images/adc/pga_block_diagram.png)
+
+1. PGA_IN is the positive input to the PGA op-amp. The signal applied to this
+pin will be amplified by the PGA. If the PGA is not used then this input can be
+used as a regular ADC/CMPSS pin.
+
+2. The active component in the PGA is an embedded operational amplifier
+(op-amp) that is configured as a non-inverting amplifier.
+
+3. The gain modes of 3x, 6x, 12x, and 24x are software-selectable. The gain of
+the PGA is determined by a preset ratio between resistors Rout and Rgnd. 
+Refer to your device's <i>Technical Reference Manual</i> for ideal target values for the gain resistors.
+
+    $Gain = 1 + \frac{R_{OUT}}{R_{GND}}$
+
+4. PGA_OUT is an internal signal available for sampling and monitoring by the
+internal ADC and CMPSS modules. 
+
+5. The PGA output can be routed to a pin through an embedded series resistor for
+the purpose of low-pass filtering the amplified signal. The cut-off frequency
+can be estimated using the standard low-pass RC equation of: 
+
+    $f_c = 1/(2\pi RC)$ 
+
+If the PGA is not used then the PGA_OF pin can be used as a regular ADC/CMPSS pin.
+
+## Resources
+```{eval-rst}
+
+.. only:: internal_only
+
+  .. include:: ../../source/MARKDOWN_staging/pga_internal.rst
+
+```
+
+```{eval-rst}
+
+.. only:: external_only
+
+  .. include:: ../../source/MARKDOWN_staging/pga.rst
+
+```
+
+------------------------------------------
+
+```{admonition} Feedback
+Please provide any feedback you may have about the content within C2000 Academy to: <c2000_academy_feedback@list.ti.com>
+
+```

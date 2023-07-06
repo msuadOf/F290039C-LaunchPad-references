@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Background CRC (BGCRC) &#8212; C2000 Academy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/local/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/fonts/font.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.ti.com/assets/style/resource-explorer.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "quizdown.js", "start_on_load": true, "shuffle_answers": false, "shuffle_questions": false, "primary_color": "var(--pst-color-primary)", "secondary_color": "#DDDDDD", "text_color": "black"});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/c2000_security_safety/c2000_bgcrc';</script>
+    <script src="../../_static/quizdown.js"></script>
+    <link rel="canonical" href="http://127.0.0.1:8000/source/c2000_security_safety/c2000_bgcrc.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Embedded Real-time Analysis and Diagnostic (ERAD)" href="../c2000_debug_systems/c2000_erad.html" />
+    <link rel="prev" title="Functional Safety (FuSa)" href="c2000_fusa.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search C2000 Academy" aria-label="Search C2000 Academy" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+                <article class="bd-article" role="main">
+                  
+                  
+<div id="searchbox"></div>
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="background-crc-bgcrc">
+<h1>Background CRC (BGCRC)<a class="headerlink" href="#background-crc-bgcrc" title="Permalink to this heading">#</a></h1>
+<p>A cyclic redundancy check (CRC) is an error-detecting code that is commonly
+used in digital systems. Some C2000 devices feature the background CRC (BGCRC)
+module, which computes the CRC value in hardware. The CRC method is very useful
+in safety-critical applications. This module describes the BGCRC module, its
+operation and features.</p>
+<section id="overview-of-the-bgcrc-module">
+<h2>Overview of the BGCRC module<a class="headerlink" href="#overview-of-the-bgcrc-module" title="Permalink to this heading">#</a></h2>
+<p>The Background CRC (BGCRC) module computes a CRC-32 check value on a
+configurable block of memory. It accomplishes this by fetching the
+specified block of memory during idle cycles (when the CPU, CLA, or DMA is not
+accessing the memory block). The calculated CRC-32 value is compared
+against a golden CRC-32 value to indicate a pass or fail. In essence,
+the BGCRC helps identify memory faults and corruption. There are two
+BGCRC modules, CPU_CRC and CLA_CRC. The two BGCRC modules differ only
+in the memories they test.</p>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h2>
+<p>The BGCRC module has the following features:</p>
+<ul class="simple">
+<li><p>One cycle CRC-32 computation on 32 bits of data</p></li>
+<li><p>No CPU bandwidth impact for zero-wait-state memory</p></li>
+<li><p>Minimal CPU bandwidth impact for non-zero-wait-state memory</p></li>
+<li><p>Dual operation modes (CRC-32 mode and scrub mode)</p></li>
+<li><p>Watchdog timer to time CRC-32 completion</p></li>
+<li><p>Ability to pause and resume CRC-32 computation</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this heading">#</a></h2>
+<p>The CRC-32 calculation can be initiated
+by configuring the register BGCRC_EN.START to 1010. Once started, the
+module will perform the background memory checks without CPU or CLA
+intervention. However, on completion of the CRC-32 calculation or
+in the event of an error, the CPU or CLA will be notified through
+an interrupt or task, respectively.</p>
+<p>There are two BGCRC modules:</p>
+<ul class="simple">
+<li><p>CPU_CRC : It is configurable by the CPU and can only generate an interrupt.</p></li>
+<li><p>CLA_CRC : It can be configured by both the CPU and CLA and can generate
+an interrupt to the CPU or task for the CLA.</p></li>
+</ul>
+<section id="data-read-unit">
+<h3>Data Read Unit<a class="headerlink" href="#data-read-unit" title="Permalink to this heading">#</a></h3>
+<p>Once the CRC-32 calculation is started, the BGCRC module will
+continuously read data from memory as a background process. These reads
+happen during the idle times (when the CPU, CLA or DMA is not accessing
+the memory block) and hence will not impact functional access. The
+data-read-unit will only read data if there is no pending functional access.
+The data-read-unit begins the operation by reading a block of data of size
+<i>BGCRC_CTRL2.BLOCK_SIZE</i> from address <i>BGCRC_START_ADDR</i>. Note that
+<i>BGCRC_START_ADDR</i> must be 0x80 word aligned. For a non-0x80 word
+aligned <i>BGCRC_START_ADDR</i>, the least significant bits will be zeroed out
+to get a 0x80 word-aligned <i>BGCRC_START_ADDR</i>. For instance, if the
+programmed <i>BGCRC_START_ADDR</i> = 0x1AF3, the internal 0x80 word-aligned
+start address will be 0x1A80.</p>
+<p>When the data-read-unit reads a block of data, ECC or parity
+will be checked. Any ECC or parity errors that occur during the
+read will be indicated by setting the respective NMI flag and generating
+an interrupt, if configured accordingly. The BGCRC module, however, will
+not write back the corrected memory contents on the occurrence of a
+correctable ECC error. Writing back the corrected values should be
+handled by the application.</p>
+</section>
+<section id="crc-32-compute-unit">
+<h3>CRC-32 Compute Unit<a class="headerlink" href="#crc-32-compute-unit" title="Permalink to this heading">#</a></h3>
+<p>After the data-read-unit reads a block of data, it feeds this data
+to the CRC-32 compute unit. This unit computes the CRC-32 using the
+standard polynomial 0x04C11DB7 given below :
+\[x^{32} + x^{26} + x^{23} + x^{22} + x^{16} + x^{12} + x^{11} + x^{10} + x^8 + x^7 + x^5 + x^4 + x^2 + x + 1 \]</p>
+<p>The CRC-32 unit retrieves 32-bit of data at a time from the block
+of data to compute the  polynomial. This computation takes 1 cycle.</p>
+<p>For instance, the CRC-32 calculation for 1KB block of data will
+be 256 cycles, 1 cycle for each of the 256 32-bit chunks. The
+initial value for the CRC-32 computation can be configured using <i>BGCRC_SEED</i>.</p>
+<p>After the CRC-32 calculation is complete for a data block, the
+final result is loaded into <i>BGCRC_RESULT</i>. Note that <i>BGCRC_RESULT</i>
+will only contain the final calculation for the whole data block;
+intermediate results will not update <i>BGCRC_RESULT</i>.
+The value in <i>BGCRC_RESULT</i> will be compared against the value in
+<i>BGCRC_GOLDEN</i> by the module and the NMI/Interrupt flags will be set
+accordingly by the CRC notification unit.</p>
+<p>Once CRC-32 calculation is commenced, it can be halted by
+setting <i>BGCRC_CTRL2.TEST_HALT</i> to 1010. Clearing this bit resumes
+CRC-32 calculation from the halt point.</p>
+</section>
+<section id="crc-notification-unit">
+<h3>CRC Notification Unit<a class="headerlink" href="#crc-notification-unit" title="Permalink to this heading">#</a></h3>
+<p>After the CRC-32 compute unit completes the CRC-32 calculation
+for a block of data or fails to complete the calculation within
+<i>BGCRC_WD_MIN</i> and <i>BGCRC_WD_MAX</i>, if configured, it will send out a
+NMI/Interrupt on the occurrence of a pass or fail. In addition,
+during a data read by the data-read-unit, if an ECC or parity error
+occurs, the CRC notification unit can send out a NMI/Interrupt.
+In the case of an ECC or parity error, the BGCRC will stop operation
+and <i>BGCRC_CURR_ADDR</i> will contain the memory address which caused the
+ECC or parity error. The contents of <i>BGCRC_CURR_ADDR</i> in addition
+to the NMI/Interrupt flags can be used to debug a BGCRC failure.</p>
+</section>
+</section>
+<section id="cpu-interrupt-and-non-maskable-interrupt-nmi">
+<h2>CPU Interrupt and Non-Maskable Interrupt (NMI)<a class="headerlink" href="#cpu-interrupt-and-non-maskable-interrupt-nmi" title="Permalink to this heading">#</a></h2>
+<p>The BGCRC module has configurable Interrupt and NMI lines. NMIs
+are enabled by default but can be disabled by writing 0xA to
+BGCRC_CTRL1.NMIDIS register. Conversely, all Interrupts
+are disabled by default but can be enabled by writing 0x7E
+to BGCRC_INTEN register. When an error occurs in the BGCRC,
+it can be configured to generate an NMI or Interrupt. Since
+NMIs are enabled by default, all BGCRC errors will cause an NMI.</p>
+<p><img alt=" BGCRC NMI" src="../../_images/bgcrc_nmi.png" /></p>
+<p><img alt="BGCRC Interrupt" src="../../_images/bgcrc_interrupt.png" /></p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<section id="bgcrc-related-collateral">
+<h3>BGCRC Related Collateral<a class="headerlink" href="#bgcrc-related-collateral" title="Permalink to this heading">#</a></h3>
+<p><strong>Getting Started</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/lit/spracr3">CRC Engines in C2000 Devices Application Report</a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<div class="admonition-feedback admonition">
+<p class="admonition-title">Feedback</p>
+<p>Please provide any feedback you may have about the content within C2000 Academy to: <a class="reference external" href="mailto:c2000_academy_feedback&#37;&#52;&#48;list&#46;ti&#46;com">c2000_academy_feedback<span>&#64;</span>list<span>&#46;</span>ti<span>&#46;</span>com</a></p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="c2000_fusa.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Functional Safety (FuSa)</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="../c2000_debug_systems/c2000_erad.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Embedded Real-time Analysis and Diagnostic (ERAD)</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc">
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview-of-the-bgcrc-module">
+   Overview of the BGCRC module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#features">
+   Features
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functional-description">
+   Functional Description
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-read-unit">
+     Data Read Unit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#crc-32-compute-unit">
+     CRC-32 Compute Unit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#crc-notification-unit">
+     CRC Notification Unit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cpu-interrupt-and-non-maskable-interrupt-nmi">
+   CPU Interrupt and Non-Maskable Interrupt (NMI)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bgcrc-related-collateral">
+     BGCRC Related Collateral
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>
+</div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+<script async>
+  async function setTheme() {
+    try {
+      var colorScheme = await window.parent.getTirexTheme();
+      var mode = colorScheme === 'dark' ? 'dark' : 'light';
+      localStorage.setItem('mode', mode);
+      document.documentElement.dataset.mode = mode;
+      document.documentElement.dataset.theme = colorScheme;
+    } catch (error) {
+      console.error('Failed to set the theme:', error);
+    }
+  }
+
+  setTheme();
+</script>
+
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+
+
+
+<script type="text/javascript">
+  function extractNodeValue(url) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.pathname === '/tirex/explore/node') {
+        const searchParams = new URLSearchParams(parsedUrl.search);
+        return searchParams.get('node');
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  }
+
+  // Get all links on the page
+  const links = document.querySelectorAll('a');
+
+  // Get the project name and replace spaces with underscores
+  var projName = "C2000 Academy";
+
+  // Attach a click event listener to each link
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+
+      const url = link.href;
+      const match = url.match(/source\/.+$/);
+      const localId = match ? match[0].replace(/\.html$/, '').replace(/[\/\\\.]/g, '_').toLowerCase() : null;
+
+      const extractedNode = extractNodeValue(url);
+
+      if (typeof window.parent.jumpToTirexNodeOnLocal === 'function') {
+        window.parent.jumpToTirexNodeOnLocal(localId, null, null, {
+            throwError: true
+          })
+          .catch((e) => {
+            if (extractedNode !== null) {
+              window.parent.jumpToTirexNode(extractedNode, {
+                  throwError: true
+                })
+                .catch((e) => {
+                  window.location.href = link.href;
+                })
+            }
+            else {
+              if (url.includes("e2e.ti.com") || url.includes("dev.ti.com/gallery/view")) {
+              window.open(url, "_blank")
+              } else {
+              window.location.href = link.href;
+            }}
+          })
+      } else {
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2023, Texas Instruments.<br>
+
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

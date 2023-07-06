@@ -1,0 +1,14 @@
+CMPSS Related Collateral
+====================================
+
+**Foundational**
+
+- `Real-Time Control Reference Guide <https://www.ti.com/lit/eb/slyy211/slyy211.pdf>`_
+
+**Expert**
+
+- `Peak Current Control Realization for Boost Circuit Based On C2000™ MCU Application Report <https://ti.com/lit/SPRABU2>`_
+
+- `Peak Current Mode Controlled PSFB Converter Reference Design Using C2000™ Real-time MCU <https://ti.com/lit/TIDUEO1>`_
+
+- `Understanding and Applying Current-Mode Control Theory Application Report <https://ti.com/lit/SNVA555>`_

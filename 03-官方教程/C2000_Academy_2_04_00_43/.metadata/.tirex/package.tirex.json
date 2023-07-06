@@ -1,0 +1,45 @@
+[
+    {
+        "id": "C2000-ACADEMY",
+        "name": "C2000 Academy",
+        "description": "The C2000 Academy is a great resource for developers to learn about C2000 real-time microcontrollers platform. The Academy delivers easy-to-use training modules that span a wide range of topics for all C2000 devices. Additionally, C2000 Academy provides hands-on lab exercises and a full solution for each lab exercise.\nC2000 Academy is applicable to all generation-3 devices- F2807x, F2837xS, F2837xD, F2838xS, F2838xD, F28004x, F28002x, F28003x, F280013x and F280015x",
+        "version": "2.04.00.43",
+        "devices": [
+            "F2837xD",
+            "F2837xS",
+            "F2807x",
+            "F2838x",
+            "F28004x",
+            "F28002x",
+            "F28003x",
+            "F280013x",
+            "F280015x",
+            "F28P65x"
+        ],
+        "devtools": [
+            "LAUNCHXL-F2800137",
+            "LAUNCHXL-F2800157",
+            "LAUNCHXL-F280039C",
+            "LAUNCHXL-F280049C",
+            "LAUNCHXL-F280025C",
+            "LAUNCHXL-F28379D",
+            "TMDSCNCD28379D",
+            "TMDSCNCD28388D",
+            "TMDSCNCD280025C",
+            "TMDSCNCD280039C",
+            "TMDSCNCD280049C",
+            "TMDSCNCD2800137",
+            "TMDSCNCD2800157",
+            "TMDSCNCD28P65X"
+        ],
+        "tags": null,
+        "aliases": [
+            "c2000Academy"
+        ],
+        "location": "../../_build/index.html",
+        "type": "software",
+        "metadataVersion": "3.01.00",
+        "hideNodeDirPanel": true,
+        "sort": "manual"
+    }
+]

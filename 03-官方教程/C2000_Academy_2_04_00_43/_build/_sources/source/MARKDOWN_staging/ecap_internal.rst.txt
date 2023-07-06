@@ -1,0 +1,6 @@
+ECAP Related Collateral
+====================================
+
+**Getting Started**
+
+- `Leveraging High Resolution Capture (HRCAP) for Single Wire Data Transfer Application Report <https://ti.com/lit/SPRACO5>`_

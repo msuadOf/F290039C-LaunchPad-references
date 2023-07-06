@@ -1,0 +1,16 @@
+DCSM Related Collateral
+====================================
+
+**Getting Started**
+
+- `C2000 DCSM Security Tool Application Report <https://ti.com/lit/SPRACP8>`_
+
+- `C2000 Unique Device Number Application Report <https://ti.com/lit/SPRACD0>`_
+
+- `Enhancing Device Security by Using JTAGLOCK Feature Application Report <https://ti.com/lit/SPRACS4>`_
+
+- `Secure BOOT On C2000 Device Application Report <https://ti.com/lit/SPRACT3>`_ - Only applicable to: F280013x, F2838x
+
+**Expert**
+
+- `Updating Firmware on Security Enabled TMS320F2837xx or TMS320F2807x Devices Application Report <https://www.ti.com/lit/spraci5>`_ - Only applicable to: F2807x, F2837xD, F2837xS

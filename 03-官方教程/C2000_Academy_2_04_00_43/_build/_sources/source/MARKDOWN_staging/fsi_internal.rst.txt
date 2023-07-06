@@ -1,0 +1,16 @@
+FSI Related Collateral
+====================================
+
+**Getting Started**
+
+- `Fast Serial Interface (FSI) Skew Compensation Application Report <https://ti.com/lit/SPRACJ9>`_
+
+- `Fast serial interface (FSI) adapter board evaluation module <https://www.ti.com/tool/TMDSFSIADAPEVM>`_
+
+- `Using the Fast Serial Interface (FSI) With Multiple Devices in an Application Application Report <https://ti.com/lit/SPRACM3>`_
+
+**Expert**
+
+- `Design Guide: TIDM-02006 Distributed Multi-axis Servo Drive Over Fast Serial Interface (FSI) Reference Design <https://www.ti.com/lit/TIDUEV1>`_
+
+- `The Essential Guide for Developing With C2000 Real-Time Microcontrollers Application Report <https://ti.com/lit/SPRACN0>`_
