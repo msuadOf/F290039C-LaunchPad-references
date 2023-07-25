@@ -31,6 +31,11 @@ void main(void)
     // Service Routines (ISR).
     Interrupt_initVectorTable();
 
+    //
+    // Board Initialization
+    //
+    Board_init();
+
     // Enable Global Interrupt (INTM) and realtime interrupt (DBGM)
     EINT;
     ERTM;
